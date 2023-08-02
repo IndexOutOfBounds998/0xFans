@@ -20,11 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6fbf544-fb17-49f2-91d8-77cfc54f78e0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/constants/constant.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/lensx.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +84,7 @@
       <updated>1690942812999</updated>
       <workItem from="1690942815014" duration="5144000" />
       <workItem from="1690966489263" duration="919000" />
-      <workItem from="1690980049865" duration="246000" />
+      <workItem from="1690980049865" duration="561000" />
     </task>
     <servers />
   </component>
@@ -126,9 +128,18 @@
     </state>
     <state width="1515" height="251" key="GridCell.Tab.0.right/0.0.1536.816/1920.0.1920.1032@0.0.1536.816" timestamp="1690952488125" />
     <state width="1515" height="251" key="GridCell.Tab.0.right/0.0.1536.816@0.0.1536.816" timestamp="1690980246001" />
-    <state x="448" y="195" key="git4idea.merge.GitPullDialog" timestamp="1690945098905">
+    <state x="152" y="44" key="MergeDialog" timestamp="1690980600810">
+      <screen x="0" y="0" width="1536" height="816" />
+    </state>
+    <state x="152" y="44" key="MergeDialog/0.0.1536.816@0.0.1536.816" timestamp="1690980600810" />
+    <state x="488" y="254" width="570" height="267" key="MultipleFileMergeDialog" timestamp="1690980600820">
+      <screen x="0" y="0" width="1536" height="816" />
+    </state>
+    <state x="488" y="254" width="570" height="267" key="MultipleFileMergeDialog/0.0.1536.816@0.0.1536.816" timestamp="1690980600820" />
+    <state x="448" y="195" key="git4idea.merge.GitPullDialog" timestamp="1690980578292">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="448" y="195" key="git4idea.merge.GitPullDialog/0.0.1536.816/1920.0.1920.1032@0.0.1536.816" timestamp="1690945098905" />
+    <state x="448" y="195" key="git4idea.merge.GitPullDialog/0.0.1536.816@0.0.1536.816" timestamp="1690980578292" />
   </component>
 </project>
