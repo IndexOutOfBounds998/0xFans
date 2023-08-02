@@ -3,13 +3,13 @@ import { SEO } from '@components/common/seo';
 import { LoginMain } from '@components/login/login-main';
 import { LoginFooter } from '@components/login/login-footer';
 import type { ReactElement, ReactNode } from 'react';
-import { getWalletClient } from '@wagmi/core';
-import { useNetwork, useSwitchNetwork } from 'wagmi';
-import { polygon, polygonMumbai } from 'wagmi/chains';
-import { useAccount } from 'wagmi';
-import { useWalletLogin, useActiveProfile } from '@lens-protocol/react-web';
-import { useEffect } from 'react';
-import { MAIN_NETWORK } from '../constants/constant';
+// import { getWalletClient } from '@wagmi/core';
+// import { useNetwork, useSwitchNetwork } from 'wagmi';
+// import { polygon, polygonMumbai } from 'wagmi/chains';
+// import { useAccount } from 'wagmi';
+// import { useWalletLogin, useActiveProfile } from '@lens-protocol/react-web';
+// import { useEffect } from 'react';
+// import { MAIN_NETWORK } from '../constants/constant';
 
 export default function Login(): JSX.Element {
   // const { chain } = useNetwork();
