@@ -18,11 +18,13 @@ import type { ReactElement, ReactNode } from 'react';
 export default function Home(): JSX.Element {
   const { isMobile } = useWindow();
 
-  const { data, loading, LoadMore } = useInfiniteScroll(
-    tweetsCollection,
-    [where('parent', '==', null), orderBy('createdAt', 'desc')],
-    { includeUser: true, allowNull: true, preserve: true }
-  );
+  // const { data, loading, LoadMore } = useInfiniteScroll(
+  //   tweetsCollection,
+  //   [where('parent', '==', null), orderBy('createdAt', 'desc')],
+  //   { includeUser: true, allowNull: true, preserve: true }
+  // );
+
+  const { data, loading, LoadMore } = '';
 
   return (
     <MainContainer>
