@@ -56,7 +56,8 @@ export function Input({
   const [visited, setVisited] = useState(false);
 
   const { user, isAdmin } = useAuth();
-  const { name, username, photoURL } = user as User;
+  // const { name, username, photoURL } = user as User;
+  const { name, username, photoURL } = '';
 
   const inputRef = useRef<HTMLTextAreaElement>(null);
 

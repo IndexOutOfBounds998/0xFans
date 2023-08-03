@@ -7,41 +7,39 @@ import type { ReactElement, ReactNode } from 'react';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 
-
 import {
   LensProvider,
   LensConfig,
   production,
   appId,
-  development,
-} from "@lens-protocol/react-web";
-import { bindings } from "@lens-protocol/wagmi";
- 
-import React from "react";
-import { ALCHEMY_KEY, RB_PID, MAIN_NETWORK } from "@lib/const";
-import "@rainbow-me/rainbowkit/styles.css";
-import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
-import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { polygonMumbai, polygon } from "wagmi/chains";
-import { alchemyProvider } from "wagmi/providers/alchemy";
-import { publicProvider } from "wagmi/providers/public";
+  development
+} from '@lens-protocol/react-web';
+import { bindings } from '@lens-protocol/wagmi';
 
+import React, { useEffect } from 'react';
+import { ALCHEMY_KEY, RB_PID, MAIN_NETWORK } from '@lib/const';
+import '@rainbow-me/rainbowkit/styles.css';
+import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import { configureChains, createConfig, WagmiConfig } from 'wagmi';
+import { polygonMumbai, polygon } from 'wagmi/chains';
+import { alchemyProvider } from 'wagmi/providers/alchemy';
+import { publicProvider } from 'wagmi/providers/public';
 
 const { chains, publicClient } = configureChains(
   [MAIN_NETWORK ? polygon : polygonMumbai],
-  [alchemyProvider({ apiKey: ALCHEMY_KEY }), publicProvider()],
+  [alchemyProvider({ apiKey: ALCHEMY_KEY }), publicProvider()]
 );
 
 const { connectors } = getDefaultWallets({
-  appName: "lenstrip",
+  appName: 'lenstrip',
   projectId: RB_PID,
-  chains,
+  chains
 });
 
 const wagmiConfig = createConfig({
   autoConnect: true,
   connectors,
-  publicClient,
+  publicClient
 });
 
 // 'lenster', 'lenstrip', "lenstube", "orb", "buttrfly", "lensplay"
@@ -49,14 +47,14 @@ const lensConfig: LensConfig = {
   bindings: bindings(),
   environment: MAIN_NETWORK ? production : development,
   sources: [
-    appId("lenster"),
-    appId("lenstrip"),
-    appId("lenstube"),
-    appId("orb"),
-    appId("buttrfly"),
-    appId("lensplay"),
+    appId('lenster'),
+    appId('lenstrip'),
+    appId('lenstube'),
+    appId('orb'),
+    appId('buttrfly'),
+    appId('lensplay')
   ],
-  appId: appId("lenstrip"),
+  appId: appId('lenstrip')
 };
 
 type NextPageWithLayout = NextPage & {

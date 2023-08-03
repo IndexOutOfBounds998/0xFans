@@ -5,6 +5,9 @@ const nextConfig = {
   images: {
     domains: ['lh3.googleusercontent.com', 'firebasestorage.googleapis.com']
   },
+  experimental: {
+    newNextLinkBehavior: false
+  },
   webpack5: true,
   webpack: (config) => {
     config.resolve.fallback = { fs: false, net: false, tls: false };
