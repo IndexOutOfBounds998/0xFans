@@ -26,6 +26,12 @@ import type { User } from '@lib/types/user';
 import type { Bookmark } from '@lib/types/bookmark';
 import type { Stats } from '@lib/types/stats';
 
+
+import { useWalletLogin, useActiveProfile } from "@lens-protocol/react-web";
+import { useAccount } from "wagmi";
+import { useNetwork, useSwitchNetwork } from "wagmi";
+import { getWalletClient } from "@wagmi/core";
+ 
 type AuthContext = {
   user: User | null;
   error: Error | null;
@@ -133,6 +139,24 @@ export function AuthContextProvider({
     onAuthStateChanged(auth, handleUserAuth);
   }, []);
 
+
+  const { chain } = useNetwork();
+
+  const { switchNetwork } = useSwitchNetwork();
+
+ 
+
+  const {
+    execute: login,
+    error: loginError,
+    isPending: isLoginPending,
+  } = useWalletLogin();
+
+  const { isConnected } = useAccount();
+
+  const { data: profile, error:profileError, loading: profileLoading } = useActiveProfile();
+
+
   useEffect(() => {
     if (!user) return;
 
@@ -159,8 +183,10 @@ export function AuthContextProvider({
 
   const signInWithGoogle = async (): Promise<void> => {
     try {
-      const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
+      const walletClient = await getWalletClient();
+      await login({
+      address: walletClient.account.address,
+    });
     } catch (error) {
       setError(error as Error);
     }
