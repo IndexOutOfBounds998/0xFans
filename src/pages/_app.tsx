@@ -7,6 +7,58 @@ import type { ReactElement, ReactNode } from 'react';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 
+
+import {
+  LensProvider,
+  LensConfig,
+  production,
+  appId,
+  development,
+} from "@lens-protocol/react-web";
+import { bindings } from "@lens-protocol/wagmi";
+ 
+import React from "react";
+import { ALCHEMY_KEY, RB_PID, MAIN_NETWORK } from "@lib/const";
+import "@rainbow-me/rainbowkit/styles.css";
+import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { configureChains, createConfig, WagmiConfig } from "wagmi";
+import { polygonMumbai, polygon } from "wagmi/chains";
+import { alchemyProvider } from "wagmi/providers/alchemy";
+import { publicProvider } from "wagmi/providers/public";
+
+
+const { chains, publicClient } = configureChains(
+  [MAIN_NETWORK ? polygon : polygonMumbai],
+  [alchemyProvider({ apiKey: ALCHEMY_KEY }), publicProvider()],
+);
+
+const { connectors } = getDefaultWallets({
+  appName: "lenstrip",
+  projectId: RB_PID,
+  chains,
+});
+
+const wagmiConfig = createConfig({
+  autoConnect: true,
+  connectors,
+  publicClient,
+});
+
+// 'lenster', 'lenstrip', "lenstube", "orb", "buttrfly", "lensplay"
+const lensConfig: LensConfig = {
+  bindings: bindings(),
+  environment: MAIN_NETWORK ? production : development,
+  sources: [
+    appId("lenster"),
+    appId("lenstrip"),
+    appId("lenstube"),
+    appId("orb"),
+    appId("buttrfly"),
+    appId("lensplay"),
+  ],
+  appId: appId("lenstrip"),
+};
+
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
@@ -24,11 +76,17 @@ export default function App({
   return (
     <>
       <AppHead />
-      <AuthContextProvider>
-        <ThemeContextProvider>
-          {getLayout(<Component {...pageProps} />)}
-        </ThemeContextProvider>
-      </AuthContextProvider>
+      <WagmiConfig config={wagmiConfig}>
+        <RainbowKitProvider chains={chains} coolMode={true}>
+          <LensProvider config={lensConfig}>
+            <AuthContextProvider>
+              <ThemeContextProvider>
+                {getLayout(<Component {...pageProps} />)}
+              </ThemeContextProvider>
+            </AuthContextProvider>
+          </LensProvider>
+        </RainbowKitProvider>
+      </WagmiConfig>
     </>
   );
 }
