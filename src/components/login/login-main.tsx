@@ -2,10 +2,11 @@ import { useAuth } from '@lib/context/auth-context';
 import { NextImage } from '@components/ui/next-image';
 import { CustomIcon } from '@components/ui/custom-icon';
 import { Button } from '@components/ui/button';
-
+import { useAccount } from "wagmi";
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 export function LoginMain(): JSX.Element {
-  const { signInWithGoogle } = useAuth();
-
+  const { signInWithLens } = useAuth();
+  const { isConnected } = useAccount();
   return (
     <main className='grid lg:grid-cols-[1fr,45vw]'>
       <div className='relative hidden items-center justify-center  lg:flex'>
@@ -39,14 +40,16 @@ export function LoginMain(): JSX.Element {
         </div>
         <div className='flex max-w-xs flex-col gap-6 [&_button]:py-2'>
           <div className='grid gap-3 font-bold'>
-            <Button
-              className='flex justify-center gap-2 border border-light-line-reply font-bold text-light-primary transition
-                         hover:bg-[#e6e6e6] focus-visible:bg-[#e6e6e6] active:bg-[#cccccc] dark:border-0 dark:bg-white
-                         dark:hover:brightness-90 dark:focus-visible:brightness-90 dark:active:brightness-75'
-              onClick={signInWithGoogle}
-            >
-              <CustomIcon iconName='GoogleIcon' /> Sign up with Google
-            </Button>
+            {isConnected ?
+              <Button
+                className='flex justify-center gap-2 border border-light-line-reply font-bold text-light-primary transition
+                       hover:bg-[#e6e6e6] focus-visible:bg-[#e6e6e6] active:bg-[#cccccc] dark:border-0 dark:bg-white
+                       dark:hover:brightness-90 dark:focus-visible:brightness-90 dark:active:brightness-75'
+                onClick={signInWithLens}
+              >
+                <CustomIcon iconName='GoogleIcon' /> Sign up with lens
+              </Button> : <ConnectButton></ConnectButton>}
+
             <Button
               className='flex cursor-not-allowed justify-center gap-2 border border-light-line-reply font-bold text-light-primary
                          transition hover:bg-[#e6e6e6] focus-visible:bg-[#e6e6e6] active:bg-[#cccccc] dark:border-0
