@@ -40,3 +40,4 @@ next-env.d.ts
 *.py
 .idea/workspace.xml
 .idea/codeStyles/Project.xml
+/.idea/
