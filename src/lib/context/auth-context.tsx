@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext, createContext, useMemo } from 'react';
-import { getRandomId, getRandomInt } from '@lib/random';
 import type { ReactNode } from 'react';
 import type { Bookmark } from '@lib/types/bookmark';
 import { useWalletLogin, useActiveProfile, useWalletLogout, ProfileOwnedByMe } from "@lens-protocol/react-web";
@@ -28,7 +27,7 @@ export function AuthContextProvider({
   const [userBookmarks, setUserBookmarks] = useState<Bookmark[] | null>(null);
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(true);
-  
+
 
   const { data: profile, error: profileError, loading: profileLoading } = useActiveProfile();
 
@@ -42,16 +41,20 @@ export function AuthContextProvider({
 
   useEffect(() => {
     const manageUser = async (): Promise<void> => {
+
+      setLoading(true);
       setUser(profile!);
       setLoading(profileLoading);
       setError(profileError!);
+      setLoading(false);
     };
     manageUser()
-  }, []);
- 
+  }, [profile, profileLoading, profileError]);
+
 
   const signInWithLens = async (): Promise<void> => {
     try {
+      setLoading(true);
       const walletClient = await getWalletClient();
       if (walletClient) {
         await login({
@@ -61,6 +64,7 @@ export function AuthContextProvider({
     } catch (error) {
       setError(error as Error);
     }
+    setLoading(false);
   };
 
   const signOut = async (): Promise<void> => {
@@ -71,14 +75,10 @@ export function AuthContextProvider({
     }
   };
 
-
-  const randomSeed = useMemo(getRandomId, [user?.id]);
-
   const value: AuthContext = {
     user,
     error,
     loading,
-    randomSeed,
     userBookmarks,
     signOut,
     signInWithLens

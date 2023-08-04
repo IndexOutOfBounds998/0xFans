@@ -1,8 +1,8 @@
 import { AnimatePresence } from 'framer-motion';
-import { where, orderBy } from 'firebase/firestore';
+ 
 import { useWindow } from '@lib/context/window-context';
 import { useInfiniteScroll } from '@lib/hooks/useInfiniteScroll';
-import { tweetsCollection } from '@lib/firebase/collections';
+ 
 import { HomeLayout, ProtectedLayout } from '@components/layout/common-layout';
 import { MainLayout } from '@components/layout/main-layout';
 import { SEO } from '@components/common/seo';
@@ -14,17 +14,34 @@ import { Tweet } from '@components/tweet/tweet';
 import { Loading } from '@components/ui/loading';
 import { Error } from '@components/ui/error';
 import type { ReactElement, ReactNode } from 'react';
-
+import { PublicationSortCriteria, PublicationTypes } from '@lens-protocol/react-web';
+import { PublicationMainFocus } from '@lens-protocol/client';
 export default function Home(): JSX.Element {
   const { isMobile } = useWindow();
 
-  // const { data, loading, LoadMore } = useInfiniteScroll(
-  //   tweetsCollection,
-  //   [where('parent', '==', null), orderBy('createdAt', 'desc')],
-  //   { includeUser: true, allowNull: true, preserve: true }
-  // );
+  const { data, loading, LoadMore } = useInfiniteScroll(
+    {
+      cursor: JSON.stringify({
+        timestamp: 1,
+        offset: 0,
+      }),
+      sortCriteria:  PublicationSortCriteria.Latest,
+      limit: 20,
+      publicationTypes: [PublicationTypes.Post, PublicationTypes.Mirror],
+      metadata: {
+        mainContentFocus: [
+          PublicationMainFocus.Image,
+          PublicationMainFocus.Video,
+        ],
+        tags: {
+          oneOf: [],
+        },
+      },
+      sources: ["lenster", "lenstrip", "lenstube", "orb", "buttrfly", "lensplay"],
+    }
+  );
 
-  const { data, loading, LoadMore } = '';
+ 
 
   return (
     <MainContainer>
@@ -45,8 +62,8 @@ export default function Home(): JSX.Element {
         ) : (
           <>
             <AnimatePresence mode='popLayout'>
-              {data.map((tweet) => (
-                <Tweet {...tweet} key={tweet.id} />
+              {data.map((tweet,index) => (
+                <Tweet {...tweet} key={index} />
               ))}
             </AnimatePresence>
             <LoadMore />

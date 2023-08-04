@@ -18,12 +18,13 @@ import { TweetDate } from './tweet-date';
 import type { Variants } from 'framer-motion';
 import type { Tweet } from '@lib/types/tweet';
 import type { User } from '@lib/types/user';
+import { ProfileOwnedByMe } from '@lens-protocol/react-web';
 
 export type TweetProps = Tweet & {
-  user: User;
+  user: ProfileOwnedByMe;
   modal?: boolean;
   pinned?: boolean;
-  profile?: User | null;
+  profile?: ProfileOwnedByMe | null;
   parentTweet?: boolean;
 };
 
@@ -51,7 +52,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
     user: tweetUserData
   } = tweet;
 
-  const { id: ownerId, name, username, verified, photoURL } = tweetUserData;
+  const { id: ownerId, name, handle, picture } = tweetUserData;
 
   const { user } = useAuth();
 
@@ -63,12 +64,12 @@ export function Tweet(tweet: TweetProps): JSX.Element {
 
   const isOwner = userId === createdBy;
 
-  const { id: parentId, username: parentUsername = username } = parent ?? {};
+  const { id: parentId, username: parentUsername = name } = parent ?? {};
 
   const {
     id: profileId,
     name: profileName,
-    username: profileUsername
+    name: profileUsername
   } = profile ?? {};
 
   const reply = !!parent;

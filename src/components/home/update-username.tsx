@@ -42,7 +42,7 @@ export function UpdateUsername(): JSX.Element {
     if (visited) {
       if (errorMessage) setErrorMessage('');
 
-      const error = isValidUsername(user?.username as string, inputValue);
+      const error = isValidUsername(user?.name as string, inputValue);
 
       if (error) {
         setAvailable(false);

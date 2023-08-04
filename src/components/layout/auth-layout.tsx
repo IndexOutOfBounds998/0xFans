@@ -13,6 +13,7 @@ export function AuthLayout({ children }: LayoutProps): JSX.Element {
 
   useEffect(() => {
     const checkLogin = async (): Promise<void> => {
+      
       setPending(true);
 
       if (user) {
@@ -28,7 +29,7 @@ export function AuthLayout({ children }: LayoutProps): JSX.Element {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, loading]);
 
-  // if (loading || pending) return <Placeholder />;
+  if (loading || pending) return <Placeholder />;
 
   return <>{children}</>;
 }

@@ -18,19 +18,19 @@ import { UserShare } from '@components/user/user-share';
 import type { LayoutProps } from './common-layout';
 
 export function UserHomeLayout({ children }: LayoutProps): JSX.Element {
-  const { user, isAdmin } = useAuth();
+  const { user } = useAuth();
   const { user: userData, loading } = useUser();
 
   const {
     query: { id }
   } = useRouter();
 
-  const coverData = userData?.coverPhotoURL
-    ? { src: userData.coverPhotoURL, alt: userData.name }
+  const coverData = userData?.coverPicture
+    ? { src: userData.coverPicture, alt: userData.name }
     : null;
 
   const profileData = userData
-    ? { src: userData.photoURL, alt: userData.name }
+    ? { src: userData.picture.original.cover, alt: userData.name }
     : null;
 
   const { id: userId } = user ?? {};
@@ -41,7 +41,7 @@ export function UserHomeLayout({ children }: LayoutProps): JSX.Element {
     <>
       {userData && (
         <SEO
-          title={`${`${userData.name} (@${userData.username})`} / Twitter`}
+          title={`${`${userData.name} (@${userData.handle})`} / LensX`}
         />
       )}
       <motion.section {...variants} exit={undefined}>
