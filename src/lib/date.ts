@@ -17,7 +17,8 @@ export function formatDate(
   targetDate: Timestamp,
   mode: 'tweet' | 'message' | 'full' | 'joined'
 ): string {
-  const date = targetDate.toDate();
+  // const date = targetDate.toDate();
+  const date = new Date();
 
   if (mode === 'full') return getFullTime(date);
   if (mode === 'tweet') return getPostTime(date);

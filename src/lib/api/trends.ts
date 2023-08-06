@@ -36,10 +36,11 @@ export function useTrends(
   limit?: number,
   config?: SWRConfiguration
 ): UseTrendsReturn | FilteredUseTrendsReturn {
-  const { data, error } = useSWR<SuccessResponse, Error>(
-    `/api/trends/place/${id}${limit ? `?limit=${limit}` : ''}`,
-    config
-  );
+  // const { data, error } = useSWR<SuccessResponse, Error>(
+  //   `/api/trends/place/${id}${limit ? `?limit=${limit}` : ''}`,
+  //   config
+  // );
+  const { data, error } = {};
 
   if (data && 'errors' in data)
     return {

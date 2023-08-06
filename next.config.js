@@ -3,7 +3,18 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['lh3.googleusercontent.com', 'firebasestorage.googleapis.com']
+    minimumCacheTTL: 30,
+    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**'
+      },
+      {
+        protocol: 'http',
+        hostname: '**'
+      }
+    ]
   },
   experimental: {
     newNextLinkBehavior: false

@@ -28,8 +28,8 @@ export function Suggestions(): JSX.Element {
   const { data: suggestionsData, loading: suggestionsLoading } = useCollection(
     query(
       usersCollection,
-      where(documentId(), '>=', randomSeed),
-      orderBy(documentId()),
+      // where(documentId(), '>=', randomSeed),
+      // orderBy(documentId()),
       limit(2)
     ),
     { allowNull: true }
@@ -46,14 +46,14 @@ export function Suggestions(): JSX.Element {
           {suggestionsData?.map((userData) => (
             <UserCard {...userData} key={userData.id} />
           ))}
-          <Link href='/people'>
-            <a
-              className='custom-button accent-tab hover-card block w-full rounded-2xl
+          {/*<Link href='/people'>*/}
+          <span
+            className='custom-button accent-tab hover-card block w-full rounded-2xl
                          rounded-t-none text-center text-main-accent'
-            >
-              Show more
-            </a>
-          </Link>
+          >
+            Show more
+          </span>
+          {/*</Link>*/}
         </motion.div>
       ) : (
         <Error />

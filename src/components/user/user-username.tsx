@@ -13,17 +13,17 @@ export function UserUsername({
   disableLink
 }: UserUsernameProps): JSX.Element {
   return (
-    <Link href={`/user/${username}`}>
-      <a
-        className={cn(
-          'truncate text-light-secondary dark:text-dark-secondary',
-          className,
-          disableLink && 'pointer-events-none'
-        )}
-        tabIndex={-1}
-      >
-        @{username}
-      </a>
-    </Link>
+    // <Link href={`/user/${username}`}>
+    //   <a
+    //     className={cn(
+    //       'truncate text-light-secondary dark:text-dark-secondary',
+    //       className,
+    //       disableLink && 'pointer-events-none'
+    //     )}
+    //     tabIndex={-1}
+    //   >
+    <>{/*@{username}*/}</>
+    // </a>
+    // </Link>
   );
 }

@@ -116,9 +116,9 @@ export function Input({
       () => (
         <span className='flex gap-2'>
           Your Tweet was sent
-          <Link href={`/tweet/${tweetId}`}>
-            <a className='custom-underline font-bold'>View</a>
-          </Link>
+          {/*<Link href={`/tweet/${tweetId}`}>*/}
+          <span className='custom-underline font-bold'>View</span>
+          {/*</Link>*/}
         </span>
       ),
       { duration: 6000 }
@@ -218,12 +218,11 @@ export function Input({
           className='ml-[75px] -mb-2 mt-2 text-light-secondary dark:text-dark-secondary'
           {...fromTop}
         >
-          Replying to{' '}
-          <Link href={`/user/${parent?.username as string}`}>
-            <a className='custom-underline text-main-accent'>
-              {parent?.username as string}
-            </a>
-          </Link>
+          Replying to {/*<Link href={`/user/${parent?.username as string}`}>*/}
+          <span className='custom-underline text-main-accent'>
+            {parent?.username as string}
+          </span>
+          {/*</Link>*/}
         </motion.p>
       )}
       <label

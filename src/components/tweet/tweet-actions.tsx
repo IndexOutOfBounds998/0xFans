@@ -140,7 +140,7 @@ export function TweetActions({
       );
     };
 
-  const userIsFollowed = following.includes(createdBy);
+  const userIsFollowed = following ? following.includes(createdBy) : '';
 
   const currentPinModalData = useMemo(
     () => pinModalData[+tweetIsPinned],
@@ -208,7 +208,7 @@ export function TweetActions({
             <AnimatePresence>
               {open && (
                 <Popover.Panel
-                  className='menu-container group absolute top-[50px] right-2 whitespace-nowrap text-light-primary 
+                  className='menu-container group absolute top-[50px] right-2 whitespace-nowrap text-light-primary
                              dark:text-dark-primary'
                   as={motion.div}
                   {...variants}
