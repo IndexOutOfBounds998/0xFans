@@ -4,19 +4,19 @@ import { motion } from 'framer-motion';
 import { Loading } from '@components/ui/loading';
 import { useFetchPublications } from './useFetchPublications';
 import { ExplorePublicationRequest } from '@lens-protocol/client';
-import {  Post, Profile } from '@lens-protocol/react-web';
+import { Post, Profile } from '@lens-protocol/react-web';
 
 import type { Tweet } from '@lib/types/tweet';
 import { ProfileOwnedByMe } from '@lens-protocol/react-web';
- 
+
 type InfiniteScroll<T> = {
-  data: T[] | null;
+  data: any;
   loading: boolean;
   LoadMore: () => JSX.Element;
 };
 
 type InfiniteScrollWithUser<T> = {
-  data: (T & { user: Profile })[] | null;
+  data: any;
   loading: boolean;
   LoadMore: () => JSX.Element;
 };
@@ -36,7 +36,6 @@ export function useInfiniteScroll<T>(
 export function useInfiniteScroll<T>(
   request: ExplorePublicationRequest
 ): InfiniteScroll<T> | InfiniteScrollWithUser<T> {
-
   const [tweetsLimit, setTweetsLimit] = useState(20);
   const [tweetsSize, setTweetsSize] = useState<number | null>(null);
   const [reachedLimit, setReachedLimit] = useState(false);
@@ -47,6 +46,7 @@ export function useInfiniteScroll<T>(
   });
 
   let formateData: TweetProps[] = [];
+  const [formateList, setFormateList] = useState<TweetProps[]>([]);
 
   useEffect(() => {
     const checkLimit = tweetsSize ? tweetsLimit >= tweetsSize : false;
@@ -54,32 +54,28 @@ export function useInfiniteScroll<T>(
   }, [tweetsSize, tweetsLimit]);
 
   useEffect(() => {
-
     if (data && data.length > 0) {
-
-      formateData = data.map((item: Post) => {
-        return {
+      let list = [];
+      data.forEach((item: Post) => {
+        list.push({
           id: item.id,
           text: item.metadata.content,
-          images: item.metadata.media.map((img => {
+          images: item.metadata.media.map((img) => {
             return {
               src: img.original.url,
               alt: img.original.altTag ? img.original.altTag : ''
-            }
-          })),
-          parent: true,
+            };
+          }),
+          parent: null,
           userLikes: [],
-          user:item.profile,
-          createdBy: null,
-        }
-
-
-      })
+          user: item.profile,
+          createdBy: null
+        });
+      });
+      formateData = list;
+      setFormateList(list);
     }
-
-
   }, [data]);
-
 
   useEffect(() => {
     if (reachedLimit) return;
@@ -93,7 +89,7 @@ export function useInfiniteScroll<T>(
 
   useEffect(() => {
     if (reachedLimit) return;
-    if (loadMoreInView) setTweetsLimit(tweetsLimit + (20));
+    if (loadMoreInView) setTweetsLimit(tweetsLimit + 20);
   }, [loadMoreInView]);
 
   const makeItInView = (): void => setLoadMoreInView(true);
@@ -115,6 +111,8 @@ export function useInfiniteScroll<T>(
     ),
     [isLoadMoreHidden]
   );
+  console.log('data', data);
+  console.log('formateList', formateList);
 
-  return { formateData, loading, LoadMore };
+  return { data: formateList, loading, LoadMore };
 }
