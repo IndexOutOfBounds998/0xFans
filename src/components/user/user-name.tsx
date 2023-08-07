@@ -23,16 +23,15 @@ export function UserName({
 
   return (
     // <Link href={username ? `/user/${username}` : '#'}>
-    //   <a
-    //     className={cn(
-    //       'flex items-center gap-1 truncate font-bold',
-    //       username ? 'custom-underline' : 'pointer-events-none',
-    //       className
-    //     )}
-    //     tabIndex={username ? 0 : -1}
-    //   >
-    <>
-      <CustomTag className='truncate'>{name}</CustomTag>
+    <span
+      className={cn(
+        'flex items-center gap-1 truncate font-bold',
+        username ? 'custom-underline' : 'pointer-events-none',
+        className
+      )}
+      tabIndex={username ? 0 : -1}
+    >
+      <CustomTag className='truncate'>{username}</CustomTag>
       {verified && (
         <i>
           <HeroIcon
@@ -42,8 +41,7 @@ export function UserName({
           />
         </i>
       )}
-    </>
-    // {/*</a>*/}
+    </span>
     // {/*</Link>*/}
   );
 }

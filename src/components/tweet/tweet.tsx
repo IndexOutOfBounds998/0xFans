@@ -18,7 +18,7 @@ import { TweetDate } from './tweet-date';
 import type { Variants } from 'framer-motion';
 import type { Tweet } from '@lib/types/tweet';
 import { ProfileOwnedByMe } from '@lens-protocol/react-web';
-import { formatAvater } from '@lib/FormatContent';
+import { formatAvater, formatNickName } from '@lib/FormatContent';
 
 export type TweetProps = Tweet & {
   user: ProfileOwnedByMe;
@@ -49,18 +49,22 @@ export function Tweet(tweet: TweetProps): JSX.Element {
     parentTweet,
     userReplies,
     userRetweets,
-    user: tweetUserData
+    user
   } = tweet;
 
-  const { id: ownerId, name, handle, picture } = tweetUserData ?? {};
+  const { id: ownerId, name, handle, picture } = user ?? {};
 
-  const { user } = useAuth();
+  // const { user } = useAuth();
 
   let photoURL;
-  if (user) photoURL = formatAvater(user.picture.original.url);
+  let username;
+  if (user) {
+    photoURL = formatAvater(user.picture.original.url);
+    username = formatNickName(user.handle);
+  }
 
   console.log(photoURL);
-  console.log(user);
+  console.log(username);
 
   const { open, openModal, closeModal } = useModal();
 
@@ -128,7 +132,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
             )}
           </AnimatePresence>
           <div className='flex flex-col items-center gap-2'>
-            <UserTooltip avatar modal={modal} {...tweetUserData}>
+            <UserTooltip avatar modal={modal} {...user}>
               <UserAvatar src={photoURL} alt={name} username={username} />
             </UserTooltip>
             {parentTweet && (
@@ -138,7 +142,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
           <div className='flex min-w-0 flex-col'>
             <div className='flex justify-between gap-2 text-light-secondary dark:text-dark-secondary'>
               <div className='flex gap-1 truncate xs:overflow-visible xs:whitespace-normal'>
-                <UserTooltip modal={modal} {...tweetUserData}>
+                <UserTooltip modal={modal} {...user}>
                   <UserName
                     name={name}
                     username={username}
@@ -146,7 +150,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                     className='text-light-primary dark:text-dark-primary'
                   />
                 </UserTooltip>
-                <UserTooltip modal={modal} {...tweetUserData}>
+                <UserTooltip modal={modal} {...user}>
                   <UserUsername username={username} />
                 </UserTooltip>
                 <TweetDate tweetLink={tweetLink} createdAt={createdAt} />

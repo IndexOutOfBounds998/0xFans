@@ -10,13 +10,13 @@ import type { Tweet } from '@lib/types/tweet';
 import { ProfileOwnedByMe } from '@lens-protocol/react-web';
 
 type InfiniteScroll<T> = {
-  data: any;
+  data: T[] | null;
   loading: boolean;
   LoadMore: () => JSX.Element;
 };
 
 type InfiniteScrollWithUser<T> = {
-  data: any;
+  data: (T & { user: Profile })[] | null;
   loading: boolean;
   LoadMore: () => JSX.Element;
 };
@@ -111,8 +111,6 @@ export function useInfiniteScroll<T>(
     ),
     [isLoadMoreHidden]
   );
-  console.log('data', data);
-  console.log('formateList', formateList);
 
   return { data: formateList, loading, LoadMore };
 }
