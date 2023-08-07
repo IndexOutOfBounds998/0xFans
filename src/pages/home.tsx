@@ -27,7 +27,7 @@ export default function Home(): JSX.Element {
       }),
       sortCriteria:  PublicationSortCriteria.Latest,
       limit: 20,
-      publicationTypes: [PublicationTypes.Post, PublicationTypes.Mirror],
+      publicationTypes: [PublicationTypes.Post],
       metadata: {
         mainContentFocus: [
           PublicationMainFocus.Image,

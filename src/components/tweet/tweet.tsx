@@ -17,7 +17,6 @@ import { TweetStats } from './tweet-stats';
 import { TweetDate } from './tweet-date';
 import type { Variants } from 'framer-motion';
 import type { Tweet } from '@lib/types/tweet';
-import type { User } from '@lib/types/user';
 import { ProfileOwnedByMe } from '@lens-protocol/react-web';
 import { formatAvater } from '@lib/FormatContent';
 

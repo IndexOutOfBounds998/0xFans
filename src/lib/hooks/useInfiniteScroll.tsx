@@ -4,7 +4,11 @@ import { motion } from 'framer-motion';
 import { Loading } from '@components/ui/loading';
 import { useFetchPublications } from './useFetchPublications';
 import { ExplorePublicationRequest } from '@lens-protocol/client';
-import { Profile } from '@lens-protocol/react-web';
+import {  Post, Profile } from '@lens-protocol/react-web';
+
+import type { Tweet } from '@lib/types/tweet';
+import { ProfileOwnedByMe } from '@lens-protocol/react-web';
+ 
 type InfiniteScroll<T> = {
   data: T[] | null;
   loading: boolean;
@@ -15,6 +19,14 @@ type InfiniteScrollWithUser<T> = {
   data: (T & { user: Profile })[] | null;
   loading: boolean;
   LoadMore: () => JSX.Element;
+};
+
+export type TweetProps = Tweet & {
+  user: ProfileOwnedByMe;
+  modal?: boolean;
+  pinned?: boolean;
+  profile?: ProfileOwnedByMe | null;
+  parentTweet?: boolean;
 };
 
 export function useInfiniteScroll<T>(
@@ -34,10 +46,40 @@ export function useInfiniteScroll<T>(
     explorePublicationRequest: request
   });
 
+  let formateData: TweetProps[] = [];
+
   useEffect(() => {
     const checkLimit = tweetsSize ? tweetsLimit >= tweetsSize : false;
     setReachedLimit(checkLimit);
   }, [tweetsSize, tweetsLimit]);
+
+  useEffect(() => {
+
+    if (data && data.length > 0) {
+
+      formateData = data.map((item: Post) => {
+        return {
+          id: item.id,
+          text: item.metadata.content,
+          images: item.metadata.media.map((img => {
+            return {
+              src: img.original.url,
+              alt: img.original.altTag ? img.original.altTag : ''
+            }
+          })),
+          parent: true,
+          userLikes: [],
+          user:item.profile,
+          createdBy: null,
+        }
+
+
+      })
+    }
+
+
+  }, [data]);
+
 
   useEffect(() => {
     if (reachedLimit) return;
@@ -74,5 +116,5 @@ export function useInfiniteScroll<T>(
     [isLoadMoreHidden]
   );
 
-  return { data, loading, LoadMore };
+  return { formateData, loading, LoadMore };
 }
