@@ -1,8 +1,14 @@
 import { useState, useEffect, useContext, createContext, useMemo } from 'react';
 import type { ReactNode } from 'react';
 import type { Bookmark } from '@lib/types/bookmark';
-import { useWalletLogin, useActiveProfile, useWalletLogout, ProfileOwnedByMe } from "@lens-protocol/react-web";
-import { getWalletClient } from "@wagmi/core";
+import {
+  useWalletLogin,
+  useActiveProfile,
+  useWalletLogout,
+  ProfileOwnedByMe
+} from '@lens-protocol/react-web';
+import { getWalletClient } from '@wagmi/core';
+import { formatAvater, formatNickName } from '@lib/FormatContent';
 
 type AuthContext = {
   user: ProfileOwnedByMe | null;
@@ -22,35 +28,43 @@ type AuthContextProviderProps = {
 export function AuthContextProvider({
   children
 }: AuthContextProviderProps): JSX.Element {
-
   const [user, setUser] = useState<ProfileOwnedByMe | null>(null);
   const [userBookmarks, setUserBookmarks] = useState<Bookmark[] | null>(null);
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(true);
 
-
-  const { data: profile, error: profileError, loading: profileLoading } = useActiveProfile();
+  const {
+    data: profile,
+    error: profileError,
+    loading: profileLoading
+  } = useActiveProfile();
 
   const {
     execute: login,
     error: loginError,
-    isPending: isLoginPending,
+    isPending: isLoginPending
   } = useWalletLogin();
 
   const { execute: logout, isPending } = useWalletLogout();
 
   useEffect(() => {
     const manageUser = async (): Promise<void> => {
-
       setLoading(true);
-      setUser(profile!);
+      let userObj = profile!;
+      if (userObj) {
+        userObj = {
+          ...userObj,
+          photoURL: formatAvater(userObj.picture.original.url),
+          username: formatNickName(userObj.handle)
+        };
+      }
+      setUser(userObj);
       setLoading(profileLoading);
       setError(profileError!);
       setLoading(false);
     };
-    manageUser()
+    manageUser();
   }, [profile, profileLoading, profileError]);
-
 
   const signInWithLens = async (): Promise<void> => {
     try {
@@ -58,7 +72,7 @@ export function AuthContextProvider({
       const walletClient = await getWalletClient();
       if (walletClient) {
         await login({
-          address: walletClient.account.address,
+          address: walletClient.account.address
         });
       }
     } catch (error) {

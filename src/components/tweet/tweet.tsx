@@ -63,9 +63,6 @@ export function Tweet(tweet: TweetProps): JSX.Element {
     username = formatNickName(user.handle);
   }
 
-  console.log(photoURL);
-  console.log(username);
-
   const { open, openModal, closeModal } = useModal();
 
   const tweetLink = `/tweet/${tweetId}`;
