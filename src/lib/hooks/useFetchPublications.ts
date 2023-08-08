@@ -15,7 +15,7 @@ export function useFetchPublications({
   const [data, setData] = useState([]);
   const [nextCursor, setNextCursor] = useState("");
   const [hasMore, setHasMore] = useState(false);
-  const [request, setRequest] = useState(undefined);
+  const [request, setRequest] = useState<ExplorePublicationRequest | null>(null);
 
   const execute = async () => {
     setFirstLoading(true);
@@ -40,12 +40,14 @@ export function useFetchPublications({
   const next = async () => {
     setLoading(true);
     const lensClient = await getAuthenticatedClient();
-    request.cursor = nextCursor;
-    let res = await lensClient.explore.publications(request);
-    setLoading(false);
-    setData((prevData) => [...prevData, ...res.items]);
-    setNextCursor(res.pageInfo.next);
-    setHasMore(res.items.length > 0);
+    if(request){
+      request.cursor = nextCursor;
+      let res = await lensClient.explore.publications(request);
+      setLoading(false);
+      setData((prevData) => [...prevData, ...res.items]);
+      setNextCursor(res.pageInfo.next);
+      setHasMore(res.items.length > 0);
+    }
   };
 
   const reset = async () => {

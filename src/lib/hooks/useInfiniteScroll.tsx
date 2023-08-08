@@ -8,6 +8,7 @@ import { Post, Profile } from '@lens-protocol/react-web';
 
 import type { Tweet } from '@lib/types/tweet';
 import { ProfileOwnedByMe } from '@lens-protocol/react-web';
+import { Timestamp } from 'firebase/firestore';
 
 type InfiniteScroll<T> = {
   data: T[] | null;
@@ -36,67 +37,57 @@ export function useInfiniteScroll<T>(
 export function useInfiniteScroll<T>(
   request: ExplorePublicationRequest
 ): InfiniteScroll<T> | InfiniteScrollWithUser<T> {
-  const [tweetsLimit, setTweetsLimit] = useState(20);
-  const [tweetsSize, setTweetsSize] = useState<number | null>(null);
-  const [reachedLimit, setReachedLimit] = useState(false);
+
   const [loadMoreInView, setLoadMoreInView] = useState(false);
 
-  const { data, loading } = useFetchPublications({
+  const { data, loading, next, hasMore } = useFetchPublications({
     explorePublicationRequest: request
   });
 
-  let formateData: TweetProps[] = [];
   const [formateList, setFormateList] = useState<TweetProps[]>([]);
 
-  useEffect(() => {
-    const checkLimit = tweetsSize ? tweetsLimit >= tweetsSize : false;
-    setReachedLimit(checkLimit);
-  }, [tweetsSize, tweetsLimit]);
 
   useEffect(() => {
     if (data && data.length > 0) {
-      let list = [];
+      let list: TweetProps[] = [];
       data.forEach((item: Post) => {
         list.push({
           id: item.id,
           text: item.metadata.content,
-          images: item.metadata.media.map((img) => {
+          images: item.metadata.media ? item.metadata.media.map((img, index) => {
             return {
+              id: index.toString(),
               src: img.original.url,
               alt: img.original.altTag ? img.original.altTag : ''
             };
-          }),
+          }) : [],
           parent: null,
           userLikes: [],
           user: item.profile,
-          createdBy: null
+          createdBy: item.profile.handle,
+          createdAt:Timestamp.now(),
+          updatedAt: Timestamp.now(), 
+          userReplies: item.stats.commentsCount,  
+          userRetweets: []  
         });
       });
-      formateData = list;
       setFormateList(list);
     }
-  }, [data]);
+    console.log()
+  }, [data, formateList]);
+
 
   useEffect(() => {
-    if (reachedLimit) return;
-
-    const setTweetsLength = async (): Promise<void> => {
-      setTweetsSize(data.length);
-    };
-
-    void setTweetsLength();
-  }, [data?.length]);
-
-  useEffect(() => {
-    if (reachedLimit) return;
-    if (loadMoreInView) setTweetsLimit(tweetsLimit + 20);
+    if (loadMoreInView) {
+      if (!hasMore) return;
+      next();
+    }
   }, [loadMoreInView]);
 
   const makeItInView = (): void => setLoadMoreInView(true);
   const makeItNotInView = (): void => setLoadMoreInView(false);
 
-  const isLoadMoreHidden =
-    reachedLimit && (data?.length ?? 0) >= (tweetsSize ?? 0);
+  const isLoadMoreHidden = !hasMore;
 
   const LoadMore = useCallback(
     (): JSX.Element => (

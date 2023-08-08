@@ -59,7 +59,11 @@ export function Tweet(tweet: TweetProps): JSX.Element {
   let photoURL;
   let username;
   if (user) {
-    photoURL = formatAvater(user.picture.original.url);
+    if (user.picture) {
+      photoURL = formatAvater(user.picture.original.url);
+    } else {
+      photoURL = "";
+    }
     username = formatNickName(user.handle);
   }
 
