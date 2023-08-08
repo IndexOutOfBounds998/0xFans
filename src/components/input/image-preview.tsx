@@ -108,6 +108,7 @@ export function ImagePreview({
       <AnimatePresence mode='popLayout'>
         {imagesPreview.map(({ id, src, alt }, index) => (
           <motion.button
+            key={index}
             type='button'
             className={cn(
               'accent-tab relative transition-shadow',
@@ -123,10 +124,9 @@ export function ImagePreview({
             {...variants}
             onClick={preventBubbling(handleSelectedImage(index))}
             layout={!isTweet ? true : false}
-            key={id}
           >
             <NextImage
-              className='relative h-full w-full cursor-pointer transition 
+              className='relative h-full !w-auto cursor-pointer transition
                          hover:brightness-75 hover:duration-200'
               imgClassName={cn(
                 isTweet
@@ -142,7 +142,7 @@ export function ImagePreview({
             {removeImage && (
               <Button
                 className='group absolute top-0 left-0 translate-x-1 translate-y-1
-                           bg-light-primary/75 p-1 backdrop-blur-sm 
+                           bg-light-primary/75 p-1 backdrop-blur-sm
                            hover:bg-image-preview-hover/75'
                 onClick={preventBubbling(removeImage(id))}
               >

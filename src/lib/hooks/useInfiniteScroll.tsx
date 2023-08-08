@@ -37,7 +37,6 @@ export function useInfiniteScroll<T>(
 export function useInfiniteScroll<T>(
   request: ExplorePublicationRequest
 ): InfiniteScroll<T> | InfiniteScrollWithUser<T> {
-
   const [loadMoreInView, setLoadMoreInView] = useState(false);
 
   const { data, loading, next, hasMore } = useFetchPublications({
@@ -46,7 +45,6 @@ export function useInfiniteScroll<T>(
 
   const [formateList, setFormateList] = useState<TweetProps[]>([]);
 
-
   useEffect(() => {
     if (data && data.length > 0) {
       let list: TweetProps[] = [];
@@ -54,28 +52,29 @@ export function useInfiniteScroll<T>(
         list.push({
           id: item.id,
           text: item.metadata.content,
-          images: item.metadata.media ? item.metadata.media.map((img, index) => {
-            return {
-              id: index.toString(),
-              src: img.original.url,
-              alt: img.original.altTag ? img.original.altTag : ''
-            };
-          }) : [],
+          images: item.metadata.media
+            ? item.metadata.media.map((img, index) => {
+                return {
+                  id: index.toString(),
+                  src: img.original.url,
+                  alt: img.original.altTag ? img.original.altTag : ''
+                };
+              })
+            : [],
           parent: null,
           userLikes: [],
           user: item.profile,
           createdBy: item.profile.handle,
-          createdAt:Timestamp.now(),
-          updatedAt: Timestamp.now(), 
-          userReplies: item.stats.commentsCount,  
-          userRetweets: []  
+          createdAt: Timestamp.now(),
+          updatedAt: Timestamp.now(),
+          userReplies: item.stats.commentsCount,
+          userRetweets: []
         });
       });
       setFormateList(list);
     }
-    console.log()
-  }, [data, formateList]);
-
+    console.log();
+  }, [data]);
 
   useEffect(() => {
     if (loadMoreInView) {

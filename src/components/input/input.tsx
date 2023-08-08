@@ -57,9 +57,6 @@ export function Input({
 
   const { user, isAdmin } = useAuth();
   const { name, username, photoURL } = user as User;
-  // const { name, username, photoURL } = '';
-
-  console.log(user);
 
   const inputRef = useRef<HTMLTextAreaElement>(null);
 

@@ -55,7 +55,7 @@ export function AuthContextProvider({
         userObj = {
           ...userObj,
           photoURL: formatAvater(userObj.picture.original.url),
-          username: formatNickName(userObj.handle)
+          name: formatNickName(userObj.handle)
         };
       }
       setUser(userObj);

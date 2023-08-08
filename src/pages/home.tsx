@@ -34,7 +34,7 @@ export default function Home(): JSX.Element {
     metadata: {
       mainContentFocus: [
         PublicationMainFocus.Image,
-        PublicationMainFocus.Video,
+        // PublicationMainFocus.Video,
         PublicationMainFocus.TextOnly
       ],
       tags: {
