@@ -70,7 +70,7 @@ export function useInfiniteScroll<T>(
         userRetweets: []
       }));
       setFormateList(list);
-      console.log(list);
+      console.log('list', list.length);
     }
   }, [data]);
 

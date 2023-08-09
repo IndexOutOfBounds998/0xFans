@@ -133,7 +133,13 @@ export function Tweet(tweet: TweetProps): JSX.Element {
               )}
             </AnimatePresence>
             <div className='flex flex-col items-center gap-2'>
-              <UserTooltip avatar modal={modal} {...user}>
+              <UserTooltip
+                avatar
+                modal={modal}
+                {...user}
+                coverPhotoURL={photoURL}
+                photoURL={photoURL}
+              >
                 <UserAvatar src={photoURL} alt={name} username={username} />
               </UserTooltip>
               {parentTweet && (

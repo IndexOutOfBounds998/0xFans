@@ -23,7 +23,7 @@ import { useEffect } from 'react';
 export default function Home(): JSX.Element {
   const { isMobile } = useWindow();
 
-  const { data, loading, LoadMore } = useInfiniteScroll({
+  const { data, LoadMore } = useInfiniteScroll({
     cursor: JSON.stringify({
       timestamp: 1,
       offset: 0
@@ -56,20 +56,24 @@ export default function Home(): JSX.Element {
       </MainHeader>
       {!isMobile && <Input />}
       <section className='mt-0.5 xs:mt-0'>
-        {loading ? (
-          <Loading className='mt-5' />
-        ) : !data ? (
-          <Error message='Something went wrong' />
-        ) : (
-          <>
-            <AnimatePresence mode='popLayout'>
-              {data.map((tweet, index) => (
-                <Tweet {...tweet} key={index} />
-              ))}
-            </AnimatePresence>
-            <LoadMore />
-          </>
-        )}
+        {
+          //   loading ? (
+          //   <Loading className='mt-5' />
+          // ) :
+          !data ? (
+            <Loading className='mt-5' />
+          ) : (
+            // <Error message='Something went wrong' />
+            <>
+              <AnimatePresence mode='popLayout'>
+                {data.map((tweet, index) => (
+                  <Tweet {...tweet} key={index} />
+                ))}
+              </AnimatePresence>
+              <LoadMore />
+            </>
+          )
+        }
       </section>
     </MainContainer>
   );
