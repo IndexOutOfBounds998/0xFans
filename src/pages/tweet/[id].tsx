@@ -42,30 +42,21 @@ export default function TweetId(): JSX.Element {
     observerId: observerId
   });
 
-  // let tweetData;
-  // const [tweetData, setTweetData] = useState({});
-  // const [text, setText] = useState(null);
-  // const [images, setImages] = useState(null);
-  // const [imagesLength, setImagesLength] = useState(null);
-  // const [parentId, setParentIdt] = useState(null);
-  // useEffect(() => {
-  //   console.log(tweetObj)
-  //   debugger
-  //   if (tweetObj) {
-  //     // setTweetData(initData(tweetObj));
-  //     // setText(tweetObj.text);
-  //     // setImages(tweetObj.images);
-  //     // setImagesLength(images?.length ?? 0);
-  //     // setParentIdt(tweetObj?.parent?.id);
-  //     // console.log(initData(tweetObj))
-  //   }
-  // }, [tweetObj])
-
   const initData = (data) => ({
     id: data?.id,
     user: data?.profile,
     text: data?.metadata.content,
-    images: data?.metadata.image,
+    // images: data?.metadata.image,
+    images:
+      data.metadata.media && data.metadata.media.length
+        ? data.metadata.media.map((img, index) => {
+            return {
+              id: index.toString(),
+              src: img.original.url,
+              alt: img.original.altTag ? img.original.altTag : ''
+            };
+          })
+        : null,
     parent: {
       id: data?.profile?.id,
       username: formatNickName(data?.profile?.handle)
@@ -82,14 +73,6 @@ export default function TweetId(): JSX.Element {
   const initImages = (tweetObj) => tweetObj?.images;
   const initImagesLength = (tweetObj) => tweetObj?.images?.length ?? 0;
   const initParentId = (tweetObj) => tweetObj?.parent?.id;
-
-  // console.log(tweetObj)
-  // tweetData = tweetObj ? initData(tweetObj) : {};
-  // setText(tweetObj?.text);
-  // setImages(tweetObj?.images);
-  // setImagesLength(images?.length ?? 0);
-  // setParentIdt(tweetObj?.parent?.id);
-  // console.log(tweetObj ? initData(tweetObj) : {})
 
   const viewTweetRef = useRef<HTMLElement>(null);
 

@@ -52,6 +52,9 @@ export function ImagePreview({
 
   const { open, openModal, closeModal } = useModal();
 
+  //图片最多显示四个
+  const previewCountLimit = previewCount > 4 ? 4 : previewCount;
+
   useEffect(() => {
     const imageData = imagesPreview[selectedIndex];
     setSelectedImage(imageData);
@@ -67,9 +70,9 @@ export function ImagePreview({
     const nextIndex =
       type === 'prev'
         ? selectedIndex === 0
-          ? previewCount - 1
+          ? previewCountLimit - 1
           : selectedIndex - 1
-        : selectedIndex === previewCount - 1
+        : selectedIndex === previewCountLimit - 1
         ? 0
         : selectedIndex + 1;
 
@@ -100,7 +103,7 @@ export function ImagePreview({
         <ImageModal
           tweet={isTweet}
           imageData={selectedImage as ImageData}
-          previewCount={previewCount}
+          previewCountLimit={previewCountLimit}
           selectedIndex={selectedIndex}
           handleNextIndex={handleNextIndex}
         />
@@ -113,12 +116,13 @@ export function ImagePreview({
             className={cn(
               'accent-tab relative transition-shadow',
               isTweet
-                ? postImageBorderRadius[previewCount][index]
+                ? postImageBorderRadius[previewCountLimit][index]
                 : 'rounded-2xl',
               {
-                'col-span-2 row-span-2': previewCount === 1,
+                'col-span-2 row-span-2': previewCountLimit === 1,
                 'row-span-2':
-                  previewCount === 2 || (index === 0 && previewCount === 3)
+                  previewCountLimit === 2 ||
+                  (index === 0 && previewCountLimit === 3)
               }
             )}
             {...variants}
@@ -130,10 +134,10 @@ export function ImagePreview({
                          hover:brightness-75 hover:duration-200'
               imgClassName={cn(
                 isTweet
-                  ? postImageBorderRadius[previewCount][index]
+                  ? postImageBorderRadius[previewCountLimit][index]
                   : 'rounded-2xl'
               )}
-              previewCount={previewCount}
+              previewCountLimit={previewCountLimit}
               layout='fill'
               src={src}
               alt={alt}

@@ -47,12 +47,11 @@ export function useInfiniteScroll<T>(
 
   useEffect(() => {
     if (data && data.length > 0) {
-      let list: TweetProps[] = [];
-      data.forEach((item: Post) => {
-        list.push({
-          id: item.id,
-          text: item.metadata.content,
-          images: item.metadata.media
+      let list: TweetProps[] = data.map((item: Post) => ({
+        id: item.id,
+        text: item.metadata.content,
+        images:
+          item.metadata.media && item.metadata.media.length
             ? item.metadata.media.map((img, index) => {
                 return {
                   id: index.toString(),
@@ -60,20 +59,19 @@ export function useInfiniteScroll<T>(
                   alt: img.original.altTag ? img.original.altTag : ''
                 };
               })
-            : [],
-          parent: null,
-          userLikes: [],
-          user: item.profile,
-          createdBy: item.profile.handle,
-          createdAt: Timestamp.now(),
-          updatedAt: Timestamp.now(),
-          userReplies: item.stats.commentsCount,
-          userRetweets: []
-        });
-      });
+            : null,
+        parent: null,
+        userLikes: [],
+        user: item.profile,
+        createdBy: item.profile.handle,
+        createdAt: Timestamp.now(),
+        updatedAt: Timestamp.now(),
+        userReplies: item.stats.commentsCount,
+        userRetweets: []
+      }));
       setFormateList(list);
+      console.log(list);
     }
-    console.log();
   }, [data]);
 
   useEffect(() => {

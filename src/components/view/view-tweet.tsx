@@ -40,7 +40,6 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
     user: tweetUserData
   } = tweet;
 
-  debugger;
   const { id: ownerId, name, username, verified } = tweetUserData;
   const photoURL = formatAvater(tweetUserData?.picture?.original?.url);
 
