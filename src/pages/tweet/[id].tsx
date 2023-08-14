@@ -76,14 +76,35 @@ export default function TweetId(): JSX.Element {
 
   const viewTweetRef = useRef<HTMLElement>(null);
 
-  const { data: repliesData, loading: repliesLoading } = useCollection(
-    query(
-      tweetsCollection,
-      where('parent.id', '==', id),
-      orderBy('createdAt', 'desc')
-    ),
-    { includeUser: true, allowNull: true }
-  );
+  const {
+    data: repliesData,
+    loading: repliesLoading,
+    hasMore,
+    next
+  } = useComments({
+    commentsOf: id,
+    limit: 10,
+    observerId: observerId
+  });
+
+  const { commentList, setCommentList } = useState([]);
+
+  useEffect(() => {
+    if (repliesData) {
+      console.log(repliesData);
+      // let list;
+      // repliesData.
+    }
+  }, repliesData);
+
+  // const { data: repliesData, loading: repliesLoading } = useCollection(
+  //   query(
+  //     tweetsCollection,
+  //     where('parent.id', '==', id),
+  //     orderBy('createdAt', 'desc')
+  //   ),
+  //   { includeUser: true, allowNull: true }
+  // );
 
   // const { text, images } = tweetData ?? {};
 

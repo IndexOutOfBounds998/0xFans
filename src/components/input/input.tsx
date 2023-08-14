@@ -24,6 +24,7 @@ import type { Variants } from 'framer-motion';
 import type { User } from '@lib/types/user';
 import type { Tweet } from '@lib/types/tweet';
 import type { FilesWithId, ImagesPreview, ImageData } from '@lib/types/file';
+import { useSendComment } from '@lib/hooks/useSendComment';
 
 type InputProps = {
   modal?: boolean;
@@ -81,26 +82,35 @@ export function Input({
 
     const userId = user?.id as string;
 
-    const tweetData: WithFieldValue<Omit<Tweet, 'id'>> = {
-      text: inputValue.trim() || null,
-      parent: isReplying && parent ? parent : null,
-      images: await uploadImages(userId, selectedImages),
-      userLikes: [],
-      createdBy: userId,
-      createdAt: serverTimestamp(),
-      updatedAt: null,
-      userReplies: 0,
-      userRetweets: []
-    };
+    debugger;
+    //发布评论
+    const { submit: send, loading } = useSendComment({
+      publication: parent
+    });
+    if (inputValue.trim()) {
+      send(inputValue.trim(), user);
+    }
 
-    await sleep(500);
-
-    const [tweetRef] = await Promise.all([
-      addDoc(tweetsCollection, tweetData),
-      manageTotalTweets('increment', userId),
-      tweetData.images && manageTotalPhotos('increment', userId),
-      isReplying && manageReply('increment', parent?.id as string)
-    ]);
+    // const tweetData: WithFieldValue<Omit<Tweet, 'id'>> = {
+    //   text: inputValue.trim() || null,
+    //   parent: isReplying && parent ? parent : null,
+    //   images: await uploadImages(userId, selectedImages),
+    //   userLikes: [],
+    //   createdBy: userId,
+    //   createdAt: serverTimestamp(),
+    //   updatedAt: null,
+    //   userReplies: 0,
+    //   userRetweets: []
+    // };
+    //
+    // await sleep(500);
+    //
+    // const [tweetRef] = await Promise.all([
+    //   addDoc(tweetsCollection, tweetData),
+    //   manageTotalTweets('increment', userId),
+    //   tweetData.images && manageTotalPhotos('increment', userId),
+    //   isReplying && manageReply('increment', parent?.id as string)
+    // ]);
 
     const { id: tweetId } = await getDoc(tweetRef);
 
