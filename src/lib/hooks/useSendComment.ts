@@ -4,13 +4,15 @@ import { useSignTypedData } from 'wagmi';
 
 import { uuid } from '@walletconnect/legacy-utils';
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 type commentData = {
   publication: any;
 };
 
 export function useSendComment({ publication }: commentData) {
-  // const { signTypedDataAsync, isLoading: typedDataLoading } = useSignTypedData();
+  const { signTypedDataAsync, isLoading: typedDataLoading } =
+    useSignTypedData();
 
   const { execute, url: hashUrl } = useUpIpfs({ type: 'upJsonContent' });
 
@@ -71,8 +73,6 @@ export function useSendComment({ publication }: commentData) {
 
       if (broadcastResultValue.__typename == 'RelayerResult') {
       }
-
-      setLoading(false);
     }
   };
 
