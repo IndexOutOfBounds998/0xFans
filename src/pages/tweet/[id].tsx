@@ -87,24 +87,20 @@ export default function TweetId(): JSX.Element {
     observerId: observerId
   });
 
-  const { commentList, setCommentList } = useState([]);
+  const [commentList, setCommentList] = useState([]);
 
   useEffect(() => {
     if (repliesData) {
       console.log(repliesData);
+      let list = [];
+      repliesData.forEach((item) => {
+        list.push(initData(item));
+      });
+      setCommentList(list);
       // let list;
       // repliesData.
     }
   }, repliesData);
-
-  // const { data: repliesData, loading: repliesLoading } = useCollection(
-  //   query(
-  //     tweetsCollection,
-  //     where('parent.id', '==', id),
-  //     orderBy('createdAt', 'desc')
-  //   ),
-  //   { includeUser: true, allowNull: true }
-  // );
 
   // const { text, images } = tweetData ?? {};
 
@@ -148,7 +144,7 @@ export default function TweetId(): JSX.Element {
                 <Loading className='mt-5' />
               ) : (
                 <AnimatePresence mode='popLayout'>
-                  {repliesData?.map((tweet) => (
+                  {commentList?.map((tweet) => (
                     <Tweet {...tweet} key={tweet.id} />
                   ))}
                 </AnimatePresence>
