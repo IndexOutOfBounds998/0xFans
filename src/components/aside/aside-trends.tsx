@@ -3,13 +3,13 @@ import cn from 'clsx';
 import { motion } from 'framer-motion';
 import { formatNumber } from '@lib/date';
 import { preventBubbling } from '@lib/utils';
-import { useTrends } from '@lib/api/trends';
 import { Error } from '@components/ui/error';
 import { HeroIcon } from '@components/ui/hero-icon';
 import { Button } from '@components/ui/button';
 import { ToolTip } from '@components/ui/tooltip';
 import { Loading } from '@components/ui/loading';
 import type { MotionProps } from 'framer-motion';
+import { useTrending } from '@lib/hooks/useTrending';
 
 export const variants: MotionProps = {
   initial: { opacity: 0 },
@@ -22,9 +22,11 @@ type AsideTrendsProps = {
 };
 
 export function AsideTrends({ inTrendsPage }: AsideTrendsProps): JSX.Element {
-  const { data, loading } = useTrends(1, inTrendsPage ? 100 : 10, {
-    refreshInterval: 30000
-  });
+  // const { data, loading } = useTrends(1, inTrendsPage ? 100 : 10, {
+  //   refreshInterval: 30000
+  // });
+  const { data, loading } = useTrending({ limit: 4 });
+  console.log(data);
 
   const { trends, location } = data ?? {};
 
@@ -37,7 +39,7 @@ export function AsideTrends({ inTrendsPage }: AsideTrendsProps): JSX.Element {
     >
       {loading ? (
         <Loading />
-      ) : trends ? (
+      ) : data ? (
         <motion.div
           className={cn('inner:px-4 inner:py-3', inTrendsPage && 'mt-0.5')}
           {...variants}
@@ -45,14 +47,13 @@ export function AsideTrends({ inTrendsPage }: AsideTrendsProps): JSX.Element {
           {!inTrendsPage && (
             <h2 className='text-xl font-extrabold'>Trends for you</h2>
           )}
-          {trends.map(({ name, query, tweet_volume, url }) => (
+          {data.map(({ tag, query, tweet_volume, url }) => (
             // <Link href={url} key={query}>
-            //   <a
-            //     className='hover-animation accent-tab hover-card relative
-            //                flex cursor-not-allowed flex-col gap-0.5'
-            //     onClick={preventBubbling()}
-            //   >
-            <>
+            <a
+              className='hover-animation accent-tab hover-card relative
+                           flex cursor-not-allowed flex-col gap-0.5'
+              // onClick={preventBubbling()}
+            >
               <div className='absolute right-2 top-2'>
                 <Button
                   className='hover-animation group relative cursor-not-allowed p-2
@@ -68,18 +69,17 @@ export function AsideTrends({ inTrendsPage }: AsideTrendsProps): JSX.Element {
                   <ToolTip tip='More' />
                 </Button>
               </div>
-              <p className='text-sm text-light-secondary dark:text-dark-secondary'>
-                Trending{' '}
-                {location === 'Worldwide'
-                  ? 'Worldwide'
-                  : `in ${location as string}`}
-              </p>
-              <p className='font-bold'>{name}</p>
-              <p className='text-sm text-light-secondary dark:text-dark-secondary'>
-                {formatNumber(tweet_volume)} tweets
-              </p>
-            </>
-            // </a>
+              {/*<p className='text-sm text-light-secondary dark:text-dark-secondary'>*/}
+              {/*  Trending{' '}*/}
+              {/*  {location === 'Worldwide'*/}
+              {/*    ? 'Worldwide'*/}
+              {/*    : `in ${location as string}`}*/}
+              {/*</p>*/}
+              <p className='font-bold'>{tag}</p>
+              {/*<p className='text-sm text-light-secondary dark:text-dark-secondary'>*/}
+              {/*  {formatNumber(tweet_volume)} tweets*/}
+              {/*</p>*/}
+            </a>
             // </Link>
           ))}
           {!inTrendsPage && (
