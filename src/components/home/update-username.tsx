@@ -52,7 +52,7 @@ export function UpdateUsername(): JSX.Element {
   }, [inputValue]);
 
   useEffect(() => {
-    if (!user?.updatedAt) openModal();
+    if (!user) openModal();
     else setAlreadySet(true);
   }, []);
 

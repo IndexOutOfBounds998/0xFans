@@ -103,7 +103,7 @@ export function ImagePreview({
         <ImageModal
           tweet={isTweet}
           imageData={selectedImage as ImageData}
-          previewCountLimit={previewCountLimit}
+          previewCount={previewCountLimit}
           selectedIndex={selectedIndex}
           handleNextIndex={handleNextIndex}
         />
@@ -137,7 +137,7 @@ export function ImagePreview({
                   ? postImageBorderRadius[previewCountLimit][index]
                   : 'rounded-2xl'
               )}
-              previewCountLimit={previewCountLimit}
+              previewCount={previewCountLimit}
               layout='fill'
               src={src}
               alt={alt}

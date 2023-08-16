@@ -25,6 +25,8 @@ import type { User } from '@lib/types/user';
 import type { Tweet } from '@lib/types/tweet';
 import type { FilesWithId, ImagesPreview, ImageData } from '@lib/types/file';
 import { useSendComment } from '@lib/hooks/useSendComment';
+import { MediaSet, ProfileOwnedByMe } from '@lens-protocol/react-web';
+import { formatAvater } from '@lib/FormatContent';
 
 type InputProps = {
   modal?: boolean;
@@ -56,8 +58,8 @@ export function Input({
   const [loading, setLoading] = useState(false);
   const [visited, setVisited] = useState(false);
 
-  const { user, isAdmin } = useAuth();
-  const { name, username, photoURL } = user as User;
+  const { user } = useAuth();
+  const { name, handle, picture } = user as ProfileOwnedByMe;
 
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -179,7 +181,7 @@ export function Input({
 
   const formId = useId();
 
-  const inputLimit = isAdmin ? 560 : 280;
+  const inputLimit = 280;
 
   const inputLength = inputValue.length;
   const isValidInput = !!inputValue.trim().length;
@@ -219,13 +221,13 @@ export function Input({
           reply
             ? 'pt-3 pb-1'
             : replyModal
-            ? 'pt-0'
-            : 'border-b-2 border-light-border dark:border-dark-border',
+              ? 'pt-0'
+              : 'border-b-2 border-light-border dark:border-dark-border',
           (disabled || loading) && 'pointer-events-none opacity-50'
         )}
         htmlFor={formId}
       >
-        <UserAvatar src={photoURL} alt={name} username={username} />
+        <UserAvatar src={formatAvater((picture as MediaSet)?.original?.url ?? '')} alt={name ? name : ""} username={name ? name : ""} />
         <div className='flex w-full flex-col gap-4'>
           <InputForm
             modal={modal}
