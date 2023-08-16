@@ -56,7 +56,7 @@ export function useCollection<T>(
           verified: true,
           following: [],
           followers: [],
-          coverPhotoURL: item.coverPicture
+          coverPhotoURL: item.coverPicture ? formatAvater(item.coverPicture.original.url) : item.picture ? formatAvater(item.picture.original.url) : ""
         }
 
       }))
