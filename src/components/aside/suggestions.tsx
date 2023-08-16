@@ -18,31 +18,18 @@ import { Error } from '@components/ui/error';
 import { variants } from './aside-trends';
 
 export function Suggestions(): JSX.Element {
-  const { randomSeed } = useAuth();
 
-  const { data: adminData, loading: adminLoading } = useDocument(
-    doc(usersCollection, 'Twt0A27bx9YcG4vu3RTsR7ifJzf2'),
-    { allowNull: true }
-  );
-
-  const { data: suggestionsData, loading: suggestionsLoading } = useCollection(
-    query(
-      usersCollection,
-      // where(documentId(), '>=', randomSeed),
-      // orderBy(documentId()),
-      limit(2)
-    ),
-    { allowNull: true }
-  );
+  const { user } = useAuth();
+  const { data: suggestionsData, loading: suggestionsLoading } = useCollection({observerId:user?.id,limit:5});
 
   return (
     <section className='hover-animation rounded-2xl bg-main-sidebar-background'>
-      {adminLoading || suggestionsLoading ? (
+      {suggestionsLoading ? (
         <Loading className='flex h-52 items-center justify-center p-4' />
       ) : suggestionsData ? (
         <motion.div className='inner:px-4 inner:py-3' {...variants}>
           <h2 className='text-xl font-bold'>Who to follow</h2>
-          {adminData && <UserCard {...adminData} />}
+
           {suggestionsData?.map((userData) => (
             <UserCard {...userData} key={userData.id} />
           ))}
