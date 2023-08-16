@@ -1,108 +1,67 @@
-<br />
+<div align="center">
+    <h1>lensX</h1>
+    <p>Decentralized video and image&text -sharing social media platform.</p>
+    <a href="https://mainnet.0xtrip.xyz">0xtrip.xyz</a>
+</div>
+<br>
+<div align="center">
+    <a href="https://lenstube.xyz/sasicodes.lens">
+        <img src="https://lens-badge.vercel.app/api/badge/sasicodes.lens" alt="Lens">
+    </a>
+    <a href="https://twitter.com/0xtripxyz">
+        <img src="https://img.shields.io/twitter/follow/0xtripxyz?style=social" alt="Twitter">
+    </a>
+    <a href="https://deepsource.io/gh/IndexOutOfBounds998/lensX">
+        <img src="https://deepsource.io/gh/lenstube-xyz/lenstube.svg/?label=active+issues&show_trend=true" alt="Deepsource">
+    </a>
+     <a href="https://status.lensX.xyz">
+        <img src="https://betteruptime.com/status-badges/v1/monitor/dfaw.svg" alt="Better Uptime">
+    </a>
+    <a title="Crowdin" target="_blank" href="https://crowdin.com/project/lensX">
+        <img src="https://badges.crowdin.net/lenstube/localized.svg">
+    </a>
+</div>
+<br>
 
-![](/.github/assets/presentation.png)
+## 📽️ About
 
-<p align="center">
-  Twitter clone built in Next.js + TypeScript + Tailwind CSS using Cloud Firestore and Storage
-</p>
+\*_lensX_ is a decentralized video-and-image&text -sharing social media platform, built using Lens Protocol 🌿
 
-## Preview 🎬
+## 💪 Community
 
-https://user-images.githubusercontent.com/55032197/201472767-9db0177a-79b5-4913-8666-1744102b0ad7.mp4
+For a place to have open discussions on features, voice your ideas, or get help with general questions please visit our community at [Discord](https://discord.gg/aDtzhfd9c3).
 
-## Features ✨
+## 🚢 Deployments
 
-- Authentication with Firebase Authentication
-- Strongly typed React components with TypeScript
-- Users can add tweets, like, retweet, and reply
-- Users can delete tweets, add a tweet to bookmarks, and pin their tweet
-- Users can add images and GIFs to tweet
-- Users can follow and unfollow other users
-- Users can see their and other followers and the following list
-- Users can see all users and the trending list
-- Realtime update likes, retweets, and user profile
-- Realtime trending data from Twitter API
-- User can edit their profile
-- Responsive design for mobile, tablet, and desktop
-- Users can customize the site color scheme and color background
-- All images uploads are stored on Firebase Cloud Storage
+| Name    | Link                       |
+| ------- | -------------------------- |
+| Mainnet | https://mainnet.0xtrip.xyz |
+| Testnet | https://testnet.0xtrip.xyz |
 
-## Tech 🛠
+## Getting Started
 
-- [Next.js](https://nextjs.org)
-- [TypeScript](https://www.typescriptlang.org)
-- [Tailwind CSS](https://tailwindcss.com)
-- [Firebase](https://firebase.google.com)
-- [SWR](https://swr.vercel.app)
-- [Headless UI](https://headlessui.com)
-- [React Hot Toast](https://react-hot-toast.com)
-- [Framer Motion](https://framer.com)
+Install all dependencies from repository root,
 
-## Development 💻
+```bash
+npm install
+```
 
-Here are the steps to run the project locally.
+Start the application,
 
-1. Clone the repository
+```bash
+npm dev
+```
 
-   ```bash
-   git clone https://github.com/ccrsxx/twitter-clone.git
-   ```
+and visit http://localhost:3000
 
-1. Install dependencies
+## 🤝 Contributors
 
-   ```bash
-   npm i
-   ```
+We love contributors! Feel free to contribute to this project but please read the [Contributing Guidelines](CONTRIBUTING.md) before opening an issue or PR so you understand the branching strategy and local development environment.
 
-1. Create a Firebase project and select the web app
+<a href="https://github.com/IndexOutOfBounds998/lensX/graphs/contributors">
+  
+</a>
 
-1. Add your Firebase config to `.env.development`. Note that `NEXT_PUBLIC_MEASUREMENT_ID` is optional
+## 📜 License
 
-1. Make sure you have enabled the following Firebase services:
-
-   - Authentication. Enable the Google sign-in method.
-   - Cloud Firestore. Create a database and set its location to your nearest region.
-   - Cloud Storage. Create a storage bucket.
-
-1. Install Firebase CLI globally
-
-   ```bash
-   npm i -g firebase-tools
-   ```
-
-1. Log in to Firebase
-
-   ```bash
-   firebase login
-   ```
-
-1. Get your project ID
-
-   ```bash
-   firebase projects:list
-   ```
-
-1. Select your project ID
-
-   ```bash
-   firebase use your-project-id
-   ```
-
-1. Deploy Firestore rules, Firestore indexes, and Cloud Storage rules
-
-   ```bash
-   firebase deploy --except functions
-   ```
-
-1. Run the project
-
-   ```bash
-   npm run dev
-   ```
-
-> **_Note_**: When you deploy Firestore indexes rules, it might take a few minutes to complete. So before the indexes are enabled, you will get an error when you fetch the data from Firestore.<br><br>You can check the status of your Firestore indexes with the link below, replace `your-project-id` with your project ID: https://console.firebase.google.com/u/0/project/your-project-id/firestore/indexes
-
-Optional:
-
-- If you want to get trending data from Twitter API, you need to create a Twitter developer account and get your API keys. Then add your API keys to `.env.development`. I hope Elon Musk doesn't make this API paid 😅.
-- If you want to make the user stats synced with the deleted tweets, you need to enable the Cloud Functions for Firebase. Then deploy the Cloud Functions.
+lensX is open-sourced software licensed under the [AGPLv3](LICENSE).
