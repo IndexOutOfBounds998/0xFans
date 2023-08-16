@@ -34,7 +34,7 @@ export function useCollection<T>(
 
   const [formateList, setFormateList] = useState<UserCardProps[]>([]);
 
- 
+
 
   const { data, loading } = useExploreProfiles({
     observerId,
@@ -45,20 +45,20 @@ export function useCollection<T>(
   useEffect(() => {
 
     if (data) {
-      let list: UserCardProps[] =   data.map((item => {
-      
-         return {
-            id: item.id,
-            bio: item.bio,
-            name: item.handle,
-            username: item.name,
-            photoURL: formatAvater(item.picture.original.url),
-            verified: true,
-            following: [],
-            followers: [],
-            coverPhotoURL: item.coverPicture
-          }
-      
+      let list: UserCardProps[] = data.map((item => {
+
+        return {
+          id: item.id,
+          bio: item.bio,
+          name: item.handle,
+          username: item.name,
+          photoURL: formatAvater(item.picture.original.url),
+          verified: true,
+          following: [],
+          followers: [],
+          coverPhotoURL: item.coverPicture
+        }
+
       }))
 
       setFormateList(list);
