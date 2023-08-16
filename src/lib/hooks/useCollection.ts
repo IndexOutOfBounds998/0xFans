@@ -1,4 +1,4 @@
-import { ProfileId, useExploreProfiles } from '@lens-protocol/react-web';
+import { ProfileId, ProfileSortCriteria, useExploreProfiles } from '@lens-protocol/react-web';
 import { formatAvater } from '@lib/FormatContent';
 import { User } from '@lib/types/user';
 import { useEffect, useState } from 'react';
@@ -6,9 +6,11 @@ import { useEffect, useState } from 'react';
 type UseCollection<T> = {
   data: T[] | null;
   loading: boolean;
+  user: User[];
 } | {
   data: (T & { user: UserCardProps })[] | null;
   loading: boolean;
+  user: User[];
 };
 
 
@@ -22,6 +24,7 @@ type DataWithUser<T> = UseCollection<T & { user: UserCardProps }>;
 export type UseCollectionOptions = {
   limit: number;
   observerId?: ProfileId;
+  sortCriteria: ProfileSortCriteria;
 };
 
 
@@ -29,16 +32,14 @@ export function useCollection<T>(
   options?: UseCollectionOptions
 ): UseCollection<T> | DataWithUser<T> {
 
-  const { limit, observerId } = options ?? {};
-
+  const { limit, observerId, sortCriteria } = options ?? {};
 
   const [formateList, setFormateList] = useState<UserCardProps[]>([]);
 
-
-
   const { data, loading } = useExploreProfiles({
     observerId,
-    limit
+    limit,
+    sortCriteria
   });
 
 
@@ -46,13 +47,12 @@ export function useCollection<T>(
 
     if (data) {
       let list: UserCardProps[] = data.map((item => {
-
         return {
           id: item.id,
           bio: item.bio,
-          name: item.handle,
-          username: item.name,
-          photoURL: formatAvater(item.picture.original.url),
+          name: item.name,
+          username: item.handle,
+          photoURL: item.picture ? formatAvater(item.picture.original.url) : "",
           verified: true,
           following: [],
           followers: [],
@@ -66,5 +66,5 @@ export function useCollection<T>(
 
   }, [data])
 
-  return { data: formateList, loading };
+  return { data: formateList, loading, user: formateList };
 }
