@@ -18,16 +18,16 @@ export function TweetDate({
     <div className={cn('flex gap-1', viewTweet && 'py-4')}>
       {!viewTweet && <i>·</i>}
       <div className='group relative'>
-        <Link href={tweetLink}>
-          <a
-            className={cn(
-              'custom-underline peer whitespace-nowrap',
-              viewTweet && 'text-light-secondary dark:text-dark-secondary'
-            )}
-          >
-            {formatDate(createdAt, viewTweet ? 'full' : 'tweet')}
-          </a>
-        </Link>
+        {/*<Link href={tweetLink}>*/}
+        <span
+          className={cn(
+            'custom-underline peer whitespace-nowrap',
+            viewTweet && 'text-light-secondary dark:text-dark-secondary'
+          )}
+        >
+          {formatDate(createdAt, viewTweet ? 'full' : 'tweet')}
+        </span>
+        {/*</Link>*/}
         <ToolTip
           className='translate-y-1 peer-focus:opacity-100 peer-focus-visible:visible
                      peer-focus-visible:delay-200'

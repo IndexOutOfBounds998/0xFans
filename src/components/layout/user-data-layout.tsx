@@ -15,12 +15,9 @@ export function UserDataLayout({ children }: LayoutProps): JSX.Element {
     back
   } = useRouter();
 
-  const { data, loading } = useCollection(
-    query(usersCollection, where('username', '==', id), limit(1)),
-    { allowNull: true }
-  );
+  const { data, loading } = useCollection();
 
-  const user = data ? data[0] : null;
+  const user = data?.[0] ?? null;
 
   return (
     <UserContextProvider value={{ user, loading }}>

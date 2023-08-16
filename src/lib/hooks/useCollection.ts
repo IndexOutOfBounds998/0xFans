@@ -1,96 +1,70 @@
-import { useState, useEffect } from 'react';
-import { getDoc, doc, onSnapshot } from 'firebase/firestore';
-import { usersCollection } from '@lib/firebase/collections';
-import { useCacheQuery } from './useCacheQuery';
-import type { Query } from 'firebase/firestore';
-import type { User } from '@lib/types/user';
+import { ProfileId, ProfileSortCriteria, useExploreProfiles } from '@lens-protocol/react-web';
+import { formatAvater } from '@lib/FormatContent';
+import { User } from '@lib/types/user';
+import { useEffect, useState } from 'react';
 
 type UseCollection<T> = {
   data: T[] | null;
   loading: boolean;
+  user: User[];
+} | {
+  data: (T & { user: UserCardProps })[] | null;
+  loading: boolean;
+  user: User[];
 };
 
-type DataWithRef<T> = (T & { createdBy: string })[];
-type DataWithUser<T> = UseCollection<T & { user: User }>;
+
+type UserCardProps = User & {
+  modal?: boolean;
+  follow?: boolean;
+};
+
+type DataWithUser<T> = UseCollection<T & { user: UserCardProps }>;
 
 export type UseCollectionOptions = {
-  includeUser?: boolean;
-  allowNull?: boolean;
-  disabled?: boolean;
-  preserve?: boolean;
+  limit: number;
+  observerId?: ProfileId;
+  sortCriteria: ProfileSortCriteria;
 };
 
-export function useCollection<T>(
-  query: Query<T>,
-  options: {
-    includeUser: true;
-    allowNull?: boolean;
-    disabled?: boolean;
-    preserve?: boolean;
-  }
-): DataWithUser<T>;
 
 export function useCollection<T>(
-  query: Query<T>,
-  options?: UseCollectionOptions
-): UseCollection<T>;
-
-export function useCollection<T>(
-  query: Query<T>,
   options?: UseCollectionOptions
 ): UseCollection<T> | DataWithUser<T> {
-  const [data, setData] = useState<T[] | null>(null);
-  const [loading, setLoading] = useState(true);
 
-  const cachedQuery = useCacheQuery(query);
+  const { limit, observerId, sortCriteria } = options ?? {};
 
-  const { includeUser, allowNull, disabled, preserve } = options ?? {};
+  const [formateList, setFormateList] = useState<UserCardProps[]>([]);
+
+  const { data, loading } = useExploreProfiles({
+    observerId,
+    limit,
+    sortCriteria
+  });
+
 
   useEffect(() => {
-    if (disabled) {
-      setLoading(false);
-      return;
+
+    if (data) {
+      let list: UserCardProps[] = data.map((item => {
+        return {
+          id: item.id,
+          bio: item.bio,
+          name: item.name,
+          username: item.handle,
+          photoURL: item.picture ? formatAvater(item.picture.original.url) : "",
+          verified: true,
+          following: [],
+          followers: [],
+          coverPhotoURL: item.coverPicture ? formatAvater(item.coverPicture.original.url) : item.picture ? formatAvater(item.picture.original.url) : ""
+        }
+
+      }))
+
+      setFormateList(list);
     }
 
-    if (!preserve && data) {
-      setData(null);
-      setLoading(true);
-    }
+  }, [data])
 
-    const populateUser = async (currentData: DataWithRef<T>): Promise<void> => {
-      const dataWithUser = await Promise.all(
-        currentData.map(async (currentData) => {
-          const user = (
-            await getDoc(doc(usersCollection, currentData.createdBy))
-          ).data();
-          return { ...currentData, user };
-        })
-      );
-      setData(dataWithUser);
-      setLoading(false);
-    };
-
-    const unsubscribe = onSnapshot(cachedQuery, (snapshot) => {
-      const data = snapshot.docs.map((doc) =>
-        doc.data({ serverTimestamps: 'estimate' })
-      );
-
-      if (allowNull && !data.length) {
-        setData(null);
-        setLoading(false);
-        return;
-      }
-
-      if (includeUser) void populateUser(data as DataWithRef<T>);
-      else {
-        setData(data);
-        setLoading(false);
-      }
-    });
-
-    return unsubscribe;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cachedQuery, disabled]);
-
-  return { data, loading };
+  return { data: formateList, loading, user: formateList };
 }

@@ -2,10 +2,11 @@ import { useAuth } from '@lib/context/auth-context';
 import { NextImage } from '@components/ui/next-image';
 import { CustomIcon } from '@components/ui/custom-icon';
 import { Button } from '@components/ui/button';
-
+import { useAccount } from 'wagmi';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 export function LoginMain(): JSX.Element {
-  const { signInWithGoogle } = useAuth();
-
+  const { signInWithLens } = useAuth();
+  const { isConnected } = useAccount();
   return (
     <main className='grid lg:grid-cols-[1fr,45vw]'>
       <div className='relative hidden items-center justify-center  lg:flex'>
@@ -30,7 +31,7 @@ export function LoginMain(): JSX.Element {
         </i>
         <div className='flex max-w-xs flex-col gap-4 font-twitter-chirp-extended lg:max-w-none lg:gap-16'>
           <h1
-            className='text-3xl before:content-["See_what’s_happening_in_the_world_right_now."] 
+            className='text-3xl before:content-["See_what’s_happening_in_the_world_right_now."]
                        lg:text-6xl lg:before:content-["Happening_now"]'
           />
           <h2 className='hidden text-xl lg:block lg:text-3xl'>
@@ -39,14 +40,19 @@ export function LoginMain(): JSX.Element {
         </div>
         <div className='flex max-w-xs flex-col gap-6 [&_button]:py-2'>
           <div className='grid gap-3 font-bold'>
-            <Button
-              className='flex justify-center gap-2 border border-light-line-reply font-bold text-light-primary transition
-                         hover:bg-[#e6e6e6] focus-visible:bg-[#e6e6e6] active:bg-[#cccccc] dark:border-0 dark:bg-white
-                         dark:hover:brightness-90 dark:focus-visible:brightness-90 dark:active:brightness-75'
-              onClick={signInWithGoogle}
-            >
-              <CustomIcon iconName='GoogleIcon' /> Sign up with Google
-            </Button>
+            {isConnected ? (
+              <Button
+                className='flex justify-center gap-2 border border-light-line-reply font-bold text-light-primary transition
+                       hover:bg-[#e6e6e6] focus-visible:bg-[#e6e6e6] active:bg-[#cccccc] dark:border-0 dark:bg-white
+                       dark:hover:brightness-90 dark:focus-visible:brightness-90 dark:active:brightness-75'
+                onClick={signInWithLens}
+              >
+                <CustomIcon iconName='GoogleIcon' /> Sign up with lens
+              </Button>
+            ) : (
+              <ConnectButton></ConnectButton>
+            )}
+
             <Button
               className='flex cursor-not-allowed justify-center gap-2 border border-light-line-reply font-bold text-light-primary
                          transition hover:bg-[#e6e6e6] focus-visible:bg-[#e6e6e6] active:bg-[#cccccc] dark:border-0
@@ -102,7 +108,6 @@ export function LoginMain(): JSX.Element {
               className='border border-light-line-reply font-bold text-accent-blue hover:bg-accent-blue/10
                          focus-visible:bg-accent-blue/10 focus-visible:!ring-accent-blue/80 active:bg-accent-blue/20
                          dark:border-light-secondary'
-              onClick={signInWithGoogle}
             >
               Sign in
             </Button>

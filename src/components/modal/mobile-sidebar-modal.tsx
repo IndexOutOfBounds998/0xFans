@@ -136,21 +136,21 @@ export function MobileSidebarModal({
         action={closeModal}
       />
       <section className='mt-0.5 flex flex-col gap-2 px-4'>
-        <Link href={userLink}>
-          <a className='blur-picture relative h-20 rounded-md'>
-            {coverPhotoURL ? (
-              <NextImage
-                useSkeleton
-                imgClassName='rounded-md'
-                src={coverPhotoURL}
-                alt={name}
-                layout='fill'
-              />
-            ) : (
-              <div className='h-full rounded-md bg-light-line-reply dark:bg-dark-line-reply' />
-            )}
-          </a>
-        </Link>
+        {/*<Link href={userLink}>*/}
+        <span className='blur-picture relative h-20 rounded-md'>
+          {coverPhotoURL ? (
+            <NextImage
+              useSkeleton
+              imgClassName='rounded-md'
+              src={coverPhotoURL}
+              alt={name}
+              layout='fill'
+            />
+          ) : (
+            <div className='h-full rounded-md bg-light-line-reply dark:bg-dark-line-reply' />
+          )}
+        </span>
+        {/*</Link>*/}
         <div className='mb-8 ml-2 -mt-4'>
           <UserAvatar
             className='absolute -translate-y-1/2 bg-main-background p-1 hover:brightness-100
@@ -174,18 +174,18 @@ export function MobileSidebarModal({
           </div>
           <div className='text-secondary flex gap-4'>
             {allStats.map(([id, label, stat]) => (
-              <Link href={`${userLink}/${id}`} key={id}>
-                <a
-                  className='hover-animation flex h-4 items-center gap-1 border-b border-b-transparent 
+              // <Link href={`${userLink}/${id}`} key={id}>
+              <span
+                className='hover-animation flex h-4 items-center gap-1 border-b border-b-transparent
                              outline-none hover:border-b-light-primary focus-visible:border-b-light-primary
                              dark:hover:border-b-dark-primary dark:focus-visible:border-b-dark-primary'
-                >
-                  <p className='font-bold'>{stat}</p>
-                  <p className='text-light-secondary dark:text-dark-secondary'>
-                    {label}
-                  </p>
-                </a>
-              </Link>
+              >
+                <p className='font-bold'>{stat}</p>
+                <p className='text-light-secondary dark:text-dark-secondary'>
+                  {label}
+                </p>
+              </span>
+              // </Link>
             ))}
           </div>
           <i className='h-0.5 bg-light-line-reply dark:bg-dark-line-reply' />
@@ -206,7 +206,7 @@ export function MobileSidebarModal({
             ))}
             <Button
               className='accent-tab accent-bg-tab flex items-center gap-2 rounded-md p-1.5 font-bold transition
-                         hover:bg-light-primary/10 focus-visible:ring-2 first:focus-visible:ring-[#878a8c] 
+                         hover:bg-light-primary/10 focus-visible:ring-2 first:focus-visible:ring-[#878a8c]
                          dark:hover:bg-dark-primary/10 dark:focus-visible:ring-white'
               onClick={displayOpenModal}
             >
@@ -215,7 +215,7 @@ export function MobileSidebarModal({
             </Button>
             <Button
               className='accent-tab accent-bg-tab flex items-center gap-2 rounded-md p-1.5 font-bold transition
-                         hover:bg-light-primary/10 focus-visible:ring-2 first:focus-visible:ring-[#878a8c] 
+                         hover:bg-light-primary/10 focus-visible:ring-2 first:focus-visible:ring-[#878a8c]
                          dark:hover:bg-dark-primary/10 dark:focus-visible:ring-white'
               onClick={logOutOpenModal}
             >

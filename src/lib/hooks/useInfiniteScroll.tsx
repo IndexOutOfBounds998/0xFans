@@ -1,14 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-
 import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { query, limit } from 'firebase/firestore';
-import { getCollectionCount } from '@lib/firebase/utils';
 import { Loading } from '@components/ui/loading';
-import { useCollection } from './useCollection';
-import type { UseCollectionOptions } from './useCollection';
-import type { Query, QueryConstraint } from 'firebase/firestore';
-import type { User } from '@lib/types/user';
+import { useFetchPublications } from './useFetchPublications';
+import { ExplorePublicationRequest } from '@lens-protocol/client';
+import { Post, Profile } from '@lens-protocol/react-web';
+
+import type { Tweet } from '@lib/types/tweet';
+import { ProfileOwnedByMe } from '@lens-protocol/react-web';
+import { Timestamp } from 'firebase/firestore';
 
 type InfiniteScroll<T> = {
   data: T[] | null;
@@ -17,83 +17,80 @@ type InfiniteScroll<T> = {
 };
 
 type InfiniteScrollWithUser<T> = {
-  data: (T & { user: User })[] | null;
+  data: (T & { user: Profile })[] | null;
   loading: boolean;
   LoadMore: () => JSX.Element;
 };
 
+export type TweetProps = Tweet & {
+  user: ProfileOwnedByMe;
+  modal?: boolean;
+  pinned?: boolean;
+  profile?: ProfileOwnedByMe | null;
+  parentTweet?: boolean;
+};
+
 export function useInfiniteScroll<T>(
-  collection: Query<T>,
-  constraints: QueryConstraint[],
-  fetchOptions: UseCollectionOptions & { includeUser: true },
-  options?: { initialSize?: number; stepSize?: number; marginBottom?: number }
+  request: ExplorePublicationRequest
 ): InfiniteScrollWithUser<T>;
 
 export function useInfiniteScroll<T>(
-  collection: Query<T>,
-  constraints: QueryConstraint[],
-  fetchOptions?: UseCollectionOptions,
-  options?: { initialSize?: number; stepSize?: number; marginBottom?: number }
-): InfiniteScroll<T>;
-
-export function useInfiniteScroll<T>(
-  collection: Query<T>,
-  queryConstraints?: QueryConstraint[],
-  fetchOptions?: UseCollectionOptions,
-  options?: { initialSize?: number; stepSize?: number; marginBottom?: number }
+  request: ExplorePublicationRequest
 ): InfiniteScroll<T> | InfiniteScrollWithUser<T> {
-  const { initialSize, stepSize, marginBottom } = options ?? {};
-
-  const [tweetsLimit, setTweetsLimit] = useState(initialSize ?? 20);
-  const [tweetsSize, setTweetsSize] = useState<number | null>(null);
-  const [reachedLimit, setReachedLimit] = useState(false);
   const [loadMoreInView, setLoadMoreInView] = useState(false);
 
-  const { data, loading } = useCollection(
-    query(
-      collection,
-      ...[
-        ...(queryConstraints ?? []),
-        ...(!reachedLimit ? [limit(tweetsLimit)] : [])
-      ]
-    ),
-    fetchOptions
-  );
+  const { data, loading, next, hasMore } = useFetchPublications({
+    explorePublicationRequest: request
+  });
+
+  const [formateList, setFormateList] = useState<TweetProps[]>([]);
 
   useEffect(() => {
-    const checkLimit = tweetsSize ? tweetsLimit >= tweetsSize : false;
-    setReachedLimit(checkLimit);
-  }, [tweetsSize, tweetsLimit]);
+    if (data && data.length > 0) {
+      let list: TweetProps[] = data.map((item: Post) => ({
+        id: item.id,
+        text: item.metadata.content,
+        images:
+          item.metadata.media && item.metadata.media.length
+            ? item.metadata.media.map((img, index) => {
+                return {
+                  id: index.toString(),
+                  src: img.original.url,
+                  alt: img.original.altTag ? img.original.altTag : ''
+                };
+              })
+            : null,
+        parent: null,
+        userLikes: [],
+        user: item.profile,
+        createdBy: item.profile.handle,
+        createdAt: Timestamp.now(),
+        updatedAt: Timestamp.now(),
+        userReplies: item.stats.commentsCount,
+        userRetweets: []
+      }));
+      setFormateList(list);
+      console.log('list', list.length);
+    }
+  }, [data]);
 
   useEffect(() => {
-    if (reachedLimit) return;
-
-    const setTweetsLength = async (): Promise<void> => {
-      const currentTweetsSize = await getCollectionCount(
-        query(collection, ...(queryConstraints ?? []))
-      );
-      setTweetsSize(currentTweetsSize);
-    };
-
-    void setTweetsLength();
-  }, [data?.length]);
-
-  useEffect(() => {
-    if (reachedLimit) return;
-    if (loadMoreInView) setTweetsLimit(tweetsLimit + (stepSize ?? 20));
+    if (loadMoreInView) {
+      if (!hasMore) return;
+      next();
+    }
   }, [loadMoreInView]);
 
   const makeItInView = (): void => setLoadMoreInView(true);
   const makeItNotInView = (): void => setLoadMoreInView(false);
 
-  const isLoadMoreHidden =
-    reachedLimit && (data?.length ?? 0) >= (tweetsSize ?? 0);
+  const isLoadMoreHidden = !hasMore;
 
   const LoadMore = useCallback(
     (): JSX.Element => (
       <motion.div
         className={isLoadMoreHidden ? 'hidden' : 'block'}
-        viewport={{ margin: `0px 0px ${marginBottom ?? 1000}px` }}
+        viewport={{ margin: `0px 0px 1000px` }}
         onViewportEnter={makeItInView}
         onViewportLeave={makeItNotInView}
       >
@@ -103,5 +100,5 @@ export function useInfiniteScroll<T>(
     [isLoadMoreHidden]
   );
 
-  return { data, loading, LoadMore };
+  return { data: formateList, loading, LoadMore };
 }

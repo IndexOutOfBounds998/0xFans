@@ -1,8 +1,9 @@
+import { ProfileId } from '@lens-protocol/react-web';
 import type { Theme, Accent } from './theme';
 import type { Timestamp, FirestoreDataConverter } from 'firebase/firestore';
 
 export type User = {
-  id: string;
+  id: ProfileId;
   bio: string | null;
   name: string;
   theme: Theme | null;

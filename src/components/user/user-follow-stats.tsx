@@ -52,21 +52,21 @@ export function UserFollowStats({
   return (
     <div
       className='flex gap-4 text-light-secondary dark:text-dark-secondary
-                 [&>a>div]:font-bold [&>a>div]:text-light-primary 
+                 [&>a>div]:font-bold [&>a>div]:text-light-primary
                  dark:[&>a>div]:text-dark-primary'
     >
       {allStats.map(([title, link, move, stats], index) => (
-        <Link href={link} key={title}>
-          <a
-            className='hover-animation mt-0.5 mb-[3px] flex h-4 items-center gap-1 border-b 
-                       border-b-transparent outline-none hover:border-b-light-primary 
+        // <Link href={link} key={title}>
+        <span
+          className='hover-animation mt-0.5 mb-[3px] flex h-4 items-center gap-1 border-b
+                       border-b-transparent outline-none hover:border-b-light-primary
                        focus-visible:border-b-light-primary dark:hover:border-b-dark-primary
                        dark:focus-visible:border-b-dark-primary'
-          >
-            <NumberStats move={move} stats={stats} alwaysShowStats />
-            <p>{index === 1 && stats > 1 ? `${title}s` : title}</p>
-          </a>
-        </Link>
+        >
+          <NumberStats move={move} stats={stats} alwaysShowStats />
+          <p>{index === 1 && stats > 1 ? `${title}s` : title}</p>
+        </span>
+        // </Link>
       ))}
     </div>
   );

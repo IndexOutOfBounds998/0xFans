@@ -38,9 +38,9 @@ export function TweetShare({
           ? (): JSX.Element => (
               <span className='flex gap-2'>
                 Tweet added to your Bookmarks
-                <Link href='/bookmarks'>
-                  <a className='custom-underline font-bold'>View</a>
-                </Link>
+                {/*<Link href='/bookmarks'>*/}
+                <span className='custom-underline font-bold'>View</span>
+                {/*</Link>*/}
               </span>
             )
           : 'Tweet removed from your bookmarks'
@@ -67,8 +67,8 @@ export function TweetShare({
             )}
           >
             <i
-              className='relative rounded-full p-2 not-italic duration-200 group-hover:bg-accent-blue/10 
-                         group-focus-visible:bg-accent-blue/10 group-focus-visible:ring-2 
+              className='relative rounded-full p-2 not-italic duration-200 group-hover:bg-accent-blue/10
+                         group-focus-visible:bg-accent-blue/10 group-focus-visible:ring-2
                          group-focus-visible:ring-accent-blue/80 group-active:bg-accent-blue/20'
             >
               <HeroIcon

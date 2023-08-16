@@ -24,6 +24,9 @@ import type { Variants } from 'framer-motion';
 import type { User } from '@lib/types/user';
 import type { Tweet } from '@lib/types/tweet';
 import type { FilesWithId, ImagesPreview, ImageData } from '@lib/types/file';
+import { useSendComment } from '@lib/hooks/useSendComment';
+import { MediaSet, ProfileOwnedByMe } from '@lens-protocol/react-web';
+import { formatAvater } from '@lib/FormatContent';
 
 type InputProps = {
   modal?: boolean;
@@ -55,13 +58,18 @@ export function Input({
   const [loading, setLoading] = useState(false);
   const [visited, setVisited] = useState(false);
 
-  const { user, isAdmin } = useAuth();
-  const { name, username, photoURL } = user as User;
+  const { user } = useAuth();
+  const { name, handle, picture } = user as ProfileOwnedByMe;
 
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
   const previewCount = imagesPreview.length;
   const isUploadingImages = !!previewCount;
+
+  //发布评论
+  const { submit: send, loading: sendLoad } = useSendComment({
+    publication: parent
+  });
 
   useEffect(
     () => {
@@ -81,28 +89,9 @@ export function Input({
 
     const userId = user?.id as string;
 
-    const tweetData: WithFieldValue<Omit<Tweet, 'id'>> = {
-      text: inputValue.trim() || null,
-      parent: isReplying && parent ? parent : null,
-      images: await uploadImages(userId, selectedImages),
-      userLikes: [],
-      createdBy: userId,
-      createdAt: serverTimestamp(),
-      updatedAt: null,
-      userReplies: 0,
-      userRetweets: []
-    };
-
-    await sleep(500);
-
-    const [tweetRef] = await Promise.all([
-      addDoc(tweetsCollection, tweetData),
-      manageTotalTweets('increment', userId),
-      tweetData.images && manageTotalPhotos('increment', userId),
-      isReplying && manageReply('increment', parent?.id as string)
-    ]);
-
-    const { id: tweetId } = await getDoc(tweetRef);
+    if (inputValue.trim()) {
+      await Promise.all([send(inputValue.trim(), user)]);
+    }
 
     if (!modal && !replyModal) {
       discardTweet();
@@ -111,13 +100,15 @@ export function Input({
 
     if (closeModal) closeModal();
 
+    // const { id: tweetId } = await getDoc(tweetRef);
+
     toast.success(
       () => (
         <span className='flex gap-2'>
           Your Tweet was sent
-          <Link href={`/tweet/${tweetId}`}>
-            <a className='custom-underline font-bold'>View</a>
-          </Link>
+          {/*<Link href={`/tweet/${tweetId}`}>*/}
+          <span className='custom-underline font-bold'>View</span>
+          {/*</Link>*/}
         </span>
       ),
       { duration: 6000 }
@@ -190,7 +181,7 @@ export function Input({
 
   const formId = useId();
 
-  const inputLimit = isAdmin ? 560 : 280;
+  const inputLimit = 280;
 
   const inputLength = inputValue.length;
   const isValidInput = !!inputValue.trim().length;
@@ -217,12 +208,11 @@ export function Input({
           className='ml-[75px] -mb-2 mt-2 text-light-secondary dark:text-dark-secondary'
           {...fromTop}
         >
-          Replying to{' '}
-          <Link href={`/user/${parent?.username as string}`}>
-            <a className='custom-underline text-main-accent'>
-              {parent?.username as string}
-            </a>
-          </Link>
+          Replying to {/*<Link href={`/user/${parent?.username as string}`}>*/}
+          <span className='custom-underline text-main-accent'>
+            {parent?.username as string}
+          </span>
+          {/*</Link>*/}
         </motion.p>
       )}
       <label
@@ -231,13 +221,13 @@ export function Input({
           reply
             ? 'pt-3 pb-1'
             : replyModal
-            ? 'pt-0'
-            : 'border-b-2 border-light-border dark:border-dark-border',
+              ? 'pt-0'
+              : 'border-b-2 border-light-border dark:border-dark-border',
           (disabled || loading) && 'pointer-events-none opacity-50'
         )}
         htmlFor={formId}
       >
-        <UserAvatar src={photoURL} alt={name} username={username} />
+        <UserAvatar src={formatAvater((picture as MediaSet)?.original?.url ?? '')} alt={name ? name : ""} username={name ? name : ""} />
         <div className='flex w-full flex-col gap-4'>
           <InputForm
             modal={modal}

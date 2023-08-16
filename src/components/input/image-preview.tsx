@@ -52,6 +52,9 @@ export function ImagePreview({
 
   const { open, openModal, closeModal } = useModal();
 
+  //图片最多显示四个
+  const previewCountLimit = previewCount > 4 ? 4 : previewCount;
+
   useEffect(() => {
     const imageData = imagesPreview[selectedIndex];
     setSelectedImage(imageData);
@@ -67,9 +70,9 @@ export function ImagePreview({
     const nextIndex =
       type === 'prev'
         ? selectedIndex === 0
-          ? previewCount - 1
+          ? previewCountLimit - 1
           : selectedIndex - 1
-        : selectedIndex === previewCount - 1
+        : selectedIndex === previewCountLimit - 1
         ? 0
         : selectedIndex + 1;
 
@@ -100,7 +103,7 @@ export function ImagePreview({
         <ImageModal
           tweet={isTweet}
           imageData={selectedImage as ImageData}
-          previewCount={previewCount}
+          previewCount={previewCountLimit}
           selectedIndex={selectedIndex}
           handleNextIndex={handleNextIndex}
         />
@@ -108,32 +111,33 @@ export function ImagePreview({
       <AnimatePresence mode='popLayout'>
         {imagesPreview.map(({ id, src, alt }, index) => (
           <motion.button
+            key={index}
             type='button'
             className={cn(
               'accent-tab relative transition-shadow',
               isTweet
-                ? postImageBorderRadius[previewCount][index]
+                ? postImageBorderRadius[previewCountLimit][index]
                 : 'rounded-2xl',
               {
-                'col-span-2 row-span-2': previewCount === 1,
+                'col-span-2 row-span-2': previewCountLimit === 1,
                 'row-span-2':
-                  previewCount === 2 || (index === 0 && previewCount === 3)
+                  previewCountLimit === 2 ||
+                  (index === 0 && previewCountLimit === 3)
               }
             )}
             {...variants}
             onClick={preventBubbling(handleSelectedImage(index))}
             layout={!isTweet ? true : false}
-            key={id}
           >
             <NextImage
-              className='relative h-full w-full cursor-pointer transition 
+              className='relative h-full !w-auto cursor-pointer transition
                          hover:brightness-75 hover:duration-200'
               imgClassName={cn(
                 isTweet
-                  ? postImageBorderRadius[previewCount][index]
+                  ? postImageBorderRadius[previewCountLimit][index]
                   : 'rounded-2xl'
               )}
-              previewCount={previewCount}
+              previewCount={previewCountLimit}
               layout='fill'
               src={src}
               alt={alt}
@@ -142,7 +146,7 @@ export function ImagePreview({
             {removeImage && (
               <Button
                 className='group absolute top-0 left-0 translate-x-1 translate-y-1
-                           bg-light-primary/75 p-1 backdrop-blur-sm 
+                           bg-light-primary/75 p-1 backdrop-blur-sm
                            hover:bg-image-preview-hover/75'
                 onClick={preventBubbling(removeImage(id))}
               >

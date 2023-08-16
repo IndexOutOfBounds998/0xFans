@@ -18,6 +18,7 @@ import { Input } from '@components/input/input';
 import type { RefObject } from 'react';
 import type { User } from '@lib/types/user';
 import type { Tweet } from '@lib/types/tweet';
+import { formatNickName, formatAvater } from '@lib/FormatContent';
 
 type ViewTweetProps = Tweet & {
   user: User;
@@ -39,7 +40,8 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
     user: tweetUserData
   } = tweet;
 
-  const { id: ownerId, name, username, verified, photoURL } = tweetUserData;
+  const { id: ownerId, name, username, verified } = tweetUserData;
+  const photoURL = formatAvater(tweetUserData?.picture?.original?.url);
 
   const { user } = useAuth();
 
@@ -116,12 +118,11 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
       </div>
       {reply && (
         <p className='text-light-secondary dark:text-dark-secondary'>
-          Replying to{' '}
-          <Link href={`/user/${parentUsername}`}>
-            <a className='custom-underline text-main-accent'>
-              @{parentUsername}
-            </a>
-          </Link>
+          Replying to {/*<Link href={`/user/${parentUsername}`}>*/}
+          <span className='custom-underline text-main-accent'>
+            @{parentUsername}
+          </span>
+          {/*</Link>*/}
         </p>
       )}
       <div>

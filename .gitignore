@@ -38,3 +38,6 @@ next-env.d.ts
 # python
 /.mypy_cache
 *.py
+.idea/workspace.xml
+.idea/codeStyles/Project.xml
+/.idea/

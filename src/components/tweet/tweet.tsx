@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import cn from 'clsx';
-import { useAuth } from '@lib/context/auth-context';
 import { useModal } from '@lib/hooks/useModal';
 import { delayScroll } from '@lib/utils';
 import { Modal } from '@components/modal/modal';
@@ -17,13 +16,14 @@ import { TweetStats } from './tweet-stats';
 import { TweetDate } from './tweet-date';
 import type { Variants } from 'framer-motion';
 import type { Tweet } from '@lib/types/tweet';
-import type { User } from '@lib/types/user';
+import { ProfileOwnedByMe } from '@lens-protocol/react-web';
+import { formatAvater, formatNickName } from '@lib/FormatContent';
 
 export type TweetProps = Tweet & {
-  user: User;
+  user: ProfileOwnedByMe;
   modal?: boolean;
   pinned?: boolean;
-  profile?: User | null;
+  profile?: ProfileOwnedByMe | null;
   parentTweet?: boolean;
 };
 
@@ -48,12 +48,23 @@ export function Tweet(tweet: TweetProps): JSX.Element {
     parentTweet,
     userReplies,
     userRetweets,
-    user: tweetUserData
+    user
   } = tweet;
 
-  const { id: ownerId, name, username, verified, photoURL } = tweetUserData;
+  const { id: ownerId, name, handle, picture } = user ?? {};
 
-  const { user } = useAuth();
+  // const { user } = useAuth();
+
+  let photoURL;
+  let username;
+  if (user) {
+    if (user.picture) {
+      photoURL = formatAvater(user.picture.original.url);
+    } else {
+      photoURL = '';
+    }
+    username = formatNickName(user.handle);
+  }
 
   const { open, openModal, closeModal } = useModal();
 
@@ -63,16 +74,17 @@ export function Tweet(tweet: TweetProps): JSX.Element {
 
   const isOwner = userId === createdBy;
 
-  const { id: parentId, username: parentUsername = username } = parent ?? {};
+  const { id: parentId, username: parentUsername = name } = parent ?? {};
 
   const {
     id: profileId,
     name: profileName,
-    username: profileUsername
+    name: profileUsername
   } = profile ?? {};
 
   const reply = !!parent;
-  const tweetIsRetweeted = userRetweets.includes(profileId ?? '');
+  let tweetIsRetweeted;
+  if (userRetweets) tweetIsRetweeted = userRetweets.includes(profileId ?? '');
 
   return (
     <motion.article
@@ -91,10 +103,11 @@ export function Tweet(tweet: TweetProps): JSX.Element {
         <TweetReplyModal tweet={tweet} closeModal={closeModal} />
       </Modal>
       <Link href={tweetLink} scroll={!reply}>
-        <a
+        <span
           className={cn(
             `accent-tab hover-card relative flex flex-col 
-             gap-y-4 px-4 py-3 outline-none duration-200`,
+      
+            gap-y-4 px-4 py-3 outline-none duration-200`,
             parentTweet
               ? 'mt-0.5 pt-2.5 pb-0'
               : 'border-b border-light-border dark:border-dark-border'
@@ -110,17 +123,23 @@ export function Tweet(tweet: TweetProps): JSX.Element {
               ) : (
                 tweetIsRetweeted && (
                   <TweetStatus type='tweet'>
-                    <Link href={profileUsername as string}>
-                      <a className='custom-underline truncate text-sm font-bold'>
-                        {userId === profileId ? 'You' : profileName} Retweeted
-                      </a>
-                    </Link>
+                    {/*<Link href={profileUsername as string}>*/}
+                    <span className='custom-underline truncate text-sm font-bold'>
+                      {userId === profileId ? 'You' : profileName} Retweeted
+                    </span>
+                    {/*</Link>*/}
                   </TweetStatus>
                 )
               )}
             </AnimatePresence>
             <div className='flex flex-col items-center gap-2'>
-              <UserTooltip avatar modal={modal} {...tweetUserData}>
+              <UserTooltip
+                avatar
+                modal={modal}
+                {...user}
+                coverPhotoURL={photoURL}
+                photoURL={photoURL}
+              >
                 <UserAvatar src={photoURL} alt={name} username={username} />
               </UserTooltip>
               {parentTweet && (
@@ -130,15 +149,15 @@ export function Tweet(tweet: TweetProps): JSX.Element {
             <div className='flex min-w-0 flex-col'>
               <div className='flex justify-between gap-2 text-light-secondary dark:text-dark-secondary'>
                 <div className='flex gap-1 truncate xs:overflow-visible xs:whitespace-normal'>
-                  <UserTooltip modal={modal} {...tweetUserData}>
+                  <UserTooltip modal={modal} {...user}>
                     <UserName
                       name={name}
                       username={username}
-                      verified={verified}
+                      verified={false}
                       className='text-light-primary dark:text-dark-primary'
                     />
                   </UserTooltip>
-                  <UserTooltip modal={modal} {...tweetUserData}>
+                  <UserTooltip modal={modal} {...user}>
                     <UserUsername username={username} />
                   </UserTooltip>
                   <TweetDate tweetLink={tweetLink} createdAt={createdAt} />
@@ -164,12 +183,11 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                     modal && 'order-1 my-2'
                   )}
                 >
-                  Replying to{' '}
-                  <Link href={`/user/${parentUsername}`}>
-                    <a className='custom-underline text-main-accent'>
-                      @{parentUsername}
-                    </a>
-                  </Link>
+                  Replying to {/*<Link href={`/user/${parentUsername}`}>*/}
+                  <span className='custom-underline text-main-accent'>
+                    @{parentUsername}
+                  </span>
+                  {/*</Link>*/}
                 </p>
               )}
               {text && (
@@ -198,7 +216,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
               </div>
             </div>
           </div>
-        </a>
+        </span>
       </Link>
     </motion.article>
   );

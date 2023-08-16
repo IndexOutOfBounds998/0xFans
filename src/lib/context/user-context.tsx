@@ -1,9 +1,9 @@
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
-import type { User } from '@lib/types/user';
+import { ProfileOwnedByMe } from '@lens-protocol/react-web';
 
 type UserContext = {
-  user: User | null;
+  user: ProfileOwnedByMe | null;
   loading: boolean;
 };
 
