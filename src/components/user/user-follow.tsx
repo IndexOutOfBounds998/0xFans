@@ -14,17 +14,7 @@ export function UserFollow({ type }: UserFollowProps): JSX.Element {
   const { user } = useUser();
   const { name, username } = user as User;
 
-  const { data, loading } = useCollection(
-    query(
-      usersCollection,
-      where(
-        type === 'following' ? 'followers' : 'following',
-        'array-contains',
-        user?.id
-      )
-    ),
-    { allowNull: true }
-  );
+  const { data, loading } = useCollection();
 
   return (
     <>

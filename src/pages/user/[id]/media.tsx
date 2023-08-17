@@ -19,14 +19,7 @@ export default function UserMedia(): JSX.Element {
 
   const { id, name, username } = user ?? {};
 
-  const { data, loading } = useCollection(
-    query(
-      tweetsCollection,
-      where('createdBy', '==', id),
-      where('images', '!=', null)
-    ),
-    { includeUser: true, allowNull: true }
-  );
+  const { data, loading } = useCollection();
 
   const sortedTweets = mergeData(true, data);
 

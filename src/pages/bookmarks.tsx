@@ -33,10 +33,7 @@ export default function Bookmarks(): JSX.Element {
 
   const userId = user?.id as string;
 
-  const { data: bookmarksRef, loading: bookmarksRefLoading } = useCollection(
-    query(userBookmarksCollection(userId), orderBy('createdAt', 'desc')),
-    { allowNull: true }
-  );
+  const { data: bookmarksRef, loading: bookmarksRefLoading } = useCollection();
 
   const tweetIds = useMemo(
     () => bookmarksRef?.map(({ id }) => id) ?? [],
@@ -66,7 +63,7 @@ export default function Bookmarks(): JSX.Element {
         <ActionModal
           title='Clear all Bookmarks?'
           description='This can’t be undone and you’ll remove all Tweets you’ve added to your Bookmarks.'
-          mainBtnClassName='bg-accent-red hover:bg-accent-red/90 active:bg-accent-red/75 accent-tab 
+          mainBtnClassName='bg-accent-red hover:bg-accent-red/90 active:bg-accent-red/75 accent-tab
                             focus-visible:bg-accent-red/90'
           mainBtnLabel='Clear'
           action={handleClear}
@@ -82,7 +79,7 @@ export default function Bookmarks(): JSX.Element {
         </div>
         <Button
           className='dark-bg-tab group relative p-2 hover:bg-light-primary/10
-                     active:bg-light-primary/20 dark:hover:bg-dark-primary/10 
+                     active:bg-light-primary/20 dark:hover:bg-dark-primary/10
                      dark:active:bg-dark-primary/20'
           onClick={openModal}
         >

@@ -9,6 +9,8 @@ import {
 } from '@lens-protocol/react-web';
 import { getWalletClient } from '@wagmi/core';
 import { formatAvater, formatNickName } from '@lib/FormatContent';
+import { Accent, Theme } from '@lib/types/theme';
+import { Timestamp } from 'firebase/firestore';
 
 type AuthContext = {
   user: ProfileOwnedByMe | null;
@@ -53,9 +55,16 @@ export function AuthContextProvider({
       let userObj = profile!;
       if (userObj) {
         userObj = {
-          ...userObj,
-          photoURL: formatAvater(userObj.picture.original.url),
-          name: formatNickName(userObj.handle)
+          id: userObj.id,
+          bio: userObj.bio,
+          name: formatNickName(userObj.handle),
+          username: userObj.name,
+          photoURL: formatAvater(userObj?.picture?.original?.url),
+          verified: true,
+          following: [],
+          followers: [],
+          totalTweets: userObj?.stats?.totalPosts,
+          coverPhotoURL: userObj.coverPicture
         };
       }
       setUser(userObj);

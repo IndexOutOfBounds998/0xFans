@@ -29,14 +29,7 @@ export default function UserWithReplies(): JSX.Element {
     }
   );
 
-  const { data, loading } = useCollection(
-    query(
-      tweetsCollection,
-      where('createdBy', '==', id),
-      orderBy('createdAt', 'desc')
-    ),
-    { includeUser: true, allowNull: true }
-  );
+  const { data, loading } = useCollection();
 
   return (
     <section>

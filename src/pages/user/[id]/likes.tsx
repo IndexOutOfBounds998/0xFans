@@ -18,14 +18,7 @@ export default function UserLikes(): JSX.Element {
 
   const { id, name, username } = user ?? {};
 
-  const { data, loading } = useCollection(
-    query(
-      tweetsCollection,
-      where('userLikes', 'array-contains', id),
-      orderBy('createdAt', 'desc')
-    ),
-    { includeUser: true, allowNull: true }
-  );
+  const { data, loading } = useCollection();
 
   return (
     <section>

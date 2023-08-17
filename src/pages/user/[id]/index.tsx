@@ -28,23 +28,9 @@ export default function UserTweets(): JSX.Element {
     }
   );
 
-  const { data: ownerTweets, loading: ownerLoading } = useCollection(
-    query(
-      tweetsCollection,
-      where('createdBy', '==', id),
-      where('parent', '==', null)
-    ),
-    { includeUser: true, allowNull: true }
-  );
+  const { data: ownerTweets, loading: ownerLoading } = useCollection();
 
-  const { data: peopleTweets, loading: peopleLoading } = useCollection(
-    query(
-      tweetsCollection,
-      where('createdBy', '!=', id),
-      where('userRetweets', 'array-contains', id)
-    ),
-    { includeUser: true, allowNull: true }
-  );
+  const { data: peopleTweets, loading: peopleLoading } = useCollection();
 
   const mergedTweets = mergeData(true, ownerTweets, peopleTweets);
 
