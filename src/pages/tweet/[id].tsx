@@ -61,7 +61,7 @@ export default function TweetId(): JSX.Element {
       id: data?.profile?.id,
       username: formatNickName(data?.profile?.handle)
     },
-    createdBy: null,
+    createdBy: ' ',
     createdAt: data?.createdAt,
     updatedAt: data?.createdAt,
     userReplies: data?.stats?.totalAmountOfComments,

@@ -12,21 +12,23 @@ type UserDetailsProps = Pick<
   | 'photoURL'
   | 'totalTweets'
   | 'coverPhotoURL'
-  | 'username'
   | 'verified'
   | 'following'
+  | 'createdAt'
   | 'followers'
-  | 'theme' 
+  | 'theme'
   | 'accent'
-  | 'website' 
+  | 'website'
   | 'location'
+  | 'updatedAt'
+  | 'totalPhotos'
+  | 'pinnedTweet'
 >;
 
 type useProfileObj<T> = {
   user: UserDetailsProps;
   loading: boolean;
 };
-
 
 type DataWithUser<T> = useProfileObj<T & { user: UserDetailsProps }>;
 
@@ -49,7 +51,7 @@ export function useProfileContext<T>(
         id: data.id,
         bio: data.bio,
         name: formatNickName(data.handle),
-        username: data?.name || "",
+        username: data?.name || '',
         photoURL: formatAvater((data?.picture as MediaSet)?.original?.url),
         verified: true,
         following: [],
@@ -58,8 +60,9 @@ export function useProfileContext<T>(
         coverPhotoURL: (data?.coverPicture as MediaSet)?.original.url,
         theme: null,
         accent: null,
-        website: "",
-        location: ""
+        website: '',
+        location: '',
+        createdAt: null
       };
       setProfile(usrObj);
     }

@@ -2,7 +2,6 @@ import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
 import type { User } from '@lib/types/user';
 
-
 type UserDetailsProps = Pick<
   User,
   | 'id'
@@ -15,10 +14,12 @@ type UserDetailsProps = Pick<
   | 'verified'
   | 'following'
   | 'followers'
-  | 'theme' 
+  | 'theme'
+  | 'createdAt'
   | 'accent'
-  | 'website' 
+  | 'website'
   | 'location'
+  | 'totalPhotos'
 >;
 
 type UserContext = {

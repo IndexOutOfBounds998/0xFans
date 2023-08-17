@@ -49,7 +49,7 @@ export function UserTooltip({
 
   const userLink = `/user/${username}`;
 
-  const allStats: Readonly<Stats[]> = [];
+  const allStats: Stats[] = [];
 
   if (following) allStats.push(['following', 'Following', following.length]);
 

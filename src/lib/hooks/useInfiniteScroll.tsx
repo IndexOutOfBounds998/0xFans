@@ -63,7 +63,7 @@ export function useInfiniteScroll<T>(
         parent: null,
         userLikes: [],
         user: item.profile,
-        createdBy: item.profile.handle,
+        createdBy: ' ',
         createdAt: Timestamp.now(),
         updatedAt: Timestamp.now(),
         userReplies: item.stats.commentsCount,

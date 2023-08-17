@@ -14,7 +14,7 @@ export function UserFollow({ type }: UserFollowProps): JSX.Element {
   const { user } = useUser();
   const { name, username } = user as User;
 
-  const { data, loading } = useCollection();
+  const { user: data, loading } = useCollection();
 
   return (
     <>

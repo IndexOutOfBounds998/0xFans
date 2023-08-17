@@ -108,7 +108,7 @@ export function TweetActions({
     await Promise.all([
       removeTweet(tweetId),
       manageTotalTweets('decrement', ownerId),
-      hasImages && manageTotalPhotos('decrement', createdBy),
+      // hasImages && manageTotalPhotos('decrement', createdBy),
       parentId && manageReply('decrement', parentId)
     ]);
 
@@ -140,7 +140,8 @@ export function TweetActions({
       );
     };
 
-  const userIsFollowed = following ? following.includes(createdBy) : '';
+  // const userIsFollowed = following ? following.includes(createdBy) : '';
+  const userIsFollowed = '';
 
   const currentPinModalData = useMemo(
     () => pinModalData[+tweetIsPinned],
@@ -247,9 +248,9 @@ export function TweetActions({
                     <Popover.Button
                       className='accent-tab flex w-full gap-3 rounded-md rounded-t-none p-4 hover:bg-main-sidebar-background'
                       as={Button}
-                      onClick={preventBubbling(
-                        handleFollow(close, 'unfollow', userId, createdBy)
-                      )}
+                      onClick={preventBubbling()
+                      // handleFollow(close, 'unfollow', userId, createdBy)
+                      }
                     >
                       <HeroIcon iconName='UserMinusIcon' />
                       Unfollow @{username}
@@ -258,9 +259,9 @@ export function TweetActions({
                     <Popover.Button
                       className='accent-tab flex w-full gap-3 rounded-md rounded-t-none p-4 hover:bg-main-sidebar-background'
                       as={Button}
-                      onClick={preventBubbling(
-                        handleFollow(close, 'follow', userId, createdBy)
-                      )}
+                      onClick={preventBubbling()
+                      // handleFollow(close, 'follow', userId, createdBy)
+                      }
                     >
                       <HeroIcon iconName='UserPlusIcon' />
                       Follow @{username}

@@ -59,7 +59,7 @@ export function Input({
   const [visited, setVisited] = useState(false);
 
   const { user } = useAuth();
-  const { name, handle, picture } = user as ProfileOwnedByMe;
+  const { name, username, photoURL } = user as User;
 
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -221,13 +221,17 @@ export function Input({
           reply
             ? 'pt-3 pb-1'
             : replyModal
-              ? 'pt-0'
-              : 'border-b-2 border-light-border dark:border-dark-border',
+            ? 'pt-0'
+            : 'border-b-2 border-light-border dark:border-dark-border',
           (disabled || loading) && 'pointer-events-none opacity-50'
         )}
         htmlFor={formId}
       >
-        <UserAvatar src={formatAvater((picture as MediaSet)?.original?.url ?? '')} alt={name ? name : ""} username={name ? name : ""} />
+        <UserAvatar
+          src={formatAvater(photoURL ?? '')}
+          alt={name ? name : ''}
+          username={name ? name : ''}
+        />
         <div className='flex w-full flex-col gap-4'>
           <InputForm
             modal={modal}

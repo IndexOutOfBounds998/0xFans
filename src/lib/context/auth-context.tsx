@@ -11,11 +11,33 @@ import { getWalletClient } from '@wagmi/core';
 import { formatAvater, formatNickName } from '@lib/FormatContent';
 import { Accent, Theme } from '@lib/types/theme';
 import { Timestamp } from 'firebase/firestore';
-
+import { User } from '@lib/types/user';
+type UserDetailsProps = Pick<
+  User,
+  | 'id'
+  | 'bio'
+  | 'name'
+  | 'username'
+  | 'photoURL'
+  | 'totalTweets'
+  | 'coverPhotoURL'
+  | 'verified'
+  | 'following'
+  | 'createdAt'
+  | 'followers'
+  | 'theme'
+  | 'accent'
+  | 'website'
+  | 'location'
+  | 'updatedAt'
+  | 'totalPhotos'
+  | 'pinnedTweet'
+>;
 type AuthContext = {
-  user: ProfileOwnedByMe | null;
+  user: UserDetailsProps;
   error: Error | null;
   loading: boolean;
+  isAdmin: boolean;
   userBookmarks: Bookmark[] | null;
   signOut: () => Promise<void>;
   signInWithLens: () => Promise<void>;
@@ -30,7 +52,7 @@ type AuthContextProviderProps = {
 export function AuthContextProvider({
   children
 }: AuthContextProviderProps): JSX.Element {
-  const [user, setUser] = useState<ProfileOwnedByMe | null>(null);
+  const [user, setUser] = useState<UserDetailsProps | null>(null);
   const [userBookmarks, setUserBookmarks] = useState<Bookmark[] | null>(null);
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(true);
@@ -102,6 +124,7 @@ export function AuthContextProvider({
     user,
     error,
     loading,
+    isAdmin,
     userBookmarks,
     signOut,
     signInWithLens

@@ -7,6 +7,7 @@ type UserAvatarProps = {
   alt: string;
   size?: number;
   id?: string;
+  username?: string;
   className?: string;
 };
 
@@ -15,6 +16,7 @@ export function UserAvatar({
   alt,
   size,
   id,
+  username,
   className
 }: UserAvatarProps): JSX.Element {
   const pictureSize = size ?? 48;
