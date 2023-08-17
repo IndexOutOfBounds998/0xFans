@@ -1,19 +1,34 @@
-import { useProfile } from '@lens-protocol/react-web';
+import { MediaSet, ProfileId, useProfile } from '@lens-protocol/react-web';
 import { formatAvater, formatNickName } from '@lib/FormatContent';
 import type { User } from '@lib/types/user';
 import { useEffect, useState } from 'react';
 
+type UserDetailsProps = Pick<
+  User,
+  | 'id'
+  | 'bio'
+  | 'name'
+  | 'username'
+  | 'photoURL'
+  | 'totalTweets'
+  | 'coverPhotoURL'
+  | 'username'
+  | 'verified'
+  | 'following'
+  | 'followers'
+  | 'theme' 
+  | 'accent'
+  | 'website' 
+  | 'location'
+>;
+
 type useProfileObj<T> = {
-  user: User;
+  user: UserDetailsProps;
   loading: boolean;
 };
 
-type useProfiles = User & {
-  modal?: boolean;
-  follow?: boolean;
-};
 
-type DataWithUser<T> = useProfileObj<T & { user: useProfiles }>;
+type DataWithUser<T> = useProfileObj<T & { user: UserDetailsProps }>;
 
 export type UseProfileOptions = {
   profileId: string;
@@ -24,27 +39,31 @@ export function useProfileContext<T>(
 ): useProfileObj<T> | DataWithUser<T> {
   const { profileId } = options ?? {};
 
-  const [profile, setProfile] = useState<useProfiles>({});
+  const [profile, setProfile] = useState<UserDetailsProps>();
 
-  const { data, loading } = useProfile({ profileId: profileId });
+  const { data, loading } = useProfile({ profileId: profileId as ProfileId });
 
   useEffect(() => {
     if (data) {
-      let usrObj: useProfiles | {} = {
+      let usrObj: UserDetailsProps = {
         id: data.id,
         bio: data.bio,
         name: formatNickName(data.handle),
-        username: data.name,
-        photoURL: formatAvater(data?.picture?.original?.url),
+        username: data?.name || "",
+        photoURL: formatAvater((data?.picture as MediaSet)?.original?.url),
         verified: true,
         following: [],
         followers: [],
         totalTweets: data?.stats?.totalPosts,
-        coverPhotoURL: data.coverPicture
+        coverPhotoURL: (data?.coverPicture as MediaSet)?.original.url,
+        theme: null,
+        accent: null,
+        website: "",
+        location: ""
       };
       setProfile(usrObj);
     }
   }, [data]);
 
-  return { user: profile, loading };
+  return { user: profile as User, loading };
 }

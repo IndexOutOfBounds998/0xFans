@@ -2,8 +2,27 @@ import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
 import type { User } from '@lib/types/user';
 
+
+type UserDetailsProps = Pick<
+  User,
+  | 'id'
+  | 'bio'
+  | 'name'
+  | 'photoURL'
+  | 'totalTweets'
+  | 'coverPhotoURL'
+  | 'username'
+  | 'verified'
+  | 'following'
+  | 'followers'
+  | 'theme' 
+  | 'accent'
+  | 'website' 
+  | 'location'
+>;
+
 type UserContext = {
-  user: User | null;
+  user: UserDetailsProps | null;
   loading: boolean;
 };
 

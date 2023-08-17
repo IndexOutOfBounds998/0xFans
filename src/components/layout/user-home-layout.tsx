@@ -25,12 +25,12 @@ export function UserHomeLayout({ children }: LayoutProps): JSX.Element {
     query: { id }
   } = useRouter();
 
-  const coverData = userData?.coverPicture
-    ? { src: userData.coverPicture, alt: userData.name }
+  const coverData = userData?.coverPhotoURL
+    ? { src: userData.coverPhotoURL, alt: userData.name }
     : null;
 
   const profileData = userData
-    ? { src: userData.picture.original.cover, alt: userData.name }
+    ? { src: userData.photoURL, alt: userData.name }
     : null;
 
   const { id: userId } = user ?? {};
@@ -41,7 +41,7 @@ export function UserHomeLayout({ children }: LayoutProps): JSX.Element {
     <>
       {userData && (
         <SEO
-          title={`${`${userData.name} (@${userData.handle})`} / LensX`}
+          title={`${`${userData.username} (@${userData.name})`} / LensX`}
         />
       )}
       <motion.section {...variants} exit={undefined}>
@@ -86,7 +86,7 @@ export function UserHomeLayout({ children }: LayoutProps): JSX.Element {
                       userTargetId={userData.id}
                       userTargetUsername={userData.username}
                     />
-                    {isAdmin && <UserEditProfile hide />}
+                    {isOwner && <UserEditProfile hide />}
                   </div>
                 )}
               </div>

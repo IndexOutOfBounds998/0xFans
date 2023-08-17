@@ -13,12 +13,11 @@ export function UserDataLayout({ children }: LayoutProps): JSX.Element {
     back
   } = useRouter();
 
-  const { data: profile, loading } = useProfileContext({ profileId: id });
-  console.log(profile);
-
+  const { user, loading } = useProfileContext({ profileId: id });
+  
   return (
-    <UserContextProvider value={{ profile, loading }}>
-      {!profile && !loading && <SEO title='User not found / Twitter' />}
+    <UserContextProvider value={{ user, loading }}>
+      {!user && !loading && <SEO title='User not found / Twitter' />}
       <MainContainer>
         <MainHeader useActionButton action={back}>
           <UserHeader />
