@@ -11,7 +11,12 @@ type UseCollection<T> = {
   data: (T & { user: UserCardProps })[] | null;
   loading: boolean;
   user: User[];
-};
+}
+  | {
+    data: UserCardProps[] | null;
+    loading: boolean;
+    user: User[];
+  };
 
 
 type UserCardProps = User & {
