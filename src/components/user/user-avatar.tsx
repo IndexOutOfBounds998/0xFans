@@ -6,7 +6,7 @@ type UserAvatarProps = {
   src: string;
   alt: string;
   size?: number;
-  username?: string;
+  id?: string;
   className?: string;
 };
 
@@ -14,20 +14,20 @@ export function UserAvatar({
   src,
   alt,
   size,
-  username,
+  id,
   className
 }: UserAvatarProps): JSX.Element {
   const pictureSize = size ?? 48;
 
   return (
-    <Link href={username ? `/user/${username}` : '#'}>
+    <Link href={id ? `/user/${id}` : '#'}>
       <span
         className={cn(
           'blur-picture flex self-start',
-          !username && 'pointer-events-none',
+          !id && 'pointer-events-none',
           className
         )}
-        tabIndex={username ? 0 : -1}
+        tabIndex={id ? 0 : -1}
       >
         <NextImage
           useSkeleton

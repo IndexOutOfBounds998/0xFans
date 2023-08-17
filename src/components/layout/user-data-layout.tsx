@@ -6,14 +6,15 @@ import { MainContainer } from '@components/home/main-container';
 import { MainHeader } from '@components/home/main-header';
 import { UserHeader } from '@components/user/user-header';
 import type { LayoutProps } from './common-layout';
-import { useProfile } from '@lens-protocol/react-web';
+import { useProfileContext } from '@lib/hooks/useProfile';
 export function UserDataLayout({ children }: LayoutProps): JSX.Element {
   const {
     query: { id },
     back
   } = useRouter();
 
-  const { data: profile, loading } = useProfile({ profileId: id });
+  const { data: profile, loading } = useProfileContext({ profileId: id });
+  console.log(profile);
 
   return (
     <UserContextProvider value={{ profile, loading }}>

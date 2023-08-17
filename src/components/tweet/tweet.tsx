@@ -57,6 +57,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
 
   let photoURL;
   let username;
+  let user_id;
   if (user) {
     if (user.picture) {
       photoURL = formatAvater(user.picture.original.url);
@@ -64,6 +65,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
       photoURL = '';
     }
     username = formatNickName(user.handle);
+    user_id = user.id;
   }
 
   const { open, openModal, closeModal } = useModal();
@@ -140,7 +142,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                 coverPhotoURL={photoURL}
                 photoURL={photoURL}
               >
-                <UserAvatar src={photoURL} alt={name} username={username} />
+                <UserAvatar src={photoURL} alt={name} id={user_id} />
               </UserTooltip>
               {parentTweet && (
                 <i className='hover-animation h-full w-0.5 bg-light-line-reply dark:bg-dark-line-reply' />
