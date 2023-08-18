@@ -15,7 +15,7 @@ export type User = {
   verified: boolean;
   following: string[];
   followers: string[];
-  createdAt: Timestamp;
+  createdAt: Timestamp | null;
   updatedAt: Timestamp | null;
   totalTweets: number;
   totalPhotos: number;

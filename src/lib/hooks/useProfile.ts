@@ -8,21 +8,19 @@ type UserDetailsProps = Pick<
   | 'id'
   | 'bio'
   | 'name'
-  | 'username'
   | 'photoURL'
   | 'totalTweets'
   | 'coverPhotoURL'
+  | 'username'
   | 'verified'
   | 'following'
-  | 'createdAt'
   | 'followers'
   | 'theme'
+  | 'createdAt'
   | 'accent'
   | 'website'
   | 'location'
-  | 'updatedAt'
   | 'totalPhotos'
-  | 'pinnedTweet'
 >;
 
 type useProfileObj<T> = {
@@ -62,7 +60,8 @@ export function useProfileContext<T>(
         accent: null,
         website: '',
         location: '',
-        createdAt: null
+        createdAt: null,
+        totalPhotos: 0
       };
       setProfile(usrObj);
     }

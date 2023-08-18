@@ -40,7 +40,8 @@ export function useTrends(
   //   `/api/trends/place/${id}${limit ? `?limit=${limit}` : ''}`,
   //   config
   // );
-  const { data, error } = {};
+  const data = undefined;
+  const error = undefined;
 
   if (data && 'errors' in data)
     return {

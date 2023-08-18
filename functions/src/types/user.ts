@@ -9,12 +9,12 @@ export type User = {
   accent: Accent | null;
   website: string | null;
   location: string | null;
-  username: string;
+  username: string | null;
   photoURL: string;
   verified: boolean;
   following: string[];
   followers: string[];
-  createdAt: Timestamp;
+  createdAt: Timestamp | null;
   updatedAt: Timestamp | null;
   totalTweets: number;
   totalPhotos: number;

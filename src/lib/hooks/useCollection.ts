@@ -1,29 +1,54 @@
-import { ProfileId, ProfileSortCriteria, useExploreProfiles } from '@lens-protocol/react-web';
-import { formatAvater } from '@lib/FormatContent';
+import {
+  ProfileId,
+  ProfileSortCriteria,
+  useExploreProfiles,
+  MediaSet
+} from '@lens-protocol/react-web';
+import { formatAvater, formatNickName } from '@lib/FormatContent';
 import { User } from '@lib/types/user';
 import { useEffect, useState } from 'react';
 
-type UseCollection<T> = {
-  data: T[] | null;
-  loading: boolean;
-  user: User[];
-} | {
-  data: (T & { user: UserCardProps })[] | null;
-  loading: boolean;
-  user: User[];
-}
+type UseCollection<T> =
   | {
-    data: UserCardProps[] | null;
-    loading: boolean;
-    user: User[];
-  };
+      data: T[] | null;
+      loading: boolean;
+      user: User[];
+    }
+  | {
+      data: (T & { user: UserCardProps })[] | null;
+      loading: boolean;
+      user: User[];
+    }
+  | {
+      data: UserCardProps[] | null;
+      loading: boolean;
+      user: UserCardProps[] | null;
+    };
 
-
-type UserCardProps = User & {
+type UserCardProps = Pick<
+  User,
+  | 'id'
+  | 'bio'
+  | 'name'
+  | 'username'
+  | 'photoURL'
+  | 'totalTweets'
+  | 'coverPhotoURL'
+  | 'verified'
+  | 'following'
+  | 'followers'
+  | 'theme'
+  | 'location'
+  | 'updatedAt'
+  | 'totalPhotos'
+  | 'pinnedTweet'
+  | 'accent'
+  | 'website'
+  | 'createdAt'
+> & {
   modal?: boolean;
   follow?: boolean;
 };
-
 type DataWithUser<T> = UseCollection<T & { user: UserCardProps }>;
 
 export type UseCollectionOptions = {
@@ -32,11 +57,9 @@ export type UseCollectionOptions = {
   sortCriteria: ProfileSortCriteria;
 };
 
-
 export function useCollection<T>(
   options?: UseCollectionOptions
 ): UseCollection<T> | DataWithUser<T> {
-
   const { limit, observerId, sortCriteria } = options ?? {};
 
   const [formateList, setFormateList] = useState<UserCardProps[]>([]);
@@ -47,29 +70,34 @@ export function useCollection<T>(
     sortCriteria
   });
 
-
   useEffect(() => {
-
     if (data) {
-      let list: UserCardProps[] = data.map((item => {
+      let list: UserCardProps[] = data.map((item) => {
         return {
           id: item.id,
           bio: item.bio,
-          name: item.name,
+          name: formatNickName(item.handle),
           username: item.handle,
-          photoURL: item.picture ? formatAvater(item.picture.original.url) : "",
+          photoURL: formatAvater((item?.picture as MediaSet)?.original?.url),
           verified: true,
           following: [],
           followers: [],
-          coverPhotoURL: item.coverPicture ? formatAvater(item.coverPicture.original.url) : item.picture ? formatAvater(item.picture.original.url) : ""
-        }
-
-      }))
+          coverPhotoURL: (item?.coverPicture as MediaSet)?.original.url,
+          totalTweets: 0,
+          theme: null,
+          updatedAt: null,
+          location: '',
+          totalPhotos: 0,
+          pinnedTweet: null,
+          accent: null,
+          website: null,
+          createdAt: null
+        };
+      });
 
       setFormateList(list);
     }
-
-  }, [data])
+  }, [data]);
 
   return { data: formateList, loading, user: formateList };
 }

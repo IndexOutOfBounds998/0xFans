@@ -228,7 +228,7 @@ export function Input({
         htmlFor={formId}
       >
         <UserAvatar
-          src={formatAvater(photoURL ?? '')}
+          src={formatAvater(photoURL)}
           alt={name ? name : ''}
           username={name ? name : ''}
         />

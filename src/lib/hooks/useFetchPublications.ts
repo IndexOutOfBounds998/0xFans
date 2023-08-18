@@ -1,21 +1,25 @@
-import { useState, useEffect } from "react";
-import { ExplorePublicationRequest } from "@lens-protocol/client";
-import { getAuthenticatedClient } from "@lib/getAuthenticatedClient";
+import { useState, useEffect } from 'react';
+import { ExplorePublicationRequest } from '@lens-protocol/client';
+import { getAuthenticatedClient } from '@lib/getAuthenticatedClient';
+import firebase from 'firebase/compat';
+import functions = firebase.functions;
 
 type useFetchPublicationsArgs = {
   explorePublicationRequest: ExplorePublicationRequest;
 };
 
 export function useFetchPublications({
-  explorePublicationRequest,
+  explorePublicationRequest
 }: useFetchPublicationsArgs) {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<Boolean>(false);
   const [loaded, setLoaded] = useState(false);
   const [firstLoading, setFirstLoading] = useState(false);
-  const [data, setData] = useState([]);
-  const [nextCursor, setNextCursor] = useState("");
+  const [data, setData] = useState<any[]>([]);
+  const [nextCursor, setNextCursor] = useState<any>('');
   const [hasMore, setHasMore] = useState(false);
-  const [request, setRequest] = useState<ExplorePublicationRequest | null>(null);
+  const [request, setRequest] = useState<ExplorePublicationRequest | null>(
+    null
+  );
 
   const execute = async () => {
     setFirstLoading(true);
@@ -25,7 +29,7 @@ export function useFetchPublications({
       explorePublicationRequest,
       setData,
       setNextCursor,
-      setHasMore,
+      setHasMore
     );
     setFirstLoading(false);
   };
@@ -40,7 +44,7 @@ export function useFetchPublications({
   const next = async () => {
     setLoading(true);
     const lensClient = await getAuthenticatedClient();
-    if(request){
+    if (request) {
       request.cursor = nextCursor;
       let res = await lensClient.explore.publications(request);
       setLoading(false);
@@ -56,17 +60,17 @@ export function useFetchPublications({
   };
 
   async function fetchData(
-    setLoading,
+    setLoading: any,
     request: ExplorePublicationRequest,
-    setData,
-    setNextCursor,
-    setHasMore,
+    setData: any,
+    setNextCursor: any,
+    setHasMore: any
   ) {
     setLoading(true);
     const lensClient = await getAuthenticatedClient();
     let res = await lensClient.explore.publications(request);
     setLoading(false);
-    setData((prevData) => [...prevData, ...res.items]);
+    setData((prevData: any) => [...prevData, ...res.items]);
     setNextCursor(res.pageInfo.next);
     setHasMore(res.items.length > 0);
   }
@@ -84,6 +88,6 @@ export function useFetchPublications({
     hasMore,
     data,
     loading,
-    firstLoading,
+    firstLoading
   };
 }

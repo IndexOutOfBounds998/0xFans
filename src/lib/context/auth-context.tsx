@@ -5,13 +5,14 @@ import {
   useWalletLogin,
   useActiveProfile,
   useWalletLogout,
-  ProfileOwnedByMe
+  ProfileOwnedByMe,
+  MediaSet
 } from '@lens-protocol/react-web';
 import { getWalletClient } from '@wagmi/core';
 import { formatAvater, formatNickName } from '@lib/FormatContent';
 import { Accent, Theme } from '@lib/types/theme';
 import { Timestamp } from 'firebase/firestore';
-import { User } from '@lib/types/user';
+import type { User } from '@lib/types/user';
 type UserDetailsProps = Pick<
   User,
   | 'id'
@@ -23,18 +24,18 @@ type UserDetailsProps = Pick<
   | 'coverPhotoURL'
   | 'verified'
   | 'following'
-  | 'createdAt'
   | 'followers'
   | 'theme'
-  | 'accent'
-  | 'website'
   | 'location'
   | 'updatedAt'
   | 'totalPhotos'
   | 'pinnedTweet'
+  | 'accent'
+  | 'website'
+  | 'createdAt'
 >;
 type AuthContext = {
-  user: UserDetailsProps;
+  user: UserDetailsProps | null;
   error: Error | null;
   loading: boolean;
   isAdmin: boolean;
@@ -74,22 +75,29 @@ export function AuthContextProvider({
   useEffect(() => {
     const manageUser = async (): Promise<void> => {
       setLoading(true);
-      let userObj = profile!;
-      if (userObj) {
-        userObj = {
-          id: userObj.id,
-          bio: userObj.bio,
-          name: formatNickName(userObj.handle),
-          username: userObj.name,
-          photoURL: formatAvater(userObj?.picture?.original?.url),
+      if (profile) {
+        let userObj: UserDetailsProps = {
+          id: profile.id,
+          bio: profile.bio,
+          name: formatNickName(profile.handle),
+          username: profile?.name || 'null',
+          photoURL: formatAvater((profile?.picture as MediaSet)?.original?.url),
           verified: true,
           following: [],
           followers: [],
-          totalTweets: userObj?.stats?.totalPosts,
-          coverPhotoURL: userObj.coverPicture
+          totalTweets: profile?.stats?.totalPosts,
+          coverPhotoURL: (profile?.coverPicture as MediaSet)?.original.url,
+          location: null,
+          updatedAt: null,
+          totalPhotos: 0,
+          pinnedTweet: null,
+          theme: null,
+          accent: null,
+          website: null,
+          createdAt: null
         };
+        setUser(userObj);
       }
-      setUser(userObj);
       setLoading(profileLoading);
       setError(profileError!);
       setLoading(false);
@@ -119,6 +127,8 @@ export function AuthContextProvider({
       setError(error as Error);
     }
   };
+
+  const isAdmin = false;
 
   const value: AuthContext = {
     user,

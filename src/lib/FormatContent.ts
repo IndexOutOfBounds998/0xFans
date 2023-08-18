@@ -1,6 +1,6 @@
 import { IPFS_GATEWAY } from './const';
 
-export function formatContent(item) {
+export function formatContent(item: any) {
   if (!item.contentResponse) {
     return {};
   }
@@ -11,7 +11,7 @@ export function formatContent(item) {
   return { ...item, ...contentItem };
 }
 
-export function formatAvater(imgUrl) {
+export function formatAvater(imgUrl: any) {
   if (!imgUrl) {
     return (
       IPFS_GATEWAY +
@@ -26,7 +26,7 @@ export function formatAvater(imgUrl) {
   }
 }
 
-export function formatPicture(picture) {
+export function formatPicture(picture: any) {
   if (picture == undefined || picture == null) {
     return picture;
   }
@@ -75,7 +75,7 @@ export function formatPicture(picture) {
   }
 }
 
-export function formatVideoUrl(url) {
+export function formatVideoUrl(url: any) {
   if (url) {
     if (url.startsWith('ipfs://')) {
       let result = url.substring(7, url.length);
@@ -90,7 +90,7 @@ export function formatVideoUrl(url) {
   return '';
 }
 
-export function formatNickName(nickname) {
+export function formatNickName(nickname: any) {
   if (!nickname) {
     return '';
   }
@@ -102,13 +102,13 @@ export function formatNickName(nickname) {
   }
 }
 
-function formatMonthAndDay(date) {
+function formatMonthAndDay(date: any) {
   var month = (date.getMonth() + 1).toString().padStart(2, '0');
   var day = date.getDate().toString().padStart(2, '0');
   return month + '-' + day;
 }
 
-export function formatDate(dateString) {
+export function formatDate(dateString: any) {
   if (dateString === undefined || dateString === '') {
     return '';
   }

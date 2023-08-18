@@ -14,7 +14,7 @@ const UNITS: Units = {
 };
 
 export function formatDate(
-  targetDate: Timestamp,
+  targetDate: Timestamp | null,
   mode: 'tweet' | 'message' | 'full' | 'joined'
 ): string {
   // const date = targetDate.toDate();

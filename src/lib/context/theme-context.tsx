@@ -43,7 +43,8 @@ export function ThemeContextProvider({
   const [accent, setAccent] = useState<Accent>(setInitialAccent);
 
   const { user } = useAuth();
-  const { id: userId, theme: userTheme, accent: userAccent } = user ?? {};
+  const { id: userId, theme: userTheme } = user ?? {};
+  const userAccent = null;
 
   useEffect(() => {
     if (user && userTheme) setTheme(userTheme);
