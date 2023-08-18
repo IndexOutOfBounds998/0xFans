@@ -53,13 +53,13 @@ export function useInfiniteScroll<T>(
             })
             : null,
         parent: null,
-        userLikes: [],
+        userLikes: 0,
         user: item.profile,
         createdBy: ' ',
         createdAt: Timestamp.now(),
         updatedAt: Timestamp.now(),
         userReplies: item.stats.commentsCount,
-        userRetweets: []
+        userRetweets: 0
       }));
       setFormateList(list);
       console.log('list', list.length);

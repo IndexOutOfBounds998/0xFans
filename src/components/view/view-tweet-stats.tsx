@@ -8,6 +8,7 @@ import { TweetStatsModal } from '@components/modal/tweet-stats-modal';
 import { NumberStats } from '@components/tweet/number-stats';
 import { UserCards } from '@components/user/user-cards';
 import type { Tweet } from '@lib/types/tweet';
+import { User } from '@lib/types/user';
 
 type viewTweetStats = Pick<Tweet, 'userRetweets' | 'userLikes'> & {
   likeMove: number;
@@ -38,11 +39,13 @@ export function ViewTweetStats({
 
   const { open, openModal, closeModal } = useModal();
 
-  const { data, loading } = useArrayDocument(
-    statsType ? (statsType === 'likes' ? userLikes : userRetweets) : [],
-    usersCollection,
-    { disabled: !statsType }
-  );
+  // const { data, loading } = useArrayDocument(
+  //   // statsType ? (statsType === 'likes' ? userLikes : userRetweets) : [],
+  //   // usersCollection,
+  //   // { disabled: !statsType }
+  // );
+  const data: User[] = []; // 为data变量提供一个空数组作为初始值
+  const loading = false;
 
   const handleOpen = (type: StatsType) => (): void => {
     setStatsType(type);

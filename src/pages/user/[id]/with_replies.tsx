@@ -18,16 +18,16 @@ import type { ReactElement, ReactNode } from 'react';
 export default function UserWithReplies(): JSX.Element {
   const { user } = useUser();
 
-  const { id, name, username, pinnedTweet } = user ?? {};
+  const { id, name, username } = user ?? {};
 
-  const { data: pinnedData } = useDocument(
-    doc(tweetsCollection, pinnedTweet ?? 'null'),
-    {
-      disabled: !pinnedTweet,
-      allowNull: true,
-      includeUser: true
-    }
-  );
+  // const { data: pinnedData } = useDocument(
+  //   doc(tweetsCollection, pinnedTweet ?? 'null'),
+  //   {
+  //     disabled: !pinnedTweet,
+  //     allowNull: true,
+  //     includeUser: true
+  //   }
+  // );
 
   const { data, loading } = useCollection();
 
@@ -47,10 +47,10 @@ export default function UserWithReplies(): JSX.Element {
         />
       ) : (
         <AnimatePresence mode='popLayout'>
-          {pinnedData && (
+          {/* {pinnedData && (
             <Tweet pinned {...pinnedData} key={`pinned-${pinnedData.id}`} />
           )}
-          <TweetWithParent data={data} />
+          <TweetWithParent data={data} /> */}
         </AnimatePresence>
       )}
     </section>

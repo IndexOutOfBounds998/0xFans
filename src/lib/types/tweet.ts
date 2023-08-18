@@ -8,12 +8,12 @@ export type Tweet = {
   text: string | null;
   images: ImagesPreview | null;
   parent: { id: string; username: string } | null;
-  userLikes: string[];
+  userLikes: number;
   createdBy: string | null;
   createdAt: Timestamp | null;
   updatedAt: Timestamp | null;
   userReplies: number;
-  userRetweets: string[];
+  userRetweets: number;
 };
 
 export type TweetWithUser = Tweet & { user: User };

@@ -1,7 +1,4 @@
 import { AnimatePresence } from 'framer-motion';
-import { query, where, orderBy } from 'firebase/firestore';
-import { useCollection } from '@lib/hooks/useCollection';
-import { tweetsCollection } from '@lib/firebase/collections';
 import { useUser } from '@lib/context/user-context';
 import { UserLayout, ProtectedLayout } from '@components/layout/common-layout';
 import { MainLayout } from '@components/layout/main-layout';
@@ -12,20 +9,21 @@ import { Tweet } from '@components/tweet/tweet';
 import { Loading } from '@components/ui/loading';
 import { StatsEmpty } from '@components/tweet/stats-empty';
 import type { ReactElement, ReactNode } from 'react';
+import { Tweet as Tw } from '@lib/types/tweet';
 
 export default function UserLikes(): JSX.Element {
   const { user } = useUser();
 
   const { id, name, username } = user ?? {};
 
-  const { data, loading } = useCollection();
-
+  // const { data, loading } = useCollection();
+  const data: Tw[] = [];
+  const loading = false;
   return (
     <section>
       <SEO
-        title={`Tweets liked by ${name as string} (@${
-          username as string
-        }) / Twitter`}
+        title={`Tweets liked by ${name as string} (@${username as string
+          }) / Twitter`}
       />
       {loading ? (
         <Loading className='mt-5' />

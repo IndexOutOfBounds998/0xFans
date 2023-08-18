@@ -1,9 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { AnimatePresence } from 'framer-motion';
-import { doc, query, where, orderBy, Timestamp } from 'firebase/firestore';
-import { tweetsCollection } from '@lib/firebase/collections';
-import { useCollection } from '@lib/hooks/useCollection';
 import { HomeLayout, ProtectedLayout } from '@components/layout/common-layout';
 import { MainLayout } from '@components/layout/main-layout';
 import { MainContainer } from '@components/home/main-container';
@@ -17,14 +14,28 @@ import { ViewParentTweet } from '@components/view/view-parent-tweet';
 import type { ReactElement, ReactNode } from 'react';
 import {
   useComments,
-  ReactionType,
   usePublication,
-  ContentPublication,
-  Post
+  Comment
 } from '@lens-protocol/react-web';
 import { useAuth } from '@lib/context/auth-context';
 import { formatNickName } from '@lib/FormatContent';
+import { Tweet as Tw } from '@lib/types/tweet';
+import { Timestamp } from 'firebase/firestore';
 
+type TwDetailsProps = Pick<
+  Tw,
+  | 'id'
+  | 'text'
+  | 'images'
+  | 'parent'
+  | 'userReplies'
+  | 'user'
+  | 'createdBy'
+  | 'userLikes'
+  | 'createdAt'
+  | 'updatedAt'
+  | 'userRetweets'
+>;
 export default function TweetId(): JSX.Element {
   const {
     query: { id },
@@ -32,47 +43,46 @@ export default function TweetId(): JSX.Element {
   } = useRouter();
 
   const { user } = useAuth();
-  const { id: observerId } = user;
-  // const { data: tweetData, loading: tweetLoading } = useDocument(
-  //   doc(tweetsCollection, id as string),
-  //   { includeUser: true, allowNull: true }
-  // );
+
   const { data: tweetObj, loading: tweetLoading } = usePublication({
     publicationId: id,
-    observerId: observerId
+    observerId: user?.id
   });
 
-  const initData = (data) => ({
-    id: data?.id,
-    user: data?.profile,
-    text: data?.metadata.content,
-    // images: data?.metadata.image,
-    images:
-      data.metadata.media && data.metadata.media.length
-        ? data.metadata.media.map((img, index) => {
-            return {
-              id: index.toString(),
-              src: img.original.url,
-              alt: img.original.altTag ? img.original.altTag : ''
-            };
-          })
+  const initData = (data: Comment) => {
+    const initData: TwDetailsProps = {
+      user: data?.profile,
+      text: data?.metadata.content,
+      images: data?.metadata.media && data?.metadata.media.length
+        ? data?.metadata.media.map((img, index) => {
+          return {
+            id: index.toString(),
+            src: img.original.url,
+            alt: img.original.altTag ? img.original.altTag : ''
+          };
+        })
         : null,
-    parent: {
-      id: data?.profile?.id,
-      username: formatNickName(data?.profile?.handle)
-    },
-    createdBy: ' ',
-    createdAt: data?.createdAt,
-    updatedAt: data?.createdAt,
-    userReplies: data?.stats?.totalAmountOfComments,
-    userRetweets: data?.stats?.totalAmountOfMirrors,
-    ...data
-  });
+      parent: {
+        id: data?.profile?.id,
+        username: formatNickName(data?.profile?.handle)
+      },
+      id: data.id,
+      createdBy: data.profile.name,
+      createdAt: Timestamp.now(),
+      updatedAt: Timestamp.now(),
+      userReplies: data?.stats?.totalAmountOfComments,
+      userRetweets: data?.stats?.totalAmountOfMirrors,
+      userLikes: data?.stats?.totalUpvotes
+    };
 
-  const initText = (tweetObj) => tweetObj?.text;
-  const initImages = (tweetObj) => tweetObj?.images;
-  const initImagesLength = (tweetObj) => tweetObj?.images?.length ?? 0;
-  const initParentId = (tweetObj) => tweetObj?.parent?.id;
+
+    return initData;
+  };
+
+  // const initText = (tweetObj:Post) => tweetObj?.metadata.content;
+  // const initImages = (tweetObj:AnyPublication) => tweetObj?.images;
+  // const initImagesLength = (tweetObj:AnyPublication) => tweetObj?.images?.length ?? 0;
+  const initParentId = (tweetObj: Comment) => tweetObj?.commentOn?.id.toString();
 
   const viewTweetRef = useRef<HTMLElement>(null);
 
@@ -84,15 +94,15 @@ export default function TweetId(): JSX.Element {
   } = useComments({
     commentsOf: id,
     limit: 10,
-    observerId: observerId
+    observerId: user?.id
   });
 
-  const [commentList, setCommentList] = useState([]);
+  const [commentList, setCommentList] = useState<TwDetailsProps[]>([]);
 
   useEffect(() => {
     if (repliesData) {
       console.log(repliesData);
-      let list = [];
+      let list: TwDetailsProps[] = [];
       repliesData.forEach((item) => {
         list.push(initData(item));
       });
@@ -118,7 +128,7 @@ export default function TweetId(): JSX.Element {
     <MainContainer className='!pb-[1280px]'>
       <MainHeader
         useActionButton
-        title={initParentId(tweetObj) ? 'Thread' : 'Tweet'}
+        title={initParentId(tweetObj as Comment) ? 'Thread' : 'Tweet'}
         action={back}
       />
       <section>
@@ -132,13 +142,13 @@ export default function TweetId(): JSX.Element {
         ) : (
           <>
             {pageTitle && <SEO title={pageTitle} />}
-            {initParentId(tweetObj) && (
+            {initParentId(tweetObj as Comment) && (
               <ViewParentTweet
-                parentId={initParentId(tweetObj)}
+                parentId={initParentId(tweetObj as Comment) ?? ''}
                 viewTweetRef={viewTweetRef}
               />
             )}
-            <ViewTweet viewTweetRef={viewTweetRef} {...initData(tweetObj)} />
+            <ViewTweet viewTweetRef={viewTweetRef} {...initData(tweetObj as Comment)} />
             {tweetObj &&
               (repliesLoading ? (
                 <Loading className='mt-5' />

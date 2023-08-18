@@ -11,28 +11,30 @@ import { UserDataLayout } from '@components/layout/user-data-layout';
 import { UserHomeLayout } from '@components/layout/user-home-layout';
 import { StatsEmpty } from '@components/tweet/stats-empty';
 import { Loading } from '@components/ui/loading';
-import { Tweet } from '@components/tweet/tweet';
+import { Tweet, TweetProps } from '@components/tweet/tweet';
 import type { ReactElement, ReactNode } from 'react';
-
+ 
 export default function UserTweets(): JSX.Element {
   const { user } = useUser();
 
-  const { id, username, pinnedTweet } = user ?? {};
+  const { id, username } = user ?? {};
 
-  const { data: pinnedData } = useDocument(
-    doc(tweetsCollection, pinnedTweet ?? 'null'),
-    {
-      disabled: !pinnedTweet,
-      allowNull: true,
-      includeUser: true
-    }
-  );
+  // const { data: pinnedData } = useDocument(
+  //   doc(tweetsCollection, pinnedTweet ?? 'null'),
+  //   {
+  //     disabled: !pinnedTweet,
+  //     allowNull: true,
+  //     includeUser: true
+  //   }
+  // );
+  const pinnedData: TweetProps[] = [];
+  const ownerLoading = false;
+  const peopleLoading = false;
+  // const { data: ownerTweets, loading: ownerLoading } = useCollection();
 
-  const { data: ownerTweets, loading: ownerLoading } = useCollection();
+  // const { data: peopleTweets, loading: peopleLoading } = useCollection();
 
-  const { data: peopleTweets, loading: peopleLoading } = useCollection();
-
-  const mergedTweets = mergeData(true, ownerTweets, peopleTweets);
+  const mergedTweets = mergeData(true, [], []);
 
   return (
     <section>
@@ -45,12 +47,12 @@ export default function UserTweets(): JSX.Element {
         />
       ) : (
         <AnimatePresence mode='popLayout'>
-          {pinnedData && (
+          {/* {pinnedData && (
             <Tweet pinned {...pinnedData} key={`pinned-${pinnedData.id}`} />
           )}
           {mergedTweets.map((tweet) => (
             <Tweet {...tweet} profile={user} key={tweet.id} />
-          ))}
+          ))} */}
         </AnimatePresence>
       )}
     </section>

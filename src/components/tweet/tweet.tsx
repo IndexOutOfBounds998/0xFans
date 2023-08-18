@@ -86,7 +86,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
 
   const reply = !!parent;
   let tweetIsRetweeted;
-  if (userRetweets) tweetIsRetweeted = userRetweets.includes(profileId ?? '');
+  if (userRetweets) tweetIsRetweeted = '';
 
   return (
     <motion.article
