@@ -4,30 +4,22 @@ import { motion } from 'framer-motion';
 import { Loading } from '@components/ui/loading';
 import { useFetchPublications } from './useFetchPublications';
 import { ExplorePublicationRequest } from '@lens-protocol/client';
-import { Post, Profile } from '@lens-protocol/react-web';
+import { Post } from '@lens-protocol/react-web';
 
 import type { Tweet } from '@lib/types/tweet';
-import { ProfileOwnedByMe } from '@lens-protocol/react-web';
+
 import { Timestamp } from 'firebase/firestore';
 
 type InfiniteScroll<T> = {
-  data: T[] | null;
-  loading: boolean;
+  data: Tweet[] | null;
+  loading: Boolean;
   LoadMore: () => JSX.Element;
 };
 
 type InfiniteScrollWithUser<T> = {
-  data: (T & { user: Profile })[] | null;
-  loading: boolean;
+  data: (Tweet)[] | null;
+  loading: Boolean;
   LoadMore: () => JSX.Element;
-};
-
-export type TweetProps = Tweet & {
-  user: ProfileOwnedByMe;
-  modal?: boolean;
-  pinned?: boolean;
-  profile?: ProfileOwnedByMe | null;
-  parentTweet?: boolean;
 };
 
 export function useInfiniteScroll<T>(
@@ -43,22 +35,22 @@ export function useInfiniteScroll<T>(
     explorePublicationRequest: request
   });
 
-  const [formateList, setFormateList] = useState<TweetProps[]>([]);
+  const [formateList, setFormateList] = useState<Tweet[]>([]);
 
   useEffect(() => {
     if (data && data.length > 0) {
-      let list: TweetProps[] = data.map((item: Post) => ({
+      let list: Tweet[] = data.map((item: Post) => ({
         id: item.id,
         text: item.metadata.content,
         images:
           item.metadata.media && item.metadata.media.length
             ? item.metadata.media.map((img, index) => {
-                return {
-                  id: index.toString(),
-                  src: img.original.url,
-                  alt: img.original.altTag ? img.original.altTag : ''
-                };
-              })
+              return {
+                id: index.toString(),
+                src: img.original.url,
+                alt: img.original.altTag ? img.original.altTag : ''
+              };
+            })
             : null,
         parent: null,
         userLikes: [],
