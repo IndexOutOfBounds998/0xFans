@@ -5,6 +5,7 @@
   },
   "plugins": ["@typescript-eslint"],
   "extends": [
+    "next",
     "eslint:recommended",
     "plugin:import/recommended",
     "plugin:import/typescript",
@@ -27,6 +28,8 @@
     "comma-dangle": ["error", "never"],
     "no-unused-expressions": "error",
     "no-constant-binary-expression": "error",
+    "react/no-unescaped-entities": "off",
+    "@next/next/no-page-custom-font": "off",
     "import/order": [
       "warn",
       {
