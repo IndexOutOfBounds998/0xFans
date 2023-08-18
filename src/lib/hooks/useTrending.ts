@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Trending } from '../api/LensApi';
+import { Trending } from '@lib/api/lensApi';
 type useTrendingArgs = {
   limit: Number;
 };
