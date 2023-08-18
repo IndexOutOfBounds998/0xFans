@@ -1,9 +1,6 @@
 import { useMemo, useEffect } from 'react';
-import { doc } from 'firebase/firestore';
-import { useDocument } from '@lib/hooks/useDocument';
-import { tweetsCollection } from '@lib/firebase/collections';
 import { getRandomId } from '@lib/random';
-import { Tweet } from './tweet';
+import { Tweet, TweetProps } from './tweet';
 import type { LoadedParents } from './tweet-with-parent';
 
 type TweetParentProps = {
@@ -23,11 +20,14 @@ export function TweetParent({
     (child) => child.childId === componentId
   );
 
-  const { data, loading } = useDocument(doc(tweetsCollection, parentId), {
-    includeUser: true,
-    allowNull: true,
-    disabled: isParentAlreadyLoaded
-  });
+  // const { data, loading } = useDocument(doc(tweetsCollection, parentId), {
+  //   includeUser: true,
+  //   allowNull: true,
+  //   disabled: isParentAlreadyLoaded
+  // });
+
+  const loading = false;
+  const data: TweetProps[] = [];
 
   useEffect(() => {
     addParentId(parentId, componentId);
@@ -36,5 +36,6 @@ export function TweetParent({
 
   if (loading || !isParentAlreadyLoaded || !data) return null;
 
-  return <Tweet parentTweet {...data} />;
+  // return <Tweet parentTweet {...data} />;
+  return null;
 }

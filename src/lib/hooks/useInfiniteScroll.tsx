@@ -7,8 +7,7 @@ import { ExplorePublicationRequest } from '@lens-protocol/client';
 import { Post } from '@lens-protocol/react-web';
 
 import type { Tweet } from '@lib/types/tweet';
-
-import { Timestamp } from 'firebase/firestore';
+ 
 
 type InfiniteScroll<T> = {
   data: Tweet[] | null;
@@ -56,8 +55,8 @@ export function useInfiniteScroll<T>(
         userLikes: 0,
         user: item.profile,
         createdBy: ' ',
-        createdAt: Timestamp.now(),
-        updatedAt: Timestamp.now(),
+        createdAt: item.createdAt,
+        updatedAt: '',
         userReplies: item.stats.commentsCount,
         userRetweets: 0
       }));

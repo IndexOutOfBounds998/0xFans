@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
-import { checkUsernameAvailability, updateUsername } from '@lib/firebase/utils';
+ 
 import { useAuth } from '@lib/context/auth-context';
 import { useModal } from '@lib/hooks/useModal';
 import { isValidUsername } from '@lib/validation';
@@ -28,8 +28,8 @@ export function UpdateUsername(): JSX.Element {
 
   useEffect(() => {
     const checkAvailability = async (value: string): Promise<void> => {
-      const empty = await checkUsernameAvailability(value);
-
+      // const empty = await checkUsernameAvailability(value);
+      const empty='';
       if (empty) setAvailable(true);
       else {
         setAvailable(false);
@@ -67,7 +67,7 @@ export function UpdateUsername(): JSX.Element {
 
     await sleep(500);
 
-    await updateUsername(user?.id as string, inputValue);
+    // await updateUsername(user?.id as string, inputValue);
 
     closeModal();
 
@@ -82,7 +82,7 @@ export function UpdateUsername(): JSX.Element {
 
   const cancelUpdateUsername = (): void => {
     closeModal();
-    if (!alreadySet) void updateUsername(user?.id as string);
+    // if (!alreadySet) void updateUsername(user?.id as string);
   };
 
   const handleChange = ({

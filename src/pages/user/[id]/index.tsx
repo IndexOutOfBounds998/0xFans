@@ -1,10 +1,7 @@
-import { doc, query, where } from 'firebase/firestore';
+ 
 import { AnimatePresence } from 'framer-motion';
 import { useUser } from '@lib/context/user-context';
-import { useCollection } from '@lib/hooks/useCollection';
-import { useDocument } from '@lib/hooks/useDocument';
-import { tweetsCollection } from '@lib/firebase/collections';
-import { mergeData } from '@lib/merge';
+ 
 import { UserLayout, ProtectedLayout } from '@components/layout/common-layout';
 import { MainLayout } from '@components/layout/main-layout';
 import { UserDataLayout } from '@components/layout/user-data-layout';
@@ -34,7 +31,7 @@ export default function UserTweets(): JSX.Element {
 
   // const { data: peopleTweets, loading: peopleLoading } = useCollection();
 
-  const mergedTweets = mergeData(true, [], []);
+  const mergedTweets:TweetProps[] = []
 
   return (
     <section>

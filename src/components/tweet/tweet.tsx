@@ -16,14 +16,14 @@ import { TweetStats } from './tweet-stats';
 import { TweetDate } from './tweet-date';
 import type { Variants } from 'framer-motion';
 import type { Tweet } from '@lib/types/tweet';
-import { ProfileOwnedByMe } from '@lens-protocol/react-web';
 import { formatAvater, formatNickName } from '@lib/FormatContent';
+import { User } from '@lib/types/user';
 
 export type TweetProps = Tweet & {
-  user: ProfileOwnedByMe;
+  user: User | null;
   modal?: boolean;
   pinned?: boolean;
-  profile?: ProfileOwnedByMe | null;
+  profile?: User | null;
   parentTweet?: boolean;
 };
 

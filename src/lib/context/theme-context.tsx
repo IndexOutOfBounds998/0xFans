@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import { useState, useEffect, createContext, useContext } from 'react';
-import { updateUserTheme } from '@lib/firebase/utils';
+ 
 import { useAuth } from './auth-context';
 import type { ReactNode, ChangeEvent } from 'react';
 import type { Theme, Accent } from '@lib/types/theme';
@@ -76,7 +76,7 @@ export function ThemeContextProvider({
 
       if (user) {
         localStorage.setItem('theme', theme);
-        return setTimeout(() => void updateUserTheme(user.id, { theme }), 500);
+        // return setTimeout(() => void updateUserTheme(user.id, { theme }), 500);
       }
 
       return undefined;
@@ -94,7 +94,7 @@ export function ThemeContextProvider({
 
       if (user) {
         localStorage.setItem('accent', accent);
-        return setTimeout(() => void updateUserTheme(user.id, { accent }), 500);
+        // return setTimeout(() => void updateUserTheme(user.id, { accent }), 500);
       }
 
       return undefined;

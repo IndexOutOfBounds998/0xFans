@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import cn from 'clsx';
-import { manageRetweet, manageLike } from '@lib/firebase/utils';
+ 
 import { ViewTweetStats } from '@components/view/view-tweet-stats';
 import { TweetOption } from './tweet-option';
 import { TweetShare } from './tweet-share';
@@ -15,7 +15,7 @@ type TweetStatsProps = Pick<
   reply?: boolean;
   userId: string;
   isOwner: boolean;
-  tweetId: string;
+  tweetId: string | null;
   viewTweet?: boolean;
   openModal?: () => void;
 };
@@ -50,7 +50,7 @@ export function TweetStats({
   }, [totalReplies, totalLikes, totalTweets]);
 
   const replyMove = useMemo(
-    () => (totalReplies > currentReplies ? -25 : 25),
+    () => (totalReplies || 0 > (currentReplies || 0) ? -25 : 25),
     [totalReplies]
   );
 
@@ -114,11 +114,11 @@ export function TweetStats({
           stats={currentTweets}
           iconName='ArrowPathRoundedSquareIcon'
           viewTweet={viewTweet}
-          onClick={manageRetweet(
-            tweetIsRetweeted ? 'unretweet' : 'retweet',
-            userId,
-            tweetId
-          )}
+          // onClick={manageRetweet(
+          //   tweetIsRetweeted ? 'unretweet' : 'retweet',
+          //   userId,
+          //   tweetId??''
+          // )}
         />
         <TweetOption
           className={cn(
@@ -132,13 +132,13 @@ export function TweetStats({
           stats={currentLikes}
           iconName='HeartIcon'
           viewTweet={viewTweet}
-          onClick={manageLike(
-            tweetIsLiked ? 'unlike' : 'like',
-            userId,
-            tweetId
-          )}
+          // onClick={manageLike(
+          //   tweetIsLiked ? 'unlike' : 'like',
+          //   userId,
+          //   tweetId??''
+          // )}
         />
-        <TweetShare userId={userId} tweetId={tweetId} viewTweet={viewTweet} />
+        <TweetShare userId={userId} tweetId={tweetId??''} viewTweet={viewTweet} />
         {isOwner && (
           <TweetOption
             className='hover:text-accent-blue focus-visible:text-accent-blue'

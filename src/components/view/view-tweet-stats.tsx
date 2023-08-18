@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import cn from 'clsx';
-import { useArrayDocument } from '@lib/hooks/useArrayDocument';
+ 
 import { useModal } from '@lib/hooks/useModal';
-import { usersCollection } from '@lib/firebase/collections';
+ 
 import { Modal } from '@components/modal/modal';
 import { TweetStatsModal } from '@components/modal/tweet-stats-modal';
 import { NumberStats } from '@components/tweet/number-stats';
@@ -16,7 +16,7 @@ type viewTweetStats = Pick<Tweet, 'userRetweets' | 'userLikes'> & {
   replyMove: number;
   currentLikes: number;
   currentTweets: number;
-  currentReplies: number;
+  currentReplies: number | null;
   isStatsVisible: boolean;
 };
 
@@ -58,7 +58,7 @@ export function ViewTweetStats({
   };
 
   const allStats: Readonly<Stats[]> = [
-    ['Reply', null, replyMove, currentReplies],
+    ['Reply', null, replyMove, currentReplies ?? 0],
     ['Retweet', 'retweets', tweetMove, currentTweets],
     ['Like', 'likes', likeMove, currentLikes]
   ];

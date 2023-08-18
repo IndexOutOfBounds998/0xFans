@@ -1,31 +1,31 @@
-import type { Timestamp, FirestoreDataConverter } from 'firebase/firestore';
+
 import type { ImagesPreview } from './file';
 import type { User } from './user';
 
 export type Tweet = {
-  id: string;
-  user: any;
+  id: string | null;
+  user: any | null;
   text: string | null;
   images: ImagesPreview | null;
   parent: { id: string; username: string } | null;
-  userLikes: number;
+  userLikes: number | null;
   createdBy: string | null;
-  createdAt: Timestamp | null;
-  updatedAt: Timestamp | null;
-  userReplies: number;
-  userRetweets: number;
+  createdAt: string | null;
+  updatedAt: string | null;
+  userReplies: number | null;
+  userRetweets: number | null;
 };
 
 export type TweetWithUser = Tweet & { user: User };
 
-export const tweetConverter: FirestoreDataConverter<Tweet> = {
-  toFirestore(tweet) {
-    return { ...tweet };
-  },
-  fromFirestore(snapshot, options) {
-    const { id } = snapshot;
-    const data = snapshot.data(options);
+// export const tweetConverter: FirestoreDataConverter<Tweet> = {
+//   toFirestore(tweet) {
+//     return { ...tweet };
+//   },
+//   fromFirestore(snapshot, options) {
+//     const { id } = snapshot;
+//     const data = snapshot.data(options);
 
-    return { id, ...data } as Tweet;
-  }
-};
+//     return { id, ...data } as Tweet;
+//   }
+// };

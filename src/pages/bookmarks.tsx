@@ -1,12 +1,11 @@
 import { useMemo } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { toast } from 'react-hot-toast';
-import { orderBy, query } from 'firebase/firestore';
+ 
 import { useAuth } from '@lib/context/auth-context';
 import { useModal } from '@lib/hooks/useModal';
 import { useCollection } from '@lib/hooks/useCollection';
  
-import { clearAllBookmarks } from '@lib/firebase/utils';
  
 import { HomeLayout, ProtectedLayout } from '@components/layout/common-layout';
 import { MainLayout } from '@components/layout/main-layout';
@@ -47,7 +46,7 @@ export default function Bookmarks(): JSX.Element {
   // );
 
   const handleClear = async (): Promise<void> => {
-    await clearAllBookmarks(userId);
+    // await clearAllBookmarks(userId);
     closeModal();
     toast.success('Successfully cleared all bookmarks');
   };

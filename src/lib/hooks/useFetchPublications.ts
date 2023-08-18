@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ExplorePublicationRequest } from '@lens-protocol/client';
 import { getAuthenticatedClient } from '@lib/getAuthenticatedClient';
-import firebase from 'firebase/compat';
-import functions = firebase.functions;
-
+ 
 type useFetchPublicationsArgs = {
   explorePublicationRequest: ExplorePublicationRequest;
 };

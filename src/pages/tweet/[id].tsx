@@ -20,7 +20,7 @@ import {
 import { useAuth } from '@lib/context/auth-context';
 import { formatNickName } from '@lib/FormatContent';
 import { Tweet as Tw } from '@lib/types/tweet';
-import { Timestamp } from 'firebase/firestore';
+ 
 
 type TwDetailsProps = Pick<
   Tw,
@@ -68,8 +68,8 @@ export default function TweetId(): JSX.Element {
       },
       id: data.id,
       createdBy: data.profile.name,
-      createdAt: Timestamp.now(),
-      updatedAt: Timestamp.now(),
+      createdAt: data.createdAt,
+      updatedAt: '',
       userReplies: data?.stats?.totalAmountOfComments,
       userRetweets: data?.stats?.totalAmountOfMirrors,
       userLikes: data?.stats?.totalUpvotes

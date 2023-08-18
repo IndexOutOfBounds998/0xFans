@@ -1,6 +1,6 @@
 import { ProfileId } from '@lens-protocol/react-web';
 import type { Theme, Accent } from './theme';
-import type { Timestamp, FirestoreDataConverter } from 'firebase/firestore';
+ 
 
 export type User = {
   id: ProfileId;
@@ -15,8 +15,8 @@ export type User = {
   verified: boolean;
   following: string[];
   followers: string[];
-  createdAt: Timestamp | null;
-  updatedAt: Timestamp | null;
+  createdAt: string | null;
+  updatedAt: string | null;
   totalTweets: number;
   totalPhotos: number;
   pinnedTweet: string | null;
@@ -30,12 +30,12 @@ export type EditableData = Extract<
 
 export type EditableUserData = Pick<User, EditableData>;
 
-export const userConverter: FirestoreDataConverter<User> = {
-  toFirestore(user) {
-    return { ...user };
-  },
-  fromFirestore(snapshot, options) {
-    const data = snapshot.data(options);
-    return { ...data } as User;
-  }
-};
+// export const userConverter: FirestoreDataConverter<User> = {
+//   toFirestore(user) {
+//     return { ...user };
+//   },
+//   fromFirestore(snapshot, options) {
+//     const data = snapshot.data(options);
+//     return { ...data } as User;
+//   }
+// };

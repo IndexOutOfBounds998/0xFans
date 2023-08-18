@@ -8,7 +8,7 @@ import type { IconName } from '@components/ui/hero-icon';
 type TweetOption = {
   tip: string;
   move?: number;
-  stats?: number;
+  stats?: number | null;
   iconName: IconName;
   disabled?: boolean;
   className: string;

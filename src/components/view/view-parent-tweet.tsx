@@ -1,8 +1,6 @@
 import { useEffect } from 'react';
-import { doc } from 'firebase/firestore';
-import { useDocument } from '@lib/hooks/useDocument';
-import { tweetsCollection } from '@lib/firebase/collections';
-import { Tweet } from '@components/tweet/tweet';
+ 
+import { Tweet, TweetProps } from '@components/tweet/tweet';
 import type { RefObject } from 'react';
 
 type ViewParentTweetProps = {
@@ -14,15 +12,18 @@ export function ViewParentTweet({
   parentId,
   viewTweetRef
 }: ViewParentTweetProps): JSX.Element | null {
-  const { data, loading } = useDocument(doc(tweetsCollection, parentId), {
-    includeUser: true,
-    allowNull: true
-  });
+  // const { data, loading } = useDocument(doc(tweetsCollection, parentId), {
+  //   includeUser: true,
+  //   allowNull: true
+  // });
+  const loading=false;
 
-  useEffect(() => {
-    if (!loading) viewTweetRef.current?.scrollIntoView();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data?.id, loading]);
+  const data :TweetProps[]=[];
+
+  // useEffect(() => {
+  //   if (!loading) viewTweetRef.current?.scrollIntoView();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [data?.id, loading]);
 
   if (loading) return null;
   if (!data)
@@ -45,5 +46,6 @@ export function ViewParentTweet({
       </div>
     );
 
-  return <Tweet parentTweet {...data} />;
+  // return <Tweet parentTweet {...data} />;
+  return null;
 }

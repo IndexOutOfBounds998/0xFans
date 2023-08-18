@@ -1,17 +1,16 @@
 import { useState, useEffect, useContext, createContext, useMemo } from 'react';
 import type { ReactNode } from 'react';
-import type { Bookmark } from '@lib/types/bookmark';
+ 
 import {
   useWalletLogin,
   useActiveProfile,
   useWalletLogout,
-  ProfileOwnedByMe,
+ 
   MediaSet
 } from '@lens-protocol/react-web';
 import { getWalletClient } from '@wagmi/core';
 import { formatAvater, formatNickName } from '@lib/FormatContent';
-import { Accent, Theme } from '@lib/types/theme';
-import { Timestamp } from 'firebase/firestore';
+ 
 import type { User } from '@lib/types/user';
 type UserDetailsProps = Pick<
   User,
@@ -39,7 +38,6 @@ type AuthContext = {
   error: Error | null;
   loading: boolean;
   isAdmin: boolean;
-  userBookmarks: Bookmark[] | null;
   signOut: () => Promise<void>;
   signInWithLens: () => Promise<void>;
 };
@@ -54,7 +52,6 @@ export function AuthContextProvider({
   children
 }: AuthContextProviderProps): JSX.Element {
   const [user, setUser] = useState<UserDetailsProps | null>(null);
-  const [userBookmarks, setUserBookmarks] = useState<Bookmark[] | null>(null);
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -135,7 +132,6 @@ export function AuthContextProvider({
     error,
     loading,
     isAdmin,
-    userBookmarks,
     signOut,
     signInWithLens
   };
