@@ -1,7 +1,6 @@
- 
 import { AnimatePresence } from 'framer-motion';
 import { useUser } from '@lib/context/user-context';
- 
+
 import { UserLayout, ProtectedLayout } from '@components/layout/common-layout';
 import { MainLayout } from '@components/layout/main-layout';
 import { UserDataLayout } from '@components/layout/user-data-layout';
@@ -10,7 +9,7 @@ import { StatsEmpty } from '@components/tweet/stats-empty';
 import { Loading } from '@components/ui/loading';
 import { Tweet, TweetProps } from '@components/tweet/tweet';
 import type { ReactElement, ReactNode } from 'react';
- 
+
 export default function UserTweets(): JSX.Element {
   const { user } = useUser();
 
@@ -31,7 +30,7 @@ export default function UserTweets(): JSX.Element {
 
   // const { data: peopleTweets, loading: peopleLoading } = useCollection();
 
-  const mergedTweets:TweetProps[] = []
+  const mergedTweets: TweetProps[] = [];
 
   return (
     <section>

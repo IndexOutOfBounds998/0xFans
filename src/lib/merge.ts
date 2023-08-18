@@ -1,4 +1,3 @@
- 
 // type DataWithDate<T> = T & { createdAt: Timestamp };
 
 // export function mergeData<T>(

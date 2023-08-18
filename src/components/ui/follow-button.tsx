@@ -25,9 +25,7 @@ export function FollowButton({
   const handleFollow = (): Promise<void> => {
     // manageFollow('follow', userId as string, userTargetId);
     return Promise.resolve();
-  }
-
-
+  };
 
   const handleUnfollow = async (): Promise<void> => {
     // await manageFollow('unfollow', userId as string, userTargetId);

@@ -14,7 +14,7 @@ export function UserDataLayout({ children }: LayoutProps): JSX.Element {
   } = useRouter();
 
   const { user, loading } = useProfileContext({ profileId: id });
-  
+
   return (
     <UserContextProvider value={{ user, loading }}>
       {!user && !loading && <SEO title='User not found / Twitter' />}

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
- 
+
 import { Tweet, TweetProps } from '@components/tweet/tweet';
 import type { RefObject } from 'react';
 
@@ -16,9 +16,9 @@ export function ViewParentTweet({
   //   includeUser: true,
   //   allowNull: true
   // });
-  const loading=false;
+  const loading = false;
 
-  const data :TweetProps[]=[];
+  const data: TweetProps[] = [];
 
   // useEffect(() => {
   //   if (!loading) viewTweetRef.current?.scrollIntoView();

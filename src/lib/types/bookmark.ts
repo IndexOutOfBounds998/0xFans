@@ -1,5 +1,3 @@
- 
-
 // export type Bookmark = {
 //   id: string;
 //   createdAt: Timestamp;

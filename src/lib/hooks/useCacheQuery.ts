@@ -1,5 +1,4 @@
 // import { useState, useEffect } from 'react';
- 
 
 // export function useCacheQuery<T>(query: Query<T>): Query<T> {
 //   const [cachedQuery, setCachedQuery] = useState(query);

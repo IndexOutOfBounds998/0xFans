@@ -18,10 +18,13 @@ import type { ReactElement, ReactNode } from 'react';
 import { ProfileSortCriteria } from '@lens-protocol/react-web';
 
 export default function People(): JSX.Element {
-
   const { user } = useAuth();
 
-  const { data, loading, LoadMore } = useInfiniteUserScroll({ observerId: user?.id, limit: 5, sortCriteria: ProfileSortCriteria.MostFollowers });
+  const { data, loading, LoadMore } = useInfiniteUserScroll({
+    observerId: user?.id,
+    limit: 5,
+    sortCriteria: ProfileSortCriteria.MostFollowers
+  });
 
   const { back } = useRouter();
 

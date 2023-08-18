@@ -12,15 +12,10 @@ import { Loading } from '@components/ui/loading';
 import { Error } from '@components/ui/error';
 import { ViewParentTweet } from '@components/view/view-parent-tweet';
 import type { ReactElement, ReactNode } from 'react';
-import {
-  useComments,
-  usePublication,
-  Comment
-} from '@lens-protocol/react-web';
+import { useComments, usePublication, Comment } from '@lens-protocol/react-web';
 import { useAuth } from '@lib/context/auth-context';
 import { formatNickName } from '@lib/FormatContent';
 import { Tweet as Tw } from '@lib/types/tweet';
- 
 
 type TwDetailsProps = Pick<
   Tw,
@@ -53,15 +48,16 @@ export default function TweetId(): JSX.Element {
     const initData: TwDetailsProps = {
       user: data?.profile,
       text: data?.metadata.content,
-      images: data?.metadata.media && data?.metadata.media.length
-        ? data?.metadata.media.map((img, index) => {
-          return {
-            id: index.toString(),
-            src: img.original.url,
-            alt: img.original.altTag ? img.original.altTag : ''
-          };
-        })
-        : null,
+      images:
+        data?.metadata.media && data?.metadata.media.length
+          ? data?.metadata.media.map((img, index) => {
+              return {
+                id: index.toString(),
+                src: img.original.url,
+                alt: img.original.altTag ? img.original.altTag : ''
+              };
+            })
+          : null,
       parent: {
         id: data?.profile?.id,
         username: formatNickName(data?.profile?.handle)
@@ -75,14 +71,14 @@ export default function TweetId(): JSX.Element {
       userLikes: data?.stats?.totalUpvotes
     };
 
-
     return initData;
   };
 
   // const initText = (tweetObj:Post) => tweetObj?.metadata.content;
   // const initImages = (tweetObj:AnyPublication) => tweetObj?.images;
   // const initImagesLength = (tweetObj:AnyPublication) => tweetObj?.images?.length ?? 0;
-  const initParentId = (tweetObj: Comment) => tweetObj?.commentOn?.id.toString();
+  const initParentId = (tweetObj: Comment) =>
+    tweetObj?.commentOn?.id.toString();
 
   const viewTweetRef = useRef<HTMLElement>(null);
 
@@ -148,7 +144,10 @@ export default function TweetId(): JSX.Element {
                 viewTweetRef={viewTweetRef}
               />
             )}
-            <ViewTweet viewTweetRef={viewTweetRef} {...initData(tweetObj as Comment)} />
+            <ViewTweet
+              viewTweetRef={viewTweetRef}
+              {...initData(tweetObj as Comment)}
+            />
             {tweetObj &&
               (repliesLoading ? (
                 <Loading className='mt-5' />

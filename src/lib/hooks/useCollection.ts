@@ -60,7 +60,6 @@ export type UseCollectionOptions = {
 export function useCollection<T>(
   options?: UseCollectionOptions
 ): UseCollection<T> | DataWithUser<T> {
-
   const [formateList, setFormateList] = useState<UserCardProps[]>([]);
 
   const { limit, observerId, sortCriteria } = options ?? {};

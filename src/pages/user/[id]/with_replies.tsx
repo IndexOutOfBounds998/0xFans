@@ -1,7 +1,7 @@
 import { AnimatePresence } from 'framer-motion';
- 
+
 import { useCollection } from '@lib/hooks/useCollection';
- 
+
 import { useUser } from '@lib/context/user-context';
 import { UserLayout, ProtectedLayout } from '@components/layout/common-layout';
 import { MainLayout } from '@components/layout/main-layout';

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import cn from 'clsx';
- 
+
 import { ViewTweetStats } from '@components/view/view-tweet-stats';
 import { TweetOption } from './tweet-option';
 import { TweetShare } from './tweet-share';
@@ -138,7 +138,11 @@ export function TweetStats({
           //   tweetId??''
           // )}
         />
-        <TweetShare userId={userId} tweetId={tweetId??''} viewTweet={viewTweet} />
+        <TweetShare
+          userId={userId}
+          tweetId={tweetId ?? ''}
+          viewTweet={viewTweet}
+        />
         {isOwner && (
           <TweetOption
             className='hover:text-accent-blue focus-visible:text-accent-blue'

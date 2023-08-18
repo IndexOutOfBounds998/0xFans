@@ -4,7 +4,7 @@ const nextConfig = {
     ignoreBuildErrors: true,
     ignoreDuringBuilds: true,
     rules: {
-      quotes: [2, "single", { "avoidEscape": true }]
+      quotes: [2, 'single', { avoidEscape: true }]
     }
   },
   reactStrictMode: true,

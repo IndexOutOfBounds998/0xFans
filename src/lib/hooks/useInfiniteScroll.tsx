@@ -7,7 +7,6 @@ import { ExplorePublicationRequest } from '@lens-protocol/client';
 import { Post } from '@lens-protocol/react-web';
 
 import type { Tweet } from '@lib/types/tweet';
- 
 
 type InfiniteScroll<T> = {
   data: Tweet[] | null;
@@ -16,7 +15,7 @@ type InfiniteScroll<T> = {
 };
 
 type InfiniteScrollWithUser<T> = {
-  data: (Tweet)[] | null;
+  data: Tweet[] | null;
   loading: Boolean;
   LoadMore: () => JSX.Element;
 };
@@ -44,12 +43,12 @@ export function useInfiniteScroll<T>(
         images:
           item.metadata.media && item.metadata.media.length
             ? item.metadata.media.map((img, index) => {
-              return {
-                id: index.toString(),
-                src: img.original.url,
-                alt: img.original.altTag ? img.original.altTag : ''
-              };
-            })
+                return {
+                  id: index.toString(),
+                  src: img.original.url,
+                  alt: img.original.altTag ? img.original.altTag : ''
+                };
+              })
             : null,
         parent: null,
         userLikes: 0,

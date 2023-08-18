@@ -1,13 +1,13 @@
 import { useMemo } from 'react';
 import { useRouter } from 'next/router';
- 
+
 import { Popover } from '@headlessui/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import cn from 'clsx';
 import { toast } from 'react-hot-toast';
 import { useAuth } from '@lib/context/auth-context';
 import { useModal } from '@lib/hooks/useModal';
- 
+
 import { delayScroll, preventBubbling, sleep } from '@lib/utils';
 import { Modal } from '@components/modal/modal';
 import { ActionModal } from '@components/modal/action-modal';
@@ -97,16 +97,16 @@ export function TweetActions({
       //   } else await push('/home');
       // } else await push('/home');
 
-    // await Promise.all([
-    //   removeTweet(tweetId),
-    //   manageTotalTweets('decrement', ownerId),
-    //   // hasImages && manageTotalPhotos('decrement', createdBy),
-    //   parentId && manageReply('decrement', parentId)
-    // ]);
+      // await Promise.all([
+      //   removeTweet(tweetId),
+      //   manageTotalTweets('decrement', ownerId),
+      //   // hasImages && manageTotalPhotos('decrement', createdBy),
+      //   parentId && manageReply('decrement', parentId)
+      // ]);
 
-    toast.success(
-      `${isInAdminControl ? `@${username}'s` : 'Your'} Tweet was deleted`
-    );
+      toast.success(
+        `${isInAdminControl ? `@${username}'s` : 'Your'} Tweet was deleted`
+      );
 
     removeCloseModal();
   };
@@ -240,8 +240,9 @@ export function TweetActions({
                     <Popover.Button
                       className='accent-tab flex w-full gap-3 rounded-md rounded-t-none p-4 hover:bg-main-sidebar-background'
                       as={Button}
-                      onClick={preventBubbling()
-                      // handleFollow(close, 'unfollow', userId, createdBy)
+                      onClick={
+                        preventBubbling()
+                        // handleFollow(close, 'unfollow', userId, createdBy)
                       }
                     >
                       <HeroIcon iconName='UserMinusIcon' />
@@ -251,8 +252,9 @@ export function TweetActions({
                     <Popover.Button
                       className='accent-tab flex w-full gap-3 rounded-md rounded-t-none p-4 hover:bg-main-sidebar-background'
                       as={Button}
-                      onClick={preventBubbling()
-                      // handleFollow(close, 'follow', userId, createdBy)
+                      onClick={
+                        preventBubbling()
+                        // handleFollow(close, 'follow', userId, createdBy)
                       }
                     >
                       <HeroIcon iconName='UserPlusIcon' />

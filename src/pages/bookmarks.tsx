@@ -1,12 +1,11 @@
 import { useMemo } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { toast } from 'react-hot-toast';
- 
+
 import { useAuth } from '@lib/context/auth-context';
 import { useModal } from '@lib/hooks/useModal';
 import { useCollection } from '@lib/hooks/useCollection';
- 
- 
+
 import { HomeLayout, ProtectedLayout } from '@components/layout/common-layout';
 import { MainLayout } from '@components/layout/main-layout';
 import { SEO } from '@components/common/seo';
@@ -33,7 +32,7 @@ export default function Bookmarks(): JSX.Element {
   const { data: bookmarksRef, loading: bookmarksRefLoading } = useCollection();
 
   const tweetLoading = false;
-  const tweetData = [] as Tw[]; 
+  const tweetData = [] as Tw[];
   // const tweetIds = useMemo(
   //   () => bookmarksRef?.map(({ id }) => id) ?? [],
   //   [bookmarksRef]

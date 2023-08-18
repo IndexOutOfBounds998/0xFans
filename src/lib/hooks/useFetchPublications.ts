@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { ExplorePublicationRequest } from '@lens-protocol/client';
 import { getAuthenticatedClient } from '@lib/getAuthenticatedClient';
- 
+
 type useFetchPublicationsArgs = {
   explorePublicationRequest: ExplorePublicationRequest;
 };

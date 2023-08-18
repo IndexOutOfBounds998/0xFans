@@ -1,16 +1,15 @@
 import { useState, useEffect, useContext, createContext, useMemo } from 'react';
 import type { ReactNode } from 'react';
- 
+
 import {
   useWalletLogin,
   useActiveProfile,
   useWalletLogout,
- 
   MediaSet
 } from '@lens-protocol/react-web';
 import { getWalletClient } from '@wagmi/core';
 import { formatAvater, formatNickName } from '@lib/FormatContent';
- 
+
 import type { User } from '@lib/types/user';
 type UserDetailsProps = Pick<
   User,

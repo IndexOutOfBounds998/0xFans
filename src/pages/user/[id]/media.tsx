@@ -1,7 +1,7 @@
 import { AnimatePresence } from 'framer-motion';
- 
+
 import { useUser } from '@lib/context/user-context';
- 
+
 import { UserLayout, ProtectedLayout } from '@components/layout/common-layout';
 import { MainLayout } from '@components/layout/main-layout';
 import { SEO } from '@components/common/seo';
@@ -27,8 +27,9 @@ export default function UserMedia(): JSX.Element {
   return (
     <section>
       <SEO
-        title={`Media Tweets by ${name as string} (@${username as string
-          }) / Twitter`}
+        title={`Media Tweets by ${name as string} (@${
+          username as string
+        }) / Twitter`}
       />
       {loading ? (
         <Loading className='mt-5' />

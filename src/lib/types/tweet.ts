@@ -1,4 +1,3 @@
-
 import type { ImagesPreview } from './file';
 import type { User } from './user';
 

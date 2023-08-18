@@ -1,6 +1,5 @@
 import { ProfileId } from '@lens-protocol/react-web';
 import type { Theme, Accent } from './theme';
- 
 
 export type User = {
   id: ProfileId;

@@ -12,9 +12,16 @@ import { User } from '@lib/types/user';
 import { ProfileSortCriteria } from '@lens-protocol/react-web';
 
 export function Suggestions(): JSX.Element {
-
   const { user: profileUser } = useAuth();
-  const { data: suggestionsData, loading: suggestionsLoading, user } = useCollection({ observerId: profileUser?.id, limit: 5, sortCriteria: ProfileSortCriteria.MostFollowers });
+  const {
+    data: suggestionsData,
+    loading: suggestionsLoading,
+    user
+  } = useCollection({
+    observerId: profileUser?.id,
+    limit: 5,
+    sortCriteria: ProfileSortCriteria.MostFollowers
+  });
 
   return (
     <section className='hover-animation rounded-2xl bg-main-sidebar-background'>
@@ -28,12 +35,12 @@ export function Suggestions(): JSX.Element {
             <UserCard {...userData} key={userData.id} />
           ))}
           <Link href='/people'>
-          <span
-            className='custom-button accent-tab hover-card block w-full rounded-2xl
+            <span
+              className='custom-button accent-tab hover-card block w-full rounded-2xl
                          rounded-t-none text-center text-main-accent'
-          >
-            Show more
-          </span>
+            >
+              Show more
+            </span>
           </Link>
         </motion.div>
       ) : (

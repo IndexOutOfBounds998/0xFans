@@ -2,8 +2,13 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Loading } from '@components/ui/loading';
-import { MediaSet, ProfileId, ProfileSortCriteria, useExploreProfiles } from '@lens-protocol/react-web';
- 
+import {
+  MediaSet,
+  ProfileId,
+  ProfileSortCriteria,
+  useExploreProfiles
+} from '@lens-protocol/react-web';
+
 import { User } from '@lib/types/user';
 import { formatAvater, formatNickName } from '@lib/FormatContent';
 
@@ -14,7 +19,7 @@ type InfiniteScroll<T> = {
 };
 
 type InfiniteScrollWithUser<T> = {
-  data: (User)[] | null;
+  data: User[] | null;
   loading: Boolean;
   LoadMore: () => JSX.Element;
 };
@@ -28,12 +33,11 @@ export type UseCollectionOptions = {
 export function useInfiniteUserScroll<T>(
   options?: UseCollectionOptions
 ): InfiniteScroll<T> | InfiniteScrollWithUser<T> {
-
   const [loadMoreInView, setLoadMoreInView] = useState(false);
 
   const { limit, observerId, sortCriteria } = options ?? {};
 
-  const { data, loading,hasMore,next } = useExploreProfiles({
+  const { data, loading, hasMore, next } = useExploreProfiles({
     observerId,
     limit,
     sortCriteria

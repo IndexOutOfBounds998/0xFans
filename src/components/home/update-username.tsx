@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
- 
+
 import { useAuth } from '@lib/context/auth-context';
 import { useModal } from '@lib/hooks/useModal';
 import { isValidUsername } from '@lib/validation';
@@ -29,7 +29,7 @@ export function UpdateUsername(): JSX.Element {
   useEffect(() => {
     const checkAvailability = async (value: string): Promise<void> => {
       // const empty = await checkUsernameAvailability(value);
-      const empty='';
+      const empty = '';
       if (empty) setAvailable(true);
       else {
         setAvailable(false);

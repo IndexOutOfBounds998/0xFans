@@ -77,18 +77,18 @@ export function UserHeader(): JSX.Element {
             {isInFollowPage
               ? `@${user.username}`
               : isInTweetPage
-                ? totalTweets
-                  ? `${totalTweets} ${`Tweet${isPlural(totalTweets)}`}`
-                  : 'No Tweet'
-                : currentPage === 'media'
-                  ? totalPhotos
-                    ? `${totalPhotos} Photo${isPlural(totalPhotos)} & GIF${isPlural(
-                      totalPhotos
-                    )}`
-                    : 'No Photo & GIF'
-                  : totalLikes
-                    ? `${totalLikes} Like${isPlural(totalLikes)}`
-                    : 'No Like'}
+              ? totalTweets
+                ? `${totalTweets} ${`Tweet${isPlural(totalTweets)}`}`
+                : 'No Tweet'
+              : currentPage === 'media'
+              ? totalPhotos
+                ? `${totalPhotos} Photo${isPlural(totalPhotos)} & GIF${isPlural(
+                    totalPhotos
+                  )}`
+                : 'No Photo & GIF'
+              : totalLikes
+              ? `${totalLikes} Like${isPlural(totalLikes)}`
+              : 'No Like'}
           </p>
         </motion.div>
       )}
