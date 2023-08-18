@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { useAuth } from '@lib/context/auth-context';
-import { ProfileOwnedByMe } from '@lens-protocol/react-web';
+import { User } from '@lib/types/user';
 
-export function useRequireAuth(redirectUrl?: string): ProfileOwnedByMe | null {
+export function useRequireAuth(redirectUrl?: string): User | null {
   const { user, loading } = useAuth();
   const { replace } = useRouter();
 

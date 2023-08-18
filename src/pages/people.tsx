@@ -1,9 +1,7 @@
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
-import { where } from 'firebase/firestore';
 import { useAuth } from '@lib/context/auth-context';
-import { usersCollection } from '@lib/firebase/collections';
-import { useInfiniteScroll } from '@lib/hooks/useInfiniteScroll';
+import { useInfiniteUserScroll } from '@lib/hooks/useInfiniteUserScroll';
 import {
   PeopleLayout,
   ProtectedLayout
@@ -17,16 +15,13 @@ import { Loading } from '@components/ui/loading';
 import { Error } from '@components/ui/error';
 import { variants } from '@components/aside/aside-trends';
 import type { ReactElement, ReactNode } from 'react';
+import { ProfileSortCriteria } from '@lens-protocol/react-web';
 
 export default function People(): JSX.Element {
+
   const { user } = useAuth();
 
-  const { data, loading, LoadMore } = useInfiniteScroll(
-    usersCollection,
-    [where('id', '!=', user?.id)],
-    { allowNull: true, preserve: true },
-    { marginBottom: 500 }
-  );
+  const { data, loading, LoadMore } = useInfiniteUserScroll({ observerId: user?.id, limit: 5, sortCriteria: ProfileSortCriteria.MostFollowers });
 
   const { back } = useRouter();
 

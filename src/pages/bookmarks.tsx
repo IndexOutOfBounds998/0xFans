@@ -5,12 +5,9 @@ import { orderBy, query } from 'firebase/firestore';
 import { useAuth } from '@lib/context/auth-context';
 import { useModal } from '@lib/hooks/useModal';
 import { useCollection } from '@lib/hooks/useCollection';
-import { useArrayDocument } from '@lib/hooks/useArrayDocument';
+ 
 import { clearAllBookmarks } from '@lib/firebase/utils';
-import {
-  tweetsCollection,
-  userBookmarksCollection
-} from '@lib/firebase/collections';
+ 
 import { HomeLayout, ProtectedLayout } from '@components/layout/common-layout';
 import { MainLayout } from '@components/layout/main-layout';
 import { SEO } from '@components/common/seo';
@@ -25,6 +22,7 @@ import { ToolTip } from '@components/ui/tooltip';
 import { HeroIcon } from '@components/ui/hero-icon';
 import { Loading } from '@components/ui/loading';
 import type { ReactElement, ReactNode } from 'react';
+import { Tweet as Tw } from '@lib/types/tweet';
 
 export default function Bookmarks(): JSX.Element {
   const { user } = useAuth();
@@ -35,16 +33,18 @@ export default function Bookmarks(): JSX.Element {
 
   const { data: bookmarksRef, loading: bookmarksRefLoading } = useCollection();
 
-  const tweetIds = useMemo(
-    () => bookmarksRef?.map(({ id }) => id) ?? [],
-    [bookmarksRef]
-  );
+  const tweetLoading = false;
+  const tweetData = [] as Tw[]; 
+  // const tweetIds = useMemo(
+  //   () => bookmarksRef?.map(({ id }) => id) ?? [],
+  //   [bookmarksRef]
+  // );
 
-  const { data: tweetData, loading: tweetLoading } = useArrayDocument(
-    tweetIds,
-    tweetsCollection,
-    { includeUser: true }
-  );
+  // const { data: tweetData, loading: tweetLoading } = useArrayDocument(
+  //   tweetIds,
+  //   tweetsCollection,
+  //   { includeUser: true }
+  // );
 
   const handleClear = async (): Promise<void> => {
     await clearAllBookmarks(userId);

@@ -90,7 +90,7 @@ export function Input({
     const userId = user?.id as string;
 
     if (inputValue.trim()) {
-      await Promise.all([send(inputValue.trim(), user)]);
+      // await Promise.all([send(inputValue.trim(), user)]);
     }
 
     if (!modal && !replyModal) {

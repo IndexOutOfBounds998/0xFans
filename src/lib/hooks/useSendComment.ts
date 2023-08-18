@@ -1,10 +1,9 @@
 import { useUpIpfs } from './useUpIpfs';
 import { getAuthenticatedClient } from '@lib/getAuthenticatedClient';
 import { useSignTypedData } from 'wagmi';
-
 import { uuid } from '@walletconnect/legacy-utils';
 import { useState } from 'react';
-import { toast } from 'react-hot-toast';
+import { Profile } from '@lens-protocol/react-web';
 
 type commentData = {
   publication: any;
@@ -18,7 +17,7 @@ export function useSendComment({ publication }: commentData) {
 
   const [loading, setLoading] = useState(false);
 
-  const submit = async (commentValue, profile) => {
+  const submit = async (commentValue: string, profile: Profile) => {
     setLoading(true);
     const obj = {
       metadata_id: uuid(),
@@ -57,10 +56,12 @@ export function useSendComment({ publication }: commentData) {
       // sign with the wallet
       const signTypedData = await signTypedDataAsync({
         primaryType: 'CommentWithSig',
-        domain: data.typedData.domain,
+        domain: {
+          ...data.typedData.domain,
+          verifyingContract: `0x${data.typedData.domain.verifyingContract}`
+        },
         message: data.typedData.value,
-        types: data.typedData.types,
-        value: data.typedData.value
+        types: data.typedData.types
       });
       // broadcast
       const broadcastResult = await lensClient.transaction.broadcast({
