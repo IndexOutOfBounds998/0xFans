@@ -66,7 +66,7 @@ export function useInfiniteUserScroll<T>(
         };
       });
 
-      setFormateList(list);
+      setFormateList((prevList) => [...prevList, ...list]);
     }
   }, [data]);
 
