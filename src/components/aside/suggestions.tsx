@@ -27,14 +27,14 @@ export function Suggestions(): JSX.Element {
           {user?.map((userData: User) => (
             <UserCard {...userData} key={userData.id} />
           ))}
-          {/*<Link href='/people'>*/}
+          <Link href='/people'>
           <span
             className='custom-button accent-tab hover-card block w-full rounded-2xl
                          rounded-t-none text-center text-main-accent'
           >
             Show more
           </span>
-          {/*</Link>*/}
+          </Link>
         </motion.div>
       ) : (
         <Error />
