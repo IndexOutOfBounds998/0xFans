@@ -12,9 +12,9 @@ import { Loading } from '@components/ui/loading';
 import { Error } from '@components/ui/error';
 import { ViewParentTweet } from '@components/view/view-parent-tweet';
 import type { ReactElement, ReactNode } from 'react';
-import { useComments, usePublication, Comment } from '@lens-protocol/react-web';
+import { useComments, usePublication, Comment, profileId } from '@lens-protocol/react-web';
 import { useAuth } from '@lib/context/auth-context';
-import { formatNickName } from '@lib/FormatContent';
+import { formatNickName, formatUser } from '@lib/FormatContent';
 import { Tweet as Tw } from '@lib/types/tweet';
 
 type TwDetailsProps = Pick<
@@ -41,22 +41,22 @@ export default function TweetId(): JSX.Element {
 
   const { data: tweetObj, loading: tweetLoading } = usePublication({
     publicationId: id,
-    observerId: user?.id
+    observerId: profileId(user?.id.toString() ?? '')
   });
 
   const initData = (data: Comment) => {
     const initData: TwDetailsProps = {
-      user: data?.profile,
+      user: formatUser(data?.profile),
       text: data?.metadata.content,
       images:
         data?.metadata.media && data?.metadata.media.length
           ? data?.metadata.media.map((img, index) => {
-              return {
-                id: index.toString(),
-                src: img.original.url,
-                alt: img.original.altTag ? img.original.altTag : ''
-              };
-            })
+            return {
+              id: index.toString(),
+              src: img.original.url,
+              alt: img.original.altTag ? img.original.altTag : ''
+            };
+          })
           : null,
       parent: {
         id: data?.profile?.id,
@@ -90,7 +90,7 @@ export default function TweetId(): JSX.Element {
   } = useComments({
     commentsOf: id,
     limit: 10,
-    observerId: user?.id
+    observerId: profileId(user?.id.toString() ?? '')
   });
 
   const [commentList, setCommentList] = useState<TwDetailsProps[]>([]);

@@ -15,13 +15,13 @@ import { Loading } from '@components/ui/loading';
 import { Error } from '@components/ui/error';
 import { variants } from '@components/aside/aside-trends';
 import type { ReactElement, ReactNode } from 'react';
-import { ProfileSortCriteria } from '@lens-protocol/react-web';
+import { ProfileSortCriteria, profileId } from '@lens-protocol/react-web';
 
 export default function People(): JSX.Element {
   const { user } = useAuth();
 
   const { data, loading, LoadMore } = useInfiniteUserScroll({
-    observerId: user?.id,
+    observerId: profileId(user?.id.toString() ?? ''),
     limit: 5,
     sortCriteria: ProfileSortCriteria.MostFollowers
   });
@@ -41,7 +41,7 @@ export default function People(): JSX.Element {
           <>
             <motion.div className='mt-0.5' {...variants}>
               {data?.map((userData) => (
-                <UserCard {...userData} key={userData.id} follow />
+                <UserCard {...userData} key={userData.id.toString()} follow />
               ))}
             </motion.div>
             <LoadMore />

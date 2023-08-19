@@ -46,13 +46,13 @@ export function UserDetails({
       <div>
         <UserName
           className='-mb-1 text-xl'
-          name={name}
+          name={name??''}
           iconClassName='w-6 h-6'
           verified={verified}
         />
         <div className='flex items-center gap-1 text-light-secondary dark:text-dark-secondary'>
           <p>@{username}</p>
-          <UserFollowing userTargetId={id} />
+          <UserFollowing userTargetId={id.toString()} />
         </div>
       </div>
       <div className='flex flex-col gap-2'>

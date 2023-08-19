@@ -1,5 +1,5 @@
 import { MediaSet, ProfileId, useProfile } from '@lens-protocol/react-web';
-import { formatAvater, formatNickName } from '@lib/FormatContent';
+import { formatAvater, formatNickName, formatUser } from '@lib/FormatContent';
 import type { User } from '@lib/types/user';
 import { useEffect, useState } from 'react';
 
@@ -45,24 +45,7 @@ export function useProfileContext<T>(
 
   useEffect(() => {
     if (data) {
-      let usrObj: UserDetailsProps = {
-        id: data.id,
-        bio: data.bio,
-        name: formatNickName(data.handle),
-        username: data?.name || '',
-        photoURL: formatAvater((data?.picture as MediaSet)?.original?.url),
-        verified: true,
-        following: [],
-        followers: [],
-        totalTweets: data?.stats?.totalPosts,
-        coverPhotoURL: (data?.coverPicture as MediaSet)?.original.url,
-        theme: null,
-        accent: null,
-        website: '',
-        location: '',
-        createdAt: null,
-        totalPhotos: 0
-      };
+      let usrObj: UserDetailsProps = formatUser(data) as UserDetailsProps;
       setProfile(usrObj);
     }
   }, [data]);

@@ -13,8 +13,8 @@ export function UserFollowStats({
   following,
   followers
 }: UserFollowStatsProps): JSX.Element {
-  const totalFollowing = following.length;
-  const totalFollowers = followers.length;
+  const totalFollowing = following;
+  const totalFollowers = followers;
 
   const [{ currentFollowers, currentFollowing }, setCurrentStats] = useState({
     currentFollowing: totalFollowing,

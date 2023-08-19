@@ -13,14 +13,14 @@ import { MainHeader } from '@components/home/main-header';
 import { MainContainer } from '@components/home/main-container';
 import { Modal } from '@components/modal/modal';
 import { ActionModal } from '@components/modal/action-modal';
-import { Tweet } from '@components/tweet/tweet';
+import { Tweet, TweetProps } from '@components/tweet/tweet';
 import { StatsEmpty } from '@components/tweet/stats-empty';
 import { Button } from '@components/ui/button';
 import { ToolTip } from '@components/ui/tooltip';
 import { HeroIcon } from '@components/ui/hero-icon';
 import { Loading } from '@components/ui/loading';
 import type { ReactElement, ReactNode } from 'react';
-import { Tweet as Tw } from '@lib/types/tweet';
+ 
 
 export default function Bookmarks(): JSX.Element {
   const { user } = useAuth();
@@ -32,7 +32,8 @@ export default function Bookmarks(): JSX.Element {
   const { data: bookmarksRef, loading: bookmarksRefLoading } = useCollection();
 
   const tweetLoading = false;
-  const tweetData = [] as Tw[];
+
+  const tweetData = [] as TweetProps[];
   // const tweetIds = useMemo(
   //   () => bookmarksRef?.map(({ id }) => id) ?? [],
   //   [bookmarksRef]

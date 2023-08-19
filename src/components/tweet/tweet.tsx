@@ -20,10 +20,10 @@ import { formatAvater, formatNickName } from '@lib/FormatContent';
 import { User } from '@lib/types/user';
 
 export type TweetProps = Tweet & {
-  user: User | null;
+  user: User;
   modal?: boolean;
   pinned?: boolean;
-  profile?: User | null;
+  profile?: User;
   parentTweet?: boolean;
 };
 
@@ -51,22 +51,10 @@ export function Tweet(tweet: TweetProps): JSX.Element {
     user
   } = tweet;
 
-  const { id: ownerId, name, handle, picture } = user ?? {};
+  const { id: ownerId, name, username, photoURL, coverPhotoURL } = user ?? {};
 
   // const { user } = useAuth();
 
-  let photoURL;
-  let username;
-  let user_id;
-  if (user) {
-    if (user.picture) {
-      photoURL = formatAvater(user.picture.original.url);
-    } else {
-      photoURL = '';
-    }
-    username = formatNickName(user.handle);
-    user_id = user.id;
-  }
 
   const { open, openModal, closeModal } = useModal();
 
@@ -139,10 +127,15 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                 avatar
                 modal={modal}
                 {...user}
-                coverPhotoURL={photoURL}
-                photoURL={photoURL}
+                name={user?.name ?? ''}
+                username={username??''}
+                bio={user?.bio??''}
+                verified={user?.verified??false}
+                coverPhotoURL={coverPhotoURL ?? ''}
+                photoURL={photoURL ?? ''}
+                id={ownerId ?? ''}
               >
-                <UserAvatar src={photoURL} alt={name} id={user_id} />
+                <UserAvatar src={photoURL ?? ''} alt={name?.toString() ?? ''} id={ownerId?.toString() ?? ''} />
               </UserTooltip>
               {parentTweet && (
                 <i className='hover-animation h-full w-0.5 bg-light-line-reply dark:bg-dark-line-reply' />
@@ -153,14 +146,14 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                 <div className='flex gap-1 truncate xs:overflow-visible xs:whitespace-normal'>
                   <UserTooltip modal={modal} {...user}>
                     <UserName
-                      name={name}
+                      name={name ?? ''}
                       username={username}
                       verified={false}
                       className='text-light-primary dark:text-dark-primary'
                     />
                   </UserTooltip>
                   <UserTooltip modal={modal} {...user}>
-                    <UserUsername username={username} />
+                    <UserUsername username={username??''} />
                   </UserTooltip>
                   <TweetDate tweetLink={tweetLink} createdAt={createdAt} />
                 </div>
@@ -168,10 +161,10 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                   {!modal && (
                     <TweetActions
                       isOwner={isOwner}
-                      ownerId={ownerId}
+                      ownerId={ownerId?.toString()??''}
                       tweetId={tweetId}
                       parentId={parentId}
-                      username={username}
+                      username={username??''}
                       hasImages={!!images}
                       createdBy={createdBy}
                     />

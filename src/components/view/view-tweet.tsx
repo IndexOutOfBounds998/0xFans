@@ -40,8 +40,7 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
     user: tweetUserData
   } = tweet;
 
-  const { id: ownerId, name, username, verified } = tweetUserData;
-  const photoURL = formatAvater(tweetUserData?.picture?.original?.url);
+  const { id: ownerId, name, username, verified,photoURL } = tweetUserData;
 
   const { user } = useAuth();
 
@@ -85,14 +84,14 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
         )}
         <div className='grid grid-cols-[auto,1fr] gap-3'>
           <UserTooltip avatar {...tweetUserData}>
-            <UserAvatar src={photoURL} alt={name} username={username} />
+            <UserAvatar src={photoURL} alt={name??''} username={username} />
           </UserTooltip>
           <div className='flex min-w-0 justify-between'>
             <div className='flex flex-col truncate xs:overflow-visible xs:whitespace-normal'>
               <UserTooltip {...tweetUserData}>
                 <UserName
                   className='-mb-1'
-                  name={name}
+                  name={name??''}
                   username={username}
                   verified={verified}
                 />
@@ -105,7 +104,7 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
               <TweetActions
                 viewTweet
                 isOwner={isOwner}
-                ownerId={ownerId}
+                ownerId={ownerId.toString()}
                 tweetId={tweetId}
                 parentId={parentId}
                 username={username}

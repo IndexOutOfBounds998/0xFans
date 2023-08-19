@@ -96,8 +96,8 @@ export function MobileSidebarModal({
   } = useModal();
 
   const allStats: Readonly<Stats[]> = [
-    ['following', 'Following', following.length],
-    ['followers', 'Followers', followers.length]
+    ['following', 'Following', following],
+    ['followers', 'Followers', followers]
   ];
 
   const userLink = `/user/${username}`;
@@ -143,7 +143,7 @@ export function MobileSidebarModal({
               useSkeleton
               imgClassName='rounded-md'
               src={coverPhotoURL}
-              alt={name}
+              alt={name??''}
               layout='fill'
             />
           ) : (
@@ -158,14 +158,14 @@ export function MobileSidebarModal({
                        [&:hover>figure>span]:brightness-75'
             username={username}
             src={photoURL}
-            alt={name}
+            alt={name??''}
             size={60}
           />
         </div>
         <div className='flex flex-col gap-4 rounded-xl bg-main-sidebar-background p-4'>
           <div className='flex flex-col'>
             <UserName
-              name={name}
+              name={name??''}
               username={username}
               verified={verified}
               className='-mb-1'

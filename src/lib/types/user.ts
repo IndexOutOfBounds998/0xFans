@@ -1,10 +1,10 @@
-import { ProfileId } from '@lens-protocol/react-web';
+
 import type { Theme, Accent } from './theme';
 
 export type User = {
-  id: ProfileId;
+  id: String;
   bio: string | null;
-  name: string;
+  name: string | null;
   theme: Theme | null;
   accent: Accent | null;
   website: string | null;
@@ -12,8 +12,8 @@ export type User = {
   username: string;
   photoURL: string;
   verified: boolean;
-  following: string[];
-  followers: string[];
+  following: number;
+  followers: number;
   createdAt: string | null;
   updatedAt: string | null;
   totalTweets: number;

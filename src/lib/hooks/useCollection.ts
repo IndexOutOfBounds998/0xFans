@@ -4,26 +4,26 @@ import {
   useExploreProfiles,
   MediaSet
 } from '@lens-protocol/react-web';
-import { formatAvater, formatNickName } from '@lib/FormatContent';
+import { formatAvater, formatNickName, formatUser } from '@lib/FormatContent';
 import { User } from '@lib/types/user';
 import { useEffect, useState } from 'react';
 
 type UseCollection<T> =
   | {
-      data: T[] | null;
-      loading: boolean;
-      user: User[];
-    }
+    data: T[] | null;
+    loading: boolean;
+    user: User[];
+  }
   | {
-      data: (T & { user: UserCardProps })[] | null;
-      loading: boolean;
-      user: User[];
-    }
+    data: (T & { user: UserCardProps })[] | null;
+    loading: boolean;
+    user: User[];
+  }
   | {
-      data: UserCardProps[] | null;
-      loading: boolean;
-      user: UserCardProps[] | null;
-    };
+    data: UserCardProps[] | null;
+    loading: boolean;
+    user: UserCardProps[] | null;
+  };
 
 type UserCardProps = Pick<
   User,
@@ -72,29 +72,9 @@ export function useCollection<T>(
 
   useEffect(() => {
     if (data) {
-      let list: UserCardProps[] = data.map((item) => {
-        return {
-          id: item.id,
-          bio: item.bio,
-          name: formatNickName(item.handle),
-          username: item.handle,
-          photoURL: formatAvater((item?.picture as MediaSet)?.original?.url),
-          verified: true,
-          following: [],
-          followers: [],
-          coverPhotoURL: (item?.coverPicture as MediaSet)?.original.url,
-          totalTweets: 0,
-          theme: null,
-          updatedAt: null,
-          location: '',
-          totalPhotos: 0,
-          pinnedTweet: null,
-          accent: null,
-          website: null,
-          createdAt: null
-        };
+      let list: UserCardProps[] = data.filter((it => it != null)).map((item) => {
+        return formatUser(item) as UserCardProps;
       });
-
       setFormateList(list);
     }
   }, [data]);

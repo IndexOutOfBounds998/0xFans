@@ -10,7 +10,7 @@ import {
 } from '@lens-protocol/react-web';
 
 import { User } from '@lib/types/user';
-import { formatAvater, formatNickName } from '@lib/FormatContent';
+import { formatAvater, formatNickName, formatUser } from '@lib/FormatContent';
 
 type InfiniteScroll<T> = {
   data: User[] | null;
@@ -47,29 +47,9 @@ export function useInfiniteUserScroll<T>(
 
   useEffect(() => {
     if (data) {
-      let list: User[] = data.map((item) => {
-        return {
-          id: item.id,
-          bio: item.bio,
-          name: formatNickName(item.handle),
-          username: item.handle,
-          photoURL: formatAvater((item?.picture as MediaSet)?.original?.url),
-          verified: true,
-          following: [],
-          followers: [],
-          coverPhotoURL: (item?.coverPicture as MediaSet)?.original.url,
-          totalTweets: 0,
-          theme: null,
-          updatedAt: null,
-          location: '',
-          totalPhotos: 0,
-          pinnedTweet: null,
-          accent: null,
-          website: null,
-          createdAt: null
-        };
+      let list: User[] = data.filter((it => it != null)).map((item) => {
+        return formatUser(item) as User;
       });
-
       setFormateList((prevList) => [...prevList, ...list]);
     }
   }, [data]);

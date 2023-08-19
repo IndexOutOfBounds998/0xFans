@@ -79,8 +79,8 @@ export function AuthContextProvider({
           username: profile?.name || 'null',
           photoURL: formatAvater((profile?.picture as MediaSet)?.original?.url),
           verified: true,
-          following: [],
-          followers: [],
+          following: profile.stats.totalFollowing,
+          followers:profile.stats.totalFollowers,
           totalTweets: profile?.stats?.totalPosts,
           coverPhotoURL: formatAvater(
             (profile?.coverPicture as MediaSet)?.original.url

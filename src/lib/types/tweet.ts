@@ -3,7 +3,7 @@ import type { User } from './user';
 
 export type Tweet = {
   id: string | null;
-  user: any | null;
+  user: User ;
   text: string | null;
   images: ImagesPreview | null;
   parent: { id: string; username: string } | null;

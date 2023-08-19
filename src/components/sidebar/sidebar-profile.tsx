@@ -51,7 +51,7 @@ export function SidebarProfile(): JSX.Element {
               <div className='flex gap-3 truncate'>
                 <UserAvatar src={photoURL} alt={username} size={40} />
                 <div className='hidden truncate text-start leading-5 xl:block'>
-                  <UserName name={name} className='start' verified={verified} />
+                  <UserName name={name??''} className='start' verified={verified} />
                   <UserUsername username={username} disableLink />
                 </div>
               </div>
@@ -77,7 +77,7 @@ export function SidebarProfile(): JSX.Element {
                     <div className='flex items-center gap-3 truncate'>
                       <UserAvatar src={photoURL} alt={username} />
                       <div className='truncate'>
-                        <UserName name={name} verified={verified} />
+                        <UserName name={name??''} verified={verified} />
                         <UserUsername username={username} disableLink />
                       </div>
                     </div>

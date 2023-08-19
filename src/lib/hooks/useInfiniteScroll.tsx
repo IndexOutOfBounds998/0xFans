@@ -5,17 +5,17 @@ import { Loading } from '@components/ui/loading';
 import { useFetchPublications } from './useFetchPublications';
 import { ExplorePublicationRequest } from '@lens-protocol/client';
 import { Post } from '@lens-protocol/react-web';
-
-import type { Tweet } from '@lib/types/tweet';
+import { formatUser } from '@lib/FormatContent';
+import { TweetProps } from '@components/tweet/tweet';
 
 type InfiniteScroll<T> = {
-  data: Tweet[] | null;
+  data: TweetProps[] | null;
   loading: Boolean;
   LoadMore: () => JSX.Element;
 };
 
 type InfiniteScrollWithUser<T> = {
-  data: Tweet[] | null;
+  data: TweetProps[] | null;
   loading: Boolean;
   LoadMore: () => JSX.Element;
 };
@@ -33,26 +33,26 @@ export function useInfiniteScroll<T>(
     explorePublicationRequest: request
   });
 
-  const [formateList, setFormateList] = useState<Tweet[]>([]);
+  const [formateList, setFormateList] = useState<TweetProps[]>([]);
 
   useEffect(() => {
     if (data && data.length > 0) {
-      let list: Tweet[] = data.map((item: Post) => ({
-        id: item.id,
+      let list: TweetProps[] = data.filter((it => it != null)).map((item: Post) => ({
+        id: item.id.toString(),
         text: item.metadata.content,
         images:
           item.metadata.media && item.metadata.media.length
             ? item.metadata.media.map((img, index) => {
-                return {
-                  id: index.toString(),
-                  src: img.original.url,
-                  alt: img.original.altTag ? img.original.altTag : ''
-                };
-              })
+              return {
+                id: index.toString(),
+                src: img.original.url,
+                alt: img.original.altTag ? img.original.altTag : ''
+              };
+            })
             : null,
         parent: null,
         userLikes: 0,
-        user: item.profile,
+        user: formatUser(item.profile),
         createdBy: ' ',
         createdAt: item.createdAt,
         updatedAt: '',
@@ -60,7 +60,6 @@ export function useInfiniteScroll<T>(
         userRetweets: 0
       }));
       setFormateList(list);
-      console.log('list', list.length);
     }
   }, [data]);
 

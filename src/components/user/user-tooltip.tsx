@@ -51,9 +51,9 @@ export function UserTooltip({
 
   const allStats: Stats[] = [];
 
-  if (following) allStats.push(['following', 'Following', following.length]);
+  if (following) allStats.push(['following', 'Following', following]);
 
-  if (followers) allStats.push(['followers', 'Followers', followers.length]);
+  if (followers) allStats.push(['followers', 'Followers', followers]);
 
   return (
     <div
@@ -79,7 +79,7 @@ export function UserTooltip({
                     className='relative h-24'
                     imgClassName='rounded-t-2xl'
                     src={coverPhotoURL}
-                    alt={name}
+                    alt={name??''}
                     layout='fill'
                   />
                 </span>
@@ -95,23 +95,23 @@ export function UserTooltip({
                              hover:brightness-100 [&>figure>span]:[transition:200ms]
                              [&:hover>figure>span]:brightness-75'
                   src={photoURL}
-                  alt={name}
+                  alt={name??''}
                   size={64}
                   username={username}
                 />
               </div>
-              <FollowButton userTargetId={id} userTargetUsername={username} />
+              <FollowButton userTargetId={id?.toString() ?? ''} userTargetUsername={username} />
             </div>
             <div>
               <UserName
                 className='-mb-1 text-lg'
-                name={name}
+                name={name??''}
                 username={username}
                 verified={verified}
               />
               <div className='flex items-center gap-1 text-light-secondary dark:text-dark-secondary'>
                 <UserUsername username={username} />
-                <UserFollowing userTargetId={id} />
+                <UserFollowing userTargetId={id?.toString() ?? ''} />
               </div>
             </div>
           </div>

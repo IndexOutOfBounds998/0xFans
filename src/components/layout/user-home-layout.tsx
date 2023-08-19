@@ -16,6 +16,7 @@ import { variants } from '@components/user/user-header';
 import { UserEditProfile } from '@components/user/user-edit-profile';
 import { UserShare } from '@components/user/user-share';
 import type { LayoutProps } from './common-layout';
+import { ImageData } from '@lib/types/file';
 
 export function UserHomeLayout({ children }: LayoutProps): JSX.Element {
   const { user } = useAuth();
@@ -26,11 +27,11 @@ export function UserHomeLayout({ children }: LayoutProps): JSX.Element {
   } = useRouter();
 
   const coverData = userData?.coverPhotoURL
-    ? { src: userData.coverPhotoURL, alt: userData.name }
+    ? { src: userData.coverPhotoURL, alt: userData.name } as ImageData
     : null;
 
   const profileData = userData
-    ? { src: userData.photoURL, alt: userData.name }
+    ? { src: userData.photoURL, alt: userData.name } as ImageData
     : null;
 
   const { id: userId } = user ?? {};
@@ -81,7 +82,7 @@ export function UserHomeLayout({ children }: LayoutProps): JSX.Element {
                       <ToolTip tip='Message' />
                     </Button>
                     <FollowButton
-                      userTargetId={userData.id}
+                      userTargetId={userData.id.toString()}
                       userTargetUsername={userData.username}
                     />
                     {isOwner && <UserEditProfile hide />}

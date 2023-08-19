@@ -31,7 +31,7 @@ export const variants: Variants = {
 
 type TweetActionsProps = Pick<Tweet, 'createdBy'> & {
   isOwner: boolean;
-  ownerId: string;
+  ownerId: string| null;
   tweetId: string | null;
   username: string;
   parentId?: string;

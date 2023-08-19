@@ -7,7 +7,7 @@ import { ActionModal } from '@components/modal/action-modal';
 import { Button } from '@components/ui/button';
 
 type FollowButtonProps = {
-  userTargetId: string;
+  userTargetId: string|null;
   userTargetUsername: string;
 };
 
@@ -32,7 +32,7 @@ export function FollowButton({
     closeModal();
   };
 
-  const userIsFollowed = !!following?.includes(userTargetId ?? '');
+  const userIsFollowed = false;
 
   return (
     <>

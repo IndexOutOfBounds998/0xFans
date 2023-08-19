@@ -1,4 +1,7 @@
+import { MediaSet, Profile } from '@lens-protocol/react-web';
 import { IPFS_GATEWAY } from './const';
+import { User } from './types/user';
+import { Theme } from '@lens-protocol/widgets-react';
 
 export function formatContent(item: any) {
   if (!item.contentResponse) {
@@ -120,4 +123,29 @@ export function formatDate(dateString: any) {
   } else {
     return formatMonthAndDay(inputDate);
   }
+}
+
+export function formatUser(userProfile: Profile) {
+  let userFormate: User = {
+    id: userProfile.id.toString(),
+    bio: userProfile.bio,
+    name: formatNickName(userProfile.name),
+    username: formatNickName(userProfile.handle),
+    photoURL: userProfile.picture ? formatAvater((userProfile.picture as MediaSet).original.url) : '',
+    coverPhotoURL: userProfile.coverPicture ? formatAvater((userProfile.coverPicture as MediaSet).original.url) : '',
+    createdAt: '',
+    followers: userProfile.stats.totalFollowers,
+    following: userProfile.stats.totalFollowing,
+    theme: Theme.dark,
+    accent: null,
+    website: '',
+    location: '',
+    verified: true,
+    totalTweets: userProfile.stats.totalPosts,
+    totalPhotos: 0,
+    updatedAt: '',
+    pinnedTweet: ''
+  };
+
+  return userFormate;
 }
