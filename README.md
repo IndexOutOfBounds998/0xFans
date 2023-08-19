@@ -1,5 +1,5 @@
 <div align="center">
-    <h1>lensX</h1>
+    <h1>o x fan s</h1>
     <p>Decentralized video and image&text -sharing social media platform.</p>
     <a href="https://mainnet.0xtrip.xyz">0xtrip.xyz</a>
 </div>
@@ -11,13 +11,13 @@
     <a href="https://twitter.com/0xtripxyz">
         <img src="https://img.shields.io/twitter/follow/0xtripxyz?style=social" alt="Twitter">
     </a>
-    <a href="https://deepsource.io/gh/IndexOutOfBounds998/lensX">
+    <a href="https://deepsource.io/gh/IndexOutOfBounds998/oxfans">
         <img src="https://deepsource.io/gh/lenstube-xyz/lenstube.svg/?label=active+issues&show_trend=true" alt="Deepsource">
     </a>
-     <a href="https://status.lensX.xyz">
+     <a href="https://status.oxfans.xyz">
         <img src="https://betteruptime.com/status-badges/v1/monitor/dfaw.svg" alt="Better Uptime">
     </a>
-    <a title="Crowdin" target="_blank" href="https://crowdin.com/project/lensX">
+    <a title="Crowdin" target="_blank" href="https://crowdin.com/project/oxfans">
         <img src="https://badges.crowdin.net/lenstube/localized.svg">
     </a>
 </div>
@@ -25,7 +25,7 @@
 
 ## 📽️ About
 
-\*_lensX_ is a decentralized video-and-image&text -sharing social media platform, built using Lens Protocol 🌿
+\*_oxfans_ is a decentralized video-and-image&text -sharing social media platform, built using Lens Protocol 🌿
 
 ## 💪 Community
 
@@ -58,10 +58,10 @@ and visit http://localhost:3000
 
 We love contributors! Feel free to contribute to this project but please read the [Contributing Guidelines](CONTRIBUTING.md) before opening an issue or PR so you understand the branching strategy and local development environment.
 
-<a href="https://github.com/IndexOutOfBounds998/lensX/graphs/contributors">
+<a href="https://github.com/IndexOutOfBounds998/oxfans/graphs/contributors">
   
 </a>
 
 ## 📜 License
 
-lensX is open-sourced software licensed under the [AGPLv3](LICENSE).
+oxfans is open-sourced software licensed under the [AGPLv3](LICENSE).
