@@ -6,7 +6,7 @@ import { AppHead } from '@components/common/app-head';
 import type { ReactElement, ReactNode } from 'react';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
-
+import { Analytics } from '@vercel/analytics/react';
 import {
   LensProvider,
   LensConfig,
@@ -80,6 +80,7 @@ export default function App({
             <AuthContextProvider>
               <ThemeContextProvider>
                 {getLayout(<Component {...pageProps} />)}
+                <Analytics />
               </ThemeContextProvider>
             </AuthContextProvider>
           </LensProvider>
