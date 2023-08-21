@@ -19,7 +19,7 @@ export function SidebarProfile(): JSX.Element {
   const { open, openModal, closeModal } = useModal();
 
   const { name, username, verified, photoURL } = user as User;
-
+  
   return (
     <>
       <Modal
