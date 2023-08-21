@@ -1,11 +1,11 @@
 const footerLinks = [
-  ['Terms of Service', 'https://twitter.com/tos'],
-  ['Privacy Policy', 'https://twitter.com/privacy'],
-  ['Cookie Policy', 'https://support.twitter.com/articles/20170514'],
-  ['Accessibility', 'https://help.twitter.com/resources/accessibility'],
+  ['Terms of Service', 'https://0xFans.com/tos'],
+  ['Privacy Policy', 'https://0xFans.com/privacy'],
+  ['Cookie Policy', 'https://support.0xFans.com/articles/20170514'],
+  ['Accessibility', 'https://help.0xFans.com/resources/accessibility'],
   [
     'Ads Info',
-    'https://business.twitter.com/en/help/troubleshooting/how-twitter-ads-work.html'
+    'https://business.0xFans.com/en/help/troubleshooting/how-0xFans-ads-work.html'
   ]
 ] as const;
 
@@ -28,7 +28,7 @@ export function AsideFooter(): JSX.Element {
           </a>
         ))}
       </nav>
-      <p>© 2023 oxfans, Inc.</p>
+      <p>© 2023 0xFans, Inc.</p>
     </footer>
   );
 }
