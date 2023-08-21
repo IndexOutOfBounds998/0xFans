@@ -1,7 +1,7 @@
 <div align="center">
-    <h1>o x fan s</h1>
+    <h1>0xFans</h1>
     <p>Decentralized video and image&text -sharing social media platform.</p>
-    <a href="https://mainnet.0xtrip.xyz">0xtrip.xyz</a>
+    <a href="https://mainnet.0xtrip.xyz">0xfans.xyz</a>
 </div>
 <br>
 <div align="center">
@@ -33,8 +33,8 @@ For a place to have open discussions on features, voice your ideas, or get help 
 
 | Name    | Link                       |
 | ------- | -------------------------- |
-| Mainnet | https://mainnet.0xtrip.xyz |
-| Testnet | https://testnet.0xtrip.xyz |
+| Mainnet | https://mainnet.0xfans.xyz |
+| Testnet | https://testnet.0xfans.xyz |
 
 ## Getting Started
 
