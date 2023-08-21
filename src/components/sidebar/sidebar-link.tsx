@@ -21,7 +21,7 @@ export function SidebarLink({
   const isActive = username ? asPath.includes(username) : asPath === href;
 
   return (
-    // <Link href={href}>
+    <Link href={href}>
     <span
       className={cn(
         'group py-1 outline-none',
@@ -52,6 +52,6 @@ export function SidebarLink({
         <p className='hidden xl:block'>{linkName}</p>
       </div>
     </span>
-    // {/*</Link>*/}
+   </Link>
   );
 }

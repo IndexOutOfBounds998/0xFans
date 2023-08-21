@@ -66,6 +66,7 @@ export function Sidebar(): JSX.Element {
   const { open, openModal, closeModal } = useModal();
 
   const username = user?.username as string;
+  const userId = user?.id as string;
 
   return (
     <header
@@ -88,7 +89,7 @@ export function Sidebar(): JSX.Element {
       >
         <section className='flex flex-col justify-center gap-2 xs:items-center xl:items-stretch'>
           <h1 className='hidden xs:flex'>
-            {/*<Link href='/home'>*/}
+            <Link href='/home'>
             <span
               className='custom-button main-tab text-accent-blue transition hover:bg-light-primary/10
                            focus-visible:bg-accent-blue/10 focus-visible:!ring-accent-blue/80
@@ -96,14 +97,14 @@ export function Sidebar(): JSX.Element {
             >
               <CustomIcon className='h-7 w-7' iconName='TwitterIcon' />
             </span>
-            {/*</Link>*/}
+            </Link>
           </h1>
           <nav className='flex items-center justify-around xs:flex-col xs:justify-center xl:block'>
             {navLinks.map(({ ...linkData }) => (
               <SidebarLink {...linkData} key={linkData.href} />
             ))}
             <SidebarLink
-              href={`/user/${username}`}
+              href={`/user/${userId}`}
               username={username}
               linkName='Profile'
               iconName='UserIcon'
