@@ -35,7 +35,7 @@ export function LoginMain(): JSX.Element {
                        lg:text-6xl lg:before:content-["Happening_now"]'
           />
           <h2 className='hidden text-xl lg:block lg:text-3xl'>
-            Join Twitter today.
+            Join 0xFans today.
           </h2>
         </div>
         <div className='flex max-w-xs flex-col gap-6 [&_button]:py-2'>
@@ -47,13 +47,13 @@ export function LoginMain(): JSX.Element {
                        dark:hover:brightness-90 dark:focus-visible:brightness-90 dark:active:brightness-75'
                 onClick={signInWithLens}
               >
-                <CustomIcon iconName='GoogleIcon' /> Sign up with lens
+                <CustomIcon iconName='LensIcon' /> Sign up with lens
               </Button>
             ) : (
               <ConnectButton></ConnectButton>
             )}
 
-            <Button
+            {/* <Button
               className='flex cursor-not-allowed justify-center gap-2 border border-light-line-reply font-bold text-light-primary
                          transition hover:bg-[#e6e6e6] focus-visible:bg-[#e6e6e6] active:bg-[#cccccc] dark:border-0
                          dark:bg-white dark:hover:brightness-90 dark:focus-visible:brightness-90 dark:active:brightness-75'
@@ -70,7 +70,7 @@ export function LoginMain(): JSX.Element {
                          focus-visible:!ring-accent-blue/80 focus-visible:brightness-90 active:brightness-75'
             >
               Sign up with phone or email
-            </Button>
+            </Button> */}
             <p
               className='inner:custom-underline inner:custom-underline text-center text-xs
                          text-light-secondary inner:text-accent-blue dark:text-dark-secondary'
@@ -102,7 +102,7 @@ export function LoginMain(): JSX.Element {
               .
             </p>
           </div>
-          <div className='flex flex-col gap-3'>
+          {/* <div className='flex flex-col gap-3'>
             <p className='font-bold'>Already have an account? </p>
             <Button
               className='border border-light-line-reply font-bold text-accent-blue hover:bg-accent-blue/10
@@ -111,7 +111,7 @@ export function LoginMain(): JSX.Element {
             >
               Sign in
             </Button>
-          </div>
+          </div> */}
         </div>
       </div>
     </main>

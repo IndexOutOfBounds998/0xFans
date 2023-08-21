@@ -1,7 +1,5 @@
 import { AnimatePresence } from 'framer-motion';
-
 import { useUser } from '@lib/context/user-context';
-
 import { UserLayout, ProtectedLayout } from '@components/layout/common-layout';
 import { MainLayout } from '@components/layout/main-layout';
 import { SEO } from '@components/common/seo';
