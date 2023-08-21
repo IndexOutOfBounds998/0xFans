@@ -70,7 +70,7 @@ export function AuthContextProvider({
 
   useEffect(() => {
     const manageUser = async (): Promise<void> => {
-      setLoading(true);
+     
       if (profile) {
         let userObj: UserDetailsProps = {
           id: profile.id,
@@ -98,7 +98,7 @@ export function AuthContextProvider({
       }
       setLoading(profileLoading);
       setError(profileError!);
-      setLoading(false);
+      
     };
     manageUser();
   }, [profile, profileLoading, profileError]);
