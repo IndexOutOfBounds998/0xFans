@@ -11,9 +11,8 @@
     <a href="https://twitter.com/0xtripxyz">
         <img src="https://img.shields.io/twitter/follow/0xtripxyz?style=social" alt="Twitter">
     </a>
-    <a href="https://deepsource.io/gh/IndexOutOfBounds998/oxfans">
-        <img src="https://deepsource.io/gh/lenstube-xyz/lenstube.svg/?label=active+issues&show_trend=true" alt="Deepsource">
-    </a>
+   <a href="https://app.deepsource.com/gh/IndexOutOfBounds998/oxfans/?ref=repository-badge}" target="_blank"><img alt="DeepSource" title="DeepSource" src="https://app.deepsource.com/gh/IndexOutOfBounds998/oxfans.svg/?label=active+issues&show_trend=true&token=u-H2BAmuJbTMmMn2xJYjcHoE"/>
+   </a>
      <a href="https://status.oxfans.xyz">
         <img src="https://betteruptime.com/status-badges/v1/monitor/dfaw.svg" alt="Better Uptime">
     </a>
