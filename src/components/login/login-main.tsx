@@ -50,7 +50,7 @@ export function LoginMain(): JSX.Element {
                 <CustomIcon iconName='LensIcon' /> Sign up with lens
               </Button>
             ) : (
-              <ConnectButton></ConnectButton>
+              <ConnectButton />
             )}
 
             {/* <Button

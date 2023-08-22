@@ -70,7 +70,6 @@ export function AuthContextProvider({
 
   useEffect(() => {
     const manageUser = async (): Promise<void> => {
-     
       if (profile) {
         let userObj: UserDetailsProps = {
           id: profile.id,
@@ -80,7 +79,7 @@ export function AuthContextProvider({
           photoURL: formatAvater((profile?.picture as MediaSet)?.original?.url),
           verified: true,
           following: profile.stats.totalFollowing,
-          followers:profile.stats.totalFollowers,
+          followers: profile.stats.totalFollowers,
           totalTweets: profile?.stats?.totalPosts,
           coverPhotoURL: formatAvater(
             (profile?.coverPicture as MediaSet)?.original.url
@@ -98,7 +97,6 @@ export function AuthContextProvider({
       }
       setLoading(profileLoading);
       setError(profileError!);
-      
     };
     manageUser();
   }, [profile, profileLoading, profileError]);
@@ -115,7 +113,7 @@ export function AuthContextProvider({
     } catch (error) {
       setError(error as Error);
     }
-    setLoading(false);
+    // setLoading(false);
   };
 
   const signOut = async (): Promise<void> => {
