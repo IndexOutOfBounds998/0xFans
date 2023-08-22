@@ -15,6 +15,7 @@ export function AuthLayout({ children }: LayoutProps): JSX.Element {
     const checkLogin = async (): Promise<void> => {
       setPending(true);
 
+      debugger;
       if (user) {
         await sleep(500);
         void replace('/home');
