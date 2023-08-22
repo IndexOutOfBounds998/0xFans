@@ -121,6 +121,7 @@ export function AuthContextProvider({
   const signOut = async (): Promise<void> => {
     try {
       logout();
+      setUser(null);
     } catch (error) {
       setError(error as Error);
     }

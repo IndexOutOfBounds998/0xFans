@@ -41,7 +41,7 @@ export default function Home(): JSX.Element {
         oneOf: []
       }
     },
-    sources: ['lenster', 'lenstrip', 'lenstube', 'orb', 'buttrfly', 'lensplay']
+    sources: ['lenstrip', 'lenstube', 'orb', 'buttrfly', 'lensplay']
   });
 
   return (
