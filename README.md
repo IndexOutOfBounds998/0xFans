@@ -1,7 +1,7 @@
 <div align="center">
-    <h1>o x fan s</h1>
+    <h1>0xFans</h1>
     <p>Decentralized video and image&text -sharing social media platform.</p>
-    <a href="https://mainnet.0xtrip.xyz">0xtrip.xyz</a>
+    <a href="https://mainnet.0xtrip.xyz">0xfans.xyz</a>
 </div>
 <br>
 <div align="center">
@@ -11,9 +11,8 @@
     <a href="https://twitter.com/0xtripxyz">
         <img src="https://img.shields.io/twitter/follow/0xtripxyz?style=social" alt="Twitter">
     </a>
-    <a href="https://deepsource.io/gh/IndexOutOfBounds998/oxfans">
-        <img src="https://deepsource.io/gh/lenstube-xyz/lenstube.svg/?label=active+issues&show_trend=true" alt="Deepsource">
-    </a>
+   <a href="https://app.deepsource.com/gh/IndexOutOfBounds998/oxfans/?ref=repository-badge}" target="_blank"><img alt="DeepSource" title="DeepSource" src="https://app.deepsource.com/gh/IndexOutOfBounds998/oxfans.svg/?label=active+issues&show_trend=true&token=u-H2BAmuJbTMmMn2xJYjcHoE"/>
+   </a>
      <a href="https://status.oxfans.xyz">
         <img src="https://betteruptime.com/status-badges/v1/monitor/dfaw.svg" alt="Better Uptime">
     </a>
@@ -33,8 +32,8 @@ For a place to have open discussions on features, voice your ideas, or get help 
 
 | Name    | Link                       |
 | ------- | -------------------------- |
-| Mainnet | https://mainnet.0xtrip.xyz |
-| Testnet | https://testnet.0xtrip.xyz |
+| Mainnet | https://mainnet.0xfans.xyz |
+| Testnet | https://testnet.0xfans.xyz |
 
 ## Getting Started
 
