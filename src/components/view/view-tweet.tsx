@@ -19,6 +19,7 @@ import type { RefObject } from 'react';
 import type { User } from '@lib/types/user';
 import type { Tweet } from '@lib/types/tweet';
 import { formatNickName, formatAvater } from '@lib/FormatContent';
+import { VideoPreview } from '@components/input/video-preview';
 
 type ViewTweetProps = Tweet & {
   user: User;
@@ -29,6 +30,8 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
   const {
     id: tweetId,
     text,
+    isVideo,
+    videos,
     images,
     parent,
     userLikes,
@@ -40,7 +43,7 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
     user: tweetUserData
   } = tweet;
 
-  const { id: ownerId, name, username, verified,photoURL } = tweetUserData;
+  const { id: ownerId, name, username, verified, photoURL } = tweetUserData;
 
   const { user } = useAuth();
 
@@ -84,14 +87,14 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
         )}
         <div className='grid grid-cols-[auto,1fr] gap-3'>
           <UserTooltip avatar {...tweetUserData}>
-            <UserAvatar src={photoURL} alt={name??''} username={username} />
+            <UserAvatar src={photoURL} alt={name ?? ''} username={username} />
           </UserTooltip>
           <div className='flex min-w-0 justify-between'>
             <div className='flex flex-col truncate xs:overflow-visible xs:whitespace-normal'>
               <UserTooltip {...tweetUserData}>
                 <UserName
                   className='-mb-1'
-                  name={name??''}
+                  name={name ?? ''}
                   username={username}
                   verified={verified}
                 />
@@ -128,13 +131,22 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
         {text && (
           <p className='whitespace-pre-line break-words text-2xl'>{text}</p>
         )}
-        {images && (
-          <ImagePreview
-            viewTweet
-            imagesPreview={images}
-            previewCount={images.length}
-          />
-        )}
+        {isVideo
+          ? videos && <VideoPreview tweet videoPreview={videos} />
+          : images && (
+              <ImagePreview
+                tweet
+                imagesPreview={images}
+                previewCount={images.length}
+              />
+            )}
+        {/*{images && (*/}
+        {/*  <ImagePreview*/}
+        {/*    viewTweet*/}
+        {/*    imagesPreview={images}*/}
+        {/*    previewCount={images.length}*/}
+        {/*  />*/}
+        {/*)}*/}
         <div
           className='inner:hover-animation inner:border-b inner:border-light-border
                      dark:inner:border-dark-border'

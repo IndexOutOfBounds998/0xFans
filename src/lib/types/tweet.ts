@@ -1,11 +1,13 @@
-import type { ImagesPreview } from './file';
+import type { ImagesPreview, VideosPreview } from './file';
 import type { User } from './user';
 
 export type Tweet = {
   id: string | null;
-  user: User ;
+  user: User;
   text: string | null;
+  isVideo: boolean;
   images: ImagesPreview | null;
+  videos: VideosPreview | null;
   parent: { id: string; username: string } | null;
   userLikes: number | null;
   createdBy: string | null;
