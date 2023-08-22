@@ -13,7 +13,7 @@
     </a>
    <a href="https://app.deepsource.com/gh/IndexOutOfBounds998/oxfans/?ref=repository-badge}" target="_blank"><img alt="DeepSource" title="DeepSource" src="https://app.deepsource.com/gh/IndexOutOfBounds998/oxfans.svg/?label=active+issues&show_trend=true&token=u-H2BAmuJbTMmMn2xJYjcHoE"/>
    </a>
-     <a href="https://status.oxfans.xyz">
+     <a href="https://0xfans.betteruptime.com">
         <img src="https://betteruptime.com/status-badges/v1/monitor/dfaw.svg" alt="Better Uptime">
     </a>
    <a title="Crowdin" target="_blank" href="https://crowdin.com/project/lensbook"><img src="https://badges.crowdin.net/lensbook/localized.svg"></a>
