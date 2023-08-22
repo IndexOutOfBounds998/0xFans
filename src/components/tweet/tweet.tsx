@@ -18,6 +18,7 @@ import type { Variants } from 'framer-motion';
 import type { Tweet } from '@lib/types/tweet';
 import { formatAvater, formatNickName } from '@lib/FormatContent';
 import { User } from '@lib/types/user';
+import { VideoPreview } from '@components/input/video-preview';
 
 export type TweetProps = Tweet & {
   user: User;
@@ -38,6 +39,8 @@ export function Tweet(tweet: TweetProps): JSX.Element {
     id: tweetId,
     text,
     modal,
+    isVideo,
+    videos,
     images,
     parent,
     pinned,
@@ -54,7 +57,6 @@ export function Tweet(tweet: TweetProps): JSX.Element {
   const { id: ownerId, name, username, photoURL, coverPhotoURL } = user ?? {};
 
   // const { user } = useAuth();
-
 
   const { open, openModal, closeModal } = useModal();
 
@@ -128,14 +130,18 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                 modal={modal}
                 {...user}
                 name={user?.name ?? ''}
-                username={username??''}
-                bio={user?.bio??''}
-                verified={user?.verified??false}
+                username={username ?? ''}
+                bio={user?.bio ?? ''}
+                verified={user?.verified ?? false}
                 coverPhotoURL={coverPhotoURL ?? ''}
                 photoURL={photoURL ?? ''}
                 id={ownerId ?? ''}
               >
-                <UserAvatar src={photoURL ?? ''} alt={name?.toString() ?? ''} id={ownerId?.toString() ?? ''} />
+                <UserAvatar
+                  src={photoURL ?? ''}
+                  alt={name?.toString() ?? ''}
+                  id={ownerId?.toString() ?? ''}
+                />
               </UserTooltip>
               {parentTweet && (
                 <i className='hover-animation h-full w-0.5 bg-light-line-reply dark:bg-dark-line-reply' />
@@ -153,7 +159,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                     />
                   </UserTooltip>
                   <UserTooltip modal={modal} {...user}>
-                    <UserUsername username={username??''} />
+                    <UserUsername username={username ?? ''} />
                   </UserTooltip>
                   <TweetDate tweetLink={tweetLink} createdAt={createdAt} />
                 </div>
@@ -161,10 +167,10 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                   {!modal && (
                     <TweetActions
                       isOwner={isOwner}
-                      ownerId={ownerId?.toString()??''}
+                      ownerId={ownerId?.toString() ?? ''}
                       tweetId={tweetId}
                       parentId={parentId}
-                      username={username??''}
+                      username={username ?? ''}
                       hasImages={!!images}
                       createdBy={createdBy}
                     />
@@ -189,13 +195,15 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                 <p className='whitespace-pre-line break-words'>{text}</p>
               )}
               <div className='mt-1 flex flex-col gap-2'>
-                {images && (
-                  <ImagePreview
-                    tweet
-                    imagesPreview={images}
-                    previewCount={images.length}
-                  />
-                )}
+                {isVideo
+                  ? videos && <VideoPreview tweet videoPreview={videos} />
+                  : images && (
+                      <ImagePreview
+                        tweet
+                        imagesPreview={images}
+                        previewCount={images.length}
+                      />
+                    )}
                 {!modal && (
                   <TweetStats
                     reply={reply}

@@ -5,7 +5,7 @@ import { Loading } from '@components/ui/loading';
 import { useFetchPublications } from './useFetchPublications';
 import { ExplorePublicationRequest } from '@lens-protocol/client';
 import { Post } from '@lens-protocol/react-web';
-import { formatUser } from '@lib/FormatContent';
+import { formatImgList, formatUser, formatVideoList } from '@lib/FormatContent';
 import { TweetProps } from '@components/tweet/tweet';
 
 type InfiniteScroll<T> = {
@@ -37,28 +37,33 @@ export function useInfiniteScroll<T>(
 
   useEffect(() => {
     if (data && data.length > 0) {
-      let list: TweetProps[] = data.filter((it => it != null)).map((item: Post) => ({
-        id: item.id.toString(),
-        text: item.metadata.content,
-        images:
-          item.metadata.media && item.metadata.media.length
-            ? item.metadata.media.map((img, index) => {
-              return {
-                id: index.toString(),
-                src: img.original.url,
-                alt: img.original.altTag ? img.original.altTag : ''
-              };
-            })
-            : null,
-        parent: null,
-        userLikes: 0,
-        user: formatUser(item.profile),
-        createdBy: ' ',
-        createdAt: item.createdAt,
-        updatedAt: '',
-        userReplies: item.stats.commentsCount,
-        userRetweets: 0
-      }));
+      let list: TweetProps[] = data
+        .filter((it) => it != null)
+        .map((item: Post) => {
+          const isVideo = item?.metadata?.mainContentFocus === 'VIDEO';
+          const imagesList = isVideo
+            ? null
+            : formatImgList(item?.metadata?.media);
+          const videoList = isVideo
+            ? formatVideoList(item?.metadata?.media)
+            : null;
+          return {
+            id: item.id.toString(),
+            text: item.metadata.content,
+            isVideo: isVideo,
+            images: imagesList,
+            videos: videoList,
+            parent: null,
+            userLikes: 0,
+            user: formatUser(item.profile),
+            createdBy: ' ',
+            createdAt: item.createdAt,
+            updatedAt: '',
+            userReplies: item.stats.commentsCount,
+            userRetweets: 0
+          };
+        });
+      console.log(list);
       setFormateList(list);
     }
   }, [data]);

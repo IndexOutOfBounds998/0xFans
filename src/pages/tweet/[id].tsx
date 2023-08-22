@@ -12,16 +12,28 @@ import { Loading } from '@components/ui/loading';
 import { Error } from '@components/ui/error';
 import { ViewParentTweet } from '@components/view/view-parent-tweet';
 import type { ReactElement, ReactNode } from 'react';
-import { useComments, usePublication, Comment, profileId } from '@lens-protocol/react-web';
+import {
+  useComments,
+  usePublication,
+  Comment,
+  profileId
+} from '@lens-protocol/react-web';
 import { useAuth } from '@lib/context/auth-context';
-import { formatNickName, formatUser } from '@lib/FormatContent';
+import {
+  formatImgList,
+  formatNickName,
+  formatUser,
+  formatVideoList
+} from '@lib/FormatContent';
 import { Tweet as Tw } from '@lib/types/tweet';
 
 type TwDetailsProps = Pick<
   Tw,
   | 'id'
   | 'text'
+  | 'isVideo'
   | 'images'
+  | 'videos'
   | 'parent'
   | 'userReplies'
   | 'user'
@@ -45,19 +57,15 @@ export default function TweetId(): JSX.Element {
   });
 
   const initData = (data: Comment) => {
+    const isVideo = data?.metadata?.mainContentFocus === 'VIDEO';
+    const imagesList = isVideo ? null : formatImgList(data?.metadata?.media);
+    const videoList = isVideo ? formatVideoList(data?.metadata?.media) : null;
     const initData: TwDetailsProps = {
       user: formatUser(data?.profile),
       text: data?.metadata.content,
-      images:
-        data?.metadata.media && data?.metadata.media.length
-          ? data?.metadata.media.map((img, index) => {
-            return {
-              id: index.toString(),
-              src: img.original.url,
-              alt: img.original.altTag ? img.original.altTag : ''
-            };
-          })
-          : null,
+      isVideo: isVideo,
+      videos: videoList,
+      images: imagesList,
       parent: {
         id: data?.profile?.id,
         username: formatNickName(data?.profile?.handle)

@@ -131,8 +131,12 @@ export function formatUser(userProfile: Profile) {
     bio: userProfile.bio,
     name: formatNickName(userProfile.name),
     username: formatNickName(userProfile.handle),
-    photoURL: userProfile.picture ? formatAvater((userProfile.picture as MediaSet).original.url) : '',
-    coverPhotoURL: userProfile.coverPicture ? formatAvater((userProfile.coverPicture as MediaSet).original.url) : '',
+    photoURL: userProfile.picture
+      ? formatAvater((userProfile.picture as MediaSet).original.url)
+      : '',
+    coverPhotoURL: userProfile.coverPicture
+      ? formatAvater((userProfile.coverPicture as MediaSet).original.url)
+      : '',
     createdAt: '',
     followers: userProfile.stats.totalFollowers,
     following: userProfile.stats.totalFollowing,
@@ -148,4 +152,33 @@ export function formatUser(userProfile: Profile) {
   };
 
   return userFormate;
+}
+
+export function formatImgList(media: any) {
+  const obj =
+    media && media.length
+      ? media.map((img: any, index: any) => {
+          return {
+            id: index.toString(),
+            src: img.original.url,
+            alt: img.original.altTag ? img.original.altTag : ''
+          };
+        })
+      : null;
+  return obj;
+}
+
+export function formatVideoList(media: any) {
+  const obj =
+    media && media.length
+      ? media.map((video: any, index: any) => {
+          return {
+            id: index.toString(),
+            url: video.original.url,
+            alt: video.original.altTag ? video.original.altTag : '',
+            cover: video.original.cover ? video.original.cover : ''
+          };
+        })
+      : null;
+  return obj;
 }
