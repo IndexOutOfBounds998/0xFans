@@ -7,6 +7,9 @@ import { variants } from './input';
 import { ProgressBar } from './progress-bar';
 import type { ChangeEvent, ClipboardEvent } from 'react';
 import type { IconName } from '@components/ui/hero-icon';
+import { Modal } from '@components/modal/modal';
+import CollectSetting from '@components/collectSetting/CollectSetting';
+import { useModal } from '@lib/hooks/useModal';
 
 type Options = {
   name: string;
@@ -14,39 +17,6 @@ type Options = {
   disabled: boolean;
   onClick?: () => void;
 }[];
-
-const options: Readonly<Options> = [
-  {
-    name: 'Media',
-    iconName: 'PhotoIcon',
-    disabled: false
-  },
-  {
-    name: 'GIF',
-    iconName: 'GifIcon',
-    disabled: true
-  },
-  {
-    name: 'Poll',
-    iconName: 'ChartBarIcon',
-    disabled: true
-  },
-  {
-    name: 'Emoji',
-    iconName: 'FaceSmileIcon',
-    disabled: true
-  },
-  {
-    name: 'Schedule',
-    iconName: 'CalendarDaysIcon',
-    disabled: true
-  },
-  {
-    name: 'Location',
-    iconName: 'MapPinIcon',
-    disabled: true
-  }
-];
 
 type InputOptionsProps = {
   reply?: boolean;
@@ -69,9 +39,48 @@ export function InputOptions({
   isCharLimitExceeded,
   handleImageUpload
 }: InputOptionsProps): JSX.Element {
+  const { open, openModal, closeModal } = useModal();
+
+  const mediaClick = (): void => inputFileRef.current?.click();
+
+  const options: Readonly<Options> = [
+    {
+      name: 'Media',
+      iconName: 'PhotoIcon',
+      disabled: false,
+      onClick: mediaClick
+    },
+    {
+      name: 'GIF',
+      iconName: 'GifIcon',
+      disabled: true
+    },
+    {
+      name: 'Poll',
+      iconName: 'ChartBarIcon',
+      disabled: true
+    },
+    {
+      name: 'Emoji',
+      iconName: 'FaceSmileIcon',
+      disabled: true
+    },
+    {
+      name: 'Schedule',
+      iconName: 'RectangleStackIcon',
+      disabled: false,
+      onClick: openModal
+    },
+    {
+      name: 'Location',
+      iconName: 'MapPinIcon',
+      disabled: true
+    }
+  ];
+
   const inputFileRef = useRef<HTMLInputElement>(null);
 
-  const onClick = (): void => inputFileRef.current?.click();
+  const setCollectData = (data) => {};
 
   let filteredOptions = options;
 
@@ -82,8 +91,16 @@ export function InputOptions({
 
   return (
     <motion.div className='flex justify-between' {...variants}>
+      <Modal
+        className='flex items-start justify-center'
+        modalClassName='bg-main-background rounded-2xl max-w-xl w-full mt-8 overflow-hidden'
+        open={open}
+        closeModal={closeModal}
+      >
+        <CollectSetting setCollectData={setCollectData} />
+      </Modal>
       <div
-        className='flex text-main-accent xs:[&>button:nth-child(n+6)]:hidden 
+        className='flex text-main-accent xs:[&>button:nth-child(n+6)]:hidden
                    md:[&>button]:!block [&>button:nth-child(n+4)]:hidden'
       >
         <input
@@ -94,11 +111,11 @@ export function InputOptions({
           ref={inputFileRef}
           multiple
         />
-        {filteredOptions.map(({ name, iconName, disabled }, index) => (
+        {filteredOptions.map(({ name, iconName, disabled, onClick }, index) => (
           <Button
-            className='accent-tab accent-bg-tab group relative rounded-full p-2 
+            className='accent-tab accent-bg-tab group relative rounded-full p-2
                        hover:bg-main-accent/10 active:bg-main-accent/20'
-            onClick={index === 0 ? onClick : undefined}
+            onClick={onClick}
             disabled={disabled}
             key={name}
           >

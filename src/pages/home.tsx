@@ -12,14 +12,12 @@ import { UpdateUsername } from '@components/home/update-username';
 import { MainHeader } from '@components/home/main-header';
 import { Tweet } from '@components/tweet/tweet';
 import { Loading } from '@components/ui/loading';
-import { Error } from '@components/ui/error';
 import type { ReactElement, ReactNode } from 'react';
 import {
   PublicationSortCriteria,
   PublicationTypes
 } from '@lens-protocol/react-web';
 import { PublicationMainFocus } from '@lens-protocol/client';
-import { useEffect } from 'react';
 export default function Home(): JSX.Element {
   const { isMobile } = useWindow();
 
