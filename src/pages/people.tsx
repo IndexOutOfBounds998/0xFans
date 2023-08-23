@@ -22,7 +22,7 @@ export default function People(): JSX.Element {
 
   const { data, loading, LoadMore } = useInfiniteUserScroll({
     observerId: profileId(user?.id.toString() ?? ''),
-    limit: 10,
+    limit: 20,
     sortCriteria: ProfileSortCriteria.MostPosts
   });
 
