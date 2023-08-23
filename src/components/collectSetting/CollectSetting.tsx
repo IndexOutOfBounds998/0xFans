@@ -10,10 +10,12 @@ import { Variants } from 'framer-motion';
 
 type CollectProps = {
   setCollectData: (obj: any) => void;
+  closeModal: () => void;
 };
 
 export default function CollectSetting({
-  setCollectData
+  setCollectData,
+  closeModal
 }: CollectProps): JSX.Element {
   const { data, loading } = useCurrencies();
 
@@ -30,11 +32,11 @@ export default function CollectSetting({
   //是否只有关注者才能收集
   let [followerOnly, setFollowerOnly] = useState(false);
   //代币种类
-  let [currencys, setCurrencys] = useState([]);
+  let [currencys, setCurrencys] = useState<any[]>([]);
   //所选的币种数量
   let [amount, setAmount] = useState(0);
   //所选的币种地址
-  let [selectAddress, setSelectAddress] = useState('');
+  let [selectAddress, setSelectAddress] = useState<any>({});
   //转发人获取到的收益百分比
   let [referralFee, setReferralFee] = useState(0);
   //该发布的最大收集次数
@@ -42,8 +44,8 @@ export default function CollectSetting({
   //是否保存当前操作
   let [isSave, setIsSave] = useState(false);
 
-  // 将这些数据返回给父组件，设置到setCollectData这个方法里
-  useEffect(() => {
+  const close = () => {
+    // 将这些数据返回给父组件，设置到setCollectData这个方法里
     setCollectData({
       isCollect: isCollect,
       isCost: isCost,
@@ -55,30 +57,17 @@ export default function CollectSetting({
       amount: amount,
       selectAddress: selectAddress,
       referralFee: referralFee,
-      collectLimit: collectLimit,
-      isSave: isSave
+      collectLimit: collectLimit
     });
-  }, [
-    isCollect,
-    isCost,
-    isReward,
-    isLimit,
-    isTimeLimit,
-    followerOnly,
-    currencys,
-    amount,
-    selectAddress,
-    referralFee,
-    collectLimit,
-    isSave
-  ]);
+    closeModal();
+  };
 
   useEffect(() => {
     if (!loading && data) {
       setCurrencys(data);
       setSelectAddress(data[0]);
     }
-  }, [loading, data]);
+  }, [loading]);
 
   //初始化
   const modelInfo = () => {
@@ -89,25 +78,27 @@ export default function CollectSetting({
     setIsTimeLimit(false);
     setFollowerOnly(false);
     setAmount(0);
-    setSelectAddress(data[0]);
+    setSelectAddress(data ? data[0] : null);
     setReferralFee(0);
     setCollectLimit(0);
   };
 
   return (
     <>
-      <div className='flex py-[15px] px-[20px]'>
-        <HeroIcon iconName='RectangleStackIcon' />
+      <div className='flex py-[15px] px-[20px] text-sm'>
+        <HeroIcon
+          iconName='RectangleStackIcon'
+          className='h-6 w-6 text-main-accent'
+        />
         <span className='ml-[5px]'>收集设置</span>
       </div>
-      <div className='overflow-auto border-t-[1px] border-[#00000014] p-[20px]'>
+      <div className='overflow-auto border-t-[1px] border-[#00000014] p-[20px] text-sm'>
         <div className='mb-[20px] flex'>
           <ReactSwitch
-            className='relative inline-flex h-[38px] w-[74px] shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-teal-900 transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75'
             checked={isCollect}
             onChange={(val) => {
               modelInfo();
-              setIsCollect(val);
+              setIsCollect(!!val);
             }}
           >
             <span className='ml-[8px] font-bold text-[#71717a]'>
@@ -119,14 +110,17 @@ export default function CollectSetting({
           <div className='pl-[30px]'>
             <div className='mb-[20px]'>
               <p className='mb-[10px] flex text-[16px]'>
-                <HeroIcon iconName='CurrencyDollarIcon' />
-                <span className='ml-[5px]'>收取费用</span>
+                <HeroIcon
+                  iconName='CurrencyDollarIcon'
+                  className='h-6 w-6 text-main-accent'
+                />
+                <span className='ml-[5px] text-sm'>收取费用</span>
               </p>
               <div className='mb-[20px] flex'>
                 <ReactSwitch
                   className='switch-basic'
                   checked={isCost}
-                  onChange={setIsCost}
+                  onChange={(val) => setIsCost}
                 >
                   <span className='ml-[10px] font-bold text-[#71717a]'>
                     每当有人收藏您的帖子时即可获得报酬
@@ -158,14 +152,17 @@ export default function CollectSetting({
                   </div>
                   <div className='w-full'>
                     <p className='mb-[10px] flex text-[16px]'>
-                      <HeroIcon iconName='ArrowsRightLeftIcon' />
-                      <span className='ml-[5px]'>镜像推荐奖励</span>
+                      <HeroIcon
+                        iconName='ArrowsRightLeftIcon'
+                        className='h-6 w-6 text-main-accent'
+                      />
+                      <span className='ml-[5px] text-sm'>镜像推荐奖励</span>
                     </p>
                     <div className='mb-[20px] flex'>
                       <ReactSwitch
                         className='switch-basic'
                         checked={isReward}
-                        onChange={setIsReward}
+                        onChange={(val) => setIsReward}
                       >
                         <span className='ml-[10px] font-bold text-[#71717a]'>
                           与扩大您的内容的人分享您的费用
@@ -194,14 +191,17 @@ export default function CollectSetting({
             </div>
             <div className='mb-[20px]'>
               <p className='mb-[10px] flex text-[16px]'>
-                <HeroIcon iconName='StarIcon' />
-                <span className='ml-[5px]'>限量版</span>
+                <HeroIcon
+                  iconName='StarIcon'
+                  className='h-6 w-6 text-main-accent'
+                />
+                <span className='ml-[5px] text-sm'>限量版</span>
               </p>
               <div className='mb-[20px] flex'>
                 <ReactSwitch
                   className='switch-basic'
                   checked={isLimit}
-                  onChange={setIsLimit}
+                  onChange={(val) => setIsLimit}
                 >
                   <span className='ml-[10px] font-bold text-[#71717a]'>
                     让帖子变的独一无二
@@ -225,14 +225,17 @@ export default function CollectSetting({
             </div>
             <div className='mb-[20px]'>
               <p className='mb-[10px] flex text-[16px]'>
-                <HeroIcon iconName='ClockIcon' />
-                <span className='ml-[5px]'>时间限制</span>
+                <HeroIcon
+                  iconName='ClockIcon'
+                  className='h-6 w-6 text-main-accent'
+                />
+                <span className='ml-[5px] text-sm'>时间限制</span>
               </p>
               <div className='mb-[20px] flex'>
                 <ReactSwitch
                   className='switch-basic'
                   checked={isTimeLimit}
-                  onChange={setIsTimeLimit}
+                  onChange={(val) => setIsTimeLimit}
                 >
                   <span className='ml-[10px] font-bold text-[#71717a]'>
                     收藏仅限前24小时
@@ -242,14 +245,17 @@ export default function CollectSetting({
             </div>
             <div className='mb-[20px]'>
               <p className='mb-[10px] flex text-[16px]'>
-                <HeroIcon iconName='UserGroupIcon' />
-                <span className='ml-[5px]'>谁可以收藏</span>
+                <HeroIcon
+                  iconName='UserGroupIcon'
+                  className='h-6 w-6 text-main-accent'
+                />
+                <span className='ml-[5px] text-sm'>谁可以收藏</span>
               </p>
               <div className='mb-[20px] flex'>
                 <ReactSwitch
                   className='switch-basic'
                   checked={followerOnly}
-                  onChange={setFollowerOnly}
+                  onChange={(val) => setFollowerOnly}
                 >
                   <span className='ml-[10px] font-bold text-[#71717a]'>
                     只有关注者才可以收藏
@@ -263,10 +269,16 @@ export default function CollectSetting({
         )}
       </div>
       <div className='flex justify-end px-[20px] pb-[15px]'>
-        <Button className='inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'>
+        <Button
+          className='inline-flex justify-center rounded-md border-[2px] border-transparent border-main-accent px-4 py-2 text-sm font-bold text-main-accent hover:bg-main-accent/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
+          onClick={closeModal}
+        >
           Cancel
         </Button>
-        <Button className='ml-[15px] inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'>
+        <Button
+          className='ml-[15px] inline-flex justify-center rounded-md border border-transparent bg-main-accent px-4 py-2 text-sm font-bold text-white hover:bg-main-accent/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
+          onClick={close}
+        >
           Save
         </Button>
       </div>

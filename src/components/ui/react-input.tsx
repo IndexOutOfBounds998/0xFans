@@ -7,7 +7,7 @@ import {
 } from 'react';
 
 type InputProps = ComponentPropsWithRef<'select'> & {
-  value?: any[];
+  value?: string | number;
   type: string | 'text';
   defaultValue?: string | number;
   onChange: (val: any) => void;

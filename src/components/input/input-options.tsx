@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@components/ui/button';
 import { HeroIcon } from '@components/ui/hero-icon';
@@ -80,7 +80,7 @@ export function InputOptions({
 
   const inputFileRef = useRef<HTMLInputElement>(null);
 
-  const setCollectData = (data) => {};
+  const [collectData, setCollectData] = useState();
 
   let filteredOptions = options;
 
@@ -97,7 +97,10 @@ export function InputOptions({
         open={open}
         closeModal={closeModal}
       >
-        <CollectSetting setCollectData={setCollectData} />
+        <CollectSetting
+          closeModal={closeModal}
+          setCollectData={setCollectData}
+        />
       </Modal>
       <div
         className='flex text-main-accent xs:[&>button:nth-child(n+6)]:hidden
