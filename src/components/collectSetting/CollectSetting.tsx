@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { useCurrencies } from '@lens-protocol/react-web';
 import { ReactSwitch } from '@components/ui/react-switch';
 import { ReactSelect } from '@components/ui/react-select';
@@ -6,8 +6,15 @@ import { ReactInput } from '@components/ui/react-input';
 import cn from 'clsx';
 import { HeroIcon } from '@components/ui/hero-icon';
 import { Button } from '@components/ui/button';
+import { Variants } from 'framer-motion';
 
-export default function CollectSetting({ setCollectData }) {
+type CollectProps = {
+  setCollectData: (obj: any) => void;
+};
+
+export default function CollectSetting({
+  setCollectData
+}: CollectProps): JSX.Element {
   const { data, loading } = useCurrencies();
 
   //此贴可以收藏
@@ -67,11 +74,11 @@ export default function CollectSetting({ setCollectData }) {
   ]);
 
   useEffect(() => {
-    if (!loading) {
+    if (!loading && data) {
       setCurrencys(data);
       setSelectAddress(data[0]);
     }
-  }, [loading]);
+  }, [loading, data]);
 
   //初始化
   const modelInfo = () => {
