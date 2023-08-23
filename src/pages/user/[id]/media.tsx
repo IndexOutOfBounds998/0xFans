@@ -9,29 +9,35 @@ import { Tweet } from '@components/tweet/tweet';
 import { Loading } from '@components/ui/loading';
 import { StatsEmpty } from '@components/tweet/stats-empty';
 import type { ReactElement, ReactNode } from 'react';
-import { Tweet as Tw } from '@lib/types/tweet';
+import { useInfinitePublicationsScroll } from '@lib/hooks/useInfinitePublicationsScroll';
+import { PublicationMainFocus, profileId } from '@lens-protocol/react-web';
 
 export default function UserMedia(): JSX.Element {
   const { user } = useUser();
 
   const { id, name, username } = user ?? {};
 
-  // const { data, loading } = useCollection();
+  const {
+    data,
+    loading,
+    LoadMore
+  } = useInfinitePublicationsScroll({
+    profileId: profileId(id as string ?? ''),
+    limit: 10,
+    metadataFilter: {
+      restrictPublicationMainFocusTo: [PublicationMainFocus.Image, PublicationMainFocus.Video]
+    }
+  });
 
-  // const sortedTweets = mergeData(true, data);
-
-  const loading = false;
-  const sortedTweets: Tw[] = [];
   return (
     <section>
       <SEO
-        title={`Media Tweets by ${name as string} (@${
-          username as string
-        }) / Twitter`}
+        title={`Media 0xFans by ${name as string} (@${username as string
+          }) / 0xFans`}
       />
       {loading ? (
         <Loading className='mt-5' />
-      ) : !sortedTweets ? (
+      ) : !data ? (
         <StatsEmpty
           title={`@${username as string} hasn't Tweeted Media`}
           description='Once they do, those Tweets will show up here.'
@@ -39,9 +45,10 @@ export default function UserMedia(): JSX.Element {
         />
       ) : (
         <AnimatePresence mode='popLayout'>
-          {sortedTweets.map((tweet) => (
+          {data.map((tweet) => (
             <Tweet {...tweet} key={tweet.id} />
           ))}
+          <LoadMore />
         </AnimatePresence>
       )}
     </section>

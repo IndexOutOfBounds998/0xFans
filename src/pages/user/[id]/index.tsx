@@ -7,36 +7,34 @@ import { UserDataLayout } from '@components/layout/user-data-layout';
 import { UserHomeLayout } from '@components/layout/user-home-layout';
 import { StatsEmpty } from '@components/tweet/stats-empty';
 import { Loading } from '@components/ui/loading';
-import { Tweet, TweetProps } from '@components/tweet/tweet';
+import { Tweet } from '@components/tweet/tweet';
 import type { ReactElement, ReactNode } from 'react';
+
+import { PublicationMainFocus, profileId } from '@lens-protocol/react-web';
+import { useInfinitePublicationsScroll } from '@lib/hooks/useInfinitePublicationsScroll';
 
 export default function UserTweets(): JSX.Element {
   const { user } = useUser();
 
   const { id, username } = user ?? {};
 
-  // const { data: pinnedData } = useDocument(
-  //   doc(tweetsCollection, pinnedTweet ?? 'null'),
-  //   {
-  //     disabled: !pinnedTweet,
-  //     allowNull: true,
-  //     includeUser: true
-  //   }
-  // );
-  const pinnedData: TweetProps[] = [];
-  const ownerLoading = false;
-  const peopleLoading = false;
-  // const { data: ownerTweets, loading: ownerLoading } = useCollection();
-
-  // const { data: peopleTweets, loading: peopleLoading } = useCollection();
-
-  const mergedTweets: TweetProps[] = [];
+  const {
+    data,
+    loading,
+    LoadMore
+  } = useInfinitePublicationsScroll({
+    profileId: profileId(id as string ?? ''),
+    limit: 10,
+    metadataFilter: {
+      restrictPublicationMainFocusTo: [PublicationMainFocus.TextOnly, PublicationMainFocus.Image, PublicationMainFocus.Video]
+    }
+  });
 
   return (
     <section>
-      {ownerLoading || peopleLoading ? (
+      {loading ? (
         <Loading className='mt-5' />
-      ) : !mergedTweets ? (
+      ) : !data ? (
         <StatsEmpty
           title={`@${username as string} hasn't tweeted`}
           description='When they do, their Tweets will show up here.'
@@ -45,10 +43,11 @@ export default function UserTweets(): JSX.Element {
         <AnimatePresence mode='popLayout'>
           {/* {pinnedData && (
             <Tweet pinned {...pinnedData} key={`pinned-${pinnedData.id}`} />
-          )}
-          {mergedTweets.map((tweet) => (
-            <Tweet {...tweet} profile={user} key={tweet.id} />
-          ))} */}
+          )} */}
+          {data.map((tweet) => (
+            <Tweet {...tweet} profile={tweet.user} key={tweet.id} />
+          ))}
+          <LoadMore />
         </AnimatePresence>
       )}
     </section>
