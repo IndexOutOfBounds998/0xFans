@@ -132,10 +132,10 @@ export function formatUser(userProfile: Profile) {
     name: formatNickName(userProfile.name),
     username: formatNickName(userProfile.handle),
     photoURL: userProfile.picture
-      ? formatAvater((userProfile.picture as MediaSet).original.url)
+      ? formatAvater((userProfile.picture as MediaSet)?.original?.url)
       : '',
     coverPhotoURL: userProfile.coverPicture
-      ? formatAvater((userProfile.coverPicture as MediaSet).original.url)
+      ? formatAvater((userProfile.coverPicture as MediaSet)?.original?.url)
       : '',
     createdAt: '',
     followers: userProfile.stats.totalFollowers,
