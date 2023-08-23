@@ -44,27 +44,26 @@ export function useInfiniteUserScroll<T>(
 
   const [formateList, setFormateList] = useState<User[]>([]);
 
-
   useEffect(() => {
     if (data) {
-      let list: User[] = data.filter((it => it != null)).map((item) => {
-        return formatUser(item) as User;
-      });
+      let list: User[] = data
+        .filter((it) => it != null)
+        .map((item) => {
+          return formatUser(item) as User;
+        });
       setFormateList(list);
     }
   }, [data]);
 
   useEffect(() => {
-    debugger
     if (loadMoreInView) {
       if (!hasMore) return;
       next();
-
     }
   }, [loadMoreInView]);
 
   const makeItInView = (): void => setLoadMoreInView(true);
-  
+
   const makeItNotInView = (): void => setLoadMoreInView(false);
 
   const isLoadMoreHidden = !hasMore;

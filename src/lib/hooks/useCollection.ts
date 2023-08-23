@@ -10,20 +10,20 @@ import { useEffect, useState } from 'react';
 
 type UseCollection<T> =
   | {
-    data: T[] | null;
-    loading: boolean;
-    user: User[];
-  }
+      data: T[] | null;
+      loading: boolean;
+      user: User[];
+    }
   | {
-    data: (T & { user: UserCardProps })[] | null;
-    loading: boolean;
-    user: User[];
-  }
+      data: (T & { user: UserCardProps })[] | null;
+      loading: boolean;
+      user: User[];
+    }
   | {
-    data: UserCardProps[] | null;
-    loading: boolean;
-    user: UserCardProps[] | null;
-  };
+      data: UserCardProps[] | null;
+      loading: boolean;
+      user: UserCardProps[] | null;
+    };
 
 type UserCardProps = Pick<
   User,
@@ -72,10 +72,11 @@ export function useCollection<T>(
 
   useEffect(() => {
     if (data) {
-      debugger
-      let list: UserCardProps[] = data.filter((it => it != null)).map((item) => {
-        return formatUser(item) as UserCardProps;
-      });
+      let list: UserCardProps[] = data
+        .filter((it) => it != null)
+        .map((item) => {
+          return formatUser(item) as UserCardProps;
+        });
       setFormateList(list);
     }
   }, [data]);
