@@ -10,16 +10,16 @@ export function LoginMain(): JSX.Element {
   return (
     <main className='grid lg:grid-cols-[1fr,45vw]'>
       <div className='relative hidden items-center justify-center  lg:flex'>
-        <NextImage
+        {/* <NextImage
           imgClassName='object-cover'
           blurClassName='bg-accent-blue'
           src='/assets/twitter-banner.png'
-          alt='Twitter banner'
+          alt='0xFans banner'
           layout='fill'
           useSkeleton
-        />
+        /> */}
         <i className='absolute'>
-          <CustomIcon className='h-96 w-96 text-white' iconName='TwitterIcon' />
+          <CustomIcon className='h-96 w-96 text-white' iconName='oxFnasIcon' />
         </i>
       </div>
       <div className='flex flex-col items-center justify-between gap-6 p-8 lg:items-start lg:justify-center'>
