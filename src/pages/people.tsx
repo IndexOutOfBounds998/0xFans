@@ -22,8 +22,8 @@ export default function People(): JSX.Element {
 
   const { data, loading, LoadMore } = useInfiniteUserScroll({
     observerId: profileId(user?.id.toString() ?? ''),
-    limit: 5,
-    sortCriteria: ProfileSortCriteria.MostFollowers
+    limit: 10,
+    sortCriteria: ProfileSortCriteria.MostPosts
   });
 
   const { back } = useRouter();

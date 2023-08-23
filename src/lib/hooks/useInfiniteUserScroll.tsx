@@ -3,14 +3,13 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Loading } from '@components/ui/loading';
 import {
-  MediaSet,
   ProfileId,
   ProfileSortCriteria,
   useExploreProfiles
 } from '@lens-protocol/react-web';
 
 import { User } from '@lib/types/user';
-import { formatAvater, formatNickName, formatUser } from '@lib/FormatContent';
+import { formatUser } from '@lib/FormatContent';
 
 type InfiniteScroll<T> = {
   data: User[] | null;
@@ -45,23 +44,27 @@ export function useInfiniteUserScroll<T>(
 
   const [formateList, setFormateList] = useState<User[]>([]);
 
+
   useEffect(() => {
     if (data) {
       let list: User[] = data.filter((it => it != null)).map((item) => {
         return formatUser(item) as User;
       });
-      setFormateList((prevList) => [...prevList, ...list]);
+      setFormateList(list);
     }
   }, [data]);
 
   useEffect(() => {
+    debugger
     if (loadMoreInView) {
       if (!hasMore) return;
       next();
+
     }
   }, [loadMoreInView]);
 
   const makeItInView = (): void => setLoadMoreInView(true);
+  
   const makeItNotInView = (): void => setLoadMoreInView(false);
 
   const isLoadMoreHidden = !hasMore;

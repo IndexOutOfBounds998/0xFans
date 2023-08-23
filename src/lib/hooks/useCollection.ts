@@ -72,6 +72,7 @@ export function useCollection<T>(
 
   useEffect(() => {
     if (data) {
+      debugger
       let list: UserCardProps[] = data.filter((it => it != null)).map((item) => {
         return formatUser(item) as UserCardProps;
       });
