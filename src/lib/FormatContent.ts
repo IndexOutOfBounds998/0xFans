@@ -1,7 +1,10 @@
-import { MediaSet, Profile } from '@lens-protocol/react-web';
+import { MediaSet, Profile, Attribute } from '@lens-protocol/react-web';
+
+
 import { IPFS_GATEWAY } from './const';
 import { User } from './types/user';
 import { Theme } from '@lens-protocol/widgets-react';
+import { Maybe } from '@lens-protocol/client';
 
 export function formatContent(item: any) {
   if (!item.contentResponse) {
@@ -126,7 +129,9 @@ export function formatDate(dateString: any) {
 }
 
 export function formatUser(userProfile: Profile) {
+  
   let userFormate: User = {
+
     id: userProfile.id.toString(),
     bio: userProfile.bio,
     name: formatNickName(userProfile.name),
@@ -142,8 +147,8 @@ export function formatUser(userProfile: Profile) {
     following: userProfile.stats.totalFollowing,
     theme: Theme.dark,
     accent: null,
-    website: '',
-    location: '',
+    website: getProfileAttribute(userProfile?.__attributes, 'website'),
+    location: getProfileAttribute(userProfile?.__attributes, 'location'),
     verified: true,
     totalTweets: userProfile.stats.totalPosts,
     totalPhotos: 0,
@@ -153,17 +158,22 @@ export function formatUser(userProfile: Profile) {
 
   return userFormate;
 }
+type Key = 'hasPrideLogo' | 'app' | 'twitter' | 'location' | 'website' | 'statusEmoji' | 'statusMessage';
+
+const getProfileAttribute = (attributes: Maybe<Attribute[]> | undefined, key: Key): string => {
+  return attributes?.find((el) => el.key === key)?.value ?? '';
+};
 
 export function formatImgList(media: any) {
   const obj =
     media && media.length
       ? media.map((img: any, index: any) => {
-          return {
-            id: index.toString(),
-            src: img.original.url,
-            alt: img.original.altTag ? img.original.altTag : ''
-          };
-        })
+        return {
+          id: index.toString(),
+          src: img.original.url,
+          alt: img.original.altTag ? img.original.altTag : ''
+        };
+      })
       : null;
   return obj;
 }
@@ -172,13 +182,13 @@ export function formatVideoList(media: any) {
   const obj =
     media && media.length
       ? media.map((video: any, index: any) => {
-          return {
-            id: index.toString(),
-            url: video.original.url,
-            alt: video.original.altTag ? video.original.altTag : '',
-            cover: video.original.cover ? video.original.cover : ''
-          };
-        })
+        return {
+          id: index.toString(),
+          url: video.original.url,
+          alt: video.original.altTag ? video.original.altTag : '',
+          cover: video.original.cover ? video.original.cover : ''
+        };
+      })
       : null;
   return obj;
 }

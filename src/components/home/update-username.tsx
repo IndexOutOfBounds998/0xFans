@@ -14,6 +14,9 @@ import { Modal } from '@components/modal/modal';
 import { UsernameModal } from '@components/modal/username-modal';
 import { InputField } from '@components/input/input-field';
 import type { FormEvent, ChangeEvent } from 'react';
+import {
+  useUpdateProfileDetails,
+} from '@lens-protocol/react-web';
 
 export function UpdateUsername(): JSX.Element {
   const [alreadySet, setAlreadySet] = useState(false);
@@ -23,8 +26,17 @@ export function UpdateUsername(): JSX.Element {
   const [inputValue, setInputValue] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const { user } = useAuth();
+  const { user, profileByMe } = useAuth();
   const { open, openModal, closeModal } = useModal();
+
+
+  // let execute: any, error: any, isPending: any;
+
+  // if (profileByMe) {
+  //   ({ execute, error, isPending } = useUpdateProfileDetails({
+  //     profile: profileByMe, upload: null
+  //   }));
+  // }
 
   useEffect(() => {
     const checkAvailability = async (value: string): Promise<void> => {

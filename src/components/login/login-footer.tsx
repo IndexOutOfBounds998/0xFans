@@ -1,23 +1,23 @@
 const footerLinks = [
-  ['About', 'https://about.twitter.com'],
-  ['Help Center', 'https://help.twitter.com'],
-  ['Privacy Policy', 'https://twitter.com/tos'],
-  ['Cookie Policy', 'https://support.twitter.com/articles/20170514'],
-  ['Accessibility', 'https://help.twitter.com/resources/accessibility'],
+  ['About', 'https://about.0xfans.com'],
+  ['Help Center', 'https://help.0xfans.com'],
+  ['Privacy Policy', 'https://0xfans.com/tos'],
+  ['Cookie Policy', 'https://support.0xfans.com/articles/20170514'],
+  ['Accessibility', 'https://help.0xfans.com/resources/accessibility'],
   [
     'Ads Info',
-    'https://business.twitter.com/en/help/troubleshooting/how-twitter-ads-work.html'
+    'https://business.0xfans.com/en/help/troubleshooting/how-0xfans-ads-work.html'
   ],
-  ['Blog', 'https://blog.twitter.com'],
-  ['Status', 'https://status.twitterstat.us'],
-  ['Careers', 'https://careers.twitter.com'],
-  ['Brand Resources', 'https://about.twitter.com/press/brand-assets'],
-  ['Advertising', 'https://ads.twitter.com/?ref=gl-tw-tw-twitter-advertise'],
-  ['Marketing', 'https://marketing.twitter.com'],
-  ['Twitter for Business', 'https://business.twitter.com'],
-  ['Developers', 'https://developer.twitter.com'],
-  ['Directory', 'https://twitter.com/i/directory/profiles'],
-  ['Settings', 'https://twitter.com/settings']
+  ['Blog', 'https://blog.0xfans.com'],
+  ['Status', 'https://status.0xfans.us'],
+  ['Careers', 'https://careers.0xfans.com'],
+  ['Brand Resources', 'https://about.0xfans.com/press/brand-assets'],
+  ['Advertising', 'https://ads.0xfans.com/?ref=gl-tw-tw-0xfans-advertise'],
+  ['Marketing', 'https://marketing.0xfans.com'],
+  ['Twitter for Business', 'https://business.0xfans.com'],
+  ['Developers', 'https://developer.0xfans.com'],
+  ['Directory', 'https://0xfans.com/i/directory/profiles'],
+  ['Settings', 'https://0xfans.com/settings']
 ] as const;
 
 export function LoginFooter(): JSX.Element {

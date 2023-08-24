@@ -5,7 +5,9 @@ import {
   useWalletLogin,
   useActiveProfile,
   useWalletLogout,
-  MediaSet
+  MediaSet,
+  Profile,
+  ProfileOwnedByMe
 } from '@lens-protocol/react-web';
 import { getWalletClient } from '@wagmi/core';
 import { formatAvater, formatNickName } from '@lib/FormatContent';
@@ -34,6 +36,7 @@ type UserDetailsProps = Pick<
 >;
 type AuthContext = {
   user: UserDetailsProps | null;
+  profileByMe: ProfileOwnedByMe | undefined;
   error: Error | null;
   loading: boolean;
   isAdmin: boolean;
@@ -51,6 +54,7 @@ export function AuthContextProvider({
   children
 }: AuthContextProviderProps): JSX.Element {
   const [user, setUser] = useState<UserDetailsProps | null>(null);
+  const [profileByMe, setProfile] = useState<ProfileOwnedByMe>();
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -69,8 +73,16 @@ export function AuthContextProvider({
   const { execute: logout, isPending } = useWalletLogout();
 
   useEffect(() => {
+    if (profile) {
+      setProfile(profile);
+    }
+  }, [profile]);
+
+  useEffect(() => {
+
     const manageUser = async (): Promise<void> => {
       if (profile) {
+
         let userObj: UserDetailsProps = {
           id: profile.id,
           bio: profile.bio,
@@ -129,6 +141,7 @@ export function AuthContextProvider({
 
   const value: AuthContext = {
     user,
+    profileByMe,
     error,
     loading,
     isAdmin,
