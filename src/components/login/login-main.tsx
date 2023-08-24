@@ -31,8 +31,8 @@ export function LoginMain(): JSX.Element {
         </i>
         <div className='flex max-w-xs flex-col gap-4 font-twitter-chirp-extended lg:max-w-none lg:gap-16'>
           <h1
-            className='text-3xl before:content-["See_what’s_happening_in_the_world_right_now."]
-                       lg:text-6xl lg:before:content-["Happening_now"]'
+            className='text-3xl before:content-["Sign_up_to_support_your_favorite_creators."]
+                       lg:text-6xl lg:before:content-["Sign_up_to_support_your_favorite_creators"]'
           />
           <h2 className='hidden text-xl lg:block lg:text-3xl'>
             Join 0xFans today.
