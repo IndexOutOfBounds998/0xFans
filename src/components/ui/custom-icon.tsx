@@ -194,7 +194,7 @@ function LensIcon({ className }: IconProps): JSX.Element {
 function oxfansLeft({ className }: IconProps): JSX.Element {
   return (
 
-    <svg className={className} xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0.00 0.00 45.00 36.00">
+    <svg className={cn('fill-current', className)} viewBox='0 0 50 50'> xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0.00 0.00 45.00 36.00">
       <g stroke-width="2.00" fill="none" stroke-linecap="butt">
         <path stroke="#80cef2" vector-effect="non-scaling-stroke" d="
   M 34.74 14.69
