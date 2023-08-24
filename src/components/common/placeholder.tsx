@@ -12,7 +12,7 @@ export function Placeholder(): JSX.Element {
       <i>
         <CustomIcon
           className='h-20 w-20 text-[#1DA1F2]'
-          iconName='TwitterIcon'
+          iconName='oxfansLeft'
         />
       </i>
     </main>

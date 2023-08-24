@@ -136,8 +136,11 @@ export function InputForm({
             {...fromTop}
           >
             <p className='font-bold'>Everyone</p>
+
             <HeroIcon className='h-4 w-4' iconName='ChevronDownIcon' />
           </motion.button>
+
+          
         )}
         <div className='flex items-center gap-3'>
           <TextArea
