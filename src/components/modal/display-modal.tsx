@@ -33,7 +33,7 @@ export function DisplayModal({ closeModal }: DisplayModalProps): JSX.Element {
           These settings affect all the 0xFans accounts on this browser.
         </p>
       </div>
-      <article
+      {/* <article
         className='hover-animation mx-8 rounded-2xl border 
                    border-light-border px-4 py-3 dark:border-dark-border'
       >
@@ -41,7 +41,7 @@ export function DisplayModal({ closeModal }: DisplayModalProps): JSX.Element {
           <UserAvatar src='/assets/twitter-avatar.jpg' alt='Twitter' />
           <div>
             <div className='flex gap-1'>
-              <UserName verified name='Twitter' />
+              <UserName verified name='0xFans' />
               <p className='text-light-secondary dark:text-dark-secondary'>
                 @twitter
               </p>
@@ -58,7 +58,7 @@ export function DisplayModal({ closeModal }: DisplayModalProps): JSX.Element {
             </p>
           </div>
         </div>
-      </article>
+      </article> */}
       <div className='flex w-full flex-col gap-1'>
         <p className='text-sm font-bold text-light-secondary dark:text-dark-secondary'>
           Color
