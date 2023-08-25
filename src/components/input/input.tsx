@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import cn from 'clsx';
 import { toast } from 'react-hot-toast';
 import { useAuth } from '@lib/context/auth-context';
-import { sleep } from '@lib/utils';
 import { getImagesData } from '@lib/validation';
 import { UserAvatar } from '@components/user/user-avatar';
 import { InputForm, fromTop } from './input-form';
@@ -13,10 +12,10 @@ import { InputOptions } from './input-options';
 import type { ReactNode, FormEvent, ChangeEvent, ClipboardEvent } from 'react';
 import type { Variants } from 'framer-motion';
 import type { User } from '@lib/types/user';
-import type { Tweet } from '@lib/types/tweet';
 import type { FilesWithId, ImagesPreview, ImageData } from '@lib/types/file';
 import { useSendComment } from '@lib/hooks/useSendComment';
-import { MediaSet, ProfileOwnedByMe } from '@lens-protocol/react-web';
+import { usePost } from '@lib/hooks/usePost';
+import { Profile } from '@lens-protocol/react-web';
 import { formatAvater } from '@lib/FormatContent';
 
 type InputProps = {
@@ -48,6 +47,7 @@ export function Input({
   const [inputValue, setInputValue] = useState('');
   const [loading, setLoading] = useState(false);
   const [visited, setVisited] = useState(false);
+  const [collectData, setCollectData] = useState({});
 
   const { user } = useAuth();
   const { name, username, photoURL } = user as User;
@@ -60,6 +60,15 @@ export function Input({
   //发布评论
   const { submit: send, loading: sendLoad } = useSendComment({
     publication: parent
+  });
+
+  const callbackOnError = (error: any) => {
+    alert('发布失败' + error);
+  };
+  //发布帖子
+  const { submit: post, postLoading } = usePost({
+    callbackOnError: callbackOnError,
+    profile: user
   });
 
   useEffect(
@@ -80,8 +89,24 @@ export function Input({
 
     const userId = user?.id as string;
 
+    console.log(selectedImages);
     if (inputValue.trim()) {
-      // await Promise.all([send(inputValue.trim(), user)]);
+      const profileUser = user as unknown as Profile;
+      const content = inputValue.trim();
+      if (isReplying) await Promise.all([send(content, profileUser)]);
+      else {
+        await Promise.all([
+          post(
+            {
+              images: selectedImages,
+              title: '',
+              content: content,
+              collectData: collectData
+            },
+            profileUser
+          )
+        ]);
+      }
     }
 
     if (!modal && !replyModal) {
@@ -259,6 +284,7 @@ export function Input({
                 isValidTweet={isValidTweet}
                 isCharLimitExceeded={isCharLimitExceeded}
                 handleImageUpload={handleImageUpload}
+                setCollectData={setCollectData}
               />
             )}
           </AnimatePresence>
