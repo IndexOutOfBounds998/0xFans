@@ -15,6 +15,7 @@ import {
 import { useFeedInfiniteScroll } from '@lib/hooks/useFeedInfiniteScroll';
 import { useAuth } from '@lib/context/auth-context';
 import { Error } from '@components/ui/error';
+import { MainHeader } from '@components/home/main-header';
 export default function Home(): JSX.Element {
   const { user } = useAuth();
   const { isMobile } = useWindow();
@@ -24,7 +25,12 @@ export default function Home(): JSX.Element {
   return (
     <MainContainer>
       <SEO title='Home / 0xFans' />
-
+      <MainHeader
+        useMobileSidebar
+        title='Feed'
+        className='flex items-center justify-between'
+      >
+      </MainHeader>
       {!isMobile && <Input />}
       <section className='mt-0.5 xs:mt-0'>
         {loading ? (
