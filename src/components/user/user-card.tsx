@@ -14,7 +14,7 @@ type UserCardProps = User & {
 
 export function UserCard(user: UserCardProps): JSX.Element {
   const { id, bio, name, modal, follow, username, verified, photoURL } = user;
-
+  
   return (
     <Link href={`/user/${id}`}>
       <span

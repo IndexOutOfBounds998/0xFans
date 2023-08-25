@@ -41,7 +41,7 @@ export default function People(): JSX.Element {
           <>
             <motion.div className='mt-0.5' {...variants}>
               {data?.map((userData) => (
-                <UserCard {...userData} key={userData.id.toString()} follow />
+                <UserCard {...userData} key={userData.id.toString()} follow={userData.follow} />
               ))}
             </motion.div>
             <LoadMore />

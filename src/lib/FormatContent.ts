@@ -127,10 +127,14 @@ export function formatDate(dateString: any) {
     return formatMonthAndDay(inputDate);
   }
 }
+type UserCardProps = User & {
+  modal?: boolean;
+  follow?: boolean;
+};
 
 export function formatUser(userProfile: Profile) {
 
-  let userFormate: User = {
+  let userFormate: UserCardProps = {
 
     id: userProfile.id.toString(),
     bio: userProfile.bio,
@@ -153,7 +157,9 @@ export function formatUser(userProfile: Profile) {
     totalTweets: userProfile.stats.totalPosts,
     totalPhotos: 0,
     updatedAt: '',
-    pinnedTweet: ''
+    pinnedTweet: '',
+    follow: userProfile.isFollowedByMe,
+    modal: false
   };
 
   return userFormate;

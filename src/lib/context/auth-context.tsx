@@ -13,7 +13,7 @@ import { getWalletClient } from '@wagmi/core';
 import { formatAvater, formatNickName, getProfileAttribute } from '@lib/FormatContent';
 
 import type { User } from '@lib/types/user';
-type UserDetailsProps = Pick<
+type UserProps = Pick<
   User,
   | 'id'
   | 'bio'
@@ -35,7 +35,7 @@ type UserDetailsProps = Pick<
   | 'createdAt'
 >;
 type AuthContext = {
-  user: UserDetailsProps | null;
+  user: UserCardProps | null;
   profileByMe: ProfileOwnedByMe | undefined;
   error: Error | null;
   loading: boolean;
@@ -50,10 +50,15 @@ type AuthContextProviderProps = {
   children: ReactNode;
 };
 
+type UserCardProps = UserProps & {
+  modal?: boolean;
+  follow?: boolean;
+};
+
 export function AuthContextProvider({
   children
 }: AuthContextProviderProps): JSX.Element {
-  const [user, setUser] = useState<UserDetailsProps | null>(null);
+  const [user, setUser] = useState<UserCardProps | null>(null);
   const [profileByMe, setProfile] = useState<ProfileOwnedByMe>();
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(true);
@@ -83,7 +88,7 @@ export function AuthContextProvider({
     const manageUser = async (): Promise<void> => {
       if (profile) {
 
-        let userObj: UserDetailsProps = {
+        let userObj: UserCardProps = {
           id: profile.id,
           bio: profile.bio,
           name: formatNickName(profile.handle),
@@ -103,7 +108,8 @@ export function AuthContextProvider({
           accent: null,
           website: getProfileAttribute(profile?.__attributes, 'website'),
           location: getProfileAttribute(profile?.__attributes, 'location'),
-          createdAt: null
+          createdAt: null,
+          follow:profile.isFollowedByMe
         };
         setUser(userObj);
       }

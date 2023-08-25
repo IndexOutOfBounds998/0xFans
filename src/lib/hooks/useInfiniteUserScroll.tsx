@@ -11,14 +11,19 @@ import {
 import { User } from '@lib/types/user';
 import { formatUser } from '@lib/FormatContent';
 
+type UserCardProps = User & {
+  modal?: boolean;
+  follow?: boolean;
+};
+
 type InfiniteScroll<T> = {
-  data: User[] | null;
+  data: UserCardProps[] | null;
   loading: Boolean;
   LoadMore: () => JSX.Element;
 };
 
 type InfiniteScrollWithUser<T> = {
-  data: User[] | null;
+  data: UserCardProps[] | null;
   loading: Boolean;
   LoadMore: () => JSX.Element;
 };
@@ -49,7 +54,7 @@ export function useInfiniteUserScroll<T>(
       let list: User[] = data
         .filter((it) => it != null)
         .map((item) => {
-          return formatUser(item) as User;
+          return formatUser(item) as UserCardProps;
         });
       setFormateList(list);
     }
