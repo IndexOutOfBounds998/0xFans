@@ -40,7 +40,7 @@ export default function UserMedia(): JSX.Element {
       ) : !data ? (
         <StatsEmpty
           title={`@${username as string} hasn't Tweeted Media`}
-          description='Once they do, those Tweets will show up here.'
+          description='Once they do, those Posts will show up here.'
           imageData={{ src: '/assets/no-media.png', alt: 'No media' }}
         />
       ) : (
