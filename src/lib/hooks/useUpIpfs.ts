@@ -17,10 +17,10 @@ export function useUpIpfs({ type }: useUpData) {
   const execute = async (data: any) => {
     setLoad(true);
     const res = await ipfsApi[type as keyof typeof ipfsApi](data, config);
-    if (res?.data.IpfsHash) {
-      setUrl('ipfs://' + res.data.IpfsHash);
+    if (res?.IpfsHash) {
+      setUrl('ipfs://' + res.IpfsHash);
       setLoad(false);
-      return res.data.IpfsHash;
+      return res.IpfsHash;
     }
   };
 

@@ -120,7 +120,7 @@ export default function CollectSetting({
                 <ReactSwitch
                   className='switch-basic'
                   checked={isCost}
-                  onChange={(val) => setIsCost}
+                  onChange={(val: boolean) => setIsCost(val)}
                 >
                   <span className='ml-[10px] font-bold text-[#71717a]'>
                     每当有人收藏您的帖子时即可获得报酬
@@ -136,7 +136,7 @@ export default function CollectSetting({
                         className='w-full rounded-[10px]'
                         type='number'
                         value={amount}
-                        onChange={(val) => setAmount(val ? val : 0)}
+                        onChange={(val) => setAmount(val < 0 ? 0 : val)}
                         defaultValue={0}
                       />
                     </div>
@@ -162,7 +162,7 @@ export default function CollectSetting({
                       <ReactSwitch
                         className='switch-basic'
                         checked={isReward}
-                        onChange={(val) => setIsReward}
+                        onChange={(val: boolean) => setIsReward(val)}
                       >
                         <span className='ml-[10px] font-bold text-[#71717a]'>
                           与扩大您的内容的人分享您的费用
@@ -176,7 +176,7 @@ export default function CollectSetting({
                           className='w-full rounded-[10px]'
                           type='number'
                           value={referralFee}
-                          onChange={(val) => setReferralFee(val ? val : 0)}
+                          onChange={(val) => setReferralFee(val < 0 ? 0 : val)}
                           defaultValue={0}
                         />
                       </div>
@@ -201,7 +201,7 @@ export default function CollectSetting({
                 <ReactSwitch
                   className='switch-basic'
                   checked={isLimit}
-                  onChange={(val) => setIsLimit}
+                  onChange={(val: boolean) => setIsLimit(val)}
                 >
                   <span className='ml-[10px] font-bold text-[#71717a]'>
                     让帖子变的独一无二
@@ -235,7 +235,7 @@ export default function CollectSetting({
                 <ReactSwitch
                   className='switch-basic'
                   checked={isTimeLimit}
-                  onChange={(val) => setIsTimeLimit}
+                  onChange={(val: boolean) => setIsTimeLimit(val)}
                 >
                   <span className='ml-[10px] font-bold text-[#71717a]'>
                     收藏仅限前24小时
@@ -255,7 +255,7 @@ export default function CollectSetting({
                 <ReactSwitch
                   className='switch-basic'
                   checked={followerOnly}
-                  onChange={(val) => setFollowerOnly}
+                  onChange={(val: boolean) => setFollowerOnly(val)}
                 >
                   <span className='ml-[10px] font-bold text-[#71717a]'>
                     只有关注者才可以收藏

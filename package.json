@@ -17,6 +17,7 @@
     "@heroicons/react": "^2.0.11",
     "@lens-protocol/client": "^1.2.0",
     "@lens-protocol/react-web": "^1.2.1",
+    "@lens-protocol/sdk-gated": "^1.2.0",
     "@lens-protocol/wagmi": "^2.0.1",
     "@lens-protocol/widgets-react": "^0.0.21",
     "@rainbow-me/rainbowkit": "^1.0.6",
