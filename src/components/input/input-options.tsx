@@ -28,6 +28,7 @@ type InputOptionsProps = {
   handleImageUpload: (
     e: ChangeEvent<HTMLInputElement> | ClipboardEvent<HTMLTextAreaElement>
   ) => void;
+  setCollectData?: () => void;
 };
 
 export function InputOptions({
@@ -37,7 +38,8 @@ export function InputOptions({
   inputLength,
   isValidTweet,
   isCharLimitExceeded,
-  handleImageUpload
+  handleImageUpload,
+  setCollectData
 }: InputOptionsProps): JSX.Element {
   const { open, openModal, closeModal } = useModal();
 
@@ -79,8 +81,6 @@ export function InputOptions({
   ];
 
   const inputFileRef = useRef<HTMLInputElement>(null);
-
-  const [collectData, setCollectData] = useState();
 
   let filteredOptions = options;
 
