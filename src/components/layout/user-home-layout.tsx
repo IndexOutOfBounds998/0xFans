@@ -72,7 +72,7 @@ export function UserHomeLayout({ children }: LayoutProps): JSX.Element {
                   <UserEditProfile />
                 ) : (
                   <div className='flex gap-2 self-start'>
-                    <UserShare username={userData.username} />
+                    <UserShare id={userData.id as string} />
                     <Button
                       className='dark-bg-tab group relative cursor-not-allowed border border-light-line-reply p-2
                                  hover:bg-light-primary/10 active:bg-light-primary/20 dark:border-light-secondary 

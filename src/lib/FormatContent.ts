@@ -129,12 +129,12 @@ export function formatDate(dateString: any) {
 }
 
 export function formatUser(userProfile: Profile) {
-  
+
   let userFormate: User = {
 
     id: userProfile.id.toString(),
     bio: userProfile.bio,
-    name: formatNickName(userProfile.name),
+    name: formatNickName(userProfile.name) ? formatNickName(userProfile.name) : formatNickName(userProfile.handle),
     username: formatNickName(userProfile.handle),
     photoURL: userProfile.picture
       ? formatAvater((userProfile.picture as MediaSet)?.original?.url)

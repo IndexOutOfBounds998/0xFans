@@ -10,13 +10,13 @@ import { ToolTip } from '@components/ui/tooltip';
 import { variants } from '@components/tweet/tweet-actions';
 
 type UserShareProps = {
-  username: string;
+  id: string;
 };
 
-export function UserShare({ username }: UserShareProps): JSX.Element {
+export function UserShare({ id }: UserShareProps): JSX.Element {
   const handleCopy = (closeMenu: () => void) => async (): Promise<void> => {
     closeMenu();
-    await navigator.clipboard.writeText(`${siteURL}/user/${username}`);
+    await navigator.clipboard.writeText(`${siteURL}/user/${id}`);
     toast.success('Copied to clipboard');
   };
 
