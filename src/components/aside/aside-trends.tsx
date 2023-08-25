@@ -25,7 +25,7 @@ export function AsideTrends({ inTrendsPage }: AsideTrendsProps): JSX.Element {
   // const { data, loading } = useTrends(1, inTrendsPage ? 100 : 10, {
   //   refreshInterval: 30000
   // });
-  const { data, loading } = useTrending({ limit: 4 });
+  const { data, loading } = useTrending({ limit: 10 });
   console.log(data);
 
   // const { trends, location } = data ?? {};
@@ -83,14 +83,14 @@ export function AsideTrends({ inTrendsPage }: AsideTrendsProps): JSX.Element {
             // </Link>
           ))}
           {!inTrendsPage && (
-            // <Link href='/trends'>
+            <Link href='/trends'>
             <span
               className='custom-button accent-tab hover-card block w-full rounded-2xl
                            rounded-t-none text-center text-main-accent'
             >
               Show more
             </span>
-            // </Link>
+         </Link>
           )}
         </motion.div>
       ) : (

@@ -35,11 +35,6 @@ export function useTrending({ limit }: useTrendingArgs) {
     const result = await Trending(query, config);
     let items = result.data.allPublicationsTags.items;
     if (items) {
-      items.unshift({
-        tag: 'All',
-        total: 0,
-        __typename: 'TagResult'
-      });
       setData(items);
     }
     setLoading(false);
