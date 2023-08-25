@@ -43,7 +43,7 @@ export function FollowButton({
       >
         <ActionModal
           title={`Unfollow @${userTargetUsername}?`}
-          description='Their Tweets will no longer show up in your home timeline. You can still view their profile, unless their Tweets are protected.'
+          description='Their Posts will no longer show up in your home timeline. You can still view their profile, unless their Posts are protected.'
           mainBtnLabel='Unfollow'
           action={handleUnfollow}
           closeModal={closeModal}

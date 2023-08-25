@@ -23,7 +23,7 @@ type NoStatsData = Record<CombinedTypes, StatsEmptyProps>;
 
 const allNoStatsData: Readonly<NoStatsData> = {
   retweets: {
-    title: 'Amplify Tweets you like',
+    title: 'Amplify Posts you like',
     imageData: { src: '/assets/no-retweets.png', alt: 'No retweets' },
     description:
       'Share someone else’s Tweet on your timeline by Retweeting it. When you do, it’ll show up here.'
