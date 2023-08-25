@@ -109,7 +109,7 @@ export function AuthContextProvider({
           website: getProfileAttribute(profile?.__attributes, 'website'),
           location: getProfileAttribute(profile?.__attributes, 'location'),
           createdAt: null,
-          follow:profile.isFollowedByMe
+          follow: profile.isFollowedByMe
         };
         setUser(userObj);
       }
