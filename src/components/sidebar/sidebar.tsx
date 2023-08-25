@@ -25,13 +25,11 @@ const navLinks: Readonly<NavLink[]> = [
     linkName: 'Home',
     iconName: 'HomeIcon'
   },
-  // {
-  //   href: '/explore',
-  //   linkName: 'Explore',
-  //   iconName: 'HashtagIcon',
-  //   disabled: true,
-  //   canBeHidden: true
-  // },
+  {
+    href: '/feed',
+    linkName: 'Feed',
+    iconName: 'HashtagIcon'
+  },
   {
     href: '/notifications',
     linkName: 'Notifications',
