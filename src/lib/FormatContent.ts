@@ -160,7 +160,7 @@ export function formatUser(userProfile: Profile) {
 }
 type Key = 'hasPrideLogo' | 'app' | 'twitter' | 'location' | 'website' | 'statusEmoji' | 'statusMessage';
 
-const getProfileAttribute = (attributes: Maybe<Attribute[]> | undefined, key: Key): string => {
+export const getProfileAttribute = (attributes: Maybe<Attribute[]> | undefined, key: Key): string => {
   return attributes?.find((el) => el.key === key)?.value ?? '';
 };
 

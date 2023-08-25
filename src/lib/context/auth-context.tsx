@@ -10,7 +10,7 @@ import {
   ProfileOwnedByMe
 } from '@lens-protocol/react-web';
 import { getWalletClient } from '@wagmi/core';
-import { formatAvater, formatNickName } from '@lib/FormatContent';
+import { formatAvater, formatNickName, getProfileAttribute } from '@lib/FormatContent';
 
 import type { User } from '@lib/types/user';
 type UserDetailsProps = Pick<
@@ -87,7 +87,7 @@ export function AuthContextProvider({
           id: profile.id,
           bio: profile.bio,
           name: formatNickName(profile.handle),
-          username: profile?.name || 'null',
+          username: profile?.name || formatNickName(profile.handle),
           photoURL: formatAvater((profile?.picture as MediaSet)?.original?.url),
           verified: true,
           following: profile.stats.totalFollowing,
@@ -96,13 +96,13 @@ export function AuthContextProvider({
           coverPhotoURL: formatAvater(
             (profile?.coverPicture as MediaSet)?.original.url
           ),
-          location: null,
           updatedAt: null,
           totalPhotos: 0,
           pinnedTweet: null,
           theme: null,
           accent: null,
-          website: null,
+          website: getProfileAttribute(profile?.__attributes, 'website'),
+          location: getProfileAttribute(profile?.__attributes, 'location'),
           createdAt: null
         };
         setUser(userObj);
