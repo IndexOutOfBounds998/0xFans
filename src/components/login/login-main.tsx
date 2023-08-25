@@ -5,7 +5,7 @@ import { Button } from '@components/ui/button';
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 export function LoginMain(): JSX.Element {
-  const { signInWithLens } = useAuth();
+  const { signInWithLens, profileByMe, error } = useAuth();
   const { isConnected } = useAccount();
   return (
     <main className='grid lg:grid-cols-[1fr,45vw]'>
