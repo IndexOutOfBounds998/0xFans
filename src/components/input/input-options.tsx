@@ -99,7 +99,7 @@ export function InputOptions({
       >
         <CollectSetting
           closeModal={closeModal}
-          setCollectData={setCollectData}
+          setCollectData={setCollectData || (() => {})}
         />
       </Modal>
       <div

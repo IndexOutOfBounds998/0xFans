@@ -65,10 +65,11 @@ export function Input({
   const callbackOnError = (error: any) => {
     alert('发布失败' + error);
   };
+  const profileUser = user as unknown as Profile;
   //发布帖子
   const { submit: post, postLoading } = usePost({
     callbackOnError: callbackOnError,
-    profile: user
+    profile: profileUser
   });
 
   useEffect(
@@ -284,7 +285,7 @@ export function Input({
                 isValidTweet={isValidTweet}
                 isCharLimitExceeded={isCharLimitExceeded}
                 handleImageUpload={handleImageUpload}
-                setCollectData={setCollectData}
+                setCollectData={() => setCollectData({})}
               />
             )}
           </AnimatePresence>

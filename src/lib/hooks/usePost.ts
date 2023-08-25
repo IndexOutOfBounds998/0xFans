@@ -137,38 +137,38 @@ export function usePost({ callbackOnError }: PostData) {
 
   async function uploadToIPFS(metadata: any, profile: Profile) {
     /* create an instance of the Lens SDK gated content with the environment */
-    const sdk = await LensGatedSDK.create({
-      provider: new Web3Provider(window.ethereum),
-      signer: new Web3Provider(window.ethereum).getSigner(),
-      env: LensEnvironment.Mumbai
-    });
+    // const sdk = await LensGatedSDK.create({
+    //   provider: new Web3Provider(window.ethereum),
+    //   signer: new Web3Provider(window.ethereum).getSigner(),
+    //   env: LensEnvironment.Mumbai
+    // });
 
-    let condition = {};
+    // let condition = {};
 
-    /* check the gating type (nft or ERC20) and define access condition */
-    accessCondition.contractType = ContractType.Erc721;
-    condition = {
-      nft: accessCondition
-    };
+    // /* check the gating type (nft or ERC20) and define access condition */
+    // // accessCondition.contractType = ContractType.Erc721;
+    // // condition = {
+    // //   nft: accessCondition
+    // // };
 
-    /* encrypt the metadata using the Lens SDK and upload it to IPFS */
-    const { contentURI, encryptedMetadata } = await sdk.gated.encryptMetadata(
-      metadata,
-      profile.id,
-      {
-        ...condition
-      },
-      async function (EncryptedMetadata) {
-        const added = await ipfsClient.add(JSON.stringify(EncryptedMetadata));
-        return added;
-      }
-    );
+    // /* encrypt the metadata using the Lens SDK and upload it to IPFS */
+    // const { contentURI, encryptedMetadata } = await sdk.gated.encryptMetadata(
+    //   metadata,
+    //   profile.id,
+    //   {
+    //     ...condition
+    //   },
+    //   async function (EncryptedMetadata) {
+    //     const added = await ipfsClient.add(JSON.stringify(EncryptedMetadata));
+    //     return added;
+    //   }
+    // );
 
-    /* return the metadata and contentURI to the caller */
-    return {
-      encryptedMetadata,
-      contentURI
-    };
+    // /* return the metadata and contentURI to the caller */
+    // return {
+    //   encryptedMetadata,
+    //   contentURI
+    // };
   }
 
   const submit = async (
