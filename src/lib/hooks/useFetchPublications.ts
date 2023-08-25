@@ -67,10 +67,10 @@ export function useFetchPublications({
     setLoading(true);
     const lensClient = await getAuthenticatedClient();
     let res = await lensClient.explore.publications(request);
-    setLoading(false);
     setData((prevData: any) => [...prevData, ...res.items]);
     setNextCursor(res.pageInfo.next);
     setHasMore(res.items.length > 0);
+    setLoading(false);
   }
 
   const changeFilter = async (requestNew: ExplorePublicationRequest) => {

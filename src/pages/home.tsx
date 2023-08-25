@@ -21,7 +21,7 @@ import { PublicationMainFocus } from '@lens-protocol/client';
 export default function Home(): JSX.Element {
   const { isMobile } = useWindow();
 
-  const { data, LoadMore } = useInfiniteScroll({
+  const { data, LoadMore,loading } = useInfiniteScroll({
     cursor: JSON.stringify({
       timestamp: 1,
       offset: 0
@@ -58,7 +58,7 @@ export default function Home(): JSX.Element {
           //   loading ? (
           //   <Loading className='mt-5' />
           // ) :
-          !data ? (
+          !data? (
             <Loading className='mt-5' />
           ) : (
             // <Error message='Something went wrong' />
