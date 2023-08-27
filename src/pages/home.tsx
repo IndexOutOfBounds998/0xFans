@@ -18,10 +18,11 @@ import {
   PublicationTypes
 } from '@lens-protocol/react-web';
 import { PublicationMainFocus } from '@lens-protocol/client';
+import { APP_ID } from '@lib/const';
 export default function Home(): JSX.Element {
   const { isMobile } = useWindow();
 
-  const { data, LoadMore,loading } = useInfiniteScroll({
+  const { data, LoadMore, loading } = useInfiniteScroll({
     cursor: JSON.stringify({
       timestamp: 1,
       offset: 0
@@ -39,7 +40,7 @@ export default function Home(): JSX.Element {
         oneOf: []
       }
     },
-    sources: ['lenstrip', 'lenstube', 'orb', 'buttrfly', 'lensplay']
+    sources: [APP_ID, 'lenstube', 'orb', 'buttrfly', 'lensplay']
   });
 
   return (
@@ -58,7 +59,7 @@ export default function Home(): JSX.Element {
           //   loading ? (
           //   <Loading className='mt-5' />
           // ) :
-          !data? (
+          !data ? (
             <Loading className='mt-5' />
           ) : (
             // <Error message='Something went wrong' />

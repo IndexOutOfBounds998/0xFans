@@ -17,7 +17,7 @@ import {
 import { bindings } from '@lens-protocol/wagmi';
 
 import React, { useEffect } from 'react';
-import { ALCHEMY_KEY, RB_PID, MAIN_NETWORK } from '@lib/const';
+import { ALCHEMY_KEY, RB_PID, MAIN_NETWORK, APP_ID } from '@lib/const';
 import '@rainbow-me/rainbowkit/styles.css';
 import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
@@ -48,13 +48,13 @@ const lensConfig: LensConfig = {
   environment: MAIN_NETWORK ? production : development,
   sources: [
     appId('lenster'),
-    appId('0xfans'),
+    appId(APP_ID),
     appId('lenstube'),
     appId('orb'),
     appId('buttrfly'),
     appId('lensplay')
   ],
-  appId: appId('0xfans')
+  appId: appId(APP_ID),
 };
 
 type NextPageWithLayout = NextPage & {

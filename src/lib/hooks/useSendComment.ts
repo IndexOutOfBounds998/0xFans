@@ -4,6 +4,7 @@ import { useSignTypedData } from 'wagmi';
 import { uuid } from '@walletconnect/legacy-utils';
 import { useState } from 'react';
 import { Profile } from '@lens-protocol/react-web';
+import { APP_ID } from '@lib/const';
 
 type commentData = {
   publication: any;
@@ -21,7 +22,7 @@ export function useSendComment({ publication }: commentData) {
     setLoading(true);
     const obj = {
       metadata_id: uuid(),
-      appId: 'lenstrip',
+      appId: APP_ID,
       version: '1.0.0',
       animatedUrl: null,
       content: commentValue,
