@@ -101,10 +101,20 @@ export function AuthContextProvider({
   if (typeof window !== 'undefined') {
     loginAddress = localStorage.getItem('loginAddress') || '';
     isLoginAction = Boolean(JSON.parse(localStorage.getItem('isLoginAction') || 'false'));
+
+    useEffect(() => {
+      // Perform localStorage action
+      loginAddress = localStorage.getItem('loginAddress') || '';
+      isLoginAction = Boolean(JSON.parse(localStorage.getItem('isLoginAction') || 'false'));
+  
+    }, [localStorage.getItem('loginAddress'), localStorage.getItem('isLoginAction')])
+  
   }
+
+  
   useEffect(() => {
 
-    if (loginAddress) {
+    if (isLoginAction) {
       if ((address && (loginAddress))) {
         if (address.toLocaleLowerCase() !== loginAddress.toLocaleLowerCase()) {
           signOut();
@@ -159,7 +169,7 @@ export function AuthContextProvider({
       setError(profileError!);
     };
     manageUser();
-  }, [profile, profileLoading, profileError, isLoginAction]);
+  }, [profile, profileLoading, profileError]);
 
 
   const signInWithLens = async (): Promise<void> => {
@@ -177,16 +187,18 @@ export function AuthContextProvider({
 
       }
     } catch (error) {
+      debugger
       setError(error as Error);
     }
     if (loginError) {
+      debugger
       setError(loginError);
     }
   };
 
   const signOut = async (): Promise<void> => {
     try {
-      debugger
+
       if (user && isLoginAction) {
         logout();
         setUser(null);
