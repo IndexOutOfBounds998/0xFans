@@ -31,7 +31,7 @@ export const variants: Variants = {
 
 type TweetActionsProps = Pick<Tweet, 'createdBy'> & {
   isOwner: boolean;
-  ownerId: string| null;
+  ownerId: string | null;
   tweetId: string | null;
   username: string;
   parentId?: string;
@@ -66,7 +66,7 @@ export function TweetActions({
   viewTweet,
   createdBy
 }: TweetActionsProps): JSX.Element {
-  const { user, isAdmin } = useAuth();
+  const { user } = useAuth();
   const { push } = useRouter();
 
   const {
@@ -83,7 +83,7 @@ export function TweetActions({
 
   const { id: userId, following, pinnedTweet } = user as User;
 
-  const isInAdminControl = isAdmin && !isOwner;
+  const isInAdminControl = !isOwner;
   const tweetIsPinned = pinnedTweet === tweetId;
 
   const handleRemove = async (): Promise<void> => {
@@ -150,11 +150,9 @@ export function TweetActions({
       >
         <ActionModal
           title='Delete Tweet?'
-          description={`This can’t be undone and it will be removed from ${
-            isInAdminControl ? `@${username}'s` : 'your'
-          } profile, the timeline of any accounts that follow ${
-            isInAdminControl ? `@${username}` : 'you'
-          }, and from Twitter search results.`}
+          description={`This can’t be undone and it will be removed from ${isInAdminControl ? `@${username}'s` : 'your'
+            } profile, the timeline of any accounts that follow ${isInAdminControl ? `@${username}` : 'you'
+            }, and from Twitter search results.`}
           mainBtnClassName='bg-accent-red hover:bg-accent-red/90 active:bg-accent-red/75 accent-tab
                             focus-visible:bg-accent-red/90'
           mainBtnLabel='Delete'
@@ -207,7 +205,7 @@ export function TweetActions({
                   {...variants}
                   static
                 >
-                  {(isAdmin || isOwner) && (
+                  {(isOwner) && (
                     <Popover.Button
                       className='accent-tab flex w-full gap-3 rounded-md rounded-b-none p-4 text-accent-red
                                  hover:bg-main-sidebar-background'

@@ -142,8 +142,10 @@ export function usePost({ callbackOnError }: PostData) {
       env: LensEnvironment.Mumbai
     });
 
+    const profileUser = profile as unknown as Profile;
+
     await sdk.connect({
-      address: profile.ownedBy, // your signer's wallet address
+      address: profileUser.ownedBy, // your signer's wallet address
       env: LensEnvironment.Mumbai
     });
 
@@ -157,14 +159,13 @@ export function usePost({ callbackOnError }: PostData) {
     /* encrypt the metadata using the Lens SDK and upload it to IPFS */
     const { contentURI, encryptedMetadata } = await sdk.gated.encryptMetadata(
       metadata,
-      profile.id,
+      profileUser.id,
       {
         ...condition
       },
       async function (EncryptedMetadata) {
-        debugger;
-        const added = execute(JSON.stringify(EncryptedMetadata));
-        return added;
+        const added = await execute(JSON.stringify(EncryptedMetadata));
+        return added || '';
       }
     );
 
