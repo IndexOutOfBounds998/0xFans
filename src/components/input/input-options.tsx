@@ -25,6 +25,7 @@ type InputOptionsProps = {
   inputLength: number;
   isValidTweet: boolean;
   isCharLimitExceeded: boolean;
+  audience: Object;
   handleImageUpload: (
     e: ChangeEvent<HTMLInputElement> | ClipboardEvent<HTMLTextAreaElement>
   ) => void;
@@ -39,7 +40,8 @@ export function InputOptions({
   isValidTweet,
   isCharLimitExceeded,
   handleImageUpload,
-  setCollectData
+  setCollectData,
+  audience
 }: InputOptionsProps): JSX.Element {
   const { open, openModal, closeModal } = useModal();
 
@@ -70,7 +72,7 @@ export function InputOptions({
     {
       name: 'Schedule',
       iconName: 'RectangleStackIcon',
-      disabled: false,
+      disabled: audience.label === 'Everyone',
       onClick: openModal
     },
     {

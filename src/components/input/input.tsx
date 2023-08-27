@@ -17,6 +17,13 @@ import { useSendComment } from '@lib/hooks/useSendComment';
 import { usePost } from '@lib/hooks/usePost';
 import { Profile } from '@lens-protocol/react-web';
 import { formatAvater } from '@lib/FormatContent';
+import type { IconName } from '@components/ui/hero-icon';
+
+type AudienceType = {
+  icon: IconName;
+  label: string;
+  color: string;
+};
 
 type InputProps = {
   modal?: boolean;
@@ -48,6 +55,11 @@ export function Input({
   const [loading, setLoading] = useState(false);
   const [visited, setVisited] = useState(false);
   const [collectData, setCollectData] = useState({});
+  const [audience, setAudience] = useState<AudienceType>({
+    icon: 'GlobeAsiaAustraliaIcon',
+    label: 'Everyone',
+    color: '#1d9bf0'
+  });
 
   const { user } = useAuth();
   const { name, username, photoURL } = user as User;
@@ -68,8 +80,7 @@ export function Input({
   const profileUser = user as unknown as Profile;
   //发布帖子
   const { submit: post, postLoading } = usePost({
-    callbackOnError: callbackOnError,
-    profile: profileUser
+    callbackOnError: callbackOnError
   });
 
   useEffect(
@@ -261,6 +272,8 @@ export function Input({
             inputValue={inputValue}
             isValidTweet={isValidTweet}
             isUploadingImages={isUploadingImages}
+            audience={audience}
+            setAudience={(val: AudienceType) => setAudience(val)}
             sendTweet={sendTweet}
             handleFocus={handleFocus}
             discardTweet={discardTweet}
@@ -284,6 +297,7 @@ export function Input({
                 inputLength={inputLength}
                 isValidTweet={isValidTweet}
                 isCharLimitExceeded={isCharLimitExceeded}
+                audience={audience}
                 handleImageUpload={handleImageUpload}
                 setCollectData={() => setCollectData({})}
               />
