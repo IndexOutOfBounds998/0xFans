@@ -69,8 +69,7 @@ export function AuthContextProvider({
   const [profileByMe, setProfile] = useState<ProfileOwnedByMe>();
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(true);
-  const [isLoginAction, setIsLoginAction] = useState(false);
-  const [loginAddress, setLoginAddress] = useState('');
+
   const {
     data: profile,
     error: profileError,
@@ -97,11 +96,16 @@ export function AuthContextProvider({
   const { address } = useAccount();
 
   const { switchNetwork } = useSwitchNetwork();
-
+  let loginAddress = '';
+  let isLoginAction = false;
+  if (typeof window !== 'undefined') {
+    loginAddress = localStorage.getItem('loginAddress') || '';
+    isLoginAction = Boolean(JSON.parse(localStorage.getItem('isLoginAction') || 'false'));
+  }
   useEffect(() => {
 
     if (loginAddress) {
-      if ((address && loginAddress)) {
+      if ((address && (loginAddress))) {
         if (address.toLocaleLowerCase() !== loginAddress.toLocaleLowerCase()) {
           signOut();
         }
@@ -167,12 +171,13 @@ export function AuthContextProvider({
         await login({
           address: address
         });
-        setLoginAddress(address);
-        setIsLoginAction(true);
+
+        localStorage.setItem('loginAddress', address);
+        localStorage.setItem('isLoginAction', 'true');
+
       }
     } catch (error) {
       setError(error as Error);
-      setIsLoginAction(false);
     }
     if (loginError) {
       setError(loginError);
@@ -181,11 +186,11 @@ export function AuthContextProvider({
 
   const signOut = async (): Promise<void> => {
     try {
-      
+      debugger
       if (user && isLoginAction) {
         logout();
         setUser(null);
-        setIsLoginAction(false);
+        localStorage.setItem('isLoginAction', 'false');
       }
     } catch (error) {
       setError(error as Error);
