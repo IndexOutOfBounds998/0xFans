@@ -39,7 +39,8 @@ type AuthContext = {
   profileByMe: ProfileOwnedByMe | undefined;
   error: Error | null;
   loading: boolean;
-  isAdmin: boolean;
+  isLoginAction: boolean;
+  loginAddress: string;
   signOut: () => Promise<void>;
   signInWithLens: () => Promise<void>;
 };
@@ -62,7 +63,8 @@ export function AuthContextProvider({
   const [profileByMe, setProfile] = useState<ProfileOwnedByMe>();
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(true);
-
+  const [isLoginAction, setIsLoginAction] = useState(true);
+  const [loginAddress, setLoginAddress] = useState('');
   const {
     data: profile,
     error: profileError,
@@ -117,19 +119,24 @@ export function AuthContextProvider({
       setError(profileError!);
     };
     manageUser();
-  }, [profile, profileLoading, profileError]);
+  }, [profile, profileLoading, profileError, isLoginAction]);
+
 
   const signInWithLens = async (): Promise<void> => {
     try {
       setLoading(true);
       const walletClient = await getWalletClient();
       if (walletClient) {
+        const address = walletClient.account.address;
         await login({
-          address: walletClient.account.address
+          address: address
         });
+        setLoginAddress(address);
+        setIsLoginAction(true);
       }
     } catch (error) {
       setError(error as Error);
+      setIsLoginAction(true);
     }
     if (loginError) {
       setError(loginError);
@@ -138,21 +145,25 @@ export function AuthContextProvider({
 
   const signOut = async (): Promise<void> => {
     try {
-      logout();
-      setUser(null);
+      if (user) {
+        logout();
+        setUser(null);
+      }
+      setIsLoginAction(false);
     } catch (error) {
       setError(error as Error);
     }
   };
 
-  const isAdmin = false;
+
 
   const value: AuthContext = {
     user,
     profileByMe,
     error,
     loading,
-    isAdmin,
+    isLoginAction,
+    loginAddress,
     signOut,
     signInWithLens
   };

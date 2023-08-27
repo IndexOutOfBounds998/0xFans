@@ -5,7 +5,7 @@ import { Button } from '@components/ui/button';
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 export function LoginMain(): JSX.Element {
-  const { signInWithLens, profileByMe, error } = useAuth();
+  const { signInWithLens, profileByMe, error, isLoginAction } = useAuth();
   const { isConnected } = useAccount();
   return (
     <main className='grid lg:grid-cols-[1fr,45vw]'>
@@ -40,7 +40,7 @@ export function LoginMain(): JSX.Element {
         </div>
         <div className='flex max-w-xs flex-col gap-6 [&_button]:py-2'>
           <div className='grid gap-3 font-bold'>
-            {isConnected ? (
+            {isConnected && !isLoginAction ? (
               <Button
                 className='flex justify-center gap-2 border border-light-line-reply font-bold text-light-primary transition
                        hover:bg-[#e6e6e6] focus-visible:bg-[#e6e6e6] active:bg-[#cccccc] dark:border-0 dark:bg-white
@@ -50,27 +50,13 @@ export function LoginMain(): JSX.Element {
                 <CustomIcon iconName='LensIcon' /> Sign up with lens
               </Button>
             ) : (
-              <ConnectButton />
+              profileByMe ? <ConnectButton /> : ''
             )}
 
-            {/* <Button
-              className='flex cursor-not-allowed justify-center gap-2 border border-light-line-reply font-bold text-light-primary
-                         transition hover:bg-[#e6e6e6] focus-visible:bg-[#e6e6e6] active:bg-[#cccccc] dark:border-0
-                         dark:bg-white dark:hover:brightness-90 dark:focus-visible:brightness-90 dark:active:brightness-75'
-            >
-              <CustomIcon iconName='AppleIcon' /> Sign up with Apple
-            </Button>
-            <div className='grid w-full grid-cols-[1fr,auto,1fr] items-center gap-2'>
-              <i className='border-b border-light-border dark:border-dark-border' />
-              <p>or</p>
-              <i className='border-b border-light-border dark:border-dark-border' />
-            </div>
-            <Button
-              className='cursor-not-allowed bg-accent-blue text-white transition hover:brightness-90
-                         focus-visible:!ring-accent-blue/80 focus-visible:brightness-90 active:brightness-75'
-            >
-              Sign up with phone or email
-            </Button> */}
+            {
+              isLoginAction && !profileByMe ? (<p>regiser</p>) : ''
+            }
+
             <p
               className='inner:custom-underline inner:custom-underline text-center text-xs
                          text-light-secondary inner:text-accent-blue dark:text-dark-secondary'
