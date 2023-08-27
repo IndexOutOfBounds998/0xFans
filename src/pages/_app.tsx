@@ -31,7 +31,7 @@ const { chains, publicClient } = configureChains(
 );
 
 const { connectors } = getDefaultWallets({
-  appName: 'lenstrip',
+  appName: '0xfans',
   projectId: RB_PID,
   chains
 });
@@ -48,13 +48,13 @@ const lensConfig: LensConfig = {
   environment: MAIN_NETWORK ? production : development,
   sources: [
     appId('lenster'),
-    appId('lenstrip'),
+    appId('0xfans'),
     appId('lenstube'),
     appId('orb'),
     appId('buttrfly'),
     appId('lensplay')
   ],
-  appId: appId('lenstrip')
+  appId: appId('0xfans')
 };
 
 type NextPageWithLayout = NextPage & {
