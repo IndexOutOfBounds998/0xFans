@@ -25,7 +25,6 @@ import { Web3Provider } from '@ethersproject/providers';
 
 type PostData = {
   callbackOnError: (error: any) => void;
-  profile: Profile;
 };
 
 type PostSubmit = {
@@ -135,45 +134,50 @@ export function usePost({ callbackOnError }: PostData) {
     return imagesList;
   };
 
-  async function uploadToIPFS(metadata: any, profile: Profile) {
+  async function uploadToIPFS(metadata: any) {
     /* create an instance of the Lens SDK gated content with the environment */
-    // const sdk = await LensGatedSDK.create({
-    //   provider: new Web3Provider(window.ethereum),
-    //   signer: new Web3Provider(window.ethereum).getSigner(),
-    //   env: LensEnvironment.Mumbai
-    // });
+    const sdk = await LensGatedSDK.create({
+      provider: new Web3Provider(window.ethereum),
+      signer: new Web3Provider(window.ethereum).getSigner(),
+      env: LensEnvironment.Mumbai
+    });
 
-    // let condition = {};
+    await sdk.connect({
+      address: profile.ownedBy, // your signer's wallet address
+      env: LensEnvironment.Mumbai
+    });
 
-    // /* check the gating type (nft or ERC20) and define access condition */
-    // // accessCondition.contractType = ContractType.Erc721;
-    // // condition = {
-    // //   nft: accessCondition
-    // // };
+    let condition = {};
 
-    // /* encrypt the metadata using the Lens SDK and upload it to IPFS */
-    // const { contentURI, encryptedMetadata } = await sdk.gated.encryptMetadata(
-    //   metadata,
-    //   profile.id,
-    //   {
-    //     ...condition
-    //   },
-    //   async function (EncryptedMetadata) {
-    //     const added = await ipfsClient.add(JSON.stringify(EncryptedMetadata));
-    //     return added;
-    //   }
-    // );
+    /* check the gating type (nft or ERC20) and define access condition */
+    condition = {
+      nft: null
+    };
 
-    // /* return the metadata and contentURI to the caller */
-    // return {
-    //   encryptedMetadata,
-    //   contentURI
-    // };
+    /* encrypt the metadata using the Lens SDK and upload it to IPFS */
+    const { contentURI, encryptedMetadata } = await sdk.gated.encryptMetadata(
+      metadata,
+      profile.id,
+      {
+        ...condition
+      },
+      async function (EncryptedMetadata) {
+        debugger;
+        const added = execute(JSON.stringify(EncryptedMetadata));
+        return added;
+      }
+    );
+
+    /* return the metadata and contentURI to the caller */
+    return {
+      encryptedMetadata,
+      contentURI
+    };
   }
 
   const submit = async (
     { images, title, content, collectData }: PostSubmit,
-    profile: Profile
+    profileUser: Profile
   ) => {
     setPostLoading(true);
 
@@ -188,7 +192,7 @@ export function usePost({ callbackOnError }: PostData) {
 
     let collectModule: CollectModuleParams = CollectModuleInfo(
       collectData,
-      profile
+      profileUser
     );
 
     let referenceModule: ReferenceModuleParams = {
@@ -207,8 +211,9 @@ export function usePost({ callbackOnError }: PostData) {
       mainContentFocus: PublicationMainFocus.Image,
       media: imagesList,
       tags: ['trip'],
-      name: `Post by ${profile.handle}`
+      name: `Post by ${profileUser.handle}`
     };
+    // const url2 = await uploadToIPFS(obj);
     const url = await execute(obj);
     if (url) {
       // lensClient.explore.publications()
@@ -216,7 +221,7 @@ export function usePost({ callbackOnError }: PostData) {
         const lensClient = await getAuthenticatedClient();
         const typedDataResult =
           await lensClient.publication.createPostTypedData({
-            profileId: profile.id,
+            profileId: profileUser.id,
             contentURI: 'ipfs://' + url, // or arweave
             collectModule: collectModule,
             referenceModule: referenceModule

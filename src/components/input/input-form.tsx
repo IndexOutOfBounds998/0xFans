@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, Fragment, useState } from 'react';
 import TextArea from 'react-textarea-autosize';
 import { motion } from 'framer-motion';
 import { useModal } from '@lib/hooks/useModal';
@@ -14,6 +14,14 @@ import type {
   ClipboardEvent
 } from 'react';
 import type { Variants } from 'framer-motion';
+import { Menu, Popover } from '@headlessui/react';
+import type { IconName } from '@components/ui/hero-icon';
+
+type AudienceType = {
+  icon: IconName;
+  label: string;
+  color: string;
+};
 
 type InputFormProps = {
   modal?: boolean;
@@ -27,6 +35,8 @@ type InputFormProps = {
   replyModal?: boolean;
   isValidTweet: boolean;
   isUploadingImages: boolean;
+  audience: AudienceType;
+  setAudience: (val: AudienceType) => void;
   sendTweet: () => Promise<void>;
   handleFocus: () => void;
   discardTweet: () => void;
@@ -67,11 +77,21 @@ export function InputForm({
   handleFocus,
   discardTweet,
   handleChange,
-  handleImageUpload
+  handleImageUpload,
+  audience,
+  setAudience
 }: InputFormProps): JSX.Element {
   const { open, openModal, closeModal } = useModal();
 
-  useEffect(() => handleShowHideNav(true), []);
+  const peopler: Readonly<AudienceType[]> = [
+    { icon: 'GlobeAsiaAustraliaIcon', label: 'Everyone', color: '#1d9bf0' },
+    { icon: 'UserGroupIcon', label: 'Onlyfans', color: '#00ba7c' }
+  ];
+
+  useEffect(() => {
+    handleShowHideNav(true);
+    setAudience(peopler[0]);
+  }, []);
 
   const handleKeyboardShortcut = ({
     key,
@@ -126,21 +146,68 @@ export function InputForm({
           closeModal={closeModal}
         />
       </Modal>
-      <div className='flex flex-col gap-6'>
+      <div className='relative flex flex-col gap-6'>
         {isVisibilityShown && (
-          <motion.button
-            type='button'
-            className='custom-button accent-tab accent-bg-tab flex cursor-not-allowed items-center gap-1
+          <>
+            <Popover>
+              <Popover.Button
+                className='custom-button accent-tab accent-bg-tab flex items-center gap-1
                        self-start border border-light-line-reply py-0 px-3 text-main-accent
                        hover:bg-main-accent/10 active:bg-main-accent/20 dark:border-light-secondary'
-            {...fromTop}
-          >
-            <p className='font-bold'>Everyone</p>
+              >
+                <p className='font-bold'>{audience.label}</p>
+                <HeroIcon className='h-4 w-4' iconName='ChevronDownIcon' />
+              </Popover.Button>
 
-            <HeroIcon className='h-4 w-4' iconName='ChevronDownIcon' />
-          </motion.button>
-
-          
+              <Popover.Panel className='absolute left-[-70px] top-[35px] z-10'>
+                <div className='h-[190px] w-[260px] rounded-2xl border bg-white py-[10px]'>
+                  <p className='px-[15px] text-[20px]  font-bold'>
+                    Choose audience
+                  </p>
+                  {peopler.map((item) => (
+                    <div
+                      className='flex cursor-pointer items-center px-[15px] py-[15px] hover:bg-[#eff3f4e6]'
+                      onClick={() => setAudience(item)}
+                    >
+                      <div
+                        className={`bg-[${item.color}] mr-[12px] flex h-[40px] w-[40px] items-center justify-center rounded-3xl`}
+                      >
+                        <HeroIcon
+                          solid
+                          className='h-[20px] w-[20px] text-[#fff]'
+                          iconName={item.icon}
+                        />
+                      </div>
+                      <div className='flex w-[calc(100%-52px)] items-center justify-between'>
+                        <span className='font-bold'>{item.label}</span>
+                        {item.label === audience.label ? (
+                          <div>
+                            <HeroIcon
+                              className='h-[18px] w-[20px] text-[#1d9bf0]'
+                              iconName='CheckIcon'
+                            />
+                          </div>
+                        ) : (
+                          ''
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Popover.Panel>
+            </Popover>
+          </>
+          // <motion.button
+          //   type='button'
+          //   className='custom-button accent-tab accent-bg-tab flex cursor-not-allowed items-center gap-1
+          //              self-start border border-light-line-reply py-0 px-3 text-main-accent
+          //              hover:bg-main-accent/10 active:bg-main-accent/20 dark:border-light-secondary'
+          //   {...fromTop}
+          // >
+          //   <p className='font-bold'>Everyone</p>
+          //
+          //   <HeroIcon className='h-4 w-4' iconName='ChevronDownIcon' />
+          // </motion.button>
         )}
         <div className='flex items-center gap-3'>
           <TextArea
@@ -181,8 +248,8 @@ export function InputForm({
             className='custom-button accent-tab accent-bg-tab flex cursor-not-allowed items-center gap-1 py-0
                        px-3 text-main-accent hover:bg-main-accent/10 active:bg-main-accent/20'
           >
-            <HeroIcon className='h-4 w-4' iconName='GlobeAmericasIcon' />
-            <p className='font-bold'>Everyone can reply</p>
+            <HeroIcon className='h-4 w-4' iconName={audience.icon} />
+            <p className='font-bold'>{audience.label} can reply</p>
           </button>
         </motion.div>
       )}

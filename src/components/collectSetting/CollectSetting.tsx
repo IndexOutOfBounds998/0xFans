@@ -30,7 +30,7 @@ export default function CollectSetting({
   //时限
   let [isTimeLimit, setIsTimeLimit] = useState(false);
   //是否只有关注者才能收集
-  let [followerOnly, setFollowerOnly] = useState(false);
+  let [followerOnly, setFollowerOnly] = useState(true);
   //代币种类
   let [currencys, setCurrencys] = useState<any[]>([]);
   //所选的币种数量
@@ -90,7 +90,7 @@ export default function CollectSetting({
           iconName='RectangleStackIcon'
           className='h-6 w-6 text-main-accent'
         />
-        <span className='ml-[5px]'>收集设置</span>
+        <span className='ml-[5px]'>付费设置</span>
       </div>
       <div className='overflow-auto border-t-[1px] border-[#00000014] p-[20px] text-sm'>
         <div className='mb-[20px] flex'>
@@ -101,9 +101,7 @@ export default function CollectSetting({
               setIsCollect(!!val);
             }}
           >
-            <span className='ml-[8px] font-bold text-[#71717a]'>
-              此贴可以收藏
-            </span>
+            <span className='ml-[8px] font-bold text-[#71717a]'>付费查看</span>
           </ReactSwitch>
         </div>
         {isCollect ? (
@@ -243,26 +241,26 @@ export default function CollectSetting({
                 </ReactSwitch>
               </div>
             </div>
-            <div className='mb-[20px]'>
-              <p className='mb-[10px] flex text-[16px]'>
-                <HeroIcon
-                  iconName='UserGroupIcon'
-                  className='h-6 w-6 text-main-accent'
-                />
-                <span className='ml-[5px] text-sm'>谁可以收藏</span>
-              </p>
-              <div className='mb-[20px] flex'>
-                <ReactSwitch
-                  className='switch-basic'
-                  checked={followerOnly}
-                  onChange={(val) => setFollowerOnly(val as boolean)}
-                >
-                  <span className='ml-[10px] font-bold text-[#71717a]'>
-                    只有关注者才可以收藏
-                  </span>
-                </ReactSwitch>
-              </div>
-            </div>
+            {/*<div className='mb-[20px]'>*/}
+            {/*  <p className='mb-[10px] flex text-[16px]'>*/}
+            {/*    <HeroIcon*/}
+            {/*      iconName='UserGroupIcon'*/}
+            {/*      className='h-6 w-6 text-main-accent'*/}
+            {/*    />*/}
+            {/*    <span className='ml-[5px] text-sm'>谁可以收藏</span>*/}
+            {/*  </p>*/}
+            {/*  <div className='mb-[20px] flex'>*/}
+            {/*    <ReactSwitch*/}
+            {/*      className='switch-basic'*/}
+            {/*      checked={followerOnly}*/}
+            {/*      onChange={(val) => setFollowerOnly(val as boolean)}*/}
+            {/*    >*/}
+            {/*      <span className='ml-[10px] font-bold text-[#71717a]'>*/}
+            {/*        只有关注者才可以收藏*/}
+            {/*      </span>*/}
+            {/*    </ReactSwitch>*/}
+            {/*  </div>*/}
+            {/*</div>*/}
           </div>
         ) : (
           ''
