@@ -101,7 +101,7 @@ export function AuthContextProvider({
   useEffect(() => {
 
     if (loginAddress) {
-      if ((address && loginAddress === '')) {
+      if ((address && loginAddress)) {
         if (address.toLocaleLowerCase() !== loginAddress.toLocaleLowerCase()) {
           signOut();
         }
