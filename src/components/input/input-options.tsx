@@ -18,6 +18,12 @@ type Options = {
   onClick?: () => void;
 }[];
 
+type AudienceType = {
+  icon: IconName;
+  label: string;
+  color: string;
+};
+
 type InputOptionsProps = {
   reply?: boolean;
   modal?: boolean;
@@ -25,7 +31,7 @@ type InputOptionsProps = {
   inputLength: number;
   isValidTweet: boolean;
   isCharLimitExceeded: boolean;
-  audience: Object;
+  audience: AudienceType;
   handleImageUpload: (
     e: ChangeEvent<HTMLInputElement> | ClipboardEvent<HTMLTextAreaElement>
   ) => void;
