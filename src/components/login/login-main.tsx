@@ -5,7 +5,8 @@ import { Button } from '@components/ui/button';
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 export function LoginMain(): JSX.Element {
-  const { signInWithLens, profileByMe, error, isLoginAction } = useAuth();
+  const { signInWithLens, profileByMe, isLoginAction } = useAuth();
+
   const { isConnected } = useAccount();
   return (
     <main className='grid lg:grid-cols-[1fr,45vw]'>
@@ -40,17 +41,19 @@ export function LoginMain(): JSX.Element {
         </div>
         <div className='flex max-w-xs flex-col gap-6 [&_button]:py-2'>
           <div className='grid gap-3 font-bold'>
-            {isConnected && !isLoginAction ? (
-              <Button
-                className='flex justify-center gap-2 border border-light-line-reply font-bold text-light-primary transition
+            {isConnected ? (
+              !isLoginAction ? (
+                <Button
+                  className='flex justify-center gap-2 border border-light-line-reply font-bold text-light-primary transition
                        hover:bg-[#e6e6e6] focus-visible:bg-[#e6e6e6] active:bg-[#cccccc] dark:border-0 dark:bg-white
                        dark:hover:brightness-90 dark:focus-visible:brightness-90 dark:active:brightness-75'
-                onClick={signInWithLens}
-              >
-                <CustomIcon iconName='LensIcon' /> Sign up with lens
-              </Button>
+                  onClick={signInWithLens}
+                >
+                  <CustomIcon iconName='LensIcon' /> Sign up with lens
+                </Button>
+              ) : ''
             ) : (
-              profileByMe ? <ConnectButton /> : ''
+              <ConnectButton />
             )}
 
             {

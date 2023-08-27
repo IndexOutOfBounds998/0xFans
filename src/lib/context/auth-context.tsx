@@ -12,6 +12,12 @@ import {
 import { getWalletClient } from '@wagmi/core';
 import { formatAvater, formatNickName, getProfileAttribute } from '@lib/FormatContent';
 
+
+import { useAccount, useNetwork, useSwitchNetwork } from "wagmi";
+import { MAIN_NETWORK } from '@lib/const';
+import { polygon, polygonMumbai } from "wagmi/chains";
+
+
 import type { User } from '@lib/types/user';
 type UserProps = Pick<
   User,
@@ -63,7 +69,7 @@ export function AuthContextProvider({
   const [profileByMe, setProfile] = useState<ProfileOwnedByMe>();
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(true);
-  const [isLoginAction, setIsLoginAction] = useState(true);
+  const [isLoginAction, setIsLoginAction] = useState(false);
   const [loginAddress, setLoginAddress] = useState('');
   const {
     data: profile,
@@ -84,6 +90,35 @@ export function AuthContextProvider({
       setProfile(profile);
     }
   }, [profile]);
+
+
+  const { chain } = useNetwork();
+
+  const { address } = useAccount();
+
+  const { switchNetwork } = useSwitchNetwork();
+
+  useEffect(() => {
+
+    if ((address && loginAddress) || (address && loginAddress === '')) {
+
+      if (address.toLocaleLowerCase() !== loginAddress.toLocaleLowerCase()) {
+        signOut();
+      }
+
+    }
+  }, [address, loginAddress]);
+
+
+  useEffect(() => {
+    if (chain && switchNetwork) {
+      const targetNetworkId = MAIN_NETWORK ? polygon.id : polygonMumbai.id;
+      if (chain.id !== targetNetworkId) {
+        switchNetwork(targetNetworkId);
+      }
+    }
+  }, [chain, switchNetwork]);
+
 
   useEffect(() => {
 
@@ -136,7 +171,7 @@ export function AuthContextProvider({
       }
     } catch (error) {
       setError(error as Error);
-      setIsLoginAction(true);
+      setIsLoginAction(false);
     }
     if (loginError) {
       setError(loginError);
@@ -145,7 +180,7 @@ export function AuthContextProvider({
 
   const signOut = async (): Promise<void> => {
     try {
-      if (user) {
+      if (user && isLoginAction) {
         logout();
         setUser(null);
       }
