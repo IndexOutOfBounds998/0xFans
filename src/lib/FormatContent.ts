@@ -130,6 +130,7 @@ export function formatDate(dateString: any) {
 type UserCardProps = User & {
   modal?: boolean;
   follow?: boolean;
+  isFollowingbserver?: boolean;
 };
 
 export function formatUser(userProfile: Profile) {
@@ -159,6 +160,7 @@ export function formatUser(userProfile: Profile) {
     updatedAt: '',
     pinnedTweet: '',
     follow: userProfile.isFollowedByMe,
+    isFollowingbserver: userProfile.isFollowingObserver,
     modal: false
   };
 

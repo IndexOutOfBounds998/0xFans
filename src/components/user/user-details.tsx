@@ -19,7 +19,9 @@ type UserDetailsProps = Pick<
   | 'createdAt'
   | 'following'
   | 'followers'
->;
+> & {
+  isFollowingbserver?: boolean;
+};
 
 type DetailIcon = [string | null, IconName];
 
@@ -33,7 +35,8 @@ export function UserDetails({
   verified,
   createdAt,
   following,
-  followers
+  followers,
+  isFollowingbserver
 }: UserDetailsProps): JSX.Element {
   const detailIcons: Readonly<DetailIcon[]> = [
     [location, 'MapPinIcon'],
@@ -46,13 +49,13 @@ export function UserDetails({
       <div>
         <UserName
           className='-mb-1 text-xl'
-          name={name??''}
+          name={name ?? ''}
           iconClassName='w-6 h-6'
           verified={verified}
         />
         <div className='flex items-center gap-1 text-light-secondary dark:text-dark-secondary'>
           <p>@{username}</p>
-          <UserFollowing userTargetId={id.toString()} />
+          <UserFollowing isFollowingbserver={isFollowingbserver} />
         </div>
       </div>
       <div className='flex flex-col gap-2'>

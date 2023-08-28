@@ -10,11 +10,12 @@ import type { User } from '@lib/types/user';
 type UserCardProps = User & {
   modal?: boolean;
   follow?: boolean;
+  isFollowingbserver?: boolean;
 };
 
 export function UserCard(user: UserCardProps): JSX.Element {
-  const { id, bio, name, modal, follow, username, verified, photoURL } = user;
-  
+  const { id, bio, name, modal, follow, isFollowingbserver, username, verified, photoURL } = user;
+
   return (
     <Link href={`/user/${id}`}>
       <span
@@ -39,7 +40,7 @@ export function UserCard(user: UserCardProps): JSX.Element {
                 <UserTooltip {...user} modal={modal}>
                   <UserUsername username={username} />
                 </UserTooltip>
-                {follow && <UserFollowing userTargetId={id.toString() ?? ''} />}
+                {follow && <UserFollowing isFollowingbserver={isFollowingbserver} />}
               </div>
             </div>
             <FollowButton userTargetId={id.toString()} userTargetUsername={username} />
