@@ -113,7 +113,8 @@ export function Input({
               images: selectedImages,
               title: '',
               content: content,
-              collectData: collectData
+              collectData: collectData,
+              isOnlyfans: audience.label === 'Onlyfans'
             },
             profileUser
           )
