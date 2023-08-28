@@ -192,10 +192,7 @@ export function usePost({ callbackOnError }: PostData) {
     );
 
     /* return the metadata and contentURI to the caller */
-    return {
-      encryptedMetadata,
-      contentURI
-    };
+    return contentURI;
   }
 
   const submit = async (

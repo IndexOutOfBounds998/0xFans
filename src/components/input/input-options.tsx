@@ -79,6 +79,7 @@ export function InputOptions({
       name: 'Schedule',
       iconName: 'RectangleStackIcon',
       disabled: audience.label === 'Everyone',
+      tip: 'onlyfans can use',
       onClick: openModal
     },
     {
@@ -122,18 +123,20 @@ export function InputOptions({
           ref={inputFileRef}
           multiple
         />
-        {filteredOptions.map(({ name, iconName, disabled, onClick }, index) => (
-          <Button
-            className='accent-tab accent-bg-tab group relative rounded-full p-2
+        {filteredOptions.map(
+          ({ name, iconName, disabled, onClick, tip }, index) => (
+            <Button
+              className='accent-tab accent-bg-tab group relative rounded-full p-2
                        hover:bg-main-accent/10 active:bg-main-accent/20'
-            onClick={onClick}
-            disabled={disabled}
-            key={name}
-          >
-            <HeroIcon className='h-5 w-5' iconName={iconName} />
-            <ToolTip tip={name} modal={modal} />
-          </Button>
-        ))}
+              onClick={onClick}
+              disabled={disabled}
+              key={name}
+            >
+              <HeroIcon className='h-5 w-5' iconName={iconName} />
+              <ToolTip tip={tip || name} modal={modal} />
+            </Button>
+          )
+        )}
       </div>
       <div className='flex items-center gap-4'>
         <motion.div
