@@ -10,11 +10,9 @@ import {
 
 import { User } from '@lib/types/user';
 import { formatUser } from '@lib/FormatContent';
+import { UserCardProps } from './useCollection';
 
-type UserCardProps = User & {
-  modal?: boolean;
-  follow?: boolean;
-};
+
 
 type InfiniteScroll<T> = {
   data: UserCardProps[] | null;
@@ -47,11 +45,11 @@ export function useInfiniteUserScroll<T>(
     sortCriteria
   });
 
-  const [formateList, setFormateList] = useState<User[]>([]);
+  const [formateList, setFormateList] = useState<UserCardProps[]>([]);
 
   useEffect(() => {
     if (data) {
-      let list: User[] = data
+      let list: UserCardProps[] = data
         .filter((it) => it != null)
         .map((item) => {
           return formatUser(item) as UserCardProps;

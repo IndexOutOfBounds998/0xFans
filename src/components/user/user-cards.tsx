@@ -7,13 +7,15 @@ import { UserCard } from './user-card';
 import type { User } from '@lib/types/user';
 import type { StatsType } from '@components/view/view-tweet-stats';
 import type { StatsEmptyProps } from '@components/tweet/stats-empty';
+import { Profile } from '@lens-protocol/react-web';
+import { UserCardProps } from '@lib/hooks/useCollection';
 
 type FollowType = 'following' | 'followers';
 
 type CombinedTypes = StatsType | FollowType;
 
 type UserCardsProps = {
-  data: User[] | null;
+  data: UserCardProps[] | null;
   type: CombinedTypes;
   follow?: boolean;
   loading: boolean;
@@ -69,7 +71,7 @@ export function UserCards({
           {data?.length ? (
             data.map((userData) => (
               <motion.div layout='position' key={userData.id.toString()} {...variants}>
-                <UserCard {...userData} follow={follow} modal={modal} />
+                <UserCard {...userData} follow={follow} modal={modal} profile={userData.profile} />
               </motion.div>
             ))
           ) : (

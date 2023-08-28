@@ -9,6 +9,7 @@ import { NumberStats } from '@components/tweet/number-stats';
 import { UserCards } from '@components/user/user-cards';
 import type { Tweet } from '@lib/types/tweet';
 import { User } from '@lib/types/user';
+import { UserCardProps } from '@lib/hooks/useCollection';
 
 type viewTweetStats = Pick<Tweet, 'userRetweets' | 'userLikes'> & {
   likeMove: number;
@@ -44,7 +45,7 @@ export function ViewTweetStats({
   //   // usersCollection,
   //   // { disabled: !statsType }
   // );
-  const data: User[] = []; // 为data变量提供一个空数组作为初始值
+  const data: UserCardProps[] = []; // 为data变量提供一个空数组作为初始值
   const loading = false;
 
   const handleOpen = (type: StatsType) => (): void => {

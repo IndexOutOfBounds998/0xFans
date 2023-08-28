@@ -1,4 +1,5 @@
 import {
+  Profile,
   ProfileId,
   ProfileSortCriteria,
   useExploreProfiles,
@@ -8,21 +9,11 @@ import { User } from '@lib/types/user';
 import { useEffect, useState } from 'react';
 
 type UseCollection<T> =
-  | {
-      data: T[] | null;
-      loading: boolean;
-      user: User[];
-    }
-  | {
-      data: (T & { user: UserCardProps })[] | null;
-      loading: boolean;
-      user: User[];
-    }
-  | {
-      data: UserCardProps[] | null;
-      loading: boolean;
-      user: UserCardProps[] | null;
-    };
+  {
+    data: UserCardProps[] | null;
+    loading: boolean;
+    user: UserCardProps[] | null;
+  };
 
 export type UserCardProps = Pick<
   User,
@@ -47,8 +38,10 @@ export type UserCardProps = Pick<
 > & {
   modal?: boolean;
   follow?: boolean;
-  isFollowingbserver?:boolean;
+  isFollowingbserver?: boolean;
+  profile: Profile;
 };
+
 type DataWithUser<T> = UseCollection<T & { user: UserCardProps }>;
 
 export type UseCollectionOptions = {

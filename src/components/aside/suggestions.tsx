@@ -28,7 +28,7 @@ export function Suggestions(): JSX.Element {
           <h2 className='text-xl font-bold'>Who to follow</h2>
 
           {suggestionsData?.map((userData: UserCardProps) => (
-            <UserCard {...userData} key={userData.id.toString()} follow={userData.follow} />
+            <UserCard {...userData} key={userData.id.toString()} follow={userData.follow} profile={userData.profile} />
           ))}
           <Link href='/people'>
             <span

@@ -19,7 +19,7 @@ import type { LayoutProps } from './common-layout';
 import { ImageData } from '@lib/types/file';
 
 export function UserHomeLayout({ children }: LayoutProps): JSX.Element {
-  const { user } = useAuth();
+  const { user, profileByMe } = useAuth();
   const { user: userData, loading } = useUser();
 
   const {
@@ -81,10 +81,14 @@ export function UserHomeLayout({ children }: LayoutProps): JSX.Element {
                       <HeroIcon className='h-5 w-5' iconName='EnvelopeIcon' />
                       <ToolTip tip='Message' />
                     </Button>
-                    <FollowButton
-                      userTargetId={userData.id.toString()}
-                      userTargetUsername={userData.username}
-                    />
+                    {profileByMe && (
+                      <FollowButton
+                        userTargetId={userData.id.toString()}
+                        userTargetUsername={userData.username}
+                        followee={userData.profile}
+                        follower={profileByMe}
+                      />
+                    )}
                     {isOwner && <UserEditProfile hide />}
                   </div>
                 )}

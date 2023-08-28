@@ -1,6 +1,7 @@
 import { createContext, useContext } from 'react';
 import type { ReactNode } from 'react';
 import type { User } from '@lib/types/user';
+import { Profile } from '@lens-protocol/react-web';
 
 type UserDetailsProps = Pick<
   User,
@@ -20,7 +21,9 @@ type UserDetailsProps = Pick<
   | 'website'
   | 'location'
   | 'totalPhotos'
->;
+> & {
+  profile: Profile;
+};
 
 type UserContext = {
   user: UserDetailsProps | null;

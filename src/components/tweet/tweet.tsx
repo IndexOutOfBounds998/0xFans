@@ -16,15 +16,15 @@ import { TweetStats } from './tweet-stats';
 import { TweetDate } from './tweet-date';
 import type { Variants } from 'framer-motion';
 import type { Tweet } from '@lib/types/tweet';
-import { formatAvater, formatNickName } from '@lib/FormatContent';
 import { User } from '@lib/types/user';
 import { VideoPreview } from '@components/input/video-preview';
+import { Profile } from '@lens-protocol/react-web';
 
 export type TweetProps = Tweet & {
   user: User;
   modal?: boolean;
   pinned?: boolean;
-  profile?: User;
+  profile: Profile;
   parentTweet?: boolean;
 };
 
@@ -128,6 +128,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
               <UserTooltip
                 avatar
                 modal={modal}
+                profile={profile}
                 {...user}
                 name={user?.name ?? ''}
                 username={username ?? ''}
@@ -150,7 +151,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
             <div className='flex min-w-0 flex-col'>
               <div className='flex justify-between gap-2 text-light-secondary dark:text-dark-secondary'>
                 <div className='flex gap-1 truncate xs:overflow-visible xs:whitespace-normal'>
-                  <UserTooltip modal={modal} {...user}>
+                  <UserTooltip modal={modal} {...user} profile={profile}>
                     <UserName
                       name={name ?? ''}
                       username={username}
@@ -158,7 +159,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                       className='text-light-primary dark:text-dark-primary'
                     />
                   </UserTooltip>
-                  <UserTooltip modal={modal} {...user}>
+                  <UserTooltip modal={modal} {...user} profile={profile}>
                     <UserUsername username={username ?? ''} />
                   </UserTooltip>
                   <TweetDate tweetLink={tweetLink} createdAt={createdAt} />
@@ -198,12 +199,12 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                 {isVideo
                   ? videos && <VideoPreview tweet videoPreview={videos} />
                   : images && (
-                      <ImagePreview
-                        tweet
-                        imagesPreview={images}
-                        previewCount={images.length}
-                      />
-                    )}
+                    <ImagePreview
+                      tweet
+                      imagesPreview={images}
+                      previewCount={images.length}
+                    />
+                  )}
                 {!modal && (
                   <TweetStats
                     reply={reply}
