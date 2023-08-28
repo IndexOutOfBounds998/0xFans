@@ -159,18 +159,19 @@ export function InputForm({
                 <HeroIcon className='h-4 w-4' iconName='ChevronDownIcon' />
               </Popover.Button>
 
-              <Popover.Panel className='absolute left-[-70px] top-[35px] z-10'>
-                <div className='h-[190px] w-[260px] rounded-2xl border bg-white py-[10px]'>
-                  <p className='px-[15px] text-[20px]  font-bold'>
+              <Popover.Panel className='menu-container absolute left-[-70px] top-[35px] z-10'>
+                <div className='h-[190px] w-[260px] rounded-2xl bg-main-background py-[10px] shadow-inner'>
+                  <p className='px-[15px] text-[20px] font-bold'>
                     Choose audience
                   </p>
                   {peopler.map((item) => (
                     <div
-                      className='flex cursor-pointer items-center px-[15px] py-[15px] hover:bg-[#eff3f4e6]'
+                      className='flex cursor-pointer items-center px-[15px] py-[15px] hover:bg-main-accent/20'
                       onClick={() => setAudience(item)}
                     >
                       <div
-                        className={`bg-[${item.color}] mr-[12px] flex h-[40px] w-[40px] items-center justify-center rounded-3xl`}
+                        className='mr-[12px] flex h-[40px] w-[40px] items-center justify-center rounded-3xl'
+                        style={{ background: item.color }}
                       >
                         <HeroIcon
                           solid
@@ -183,7 +184,7 @@ export function InputForm({
                         {item.label === audience.label ? (
                           <div>
                             <HeroIcon
-                              className='h-[18px] w-[20px] text-[#1d9bf0]'
+                              className='h-[18px] w-[20px] text-main-accent'
                               iconName='CheckIcon'
                             />
                           </div>

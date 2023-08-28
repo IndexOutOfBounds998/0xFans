@@ -76,7 +76,7 @@ export default function CollectSetting({
     setIsReward(false);
     setIsLimit(false);
     setIsTimeLimit(false);
-    setFollowerOnly(false);
+    setFollowerOnly(true);
     setAmount(0);
     setSelectAddress(data ? data[0] : null);
     setReferralFee(0);

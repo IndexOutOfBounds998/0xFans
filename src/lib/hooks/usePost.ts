@@ -37,6 +37,7 @@ type PostSubmit = {
   title: string;
   content: string;
   collectData: CollectData;
+  isOnlyfans?: Boolean;
 };
 
 type CollectData = {
@@ -156,14 +157,21 @@ export function usePost({ callbackOnError }: PostData) {
 
     // Condition for gating the content
     const collectAccessCondition: CollectCondition = { thisPublication: true };
-    const followAccessCondition: FollowCondition = { profileId: profileUser.id };
+    const followAccessCondition: FollowCondition = {
+      profileId: profileUser.id
+    };
 
     // Create the access condition
     let accessCondition: AccessConditionOutput = {};
-    //启用付费 需要开启收藏可见 
+    //启用付费 需要开启收藏可见
     if (isCollect) {
       accessCondition = {
-        and: { criteria: [{ collect: collectAccessCondition }, { follow: followAccessCondition }] }
+        and: {
+          criteria: [
+            { collect: collectAccessCondition },
+            { follow: followAccessCondition }
+          ]
+        }
       };
     } else {
       //默认是仅仅粉丝可见
@@ -191,7 +199,7 @@ export function usePost({ callbackOnError }: PostData) {
   }
 
   const submit = async (
-    { images, title, content, collectData }: PostSubmit,
+    { images, title, content, collectData, isOnlyfans }: PostSubmit,
     profileUser: Profile
   ) => {
     setPostLoading(true);
@@ -206,7 +214,7 @@ export function usePost({ callbackOnError }: PostData) {
     });
 
     let collectModule: CollectModuleParams = CollectModuleInfo(
-      collectData,
+      isOnlyfans ? collectData : {},
       profileUser
     );
 
@@ -228,8 +236,9 @@ export function usePost({ callbackOnError }: PostData) {
       tags: ['trip'],
       name: `Post by ${profileUser.handle}`
     };
-    // const url2 = await uploadToIPFS(obj);
-    const url = await execute(obj);
+    const url = isOnlyfans
+      ? await uploadToIPFS(obj, collectData.isCollect || false)
+      : await execute(obj);
     if (url) {
       // lensClient.explore.publications()
       try {
@@ -243,9 +252,6 @@ export function usePost({ callbackOnError }: PostData) {
           });
         // typedDataResult is a Result object
         const data = typedDataResult.unwrap();
-        console.log(
-          `0x${data.typedData.domain.verifyingContract.substring(2)}`
-        );
         // sign with the wallet
         const signTypedData = await signTypedDataAsync({
           primaryType: 'PostWithSig',
