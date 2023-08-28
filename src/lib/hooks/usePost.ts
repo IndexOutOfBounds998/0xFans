@@ -19,9 +19,14 @@ import {
   ContractType,
   LensGatedSDK,
   LensEnvironment,
-  ScalarOperator
+  ScalarOperator,
+  CollectCondition,
+  FollowCondition,
+  ProfileOwnership
 } from '@lens-protocol/sdk-gated';
 import { Web3Provider } from '@ethersproject/providers';
+import { MAIN_NETWORK } from '@lib/const';
+import { AccessConditionOutput } from '@lens-protocol/sdk-gated/dist/graphql/types';
 
 type PostData = {
   callbackOnError: (error: any) => void;
@@ -134,34 +139,43 @@ export function usePost({ callbackOnError }: PostData) {
     return imagesList;
   };
 
-  async function uploadToIPFS(metadata: any) {
+  async function uploadToIPFS(metadata: any, isCollect: boolean) {
     /* create an instance of the Lens SDK gated content with the environment */
     const sdk = await LensGatedSDK.create({
       provider: new Web3Provider(window.ethereum),
       signer: new Web3Provider(window.ethereum).getSigner(),
-      env: LensEnvironment.Mumbai
+      env: MAIN_NETWORK ? LensEnvironment.Polygon : LensEnvironment.Mumbai
     });
 
     const profileUser = profile as unknown as Profile;
 
     await sdk.connect({
       address: profileUser.ownedBy, // your signer's wallet address
-      env: LensEnvironment.Mumbai
+      env: MAIN_NETWORK ? LensEnvironment.Polygon : LensEnvironment.Mumbai
     });
 
-    let condition = {};
+    // Condition for gating the content
+    const collectAccessCondition: CollectCondition = { thisPublication: true };
+    const followAccessCondition: FollowCondition = { profileId: profileUser.id };
 
-    /* check the gating type (nft or ERC20) and define access condition */
-    condition = {
-      nft: null
-    };
+    // Create the access condition
+    let accessCondition: AccessConditionOutput = {};
+    //启用付费 需要开启收藏可见 
+    if (isCollect) {
+      accessCondition = {
+        and: { criteria: [{ collect: collectAccessCondition }, { follow: followAccessCondition }] }
+      };
+    } else {
+      //默认是仅仅粉丝可见
+      accessCondition = { follow: followAccessCondition };
+    }
 
     /* encrypt the metadata using the Lens SDK and upload it to IPFS */
     const { contentURI, encryptedMetadata } = await sdk.gated.encryptMetadata(
       metadata,
       profileUser.id,
       {
-        ...condition
+        ...accessCondition
       },
       async function (EncryptedMetadata) {
         const added = await execute(JSON.stringify(EncryptedMetadata));
