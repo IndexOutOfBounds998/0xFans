@@ -2,9 +2,8 @@ import {
   ProfileId,
   ProfileSortCriteria,
   useExploreProfiles,
-  MediaSet
 } from '@lens-protocol/react-web';
-import { formatAvater, formatNickName, formatUser } from '@lib/FormatContent';
+import { formatUser } from '@lib/FormatContent';
 import { User } from '@lib/types/user';
 import { useEffect, useState } from 'react';
 
@@ -25,7 +24,7 @@ type UseCollection<T> =
       user: UserCardProps[] | null;
     };
 
-type UserCardProps = Pick<
+export type UserCardProps = Pick<
   User,
   | 'id'
   | 'bio'
@@ -48,6 +47,7 @@ type UserCardProps = Pick<
 > & {
   modal?: boolean;
   follow?: boolean;
+  isFollowingbserver?:boolean;
 };
 type DataWithUser<T> = UseCollection<T & { user: UserCardProps }>;
 

@@ -1,18 +1,13 @@
-import { useAuth } from '@lib/context/auth-context';
 
 type UserFollowingProps = {
-  userTargetId: string;
+  isFollowingbserver?: boolean;
 };
 
 export function UserFollowing({
-  userTargetId
+  isFollowingbserver
 }: UserFollowingProps): JSX.Element | null {
-  const { user } = useAuth();
-
-  let isOwner;
-  // user?.id !== userTargetId && user?.followers.includes(userTargetId);
-
-  if (!isOwner) return null;
+   
+  if (!isFollowingbserver) return null;
 
   return (
     <p className='rounded bg-main-search-background px-1 text-xs'>
