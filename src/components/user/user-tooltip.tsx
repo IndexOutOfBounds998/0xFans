@@ -9,6 +9,8 @@ import { UserFollowing } from './user-following';
 import { UserUsername } from './user-username';
 import type { ReactNode } from 'react';
 import type { User } from '@lib/types/user';
+import { Profile } from '@lens-protocol/react-web';
+import { useAuth } from '@lib/context/auth-context';
 
 type UserTooltipProps = Pick<
   User,
@@ -26,6 +28,7 @@ type UserTooltipProps = Pick<
   avatar?: boolean;
   isFollowingbserver?: boolean;
   children: ReactNode;
+  profile: Profile;
 };
 
 type Stats = [string, string, number];
@@ -43,9 +46,12 @@ export function UserTooltip({
   following,
   followers,
   coverPhotoURL,
-  isFollowingbserver
+  isFollowingbserver,
+  profile
 }: UserTooltipProps): JSX.Element {
   const { isMobile } = useWindow();
+
+  const { profileByMe } = useAuth();
 
   if (isMobile || modal) return <>{children}</>;
 
@@ -102,7 +108,7 @@ export function UserTooltip({
                   username={username}
                 />
               </div>
-              <FollowButton userTargetId={id?.toString() ?? ''} userTargetUsername={username} />
+              {profileByMe ? <FollowButton userTargetId={id?.toString() ?? ''} userTargetUsername={username} followee={profile} follower={profileByMe} /> : ''}
             </div>
             <div>
               <UserName

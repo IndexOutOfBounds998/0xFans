@@ -18,7 +18,6 @@ import { Input } from '@components/input/input';
 import type { RefObject } from 'react';
 import type { User } from '@lib/types/user';
 import type { Tweet } from '@lib/types/tweet';
-import { formatNickName, formatAvater } from '@lib/FormatContent';
 import { VideoPreview } from '@components/input/video-preview';
 
 type ViewTweetProps = Tweet & {
@@ -40,7 +39,8 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
     userRetweets,
     userReplies,
     viewTweetRef,
-    user: tweetUserData
+    user: tweetUserData,
+    profile
   } = tweet;
 
   const { id: ownerId, name, username, verified, photoURL } = tweetUserData;
@@ -86,12 +86,12 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
           </div>
         )}
         <div className='grid grid-cols-[auto,1fr] gap-3'>
-          <UserTooltip avatar {...tweetUserData}>
+          <UserTooltip avatar {...tweetUserData} profile={profile}>
             <UserAvatar src={photoURL} alt={name ?? ''} username={username} />
           </UserTooltip>
           <div className='flex min-w-0 justify-between'>
             <div className='flex flex-col truncate xs:overflow-visible xs:whitespace-normal'>
-              <UserTooltip {...tweetUserData}>
+              <UserTooltip {...tweetUserData} profile={profile}>
                 <UserName
                   className='-mb-1'
                   name={name ?? ''}
@@ -99,7 +99,7 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
                   verified={verified}
                 />
               </UserTooltip>
-              <UserTooltip {...tweetUserData}>
+              <UserTooltip {...tweetUserData} profile={profile}>
                 <UserUsername username={username} />
               </UserTooltip>
             </div>
@@ -134,12 +134,12 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
         {isVideo
           ? videos && <VideoPreview tweet videoPreview={videos} />
           : images && (
-              <ImagePreview
-                tweet
-                imagesPreview={images}
-                previewCount={images.length}
-              />
-            )}
+            <ImagePreview
+              tweet
+              imagesPreview={images}
+              previewCount={images.length}
+            />
+          )}
         {/*{images && (*/}
         {/*  <ImagePreview*/}
         {/*    viewTweet*/}

@@ -60,7 +60,8 @@ export function useInfiniteScroll<T>(
             createdAt: item.createdAt,
             updatedAt: '',
             userReplies: item.stats.commentsCount,
-            userRetweets: 0
+            userRetweets: 0,
+            profile: item.profile
           };
         });
       console.log(list);

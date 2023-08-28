@@ -6,15 +6,21 @@ import { UserName } from './user-name';
 import { UserFollowing } from './user-following';
 import { UserUsername } from './user-username';
 import type { User } from '@lib/types/user';
+import { useAuth } from '@lib/context/auth-context';
+import { Profile } from '@lens-protocol/react-web';
 
 type UserCardProps = User & {
   modal?: boolean;
   follow?: boolean;
   isFollowingbserver?: boolean;
+  profile: Profile;
 };
 
 export function UserCard(user: UserCardProps): JSX.Element {
-  const { id, bio, name, modal, follow, isFollowingbserver, username, verified, photoURL } = user;
+
+  const { profileByMe } = useAuth();
+
+  const { id, bio, name, modal, follow, isFollowingbserver, username, verified, photoURL, profile } = user;
 
   return (
     <Link href={`/user/${id}`}>
@@ -43,7 +49,7 @@ export function UserCard(user: UserCardProps): JSX.Element {
                 {follow && <UserFollowing isFollowingbserver={isFollowingbserver} />}
               </div>
             </div>
-            <FollowButton userTargetId={id.toString()} userTargetUsername={username} />
+            {profileByMe && <FollowButton userTargetId={id.toString()} userTargetUsername={username} userIsFollowed={follow} followee={profile} follower={profileByMe} />}
           </div>
           {follow && bio && <p className='whitespace-normal'>{bio}</p>}
         </div>

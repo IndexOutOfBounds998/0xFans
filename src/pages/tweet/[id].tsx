@@ -154,6 +154,7 @@ export default function TweetId(): JSX.Element {
             )}
             <ViewTweet
               viewTweetRef={viewTweetRef}
+              profile={tweetObj.profile}
               {...initData(tweetObj as Comment)}
             />
             {tweetObj &&
@@ -162,7 +163,7 @@ export default function TweetId(): JSX.Element {
               ) : (
                 <AnimatePresence mode='popLayout'>
                   {commentList?.map((tweet) => (
-                    <Tweet {...tweet} key={tweet.id} />
+                    <Tweet {...tweet} key={tweet.id} profile={tweetObj.profile} />
                   ))}
                 </AnimatePresence>
               ))}

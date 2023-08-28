@@ -5,16 +5,46 @@ import { preventBubbling } from '@lib/utils';
 import { Modal } from '@components/modal/modal';
 import { ActionModal } from '@components/modal/action-modal';
 import { Button } from '@components/ui/button';
+import {
+  Profile,
+  ProfileOwnedByMe,
+  useUnfollow,
+} from "@lens-protocol/react-web";
+import { useFollowWithSelfFundedFallback } from '@lib/hooks/useFollowWithSelfFundedFallback';
 
 type FollowButtonProps = {
-  userTargetId: string|null;
+  userTargetId: string | null;
   userTargetUsername: string;
+  userIsFollowed?: boolean;
+  follower: ProfileOwnedByMe;
+  followee: Profile;
 };
 
 export function FollowButton({
   userTargetId,
-  userTargetUsername
+  userTargetUsername,
+  userIsFollowed,
+  follower,
+  followee
 }: FollowButtonProps): JSX.Element | null {
+
+
+  const {
+    execute: unfollow,
+    error: unfollowError,
+    isPending: isUnfollowPending,
+  } = useUnfollow({ follower, followee });
+
+  const {
+    execute: follow,
+    error: followError,
+    isPending: isFollowPending,
+  } = useFollowWithSelfFundedFallback({
+    followee,
+    follower,
+  });
+
+
   const { user } = useAuth();
   const { open, openModal, closeModal } = useModal();
 
@@ -23,16 +53,15 @@ export function FollowButton({
   const { id: userId, following } = user ?? {};
 
   const handleFollow = (): Promise<void> => {
-    // manageFollow('follow', userId as string, userTargetId);
+    follow();
     return Promise.resolve();
   };
 
   const handleUnfollow = async (): Promise<void> => {
-    // await manageFollow('unfollow', userId as string, userTargetId);
+    unfollow();
     closeModal();
   };
 
-  const userIsFollowed = false;
 
   return (
     <>

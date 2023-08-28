@@ -131,6 +131,7 @@ type UserCardProps = User & {
   modal?: boolean;
   follow?: boolean;
   isFollowingbserver?: boolean;
+  profile: Profile;
 };
 
 export function formatUser(userProfile: Profile) {
@@ -161,7 +162,8 @@ export function formatUser(userProfile: Profile) {
     pinnedTweet: '',
     follow: userProfile.isFollowedByMe,
     isFollowingbserver: userProfile.isFollowingObserver,
-    modal: false
+    modal: false,
+    profile: userProfile
   };
 
   return userFormate;

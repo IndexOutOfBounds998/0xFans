@@ -14,6 +14,7 @@ import type { ChangeEvent, KeyboardEvent } from 'react';
 import type { FilesWithId } from '@lib/types/file';
 import type { User, EditableData, EditableUserData } from '@lib/types/user';
 import type { InputFieldProps } from '@components/input/input-field';
+import { Profile } from '@lens-protocol/react-web';
 
 type RequiredInputFieldProps = Omit<InputFieldProps, 'handleChange'> & {
   inputId: EditableData;
@@ -33,6 +34,29 @@ type UserEditProfileProps = {
   hide?: boolean;
 };
 
+
+type UserDetailsProps = Pick<
+  User,
+  | 'id'
+  | 'bio'
+  | 'name'
+  | 'photoURL'
+  | 'totalTweets'
+  | 'coverPhotoURL'
+  | 'username'
+  | 'verified'
+  | 'following'
+  | 'followers'
+  | 'theme'
+  | 'createdAt'
+  | 'accent'
+  | 'website'
+  | 'location'
+  | 'totalPhotos'
+> & {
+  profile: Profile;
+};
+
 export function UserEditProfile({ hide }: UserEditProfileProps): JSX.Element {
   const { user } = useUser();
   const { open, openModal, closeModal } = useModal();
@@ -40,7 +64,7 @@ export function UserEditProfile({ hide }: UserEditProfileProps): JSX.Element {
   const [loading, setLoading] = useState(false);
 
   const { bio, name, website, location, photoURL, coverPhotoURL } =
-    user as User;
+    user as UserDetailsProps;
 
   const [editUserData, setEditUserData] = useState<EditableUserData>({
     bio,
@@ -116,29 +140,29 @@ export function UserEditProfile({ hide }: UserEditProfileProps): JSX.Element {
 
   const editImage =
     (type: 'cover' | 'profile') =>
-    ({ target: { files } }: ChangeEvent<HTMLInputElement>): void => {
-      const imagesData = getImagesData(files);
+      ({ target: { files } }: ChangeEvent<HTMLInputElement>): void => {
+        const imagesData = getImagesData(files);
 
-      if (!imagesData) {
-        toast.error('Please choose a valid GIF or Photo');
-        return;
-      }
+        if (!imagesData) {
+          toast.error('Please choose a valid GIF or Photo');
+          return;
+        }
 
-      const { imagesPreviewData, selectedImagesData } = imagesData;
+        const { imagesPreviewData, selectedImagesData } = imagesData;
 
-      const targetKey = type === 'cover' ? 'coverPhotoURL' : 'photoURL';
-      const newImage = imagesPreviewData[0].src;
+        const targetKey = type === 'cover' ? 'coverPhotoURL' : 'photoURL';
+        const newImage = imagesPreviewData[0].src;
 
-      setEditUserData({
-        ...editUserData,
-        [targetKey]: newImage
-      });
+        setEditUserData({
+          ...editUserData,
+          [targetKey]: newImage
+        });
 
-      setUserImages({
-        ...userImages,
-        [targetKey]: selectedImagesData
-      });
-    };
+        setUserImages({
+          ...userImages,
+          [targetKey]: selectedImagesData
+        });
+      };
 
   const removeCoverImage = (): void => {
     setEditUserData({
@@ -182,10 +206,10 @@ export function UserEditProfile({ hide }: UserEditProfileProps): JSX.Element {
 
   const handleChange =
     (key: EditableData) =>
-    ({
-      target: { value }
-    }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-      setEditUserData({ ...editUserData, [key]: value });
+      ({
+        target: { value }
+      }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+        setEditUserData({ ...editUserData, [key]: value });
 
   const handleKeyboardShortcut = ({
     key,
