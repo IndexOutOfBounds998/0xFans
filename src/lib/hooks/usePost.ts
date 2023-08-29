@@ -157,9 +157,7 @@ export function usePost({ callbackOnError }: PostData) {
 
     // Condition for gating the content
     const collectAccessCondition: CollectCondition = { thisPublication: true };
-    const followAccessCondition: FollowCondition = {
-      profileId: profileUser.id
-    };
+    const followAccessCondition: FollowCondition = { profileId: profileUser.id };
 
     // Create the access condition
     let accessCondition: AccessConditionOutput = {};
@@ -186,7 +184,7 @@ export function usePost({ callbackOnError }: PostData) {
         ...accessCondition
       },
       async function (EncryptedMetadata) {
-        const added = await execute(JSON.stringify(EncryptedMetadata));
+        const added = await execute(EncryptedMetadata);
         return added || '';
       }
     );

@@ -24,7 +24,7 @@ export default function UserTweets(): JSX.Element {
     LoadMore
   } = useInfinitePublicationsScroll({
     profileId: profileId(id as string ?? ''),
-    limit: 10,
+    limit: 20,
     metadataFilter: {
       restrictPublicationMainFocusTo: [PublicationMainFocus.TextOnly, PublicationMainFocus.Image, PublicationMainFocus.Video]
     }
