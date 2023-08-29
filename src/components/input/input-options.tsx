@@ -15,6 +15,7 @@ type Options = {
   name: string;
   iconName: IconName;
   disabled: boolean;
+  tip?: string;
   onClick?: () => void;
 }[];
 
@@ -108,7 +109,7 @@ export function InputOptions({
       >
         <CollectSetting
           closeModal={closeModal}
-          setCollectData={setCollectData || (() => {})}
+          setCollectData={setCollectData || (() => { })}
         />
       </Modal>
       <div
