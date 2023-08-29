@@ -15,8 +15,10 @@ import { UsernameModal } from '@components/modal/username-modal';
 import { InputField } from '@components/input/input-field';
 import type { FormEvent, ChangeEvent } from 'react';
 import {
+  ProfileOwnedByMe,
   useUpdateProfileDetails,
 } from '@lens-protocol/react-web';
+import { upload } from '@lib/upload';
 
 export function UpdateUsername(): JSX.Element {
   const [alreadySet, setAlreadySet] = useState(false);
@@ -30,19 +32,18 @@ export function UpdateUsername(): JSX.Element {
   const { open, openModal, closeModal } = useModal();
 
 
-  // let execute: any, error: any, isPending: any;
+  const profile = profileByMe as unknown as ProfileOwnedByMe;
 
-  // if (profileByMe) {
-  //   ({ execute, error, isPending } = useUpdateProfileDetails({
-  //     profile: profileByMe, upload: null
-  //   }));
-  // }
+  const { execute: update, error, isPending } = useUpdateProfileDetails({
+    profile,
+    upload
+  });
 
   useEffect(() => {
     const checkAvailability = async (value: string): Promise<void> => {
       // const empty = await checkUsernameAvailability(value);
-      const empty = '';
-      if (empty) setAvailable(true);
+      
+      if (true) setAvailable(true);
       else {
         setAvailable(false);
         setErrorMessage('This username has been taken. Please choose another.');
@@ -79,7 +80,7 @@ export function UpdateUsername(): JSX.Element {
 
     await sleep(500);
 
-    // await updateUsername(user?.id as string, inputValue);
+    await update({ name: inputValue });
 
     closeModal();
 
