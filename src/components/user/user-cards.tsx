@@ -31,7 +31,7 @@ const allNoStatsData: Readonly<NoStatsData> = {
       'Share someone else’s Tweet on your timeline by Retweeting it. When you do, it’ll show up here.'
   },
   likes: {
-    title: 'No Tweet Likes yet',
+    title: 'No Posts Likes yet',
     imageData: { src: '/assets/no-likes.png', alt: 'No likes' },
     description: 'When you like a Tweet, it’ll show up here.'
   },

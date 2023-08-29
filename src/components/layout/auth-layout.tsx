@@ -4,14 +4,14 @@ import { useAuth } from '@lib/context/auth-context';
 import { sleep } from '@lib/utils';
 import { Placeholder } from '@components/common/placeholder';
 import type { LayoutProps } from './common-layout';
- 
+
 export function AuthLayout({ children }: LayoutProps): JSX.Element {
   const [pending, setPending] = useState(true);
 
-  const { user, loading, isLoginAction, loginAddress, signOut } = useAuth();
+  const { user, loading, isLoginAction } = useAuth();
 
   const { replace } = useRouter();
- 
+
 
   useEffect(() => {
     const checkLogin = async (): Promise<void> => {
@@ -32,7 +32,6 @@ export function AuthLayout({ children }: LayoutProps): JSX.Element {
     };
 
     void checkLogin();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, loading, isLoginAction]);
 
 
