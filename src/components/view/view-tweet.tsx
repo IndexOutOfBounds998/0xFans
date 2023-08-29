@@ -23,6 +23,8 @@ import { VideoPreview } from '@components/input/video-preview';
 type ViewTweetProps = Tweet & {
   user: User;
   viewTweetRef?: RefObject<HTMLElement>;
+  canComment?: boolean;
+  canMirror?: boolean;
 };
 
 export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
@@ -40,7 +42,9 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
     userReplies,
     viewTweetRef,
     user: tweetUserData,
-    profile
+    profile,
+    canComment,
+    canMirror
   } = tweet;
 
   const { id: ownerId, name, username, verified, photoURL } = tweetUserData;
@@ -55,7 +59,7 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
 
   const isOwner = userId === createdBy;
 
-  const reply = !!parent;
+
 
   const { id: parentId, username: parentUsername = username } = parent ?? {};
 
@@ -64,7 +68,7 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
       className={cn(
         `accent-tab h- relative flex cursor-default flex-col gap-3 border-b
          border-light-border px-4 py-3 outline-none dark:border-dark-border`,
-        reply && 'scroll-m-[3.25rem] pt-0'
+        canComment && 'scroll-m-[3.25rem] pt-0'
       )}
       {...variants}
       animate={{ ...variants.animate, transition: { duration: 0.2 } }}
@@ -80,7 +84,7 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
         <TweetReplyModal tweet={tweet} closeModal={closeModal} />
       </Modal>
       <div className='flex flex-col gap-2'>
-        {reply && (
+        {canComment && (
           <div className='flex w-12 items-center justify-center'>
             <i className='hover-animation h-2 w-0.5 bg-light-line-reply dark:bg-dark-line-reply' />
           </div>
@@ -118,13 +122,13 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
           </div>
         </div>
       </div>
-      {reply && (
+      {canComment && (
         <p className='text-light-secondary dark:text-dark-secondary'>
-          Replying to {/*<Link href={`/user/${parentUsername}`}>*/}
-          <span className='custom-underline text-main-accent'>
-            @{parentUsername}
-          </span>
-          {/*</Link>*/}
+          Replying to <Link href={`/user/${profile.id}`}>
+            <span className='custom-underline text-main-accent'>
+              @{parentUsername}
+            </span>
+          </Link>
         </p>
       )}
       <div>
@@ -154,7 +158,8 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
           <TweetDate viewTweet tweetLink={tweetLink} createdAt={createdAt} />
           <TweetStats
             viewTweet
-            reply={reply}
+            canComment={canComment}
+            canMirror={canMirror}
             userId={userId}
             isOwner={isOwner}
             tweetId={tweetId}

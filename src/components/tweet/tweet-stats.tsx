@@ -12,16 +12,16 @@ type TweetStatsProps = Pick<
   Tweet,
   'userLikes' | 'userRetweets' | 'userReplies'
 > & {
-  reply?: boolean;
   userId: string;
   isOwner: boolean;
   tweetId: string | null;
   viewTweet?: boolean;
+  canComment?: boolean;
+  canMirror?: boolean;
   openModal?: () => void;
 };
 
 export function TweetStats({
-  reply,
   userId,
   isOwner,
   tweetId,
@@ -29,7 +29,9 @@ export function TweetStats({
   viewTweet,
   userRetweets,
   userReplies: totalReplies,
-  openModal
+  openModal,
+  canComment,
+  canMirror
 }: TweetStatsProps): JSX.Element {
   const totalLikes = userLikes ? userLikes : 0;
   const totalTweets = userRetweets ? userRetweets : 0;
@@ -100,7 +102,7 @@ export function TweetStats({
           iconName='ChatBubbleOvalLeftIcon'
           viewTweet={viewTweet}
           onClick={openModal}
-          disabled={reply}
+          disabled={!canComment}
         />
         <TweetOption
           className={cn(
@@ -114,11 +116,12 @@ export function TweetStats({
           stats={currentTweets}
           iconName='ArrowPathRoundedSquareIcon'
           viewTweet={viewTweet}
-          // onClick={manageRetweet(
-          //   tweetIsRetweeted ? 'unretweet' : 'retweet',
-          //   userId,
-          //   tweetId??''
-          // )}
+          disabled={!canMirror}
+        // onClick={manageRetweet(
+        //   tweetIsRetweeted ? 'unretweet' : 'retweet',
+        //   userId,
+        //   tweetId??''
+        // )}
         />
         <TweetOption
           className={cn(
@@ -132,11 +135,11 @@ export function TweetStats({
           stats={currentLikes}
           iconName='HeartIcon'
           viewTweet={viewTweet}
-          // onClick={manageLike(
-          //   tweetIsLiked ? 'unlike' : 'like',
-          //   userId,
-          //   tweetId??''
-          // )}
+        // onClick={manageLike(
+        //   tweetIsLiked ? 'unlike' : 'like',
+        //   userId,
+        //   tweetId??''
+        // )}
         />
         <TweetShare
           userId={userId}

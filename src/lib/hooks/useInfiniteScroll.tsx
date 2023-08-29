@@ -61,7 +61,9 @@ export function useInfiniteScroll<T>(
             updatedAt: '',
             userReplies: item.stats.commentsCount,
             userRetweets: 0,
-            profile: item.profile
+            profile: item.profile,
+            canComment: item.canComment.result,
+            canMirror: item.canMirror.result
           };
         });
       console.log(list);

@@ -40,7 +40,7 @@ export default function Home(): JSX.Element {
         oneOf: []
       }
     },
-    sources: [APP_ID, 'lenstube', 'orb', 'buttrfly', 'lensplay']
+    sources: [APP_ID]
   });
 
   return (

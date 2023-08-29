@@ -36,7 +36,7 @@ const topNavLinks: Readonly<MobileNavLink[]> = [
   },
   {
     href: '/people',
-    linkName: 'Twitter Circle',
+    linkName: '0xFans Circle',
     iconName: 'UserGroupIcon'
   }
 ];
@@ -46,7 +46,7 @@ const bottomNavLinks: Readonly<MobileNavLink[]> = [
     href: '/settings',
     linkName: 'Settings and privacy',
     iconName: 'Cog8ToothIcon',
-    disabled: true
+    // disabled: true
   },
   {
     href: '/help-center',

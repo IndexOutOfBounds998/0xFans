@@ -26,6 +26,8 @@ export type TweetProps = Tweet & {
   pinned?: boolean;
   profile: Profile;
   parentTweet?: boolean;
+  canComment?: boolean;
+  canMirror?: boolean;
 };
 
 export const variants: Variants = {
@@ -51,9 +53,11 @@ export function Tweet(tweet: TweetProps): JSX.Element {
     parentTweet,
     userReplies,
     userRetweets,
-    user
+    user,
+    canComment,
+    canMirror
   } = tweet;
-
+   
   const { id: ownerId, name, username, photoURL, coverPhotoURL } = user ?? {};
 
   // const { user } = useAuth();
@@ -74,7 +78,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
     name: profileUsername
   } = profile ?? {};
 
-  const reply = !!parent;
+
   let tweetIsRetweeted;
   if (userRetweets) tweetIsRetweeted = '';
 
@@ -94,7 +98,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
       >
         <TweetReplyModal tweet={tweet} closeModal={closeModal} />
       </Modal>
-      <Link href={tweetLink} scroll={!reply}>
+      <Link href={tweetLink} scroll={!canComment}>
         <span
           className={cn(
             `accent-tab hover-card relative flex flex-col 
@@ -110,7 +114,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
             <AnimatePresence initial={false}>
               {modal ? null : pinned ? (
                 <TweetStatus type='pin'>
-                  <p className='text-sm font-bold'>Pinned Tweet</p>
+                  <p className='text-sm font-bold'>Pinned Post</p>
                 </TweetStatus>
               ) : (
                 tweetIsRetweeted && (
@@ -178,18 +182,18 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                   )}
                 </div>
               </div>
-              {(reply || modal) && (
+              {(canComment || modal) && (
                 <p
                   className={cn(
                     'text-light-secondary dark:text-dark-secondary',
                     modal && 'order-1 my-2'
                   )}
                 >
-                  Replying to {/*<Link href={`/user/${parentUsername}`}>*/}
-                  <span className='custom-underline text-main-accent'>
-                    @{parentUsername}
-                  </span>
-                  {/*</Link>*/}
+                  Replying to <Link href={`/user/${profile.id}`}>
+                    <span className='custom-underline text-main-accent'>
+                      @{parentUsername}
+                    </span>
+                  </Link>
                 </p>
               )}
               {text && (
@@ -207,7 +211,8 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                   )}
                 {!modal && (
                   <TweetStats
-                    reply={reply}
+                    canComment={canComment}
+                    canMirror={canMirror}
                     userId={userId}
                     isOwner={isOwner}
                     tweetId={tweetId}
