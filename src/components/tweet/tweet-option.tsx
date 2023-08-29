@@ -36,7 +36,7 @@ export function TweetOption({
         disabled && 'cursor-not-allowed',
         className
       )}
-      onClick={preventBubbling(onClick)}
+      onClick={disabled ? preventBubbling() : preventBubbling(onClick)}
     >
       <i
         className={cn(
