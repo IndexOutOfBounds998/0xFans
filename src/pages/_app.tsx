@@ -42,17 +42,11 @@ const wagmiConfig = createConfig({
   publicClient
 });
 
-// 'lenster', 'lenstrip', "lenstube", "orb", "buttrfly", "lensplay"
 const lensConfig: LensConfig = {
   bindings: bindings(),
   environment: MAIN_NETWORK ? production : development,
   sources: [
-    appId('lenster'),
-    appId(APP_ID),
-    appId('lenstube'),
-    appId('orb'),
-    appId('buttrfly'),
-    appId('lensplay')
+    appId(APP_ID)
   ],
   appId: appId(APP_ID),
 };
