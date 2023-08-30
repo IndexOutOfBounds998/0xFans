@@ -44,7 +44,8 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
     user: tweetUserData,
     profile,
     canComment,
-    canMirror
+    canMirror,
+    publication
   } = tweet;
 
   const { id: ownerId, name, username, verified, photoURL } = tweetUserData;
@@ -157,6 +158,7 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
         >
           <TweetDate viewTweet tweetLink={tweetLink} createdAt={createdAt} />
           <TweetStats
+            publication={publication}
             viewTweet
             canComment={canComment}
             canMirror={canMirror}

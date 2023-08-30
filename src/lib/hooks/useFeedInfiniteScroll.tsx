@@ -66,7 +66,8 @@ export function useFeedInfiniteScroll<T>(
             updatedAt: '',
             userReplies: item.root.stats.commentsCount,
             userRetweets: 0,
-            profile: item.root.profile
+            profile: item.root.profile,
+            publication: item.root
           };
         });
       console.log(list);

@@ -42,6 +42,7 @@ type TwDetailsProps = Pick<
   | 'createdAt'
   | 'updatedAt'
   | 'userRetweets'
+  | 'publication'
 >;
 export default function TweetId(): JSX.Element {
   const {
@@ -76,7 +77,8 @@ export default function TweetId(): JSX.Element {
       updatedAt: '',
       userReplies: data?.stats?.totalAmountOfComments,
       userRetweets: data?.stats?.totalAmountOfMirrors,
-      userLikes: data?.stats?.totalUpvotes
+      userLikes: data?.stats?.totalUpvotes,
+      publication: data
     };
 
     return initData;

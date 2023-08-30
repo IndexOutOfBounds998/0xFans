@@ -7,10 +7,12 @@ import { ViewTweetStats } from '@components/view/view-tweet-stats';
 import { TweetOption } from './tweet-option';
 import { TweetShare } from './tweet-share';
 import type { Tweet } from '@lib/types/tweet';
+import { ContentPublication, Post, ReactionType, profileId, publicationId, usePublication, useReaction } from '@lens-protocol/react-web';
+import { useAuth } from '@lib/context/auth-context';
 
 type TweetStatsProps = Pick<
   Tweet,
-  'userLikes' | 'userRetweets' | 'userReplies'
+  'userLikes' | 'userRetweets' | 'userReplies' | 'publication'
 > & {
   userId: string;
   isOwner: boolean;
@@ -66,10 +68,50 @@ export function TweetStats({
     [totalTweets]
   );
 
-  const tweetIsLiked = '';
   const tweetIsRetweeted = '';
 
   const isStatsVisible = !!(totalReplies || totalTweets || totalLikes);
+
+  const { user: profileUser } = useAuth();
+
+  const { data: publication, loading: publicatioLoading } = usePublication({
+    publicationId: publicationId(tweetId as string),
+    observerId: profileId(profileUser?.id as string),
+  });
+
+  const { addReaction, removeReaction, hasReaction, isPending } = useReaction({
+    profileId: profileId(profileUser?.id as string)
+  });
+
+  const hasReactionType = publication ? hasReaction({
+    reactionType: ReactionType.UPVOTE,
+    publication: (publication as Post)
+  }) : false;
+
+  let [loading, setLoading] = useState(false);
+
+  const toggleReaction = async () => {
+    if (!profileId) {
+      return;
+    }
+    const reactionType = ReactionType.UPVOTE;
+    const targetPublication = (publication as ContentPublication);
+
+    setLoading(true);
+    debugger
+    if (hasReactionType) {
+      await removeReaction({
+        reactionType,
+        publication: targetPublication,
+      });
+    } else {
+      await addReaction({
+        reactionType,
+        publication: targetPublication,
+      });
+    }
+    setLoading(false);
+  };
 
   return (
     <>
@@ -126,20 +168,16 @@ export function TweetStats({
         <TweetOption
           className={cn(
             'hover:text-accent-pink focus-visible:text-accent-pink',
-            tweetIsLiked && 'text-accent-pink [&>i>svg]:fill-accent-pink'
+            hasReactionType && 'text-accent-pink [&>i>svg]:fill-accent-pink'
           )}
           iconClassName='group-hover:bg-accent-pink/10 group-active:bg-accent-pink/20
                          group-focus-visible:bg-accent-pink/10 group-focus-visible:ring-accent-pink/80'
-          tip={tweetIsLiked ? 'Unlike' : 'Like'}
+          tip={hasReactionType ? 'Unlike' : 'Like'}
           move={likeMove}
           stats={currentLikes}
           iconName='HeartIcon'
           viewTweet={viewTweet}
-        // onClick={manageLike(
-        //   tweetIsLiked ? 'unlike' : 'like',
-        //   userId,
-        //   tweetId??''
-        // )}
+          onClick={() => toggleReaction()}
         />
         <TweetShare
           userId={userId}

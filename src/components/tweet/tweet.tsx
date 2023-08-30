@@ -55,9 +55,10 @@ export function Tweet(tweet: TweetProps): JSX.Element {
     userRetweets,
     user,
     canComment,
-    canMirror
+    canMirror,
+    publication
   } = tweet;
-   
+
   const { id: ownerId, name, username, photoURL, coverPhotoURL } = user ?? {};
 
   // const { user } = useAuth();
@@ -211,6 +212,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                   )}
                 {!modal && (
                   <TweetStats
+                    publication={publication}
                     canComment={canComment}
                     canMirror={canMirror}
                     userId={userId}

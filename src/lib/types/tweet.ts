@@ -1,7 +1,7 @@
 import { UserCardProps } from '@lib/hooks/useCollection';
 import type { ImagesPreview, VideosPreview } from './file';
 import type { User } from './user';
-import { Profile } from '@lens-protocol/react-web';
+import { AnyPublication, Profile } from '@lens-protocol/react-web';
 
 export type Tweet = {
   id: string | null;
@@ -18,6 +18,7 @@ export type Tweet = {
   userReplies: number | null;
   userRetweets: number | null;
   profile: Profile;
+  publication: AnyPublication
 };
 
 export type TweetWithUser = Tweet & { user: UserCardProps };
