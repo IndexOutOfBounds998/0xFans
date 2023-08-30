@@ -10,7 +10,7 @@ export function useFetchPublications({
   explorePublicationRequest
 }: useFetchPublicationsArgs) {
   const [loading, setLoading] = useState<Boolean>(false);
-  const [loaded, setLoaded] = useState(false);
+
   const [firstLoading, setFirstLoading] = useState(false);
   const [data, setData] = useState<any[]>([]);
   const [nextCursor, setNextCursor] = useState<any>('');
@@ -32,12 +32,13 @@ export function useFetchPublications({
     setFirstLoading(false);
   };
 
+  let loaded = false;
   useEffect(() => {
     if (!loaded) {
       execute();
-      setLoaded(true);
+      loaded = true;
     }
-  }, [firstLoading]);
+  }, []);
 
   const next = async () => {
     setLoading(true);
@@ -48,7 +49,11 @@ export function useFetchPublications({
       setLoading(false);
       setData((prevData) => [...prevData, ...res.items]);
       setNextCursor(res.pageInfo.next);
-      setHasMore(res.items.length > 0);
+      if (res.pageInfo.next === null) {
+        setHasMore(false);
+      } else {
+        setHasMore(true);
+      }
     }
   };
 
@@ -69,7 +74,11 @@ export function useFetchPublications({
     let res = await lensClient.explore.publications(request);
     setData((prevData: any) => [...prevData, ...res.items]);
     setNextCursor(res.pageInfo.next);
-    setHasMore(res.items.length > 0);
+    if (res.pageInfo.next === null) {
+      setHasMore(false);
+    } else {
+      setHasMore(true);
+    }
     setLoading(false);
   }
 
