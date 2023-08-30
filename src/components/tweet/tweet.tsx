@@ -216,7 +216,6 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                     canComment={canComment}
                     canMirror={canMirror}
                     userId={userId}
-                    isOwner={isOwner}
                     tweetId={tweetId}
                     userLikes={userLikes}
                     userReplies={userReplies}

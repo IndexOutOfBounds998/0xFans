@@ -163,7 +163,6 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
             canComment={canComment}
             canMirror={canMirror}
             userId={userId}
-            isOwner={isOwner}
             tweetId={tweetId}
             userLikes={userLikes}
             userRetweets={userRetweets}

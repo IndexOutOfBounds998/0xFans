@@ -15,7 +15,6 @@ type TweetStatsProps = Pick<
   'userLikes' | 'userRetweets' | 'userReplies' | 'publication'
 > & {
   userId: string;
-  isOwner: boolean;
   tweetId: string | null;
   viewTweet?: boolean;
   canComment?: boolean;
@@ -25,7 +24,6 @@ type TweetStatsProps = Pick<
 
 export function TweetStats({
   userId,
-  isOwner,
   tweetId,
   userLikes,
   viewTweet,
@@ -33,7 +31,8 @@ export function TweetStats({
   userReplies: totalReplies,
   openModal,
   canComment,
-  canMirror
+  canMirror,
+  publication: pub
 }: TweetStatsProps): JSX.Element {
   const totalLikes = userLikes ? userLikes : 0;
   const totalTweets = userRetweets ? userRetweets : 0;
@@ -73,6 +72,8 @@ export function TweetStats({
   const isStatsVisible = !!(totalReplies || totalTweets || totalLikes);
 
   const { user: profileUser } = useAuth();
+
+  const isOwner = pub.profile.id === profileUser?.id;
 
   const { data: publication, loading: publicatioLoading } = usePublication({
     publicationId: publicationId(tweetId as string),
