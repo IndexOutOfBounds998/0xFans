@@ -61,7 +61,8 @@ export function FollowButton({
   const handleUnfollow = async (): Promise<void> => {
     setUnfollowLoading(true);
     closeModal();
-    await unfollow();
+    unfollow();
+
   };
 
 
