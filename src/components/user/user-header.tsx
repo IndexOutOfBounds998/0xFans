@@ -67,8 +67,9 @@ export function UserHeader(): JSX.Element {
       ) : (
         <motion.div className='-mb-1 truncate' {...variants} key='found'>
           <UserName
+            id={id}
             tag='h2'
-            name={user.name??''}
+            name={user.name ?? ''}
             className='-mt-1 text-xl'
             iconClassName='w-6 h-6'
             verified={user.verified}
@@ -77,18 +78,18 @@ export function UserHeader(): JSX.Element {
             {isInFollowPage
               ? `@${user.username}`
               : isInTweetPage
-              ? totalTweets
-                ? `${totalTweets} ${`Posts${isPlural(totalTweets)}`}`
-                : 'No Post'
-              : currentPage === 'media'
-              ? totalPhotos
-                ? `${totalPhotos} Photo${isPlural(totalPhotos)} & GIF${isPlural(
-                    totalPhotos
-                  )}`
-                : 'No Photo & GIF'
-              : totalLikes
-              ? `${totalLikes} Like${isPlural(totalLikes)}`
-              : 'No Like'}
+                ? totalTweets
+                  ? `${totalTweets} ${`Posts${isPlural(totalTweets)}`}`
+                  : 'No Post'
+                : currentPage === 'media'
+                  ? totalPhotos
+                    ? `${totalPhotos} Photo${isPlural(totalPhotos)} & GIF${isPlural(
+                      totalPhotos
+                    )}`
+                    : 'No Photo & GIF'
+                  : totalLikes
+                    ? `${totalLikes} Like${isPlural(totalLikes)}`
+                    : 'No Like'}
           </p>
         </motion.div>
       )}

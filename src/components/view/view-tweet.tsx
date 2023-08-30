@@ -98,6 +98,7 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
             <div className='flex flex-col truncate xs:overflow-visible xs:whitespace-normal'>
               <UserTooltip {...tweetUserData} profile={profile}>
                 <UserName
+                  id={ownerId}
                   className='-mb-1'
                   name={name ?? ''}
                   username={username}
@@ -105,7 +106,7 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
                 />
               </UserTooltip>
               <UserTooltip {...tweetUserData} profile={profile}>
-                <UserUsername username={username} />
+                <UserUsername id={ownerId} username={username} />
               </UserTooltip>
             </div>
             <div className='px-4'>

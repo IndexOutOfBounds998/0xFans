@@ -158,6 +158,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                 <div className='flex gap-1 truncate xs:overflow-visible xs:whitespace-normal'>
                   <UserTooltip modal={modal} {...user} profile={profile}>
                     <UserName
+                      id={ownerId}
                       name={name ?? ''}
                       username={username}
                       verified={false}
@@ -165,7 +166,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                     />
                   </UserTooltip>
                   <UserTooltip modal={modal} {...user} profile={profile}>
-                    <UserUsername username={username ?? ''} />
+                    <UserUsername id={ownerId} username={username ?? ''} />
                   </UserTooltip>
                   <TweetDate tweetLink={tweetLink} createdAt={createdAt} />
                 </div>

@@ -36,6 +36,7 @@ export function UserCard(user: UserCardProps): JSX.Element {
             <div className='flex flex-col justify-center truncate xs:overflow-visible xs:whitespace-normal'>
               <UserTooltip {...user} modal={modal}>
                 <UserName
+                  id={id}
                   className='-mb-1'
                   name={name ?? ''}
                   username={username}
@@ -44,7 +45,7 @@ export function UserCard(user: UserCardProps): JSX.Element {
               </UserTooltip>
               <div className='flex items-center gap-1 text-light-secondary dark:text-dark-secondary'>
                 <UserTooltip {...user} modal={modal}>
-                  <UserUsername username={username} />
+                  <UserUsername id={id} username={username} />
                 </UserTooltip>
                 {follow && <UserFollowing isFollowingbserver={isFollowingbserver} />}
               </div>

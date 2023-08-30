@@ -18,8 +18,8 @@ export function SidebarProfile(): JSX.Element {
   const { user, signOut } = useAuth();
   const { open, openModal, closeModal } = useModal();
 
-  const { name, username, verified, photoURL } = user as User;
-  
+  const { id, name, username, verified, photoURL } = user as User;
+
   return (
     <>
       <Modal
@@ -51,8 +51,8 @@ export function SidebarProfile(): JSX.Element {
               <div className='flex gap-3 truncate'>
                 <UserAvatar src={photoURL} alt={username} size={40} />
                 <div className='hidden truncate text-start leading-5 xl:block'>
-                  <UserName name={name??''} className='start' verified={verified} />
-                  <UserUsername username={username} disableLink />
+                  <UserName id={id} name={name ?? ''} className='start' verified={verified} />
+                  <UserUsername id={id} username={username} disableLink />
                 </div>
               </div>
               <HeroIcon
@@ -77,8 +77,8 @@ export function SidebarProfile(): JSX.Element {
                     <div className='flex items-center gap-3 truncate'>
                       <UserAvatar src={photoURL} alt={username} />
                       <div className='truncate'>
-                        <UserName name={name??''} verified={verified} />
-                        <UserUsername username={username} disableLink />
+                        <UserName id={id} name={name ?? ''} verified={verified} />
+                        <UserUsername id={id} username={username} disableLink />
                       </div>
                     </div>
                     <i>

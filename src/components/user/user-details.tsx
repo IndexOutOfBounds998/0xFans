@@ -48,6 +48,7 @@ export function UserDetails({
     <>
       <div>
         <UserName
+          id={id}
           className='-mb-1 text-xl'
           name={name ?? ''}
           iconClassName='w-6 h-6'

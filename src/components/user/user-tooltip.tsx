@@ -112,13 +112,14 @@ export function UserTooltip({
             </div>
             <div>
               <UserName
+                id={id}
                 className='-mb-1 text-lg'
                 name={name ?? ''}
                 username={username}
                 verified={verified}
               />
               <div className='flex items-center gap-1 text-light-secondary dark:text-dark-secondary'>
-                <UserUsername username={username} />
+                <UserUsername id={id} username={username} />
                 <UserFollowing isFollowingbserver={isFollowingbserver} />
               </div>
             </div>
