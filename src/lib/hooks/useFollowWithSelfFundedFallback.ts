@@ -22,11 +22,14 @@ export function useFollowWithSelfFundedFallback({
 }: UseFollowWithSelfFundedFallbackArgs) {
   const [error, setError] = useState<PossibleError>(undefined);
 
+  const [loading, setLoading] = useState<boolean>(false);
+
   const gasless = useFollow({ followee, follower });
 
   const selfFunded = useSelfFundedFallback();
 
   const execute = async () => {
+    setLoading(true);
     // it won't ask to sign if can be performed via proxy-action
     const gaslessResult = await gasless.execute();
     // did the gasless request fail?
@@ -36,7 +39,7 @@ export function useFollowWithSelfFundedFallback({
         // ask your confirmation before using their funds
         const shouldPayFor = window.confirm(
           "It was not possible to cover the gas costs at this time.\n\n" +
-            "Do you wish to continue with your MATIC?",
+          "Do you wish to continue with your MATIC?",
         );
 
         if (shouldPayFor) {
@@ -48,6 +51,11 @@ export function useFollowWithSelfFundedFallback({
           if (selfFundedResult.isFailure()) {
             setError(selfFundedResult.error);
           }
+
+          if (selfFundedResult.isSuccess()) {
+            setLoading(false);
+          }
+
         }
         return;
       }
@@ -60,6 +68,6 @@ export function useFollowWithSelfFundedFallback({
   return {
     execute,
     error,
-    isPending: gasless.isPending || selfFunded.isPending,
+    isPending: gasless.isPending || selfFunded.isPending || loading,
   };
 }
