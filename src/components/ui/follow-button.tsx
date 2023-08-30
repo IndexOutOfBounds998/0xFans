@@ -11,6 +11,7 @@ import {
   useUnfollow,
 } from "@lens-protocol/react-web";
 import { useFollowWithSelfFundedFallback } from '@lib/hooks/useFollowWithSelfFundedFallback';
+import { useState } from 'react';
 
 type FollowButtonProps = {
   userTargetId: string | null;
@@ -46,19 +47,21 @@ export function FollowButton({
 
 
   const { user } = useAuth();
+
   const { open, openModal, closeModal } = useModal();
 
   if (user?.id === userTargetId) return null;
 
-  const { id: userId, following } = user ?? {};
+  const [unfollowLoading, setUnfollowLoading] = useState<boolean>(false);
 
   const handleFollow = (): Promise<void> => {
     return follow();
   };
 
   const handleUnfollow = async (): Promise<void> => {
-    unfollow();
+    setUnfollowLoading(true);
     closeModal();
+    await unfollow();
   };
 
 
@@ -79,7 +82,7 @@ export function FollowButton({
       </Modal>
       {userIsFollowed ? (
         <Button
-          loading={isUnfollowPending}
+          loading={isUnfollowPending || unfollowLoading}
           className='dark-bg-tab min-w-[106px] self-start border border-light-line-reply px-4 py-1.5 
                      font-bold hover:border-accent-red hover:bg-accent-red/10 hover:text-accent-red
                      hover:before:content-["Unfollow"] inner:hover:hidden dark:border-light-secondary'
