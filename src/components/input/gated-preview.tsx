@@ -2,7 +2,7 @@ import cn from 'clsx';
 import { preventBubbling } from '@lib/utils';
 import { AnimatePresence, motion, MotionProps } from 'framer-motion';
 import { HeroIcon } from '@components/ui/hero-icon';
-import { usePublication } from '@lens-protocol/react-web';
+import { ContentPublication, usePublication } from '@lens-protocol/react-web';
 
 type GatedPreviewProps = {
   publicationObj: any;
@@ -26,12 +26,10 @@ export function GatedPreview({
   openCollectModal,
   openFollowModal
 }: GatedPreviewProps): JSX.Element {
-  const { data: publication, loading: publication_loading } =
-    usePublication(publicationObj);
+  const { data: publication, loading: publication_loading } = usePublication(publicationObj);
   console.log(publication);
   const handle = publication?.profile?.handle;
-  const criteria =
-    publication?.metadata?.encryptionParams?.accessCondition?.or?.criteria;
+  const criteria = (publication as ContentPublication)?.metadata?.encryptionParams?.accessCondition?.or?.criteria;
   let isProfile;
   let isFollow;
   console.log(criteria);
