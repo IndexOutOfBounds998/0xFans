@@ -5,6 +5,8 @@ import { useModal } from '@lib/hooks/useModal';
 import { delayScroll } from '@lib/utils';
 import { Modal } from '@components/modal/modal';
 import { TweetReplyModal } from '@components/modal/tweet-reply-modal';
+import { TweetCollectModal } from '@components/modal/tweet-collect-modal';
+import { TweetFollowModal } from '@components/modal/tweet-follow-modal';
 import { ImagePreview } from '@components/input/image-preview';
 import { UserAvatar } from '@components/user/user-avatar';
 import { UserTooltip } from '@components/user/user-tooltip';
@@ -18,7 +20,9 @@ import type { Variants } from 'framer-motion';
 import type { Tweet } from '@lib/types/tweet';
 import { User } from '@lib/types/user';
 import { VideoPreview } from '@components/input/video-preview';
-import { Profile } from '@lens-protocol/react-web';
+import { GatedPreview } from '@components/input/gated-preview';
+import { Profile, usePublication } from '@lens-protocol/react-web';
+import { useEffect } from 'react';
 
 export type TweetProps = Tweet & {
   user: User;
@@ -28,6 +32,7 @@ export type TweetProps = Tweet & {
   parentTweet?: boolean;
   canComment?: boolean;
   canMirror?: boolean;
+  isGated?: boolean;
 };
 
 export const variants: Variants = {
@@ -56,7 +61,8 @@ export function Tweet(tweet: TweetProps): JSX.Element {
     user,
     canComment,
     canMirror,
-    publication
+    publication,
+    isGated
   } = tweet;
 
   const { id: ownerId, name, username, photoURL, coverPhotoURL } = user ?? {};
@@ -64,6 +70,16 @@ export function Tweet(tweet: TweetProps): JSX.Element {
   // const { user } = useAuth();
 
   const { open, openModal, closeModal } = useModal();
+  const {
+    open: openCollect,
+    openModal: openCollectModal,
+    closeModal: closeCollectModal
+  } = useModal();
+  const {
+    open: openFollow,
+    openModal: openFollowModal,
+    closeModal: closeFollowModal
+  } = useModal();
 
   const tweetLink = `/tweet/${tweetId}`;
 
@@ -78,7 +94,6 @@ export function Tweet(tweet: TweetProps): JSX.Element {
     name: profileName,
     name: profileUsername
   } = profile ?? {};
-
 
   let tweetIsRetweeted;
   if (userRetweets) tweetIsRetweeted = '';
@@ -98,6 +113,20 @@ export function Tweet(tweet: TweetProps): JSX.Element {
         closeModal={closeModal}
       >
         <TweetReplyModal tweet={tweet} closeModal={closeModal} />
+      </Modal>
+      <Modal
+        modalClassName='flex flex-col gap-6 max-w-sm bg-main-background w-full rounded-2xl'
+        open={openCollect}
+        closeModal={closeCollectModal}
+      >
+        <TweetCollectModal tweet={tweet} closeModal={closeCollectModal} />
+      </Modal>
+      <Modal
+        modalClassName='flex flex-col gap-6 max-w-md bg-main-background w-full rounded-2xl'
+        open={openFollow}
+        closeModal={closeFollowModal}
+      >
+        <TweetFollowModal tweet={tweet} closeModal={closeFollowModal} />
       </Modal>
       <Link href={tweetLink} scroll={!canComment}>
         <span
@@ -191,7 +220,8 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                     modal && 'order-1 my-2'
                   )}
                 >
-                  Replying to <Link href={`/user/${profile.id}`}>
+                  Replying to{' '}
+                  <Link href={`/user/${profile.id}`}>
                     <span className='custom-underline text-main-accent'>
                       @{parentUsername}
                     </span>
@@ -202,15 +232,26 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                 <p className='whitespace-pre-line break-words'>{text}</p>
               )}
               <div className='mt-1 flex flex-col gap-2'>
-                {isVideo
-                  ? videos && <VideoPreview tweet videoPreview={videos} />
-                  : images && (
+                {isGated ? (
+                  <GatedPreview
+                    publicationObj={{
+                      publicationId: tweetId,
+                      observerId: profile?.id
+                    }}
+                    openCollectModal={openCollectModal}
+                    openFollowModal={openFollowModal}
+                  />
+                ) : isVideo ? (
+                  videos && <VideoPreview tweet videoPreview={videos} />
+                ) : (
+                  images && (
                     <ImagePreview
                       tweet
                       imagesPreview={images}
                       previewCount={images.length}
                     />
-                  )}
+                  )
+                )}
                 {!modal && (
                   <TweetStats
                     publication={publication}
@@ -222,6 +263,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                     userReplies={userReplies}
                     userRetweets={userRetweets}
                     openModal={!parent ? openModal : undefined}
+                    openCollectModal={openCollectModal}
                   />
                 )}
               </div>

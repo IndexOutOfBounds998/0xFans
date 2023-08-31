@@ -64,7 +64,8 @@ export function useInfiniteScroll<T>(
             profile: item.profile,
             canComment: item.canComment.result,
             canMirror: item.canMirror.result,
-            publication: item
+            publication: item,
+            isGated: item.isGated
           };
         });
       console.log(list);

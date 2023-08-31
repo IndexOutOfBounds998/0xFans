@@ -7,7 +7,15 @@ import { ViewTweetStats } from '@components/view/view-tweet-stats';
 import { TweetOption } from './tweet-option';
 import { TweetShare } from './tweet-share';
 import type { Tweet } from '@lib/types/tweet';
-import { ContentPublication, Post, ReactionType, profileId, publicationId, usePublication, useReaction } from '@lens-protocol/react-web';
+import {
+  ContentPublication,
+  Post,
+  ReactionType,
+  profileId,
+  publicationId,
+  usePublication,
+  useReaction
+} from '@lens-protocol/react-web';
 import { useAuth } from '@lib/context/auth-context';
 
 type TweetStatsProps = Pick<
@@ -20,6 +28,7 @@ type TweetStatsProps = Pick<
   canComment?: boolean;
   canMirror?: boolean;
   openModal?: () => void;
+  openCollectModal?: () => void;
 };
 
 export function TweetStats({
@@ -32,7 +41,8 @@ export function TweetStats({
   openModal,
   canComment,
   canMirror,
-  publication: pub
+  publication: pub,
+  openCollectModal
 }: TweetStatsProps): JSX.Element {
   const totalLikes = userLikes ? userLikes : 0;
   const totalTweets = userRetweets ? userRetweets : 0;
@@ -77,17 +87,19 @@ export function TweetStats({
 
   const { data: publication, loading: publicatioLoading } = usePublication({
     publicationId: publicationId(tweetId as string),
-    observerId: profileId(profileUser?.id as string),
+    observerId: profileId(profileUser?.id as string)
   });
 
   const { addReaction, removeReaction, hasReaction, isPending } = useReaction({
     profileId: profileId(profileUser?.id as string)
   });
 
-  const hasReactionType = publication ? hasReaction({
-    reactionType: ReactionType.UPVOTE,
-    publication: (publication as Post)
-  }) : false;
+  const hasReactionType = publication
+    ? hasReaction({
+        reactionType: ReactionType.UPVOTE,
+        publication: publication as Post
+      })
+    : false;
 
   let [loading, setLoading] = useState(false);
 
@@ -96,19 +108,19 @@ export function TweetStats({
       return;
     }
     const reactionType = ReactionType.UPVOTE;
-    const targetPublication = (publication as ContentPublication);
+    const targetPublication = publication as ContentPublication;
 
     setLoading(true);
-    debugger
+    debugger;
     if (hasReactionType) {
       await removeReaction({
         reactionType,
-        publication: targetPublication,
+        publication: targetPublication
       });
     } else {
       await addReaction({
         reactionType,
-        publication: targetPublication,
+        publication: targetPublication
       });
     }
     setLoading(false);
@@ -160,11 +172,11 @@ export function TweetStats({
           iconName='ArrowPathRoundedSquareIcon'
           viewTweet={viewTweet}
           disabled={!canMirror}
-        // onClick={manageRetweet(
-        //   tweetIsRetweeted ? 'unretweet' : 'retweet',
-        //   userId,
-        //   tweetId??''
-        // )}
+          // onClick={manageRetweet(
+          //   tweetIsRetweeted ? 'unretweet' : 'retweet',
+          //   userId,
+          //   tweetId??''
+          // )}
         />
         <TweetOption
           className={cn(
@@ -179,6 +191,19 @@ export function TweetStats({
           iconName='HeartIcon'
           viewTweet={viewTweet}
           onClick={() => toggleReaction()}
+        />
+        <TweetOption
+          className={cn(
+            'hover:text-accent-purple focus-visible:text-accent-purple'
+          )}
+          iconClassName='group-hover:bg-accent-purple/10 group-active:bg-accent-purple/20
+                         group-focus-visible:bg-accent-purple/10 group-focus-visible:ring-accent-purple/80'
+          tip={'Collect'}
+          move={likeMove}
+          stats={currentLikes}
+          iconName='RectangleStackIcon'
+          viewTweet={viewTweet}
+          onClick={openCollectModal}
         />
         <TweetShare
           userId={userId}
