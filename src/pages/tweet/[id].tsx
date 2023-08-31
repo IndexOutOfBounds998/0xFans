@@ -25,10 +25,10 @@ import {
   formatUser,
   formatVideoList
 } from '@lib/FormatContent';
-import { Tweet as Tw } from '@lib/types/tweet';
+import { TweetProps } from '@components/tweet/tweet';
 
 type TwDetailsProps = Pick<
-  Tw,
+  TweetProps,
   | 'id'
   | 'text'
   | 'isVideo'
@@ -43,6 +43,7 @@ type TwDetailsProps = Pick<
   | 'updatedAt'
   | 'userRetweets'
   | 'publication'
+  | 'isGated'
 >;
 export default function TweetId(): JSX.Element {
   const {
@@ -78,9 +79,9 @@ export default function TweetId(): JSX.Element {
       userReplies: data?.stats?.totalAmountOfComments,
       userRetweets: data?.stats?.totalAmountOfMirrors,
       userLikes: data?.stats?.totalUpvotes,
-      publication: data
+      publication: data,
+      isGated: data?.isGated
     };
-
     return initData;
   };
 
@@ -165,7 +166,11 @@ export default function TweetId(): JSX.Element {
               ) : (
                 <AnimatePresence mode='popLayout'>
                   {commentList?.map((tweet) => (
-                    <Tweet {...tweet} key={tweet.id} profile={tweetObj.profile} />
+                    <Tweet
+                      {...tweet}
+                      key={tweet.id}
+                      profile={tweetObj.profile}
+                    />
                   ))}
                 </AnimatePresence>
               ))}

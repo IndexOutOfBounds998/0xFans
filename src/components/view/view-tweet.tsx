@@ -19,12 +19,16 @@ import type { RefObject } from 'react';
 import type { User } from '@lib/types/user';
 import type { Tweet } from '@lib/types/tweet';
 import { VideoPreview } from '@components/input/video-preview';
+import { GatedPreview } from '@components/input/gated-preview';
+import { TweetCollectModal } from '@components/modal/tweet-collect-modal';
+import { TweetFollowModal } from '@components/modal/tweet-follow-modal';
 
 type ViewTweetProps = Tweet & {
   user: User;
   viewTweetRef?: RefObject<HTMLElement>;
   canComment?: boolean;
   canMirror?: boolean;
+  isGated?: boolean;
 };
 
 export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
@@ -45,7 +49,8 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
     profile,
     canComment,
     canMirror,
-    publication
+    publication,
+    isGated
   } = tweet;
 
   const { id: ownerId, name, username, verified, photoURL } = tweetUserData;
@@ -53,14 +58,22 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
   const { user } = useAuth();
 
   const { open, openModal, closeModal } = useModal();
+  const {
+    open: openCollect,
+    openModal: openCollectModal,
+    closeModal: closeCollectModal
+  } = useModal();
+  const {
+    open: openFollow,
+    openModal: openFollowModal,
+    closeModal: closeFollowModal
+  } = useModal();
 
   const tweetLink = `/tweet/${tweetId}`;
 
   const userId = user?.id as string;
 
   const isOwner = userId === createdBy;
-
-
 
   const { id: parentId, username: parentUsername = username } = parent ?? {};
 
@@ -83,6 +96,20 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
         closeModal={closeModal}
       >
         <TweetReplyModal tweet={tweet} closeModal={closeModal} />
+      </Modal>
+      <Modal
+        modalClassName='flex flex-col gap-6 max-w-sm bg-main-background w-full rounded-2xl'
+        open={openCollect}
+        closeModal={closeCollectModal}
+      >
+        <TweetCollectModal tweet={tweet} closeModal={closeCollectModal} />
+      </Modal>
+      <Modal
+        modalClassName='flex flex-col gap-6 max-w-md bg-main-background w-full rounded-2xl'
+        open={openFollow}
+        closeModal={closeFollowModal}
+      >
+        <TweetFollowModal tweet={tweet} closeModal={closeFollowModal} />
       </Modal>
       <div className='flex flex-col gap-2'>
         {canComment && (
@@ -126,7 +153,8 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
       </div>
       {canComment && (
         <p className='text-light-secondary dark:text-dark-secondary'>
-          Replying to <Link href={`/user/${profile.id}`}>
+          Replying to{' '}
+          <Link href={`/user/${profile.id}`}>
             <span className='custom-underline text-main-accent'>
               @{parentUsername}
             </span>
@@ -137,15 +165,26 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
         {text && (
           <p className='whitespace-pre-line break-words text-2xl'>{text}</p>
         )}
-        {isVideo
-          ? videos && <VideoPreview tweet videoPreview={videos} />
-          : images && (
+        {isGated ? (
+          <GatedPreview
+            publicationObj={{
+              publicationId: tweetId,
+              observerId: profile?.id
+            }}
+            openCollectModal={openCollectModal}
+            openFollowModal={openFollowModal}
+          />
+        ) : isVideo ? (
+          videos && <VideoPreview tweet videoPreview={videos} />
+        ) : (
+          images && (
             <ImagePreview
               tweet
               imagesPreview={images}
               previewCount={images.length}
             />
-          )}
+          )
+        )}
         {/*{images && (*/}
         {/*  <ImagePreview*/}
         {/*    viewTweet*/}
