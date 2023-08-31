@@ -55,7 +55,7 @@ export function UserTooltip({
 
   if (isMobile || modal) return <>{children}</>;
 
-  const userLink = `/user/${username}`;
+  const userLink = `/user`;
 
   const allStats: Stats[] = [];
 
@@ -108,7 +108,11 @@ export function UserTooltip({
                   username={username}
                 />
               </div>
-              {profileByMe ? <FollowButton userTargetId={id?.toString() ?? ''} userTargetUsername={username} followee={profile} follower={profileByMe} userIsFollowed={profile.isFollowedByMe} /> : ''}
+              {profileByMe ? <FollowButton userTargetId={id?.toString() ?? ''}
+                userTargetUsername={username}
+                followee={profile}
+                follower={profileByMe}
+                userIsFollowed={profile.isFollowedByMe} /> : ''}
             </div>
             <div>
               <UserName
@@ -127,18 +131,18 @@ export function UserTooltip({
           {bio && <p>{bio}</p>}
           <div className='text-secondary flex gap-4'>
             {allStats.map(([id, label, stat]) => (
-              // <Link href={`${userLink}/${id}`} key={id}>
-              <span
-                className='hover-animation flex h-4 items-center gap-1 border-b border-b-transparent
+              <Link href={`${userLink}/${id}`} key={id}>
+                <span
+                  className='hover-animation flex h-4 items-center gap-1 border-b border-b-transparent
                              outline-none hover:border-b-light-primary focus-visible:border-b-light-primary
                              dark:hover:border-b-dark-primary dark:focus-visible:border-b-dark-primary'
-              >
-                <p className='font-bold'>{stat}</p>
-                <p className='text-light-secondary dark:text-dark-secondary'>
-                  {label}
-                </p>
-              </span>
-              // </Link>
+                >
+                  <p className='font-bold'>{stat}</p>
+                  <p className='text-light-secondary dark:text-dark-secondary'>
+                    {label}
+                  </p>
+                </span>
+              </Link>
             ))}
           </div>
         </div>

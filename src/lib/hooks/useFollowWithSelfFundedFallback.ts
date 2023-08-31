@@ -29,6 +29,7 @@ export function useFollowWithSelfFundedFallback({
   const selfFunded = useSelfFundedFallback();
 
   const execute = async () => {
+    
     setLoading(true);
     // it won't ask to sign if can be performed via proxy-action
     const gaslessResult = await gasless.execute();
