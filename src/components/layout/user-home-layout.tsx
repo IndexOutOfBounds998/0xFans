@@ -85,6 +85,7 @@ export function UserHomeLayout({ children }: LayoutProps): JSX.Element {
                       <FollowButton
                         userTargetId={userData.id.toString()}
                         userTargetUsername={userData.username}
+                        userIsFollowed={userData.profile.isFollowedByMe}
                         followee={userData.profile}
                         follower={profileByMe}
                       />

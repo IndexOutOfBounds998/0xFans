@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import { useAuth } from '@lib/context/auth-context';
-import { useInfiniteUserScroll } from '@lib/hooks/useInfiniteUserScroll';
 import {
   PeopleLayout,
   ProtectedLayout
