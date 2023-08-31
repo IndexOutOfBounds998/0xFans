@@ -13,6 +13,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@apollo/client": "^3.8.1",
     "@headlessui/react": "^1.7.2",
     "@heroicons/react": "^2.0.11",
     "@lens-protocol/client": "^1.2.0",
@@ -25,6 +26,7 @@
     "axios": "^1.4.0",
     "clsx": "^1.2.1",
     "framer-motion": "^7.2.1",
+    "graphql": "^16.8.0",
     "next": "13.4.9",
     "react": "18.2.0",
     "react-dom": "18.2.0",
