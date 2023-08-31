@@ -108,7 +108,7 @@ export function UserTooltip({
                   username={username}
                 />
               </div>
-              {profileByMe ? <FollowButton userTargetId={id?.toString() ?? ''} userTargetUsername={username} followee={profile} follower={profileByMe} /> : ''}
+              {profileByMe ? <FollowButton userTargetId={id?.toString() ?? ''} userTargetUsername={username} followee={profile} follower={profileByMe} userIsFollowed={profile.isFollowedByMe} /> : ''}
             </div>
             <div>
               <UserName
