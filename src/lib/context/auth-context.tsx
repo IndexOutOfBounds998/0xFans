@@ -106,12 +106,12 @@ export function AuthContextProvider({
       // Perform localStorage action
       loginAddress = localStorage.getItem('loginAddress') || '';
       isLoginAction = Boolean(JSON.parse(localStorage.getItem('isLoginAction') || 'false'));
-  
+
     }, [localStorage.getItem('loginAddress'), localStorage.getItem('isLoginAction')])
-  
+
   }
 
-  
+
   useEffect(() => {
 
     if (isLoginAction) {
@@ -181,17 +181,16 @@ export function AuthContextProvider({
         await login({
           address: address
         });
-
         localStorage.setItem('loginAddress', address);
         localStorage.setItem('isLoginAction', 'true');
 
       }
     } catch (error) {
-      debugger
+       
       setError(error as Error);
     }
     if (loginError) {
-      debugger
+     
       setError(loginError);
     }
   };

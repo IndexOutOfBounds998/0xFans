@@ -4,8 +4,7 @@ import { toast } from 'react-hot-toast';
 
 import { useAuth } from '@lib/context/auth-context';
 import { useModal } from '@lib/hooks/useModal';
-import { useCollection } from '@lib/hooks/useCollection';
-
+ 
 import { HomeLayout, ProtectedLayout } from '@components/layout/common-layout';
 import { MainLayout } from '@components/layout/main-layout';
 import { SEO } from '@components/common/seo';
@@ -20,7 +19,10 @@ import { ToolTip } from '@components/ui/tooltip';
 import { HeroIcon } from '@components/ui/hero-icon';
 import { Loading } from '@components/ui/loading';
 import type { ReactElement, ReactNode } from 'react';
- 
+
+import { profileId } from '@lens-protocol/react-web';
+import { useBookmarksQuery } from '@lib/hooks/useBookmarksQuery';
+
 
 export default function Bookmarks(): JSX.Element {
   const { user } = useAuth();
@@ -29,21 +31,7 @@ export default function Bookmarks(): JSX.Element {
 
   const userId = user?.id as string;
 
-  const { data: bookmarksRef, loading: bookmarksRefLoading } = useCollection();
-
-  const tweetLoading = false;
-
-  const tweetData = [] as TweetProps[];
-  // const tweetIds = useMemo(
-  //   () => bookmarksRef?.map(({ id }) => id) ?? [],
-  //   [bookmarksRef]
-  // );
-
-  // const { data: tweetData, loading: tweetLoading } = useArrayDocument(
-  //   tweetIds,
-  //   tweetsCollection,
-  //   { includeUser: true }
-  // );
+  const { data, loading } = useBookmarksQuery({ profileId: profileId(userId) });
 
   const handleClear = async (): Promise<void> => {
     // await clearAllBookmarks(userId);
@@ -90,9 +78,9 @@ export default function Bookmarks(): JSX.Element {
         </Button>
       </MainHeader>
       <section className='mt-0.5'>
-        {bookmarksRefLoading || tweetLoading ? (
+        {loading ? (
           <Loading className='mt-5' />
-        ) : !bookmarksRef ? (
+        ) : !data ? (
           <StatsEmpty
             title='Save Posts for later'
             description='Don’t let the good ones fly away! Bookmark Posts to easily find them again in the future.'
@@ -100,7 +88,7 @@ export default function Bookmarks(): JSX.Element {
           />
         ) : (
           <AnimatePresence mode='popLayout'>
-            {tweetData?.map((tweet) => (
+            {data?.map((tweet) => (
               <Tweet {...tweet} key={tweet.id} />
             ))}
           </AnimatePresence>
