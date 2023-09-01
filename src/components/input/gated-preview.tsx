@@ -27,8 +27,11 @@ export function GatedPreview({
   openFollowModal
 }: GatedPreviewProps): JSX.Element {
   const { data: publication, loading: publication_loading } = usePublication(publicationObj);
-  console.log(publication);
+
   const handle = publication?.profile?.handle;
+
+  const collected = (publication as ContentPublication)?.hasCollectedByMe;
+
   const criteria = (publication as ContentPublication)?.metadata?.encryptionParams?.accessCondition?.or?.criteria;
   let isProfile;
   let isFollow;
@@ -36,9 +39,13 @@ export function GatedPreview({
   if (criteria) {
     criteria.forEach((item: any) => {
       if (item.profile) {
-        isProfile = true;
+        if (!collected) {
+          isProfile = true;
+        }
       } else if (item.follow) {
-        isFollow = true;
+        if (!publication?.profile.isFollowedByMe) {
+          isFollow = true;
+        }
       }
     });
   }
@@ -73,7 +80,7 @@ export function GatedPreview({
                   iconName='RectangleStackIcon'
                 />
                 <span>
-                  Collect the&nbsp;
+                  Pay the&nbsp;
                   <span
                     className='font-bold underline'
                     onClick={preventBubbling(openCollectModal)}

@@ -5,30 +5,37 @@ import React from 'react';
 import { HeroIcon } from '@components/ui/hero-icon';
 import { Button } from '@components/ui/button';
 import cn from 'clsx';
+import { ContentPublication } from '@lens-protocol/react-web';
 
 type TweetCollectModalProps = {
-  tweet: TweetProps;
+  publication: ContentPublication;
   closeModal: () => void;
 };
 
 export function TweetCollectModal({
-  tweet,
+  publication,
   closeModal
 }: TweetCollectModalProps): JSX.Element {
+
+  const creater = publication.profile.handle;
+
+  const content = publication.metadata.content;
+   
+
   return (
     <>
       <div className='overflow-auto border-t-[1px] border-[#00000014] p-[20px] text-sm'>
         <div className='mb-[20px] flex items-center space-x-1.5 rounded-none border border-x-0 border-pink-300 bg-white !bg-pink-100 px-[5px] py-[10px] text-sm font-bold text-gray-500 dark:border-gray-700 dark:bg-black sm:rounded-xl sm:border-x'>
           <HeroIcon iconName='StarIcon' className='h-4 w-4 text-pink-500' />
           <span className='ml-[5px]'>Only</span>
-          <span className='text-purple-500'>{}</span>
+          <span className='text-purple-500'>{ }</span>
           <span className='text-pink-500'>super followers</span>
           <span>can collect</span>
         </div>
         <div className='space-y-1.5 pb-2'>
-          <div className='text-xl font-bold'>Post by {}</div>
+          <div className='text-xl font-bold'>Post by @{creater}</div>
           <div className='lt-text-gray-500 line-clamp-2'>
-            <p>This publication is gated</p>
+            <p>{content}</p>
           </div>
         </div>
         <div className='flex items-center space-x-1.5 py-2'>
@@ -57,7 +64,7 @@ export function TweetCollectModal({
             className='custom-button main-tab w-full bg-light-primary text-white hover:bg-light-primary/90 focus-visible:bg-light-primary/90 active:bg-light-primary/80
                         dark:bg-light-border dark:text-light-primary dark:hover:bg-light-border/90
                         dark:focus-visible:bg-light-border/90 dark:active:bg-light-border/75'
-            // onClick={close}
+          // onClick={close}
           >
             Allow collect module
           </Button>

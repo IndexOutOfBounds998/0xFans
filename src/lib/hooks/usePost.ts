@@ -1,7 +1,7 @@
 import { useUpIpfs } from './useUpIpfs';
 import { getAuthenticatedClient } from '@lib/getAuthenticatedClient';
 import { useSignTypedData } from 'wagmi';
-import { useActiveProfile } from '@lens-protocol/react-web';
+import { ProfileOwnedByMe, useActiveProfile } from '@lens-protocol/react-web';
 import { useState } from 'react';
 import { uuid } from '@walletconnect/legacy-utils';
 import {
@@ -25,7 +25,7 @@ import {
   ProfileOwnership
 } from '@lens-protocol/sdk-gated';
 import { Web3Provider } from '@ethersproject/providers';
-import { MAIN_NETWORK } from '@lib/const';
+import { APP_ID, MAIN_NETWORK } from '@lib/const';
 import { AccessConditionOutput } from '@lens-protocol/sdk-gated/dist/graphql/types';
 
 type PostData = {
@@ -67,22 +67,8 @@ export function usePost({ callbackOnError }: PostData) {
 
   const [postLoading, setPostLoading] = useState(false);
 
-  const CollectModuleInfo = (collectData: CollectData, profile: Profile) => {
-    let collectModule: CollectModuleParams = {
-      simpleCollectModule: {
-        followerOnly: false,
-        fee: {
-          amount: {
-            currency: '',
-            value: '0'
-          },
-          recipient: '',
-          referralFee: 0
-        },
-        collectLimit: null,
-        endTimestamp: '0'
-      }
-    };
+  const CollectModuleInfo = (collectData: CollectData, profile?: Profile) => {
+    let collectModule: CollectModuleParams;
 
     //构建 收藏模块 和 转发模块
     if (collectData.isCollect) {
@@ -92,12 +78,13 @@ export function usePost({ callbackOnError }: PostData) {
         }
       };
       if (collectData.isCost && collectModule.simpleCollectModule) {
+        debugger
         collectModule.simpleCollectModule.fee = {
           amount: {
             currency: collectData.selectAddress || '',
             value: collectData.amount ? collectData.amount + '' : '0'
           },
-          recipient: profile.ownedBy,
+          recipient: profile ? profile.ownedBy : localStorage.getItem("loginAddress") as string,
           referralFee: parseFloat(collectData.referralFee + '')
         };
       }
@@ -148,7 +135,7 @@ export function usePost({ callbackOnError }: PostData) {
       env: MAIN_NETWORK ? LensEnvironment.Polygon : LensEnvironment.Mumbai
     });
 
-    const profileUser = profile as unknown as Profile;
+    const profileUser = profile as unknown as ProfileOwnedByMe;
 
     await sdk.connect({
       address: profileUser.ownedBy, // your signer's wallet address
@@ -157,6 +144,7 @@ export function usePost({ callbackOnError }: PostData) {
 
     // Condition for gating the content
     const collectAccessCondition: CollectCondition = { thisPublication: true };
+
     const followAccessCondition: FollowCondition = { profileId: profileUser.id };
 
     // Create the access condition
@@ -194,12 +182,12 @@ export function usePost({ callbackOnError }: PostData) {
   }
 
   const submit = async (
-    { images, title, content, collectData, isOnlyfans }: PostSubmit,
-    profileUser: Profile
+    { images, title, content, collectData, isOnlyfans }: PostSubmit
   ) => {
     setPostLoading(true);
-
+    debugger
     let imagesList = await upIpfsImg(images);
+
     let attributes: MetadataAttributeInput[] = images.map((item) => {
       return {
         displayType: PublicationMetadataDisplayTypes.Number,
@@ -207,6 +195,7 @@ export function usePost({ callbackOnError }: PostData) {
         value: item.size.toString()
       };
     });
+    const profileUser = profile as unknown as ProfileOwnedByMe;
 
     let collectModule: CollectModuleParams = CollectModuleInfo(
       isOnlyfans ? collectData : {},
@@ -214,13 +203,13 @@ export function usePost({ callbackOnError }: PostData) {
     );
 
     let referenceModule: ReferenceModuleParams = {
-      followerOnlyReferenceModule: false
+      followerOnlyReferenceModule: isOnlyfans ? true : false
     };
 
     let obj: PublicationMetadataV2Input = {
       version: '2.0.0',
       metadata_id: uuid(),
-      appId: '0xfans',
+      appId: APP_ID,
       image: imagesList[0] ? imagesList[0].item : null,
       imageMimeType: imagesList[0] ? imagesList[0].type : null,
       content: content,
@@ -228,8 +217,8 @@ export function usePost({ callbackOnError }: PostData) {
       locale: 'en-US',
       mainContentFocus: PublicationMainFocus.Image,
       media: imagesList,
-      tags: ['trip'],
-      name: `Post by ${profileUser.handle}`
+      tags: [APP_ID],
+      name: `Post by ${profile?.handle}`
     };
     const url = isOnlyfans
       ? await uploadToIPFS(obj, collectData.isCollect || false)

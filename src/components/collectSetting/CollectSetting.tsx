@@ -22,29 +22,29 @@ export default function CollectSetting({
   const { data, loading } = useCurrencies();
 
   //此贴可以收藏
-  let [isCollect, setIsCollect] = useState(false);
+  const [isCollect, setIsCollect] = useState(false);
   //收取费用
-  let [isCost, setIsCost] = useState(false);
+  const [isCost, setIsCost] = useState(false);
   //镜像推荐奖励
-  let [isReward, setIsReward] = useState(false);
+  const [isReward, setIsReward] = useState(false);
   //限量版
-  let [isLimit, setIsLimit] = useState(false);
+  const [isLimit, setIsLimit] = useState(false);
   //时限
-  let [isTimeLimit, setIsTimeLimit] = useState(false);
+  const [isTimeLimit, setIsTimeLimit] = useState(false);
   //是否只有关注者才能收集
-  let [followerOnly, setFollowerOnly] = useState(true);
+  const [followerOnly, setFollowerOnly] = useState(true);
   //代币种类
-  let [currencys, setCurrencys] = useState<any[]>([]);
+  const [currencys, setCurrencys] = useState<any[]>([]);
   //所选的币种数量
-  let [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(0);
   //所选的币种地址
-  let [selectAddress, setSelectAddress] = useState<any>({});
+  const [selectAddress, setSelectAddress] = useState<any>({});
   //转发人获取到的收益百分比
-  let [referralFee, setReferralFee] = useState(0);
+  const [referralFee, setReferralFee] = useState(0);
   //该发布的最大收集次数
-  let [collectLimit, setCollectLimit] = useState(0);
+  const [collectLimit, setCollectLimit] = useState(0);
   //是否保存当前操作
-  let [isSave, setIsSave] = useState(false);
+  const [isSave, setIsSave] = useState(false);
 
   const close = () => {
     // 将这些数据返回给父组件，设置到setCollectData这个方法里
@@ -86,20 +86,6 @@ export default function CollectSetting({
     }
   }, [collectData]);
 
-  //初始化
-  const modelInfo = () => {
-    setIsCollect(false);
-    setIsCost(false);
-    setIsReward(false);
-    setIsLimit(false);
-    setIsTimeLimit(false);
-    setFollowerOnly(true);
-    setAmount(0);
-    setSelectAddress(data ? data[0] : null);
-    setReferralFee(0);
-    setCollectLimit(0);
-  };
-
   return (
     <>
       <div className='flex py-[15px] px-[20px] text-sm'>
@@ -107,18 +93,17 @@ export default function CollectSetting({
           iconName='RectangleStackIcon'
           className='h-6 w-6 text-main-accent'
         />
-        <span className='ml-[5px]'>付费设置</span>
+        <span className='ml-[5px]'>Pay settings</span>
       </div>
       <div className='overflow-auto border-t-[1px] border-[#00000014] p-[20px] text-sm'>
         <div className='mb-[20px] flex'>
           <ReactSwitch
             checked={isCollect}
             onChange={(val) => {
-              modelInfo();
               setIsCollect(!!val);
             }}
           >
-            <span className='ml-[8px] font-bold text-[#71717a]'>付费查看</span>
+            <span className='ml-[8px] font-bold text-[#71717a]'>Pay To Show</span>
           </ReactSwitch>
         </div>
         {isCollect ? (
@@ -258,26 +243,7 @@ export default function CollectSetting({
                 </ReactSwitch>
               </div>
             </div>
-            {/*<div className='mb-[20px]'>*/}
-            {/*  <p className='mb-[10px] flex text-[16px]'>*/}
-            {/*    <HeroIcon*/}
-            {/*      iconName='UserGroupIcon'*/}
-            {/*      className='h-6 w-6 text-main-accent'*/}
-            {/*    />*/}
-            {/*    <span className='ml-[5px] text-sm'>谁可以收藏</span>*/}
-            {/*  </p>*/}
-            {/*  <div className='mb-[20px] flex'>*/}
-            {/*    <ReactSwitch*/}
-            {/*      className='switch-basic'*/}
-            {/*      checked={followerOnly}*/}
-            {/*      onChange={(val) => setFollowerOnly(val as boolean)}*/}
-            {/*    >*/}
-            {/*      <span className='ml-[10px] font-bold text-[#71717a]'>*/}
-            {/*        只有关注者才可以收藏*/}
-            {/*      </span>*/}
-            {/*    </ReactSwitch>*/}
-            {/*  </div>*/}
-            {/*</div>*/}
+
           </div>
         ) : (
           ''

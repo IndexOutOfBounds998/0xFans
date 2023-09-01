@@ -21,7 +21,7 @@ import type { Tweet } from '@lib/types/tweet';
 import { User } from '@lib/types/user';
 import { VideoPreview } from '@components/input/video-preview';
 import { GatedPreview } from '@components/input/gated-preview';
-import { Profile, usePublication } from '@lens-protocol/react-web';
+import { ContentPublication, Profile, usePublication } from '@lens-protocol/react-web';
 import { useEffect } from 'react';
 
 export type TweetProps = Tweet & {
@@ -121,7 +121,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
         open={openCollect}
         closeModal={closeCollectModal}
       >
-        <TweetCollectModal tweet={tweet} closeModal={closeCollectModal} />
+        <TweetCollectModal publication={tweet.publication as ContentPublication} closeModal={closeCollectModal} />
       </Modal>
       <Modal
         modalClassName='flex flex-col gap-6 max-w-md bg-main-background w-full rounded-2xl'

@@ -61,7 +61,7 @@ export function Input({
     color: '#1d9bf0'
   });
 
-  const { user } = useAuth();
+  const { user, profileByMe } = useAuth();
   const { name, username, photoURL } = user as User;
 
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -77,7 +77,7 @@ export function Input({
   const callbackOnError = (error: any) => {
     alert('发布失败' + error);
   };
-  const profileUser = user as unknown as Profile;
+  const profileUser = profileByMe as unknown as Profile;
   //发布帖子
   const { submit: post, postLoading } = usePost({
     callbackOnError: callbackOnError
@@ -103,6 +103,7 @@ export function Input({
 
     if (inputValue.trim()) {
       const profileUser = user as unknown as Profile;
+
       const content = inputValue.trim();
       if (isReplying) await Promise.all([send(content, profileUser)]);
       else {
@@ -114,8 +115,7 @@ export function Input({
               content: content,
               collectData: collectData,
               isOnlyfans: audience.label === 'Onlyfans'
-            },
-            profileUser
+            }
           )
         ]);
       }
@@ -249,8 +249,8 @@ export function Input({
           reply
             ? 'pt-3 pb-1'
             : replyModal
-            ? 'pt-0'
-            : 'border-b-2 border-light-border dark:border-dark-border',
+              ? 'pt-0'
+              : 'border-b-2 border-light-border dark:border-dark-border',
           (disabled || loading) && 'pointer-events-none opacity-50'
         )}
         htmlFor={formId}
