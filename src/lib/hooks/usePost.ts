@@ -78,13 +78,15 @@ export function usePost({ callbackOnError }: PostData) {
         }
       };
       if (collectData.isCost && collectModule.simpleCollectModule) {
-        debugger
+        debugger;
         collectModule.simpleCollectModule.fee = {
           amount: {
-            currency: collectData.selectAddress || '',
+            currency: collectData.selectAddress.address || '',
             value: collectData.amount ? collectData.amount + '' : '0'
           },
-          recipient: profile ? profile.ownedBy : localStorage.getItem("loginAddress") as string,
+          recipient: profile
+            ? profile.ownedBy
+            : (localStorage.getItem('loginAddress') as string),
           referralFee: parseFloat(collectData.referralFee + '')
         };
       }
@@ -145,7 +147,9 @@ export function usePost({ callbackOnError }: PostData) {
     // Condition for gating the content
     const collectAccessCondition: CollectCondition = { thisPublication: true };
 
-    const followAccessCondition: FollowCondition = { profileId: profileUser.id };
+    const followAccessCondition: FollowCondition = {
+      profileId: profileUser.id
+    };
 
     // Create the access condition
     let accessCondition: AccessConditionOutput = {};
@@ -181,11 +185,15 @@ export function usePost({ callbackOnError }: PostData) {
     return contentURI;
   }
 
-  const submit = async (
-    { images, title, content, collectData, isOnlyfans }: PostSubmit
-  ) => {
+  const submit = async ({
+    images,
+    title,
+    content,
+    collectData,
+    isOnlyfans
+  }: PostSubmit) => {
     setPostLoading(true);
-    debugger
+    debugger;
     let imagesList = await upIpfsImg(images);
 
     let attributes: MetadataAttributeInput[] = images.map((item) => {
