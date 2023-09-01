@@ -21,10 +21,14 @@ import type { Tweet } from '@lib/types/tweet';
 import { User } from '@lib/types/user';
 import { VideoPreview } from '@components/input/video-preview';
 import { GatedPreview } from '@components/input/gated-preview';
-import { ContentPublication, Profile, usePublication } from '@lens-protocol/react-web';
+import {
+  ContentPublication,
+  Profile,
+  usePublication
+} from '@lens-protocol/react-web';
 import { useEffect } from 'react';
-
-export type TweetProps = Tweet & {
+import { useAuth } from '@lib/context/auth-context';
+export type TweetType = Tweet & {
   user: User;
   modal?: boolean;
   pinned?: boolean;
@@ -35,13 +39,18 @@ export type TweetProps = Tweet & {
   isGated?: boolean;
 };
 
+export type TweetProps = {
+  tweet: TweetType;
+  index: number;
+};
+
 export const variants: Variants = {
   initial: { opacity: 0 },
   animate: { opacity: 1, transition: { duration: 0.8 } },
   exit: { opacity: 0, transition: { duration: 0.2 } }
 };
 
-export function Tweet(tweet: TweetProps): JSX.Element {
+export function Tweet({ tweet, index }: TweetProps): JSX.Element {
   const {
     id: tweetId,
     text,
@@ -83,11 +92,10 @@ export function Tweet(tweet: TweetProps): JSX.Element {
 
   const tweetLink = `/tweet/${tweetId}`;
 
-  const userId = user?.id as string;
+  const { user: profileByMe } = useAuth();
+  const userId = profileByMe?.id as string;
 
-  console.log(userId);
-  console.log(createdBy);
-  const isOwner = userId === createdBy;
+  const isOwner = userId === ownerId;
 
   const { id: parentId, username: parentUsername = name } = parent ?? {};
 
@@ -121,7 +129,10 @@ export function Tweet(tweet: TweetProps): JSX.Element {
         open={openCollect}
         closeModal={closeCollectModal}
       >
-        <TweetCollectModal publication={tweet.publication as ContentPublication} closeModal={closeCollectModal} />
+        <TweetCollectModal
+          publication={tweet.publication as ContentPublication}
+          closeModal={closeCollectModal}
+        />
       </Modal>
       <Modal
         modalClassName='flex flex-col gap-6 max-w-md bg-main-background w-full rounded-2xl'
@@ -256,6 +267,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                 )}
                 {!modal && (
                   <TweetStats
+                    index={index}
                     publication={publication}
                     canComment={canComment}
                     canMirror={canMirror}

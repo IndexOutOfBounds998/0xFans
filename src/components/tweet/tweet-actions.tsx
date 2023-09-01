@@ -18,6 +18,7 @@ import { CustomIcon } from '@components/ui/custom-icon';
 import type { Variants } from 'framer-motion';
 import type { Tweet } from '@lib/types/tweet';
 import type { User } from '@lib/types/user';
+import { getAuthenticatedClient } from '@lib/getAuthenticatedClient';
 
 export const variants: Variants = {
   initial: { opacity: 0, y: -25 },
@@ -87,28 +88,18 @@ export function TweetActions({
   const tweetIsPinned = pinnedTweet === tweetId;
 
   const handleRemove = async (): Promise<void> => {
-    if (viewTweet)
-      // if (parentId) {
-      //   // const parentSnapshot = await getDoc(doc(tweetsCollection, parentId));
-      //   if (parentSnapshot.exists()) {
-      //     await push(`/tweet/${parentId}`, undefined, { scroll: false });
-      //     delayScroll(200)();
-      //     await sleep(50);
-      //   } else await push('/home');
-      // } else await push('/home');
-
-      // await Promise.all([
-      //   removeTweet(tweetId),
-      //   manageTotalTweets('decrement', ownerId),
-      //   // hasImages && manageTotalPhotos('decrement', createdBy),
-      //   parentId && manageReply('decrement', parentId)
-      // ]);
+    if (tweetId) {
+      const lensClient = await getAuthenticatedClient();
+      await lensClient.publication.hide({
+        publicationId: tweetId
+      });
 
       toast.success(
-        `${isInAdminControl ? `@${username}'s` : 'Your'} Tweet was deleted`
+        `${isInAdminControl ? `@${username}'s` : 'Your'} Post was hide`
       );
 
-    removeCloseModal();
+      removeCloseModal();
+    }
   };
 
   const handlePin = async (): Promise<void> => {
@@ -150,14 +141,16 @@ export function TweetActions({
       >
         <ActionModal
           title='Delete Tweet?'
-          description={`This can’t be undone and it will be removed from ${isInAdminControl ? `@${username}'s` : 'your'
-            } profile, the timeline of any accounts that follow ${isInAdminControl ? `@${username}` : 'you'
-            }, and from Twitter search results.`}
+          description={`This can’t be undone and it will be removed from ${
+            isInAdminControl ? `@${username}'s` : 'your'
+          } profile, the timeline of any accounts that follow ${
+            isInAdminControl ? `@${username}` : 'you'
+          }, and from Twitter search results.`}
           mainBtnClassName='bg-accent-red hover:bg-accent-red/90 active:bg-accent-red/75 accent-tab
                             focus-visible:bg-accent-red/90'
           mainBtnLabel='Delete'
           focusOnMainBtn
-          action={handleRemove}
+          action={preventBubbling(handleRemove)}
           closeModal={removeCloseModal}
         />
       </Modal>
@@ -205,7 +198,7 @@ export function TweetActions({
                   {...variants}
                   static
                 >
-                  {(isOwner) && (
+                  {isOwner && (
                     <Popover.Button
                       className='accent-tab flex w-full gap-3 rounded-md rounded-b-none p-4 text-accent-red
                                  hover:bg-main-sidebar-background'

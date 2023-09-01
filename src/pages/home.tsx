@@ -66,7 +66,7 @@ export default function Home(): JSX.Element {
             <>
               <AnimatePresence mode='popLayout'>
                 {data.map((tweet, index) => (
-                  <Tweet {...tweet} key={index} />
+                  <Tweet tweet={tweet} key={index} index={index} />
                 ))}
               </AnimatePresence>
               <LoadMore />
