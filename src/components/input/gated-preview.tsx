@@ -3,6 +3,7 @@ import { preventBubbling } from '@lib/utils';
 import { AnimatePresence, motion, MotionProps } from 'framer-motion';
 import { HeroIcon } from '@components/ui/hero-icon';
 import { ContentPublication, usePublication } from '@lens-protocol/react-web';
+import { useAuth } from '@lib/context/auth-context';
 
 type GatedPreviewProps = {
   publicationObj: any;
@@ -28,23 +29,36 @@ export function GatedPreview({
 }: GatedPreviewProps): JSX.Element {
   const { data: publication, loading: publication_loading } = usePublication(publicationObj);
 
+  const { user } = useAuth();
+
   const handle = publication?.profile?.handle;
 
+  //null 没有设置超级关注 
+  const followModule = publication?.profile?.followModule;
+
+  //是否已经被我收藏过
   const collected = (publication as ContentPublication)?.hasCollectedByMe;
 
+  //是否是我自己的帖子
+  const isOwer = (publication as ContentPublication)?.profile.id === user?.id
+
   const criteria = (publication as ContentPublication)?.metadata?.encryptionParams?.accessCondition?.or?.criteria;
-  let isProfile;
-  let isFollow;
-  console.log(criteria);
+
+  let isCollect = false;
+
+  let isFollow = false;
+
   if (criteria) {
     criteria.forEach((item: any) => {
-      if (item.profile) {
-        if (!collected) {
-          isProfile = true;
-        }
-      } else if (item.follow) {
+      if (item.follow) {
+        //存在单独的follow 则粉丝才能看
         if (!publication?.profile.isFollowedByMe) {
           isFollow = true;
+        }
+      } else if (item.and) {
+        //存在and 则粉丝收藏后付费才能看
+        if (!collected) {
+          isCollect = true;
         }
       }
     });
@@ -64,7 +78,7 @@ export function GatedPreview({
           )}
           {...variants}
         >
-          <div className='flex h-full w-full flex-col items-center justify-center rounded-2xl bg-main-accent text-white'>
+          {isOwer ? '解密' : (<div className='flex h-full w-full flex-col items-center justify-center rounded-2xl bg-main-accent text-white'>
             <HeroIcon
               className='mb-4 h-10 w-10'
               iconName='LockClosedIcon'
@@ -107,7 +121,8 @@ export function GatedPreview({
                 </span>
               </div>
             )}
-          </div>
+          </div>)}
+
         </motion.button>
       </AnimatePresence>
     </div>
