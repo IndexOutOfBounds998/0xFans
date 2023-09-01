@@ -87,7 +87,7 @@ export function GatedPreview({
             <div className='mb-2'>
               <span className='font-bold'>To view this...</span>
             </div>
-            {isProfile && (
+            {isCollect && (
               <div className='mb-2 flex items-center'>
                 <HeroIcon
                   className='mr-[5px] h-5 w-5'
