@@ -9,11 +9,13 @@ import { Button } from '@components/ui/button';
 import { Variants } from 'framer-motion';
 
 type CollectProps = {
+  collectData: any;
   setCollectData: (obj: any) => void;
   closeModal: () => void;
 };
 
 export default function CollectSetting({
+  collectData,
   setCollectData,
   closeModal
 }: CollectProps): JSX.Element {
@@ -68,6 +70,21 @@ export default function CollectSetting({
       setSelectAddress(data[0]);
     }
   }, [loading]);
+
+  useEffect(() => {
+    if (collectData) {
+      setIsCollect(collectData.isCollect || false);
+      setIsCost(collectData.isCost || false);
+      setIsReward(collectData.isReward || false);
+      setIsLimit(collectData.isLimit || false);
+      setIsTimeLimit(collectData.isTimeLimit || false);
+      setFollowerOnly(collectData.followerOnly || true);
+      setAmount(collectData.amount || 0);
+      setSelectAddress(collectData.selectAddress || (data ? data[0] : null));
+      setReferralFee(collectData.referralFee || 0);
+      setCollectLimit(collectData.collectLimit || 0);
+    }
+  }, [collectData]);
 
   //初始化
   const modelInfo = () => {

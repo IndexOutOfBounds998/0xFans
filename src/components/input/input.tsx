@@ -101,7 +101,6 @@ export function Input({
 
     const userId = user?.id as string;
 
-    console.log(selectedImages);
     if (inputValue.trim()) {
       const profileUser = user as unknown as Profile;
       const content = inputValue.trim();
@@ -300,7 +299,8 @@ export function Input({
                 isCharLimitExceeded={isCharLimitExceeded}
                 audience={audience}
                 handleImageUpload={handleImageUpload}
-                setCollectData={() => setCollectData({})}
+                collectData={collectData}
+                setCollectData={setCollectData}
               />
             )}
           </AnimatePresence>

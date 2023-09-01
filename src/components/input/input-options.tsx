@@ -36,7 +36,8 @@ type InputOptionsProps = {
   handleImageUpload: (
     e: ChangeEvent<HTMLInputElement> | ClipboardEvent<HTMLTextAreaElement>
   ) => void;
-  setCollectData?: () => void;
+  collectData: any;
+  setCollectData?: (obj: any) => void;
 };
 
 export function InputOptions({
@@ -47,6 +48,7 @@ export function InputOptions({
   isValidTweet,
   isCharLimitExceeded,
   handleImageUpload,
+  collectData,
   setCollectData,
   audience
 }: InputOptionsProps): JSX.Element {
@@ -109,7 +111,8 @@ export function InputOptions({
       >
         <CollectSetting
           closeModal={closeModal}
-          setCollectData={setCollectData || (() => { })}
+          collectData={collectData}
+          setCollectData={setCollectData || (() => {})}
         />
       </Modal>
       <div

@@ -85,6 +85,8 @@ export function Tweet(tweet: TweetProps): JSX.Element {
 
   const userId = user?.id as string;
 
+  console.log(userId);
+  console.log(createdBy);
   const isOwner = userId === createdBy;
 
   const { id: parentId, username: parentUsername = name } = parent ?? {};
