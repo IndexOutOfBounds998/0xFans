@@ -44,7 +44,7 @@ type CollectData = {
   isCollect?: boolean;
   followerOnly?: boolean;
   isCost?: boolean;
-  selectAddress?: string;
+  selectAddress?: any;
   amount?: number;
   referralFee?: number;
   isLimit?: boolean;
@@ -81,7 +81,7 @@ export function usePost({ callbackOnError }: PostData) {
         debugger;
         collectModule.simpleCollectModule.fee = {
           amount: {
-            currency: collectData.selectAddress.address || '',
+            currency: collectData.selectAddress?.address || '',
             value: collectData.amount ? collectData.amount + '' : '0'
           },
           recipient: profile

@@ -88,6 +88,7 @@ export function TweetActions({
   const tweetIsPinned = pinnedTweet === tweetId;
 
   const handleRemove = async (): Promise<void> => {
+    preventBubbling;
     if (tweetId) {
       const lensClient = await getAuthenticatedClient();
       await lensClient.publication.hide({
@@ -150,7 +151,7 @@ export function TweetActions({
                             focus-visible:bg-accent-red/90'
           mainBtnLabel='Delete'
           focusOnMainBtn
-          action={preventBubbling(handleRemove)}
+          action={handleRemove}
           closeModal={removeCloseModal}
         />
       </Modal>

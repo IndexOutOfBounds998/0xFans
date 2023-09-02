@@ -28,7 +28,7 @@ import {
 } from '@lens-protocol/react-web';
 import { useEffect } from 'react';
 import { useAuth } from '@lib/context/auth-context';
-export type TweetType = Tweet & {
+export type TweetProps = Tweet & {
   user: User;
   modal?: boolean;
   pinned?: boolean;
@@ -39,18 +39,13 @@ export type TweetType = Tweet & {
   isGated?: boolean;
 };
 
-export type TweetProps = {
-  tweet: TweetType;
-  index: number;
-};
-
 export const variants: Variants = {
   initial: { opacity: 0 },
   animate: { opacity: 1, transition: { duration: 0.8 } },
   exit: { opacity: 0, transition: { duration: 0.2 } }
 };
 
-export function Tweet(tweet: TweetType): JSX.Element {
+export function Tweet(tweet: TweetProps): JSX.Element {
   const {
     id: tweetId,
     text,
