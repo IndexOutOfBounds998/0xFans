@@ -50,7 +50,7 @@ export const variants: Variants = {
   exit: { opacity: 0, transition: { duration: 0.2 } }
 };
 
-export function Tweet({ tweet, index }: TweetProps): JSX.Element {
+export function Tweet(tweet: TweetType): JSX.Element {
   const {
     id: tweetId,
     text,
@@ -267,7 +267,6 @@ export function Tweet({ tweet, index }: TweetProps): JSX.Element {
                 )}
                 {!modal && (
                   <TweetStats
-                    index={index}
                     publication={publication}
                     canComment={canComment}
                     canMirror={canMirror}
