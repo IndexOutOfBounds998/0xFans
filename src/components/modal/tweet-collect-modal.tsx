@@ -5,7 +5,7 @@ import React from 'react';
 import { HeroIcon } from '@components/ui/hero-icon';
 import { Button } from '@components/ui/button';
 import cn from 'clsx';
-import { ContentPublication } from '@lens-protocol/react-web';
+import { ContentPublication, SimpleCollectModuleSettings } from '@lens-protocol/react-web';
 
 type TweetCollectModalProps = {
   publication: ContentPublication;
@@ -20,7 +20,8 @@ export function TweetCollectModal({
   const creater = publication.profile.handle;
 
   const content = publication.metadata.content;
-   
+
+ const  feeOptional=(publication.collectModule as SimpleCollectModuleSettings)?.feeOptional;
 
   return (
     <>
@@ -38,23 +39,25 @@ export function TweetCollectModal({
             <p>{content}</p>
           </div>
         </div>
-        <div className='flex items-center space-x-1.5 py-2'>
-          {/*<img className="h-7 w-7" height="28" width="28"*/}
-          {/*     src="https://static-assets.lenster.xyz/images/tokens/usdc.svg"*/}
-          {/*     alt="USDC" title="USDC"/>*/}
-          {/*    <span className="space-x-1">*/}
-          {/*        <span className="text-2xl font-bold">1.0</span>*/}
-          {/*        <span className="text-xs">USDC</span>*/}
-          {/*        <span className="lt-text-gray-500 px-0.5">·</span>*/}
-          {/*        <span className="lt-text-gray-500 text-xs font-bold">$1.00</span>*/}
-          {/*    </span>*/}
-        </div>
+        { feeOptional ? 
+        (<div className='flex items-center space-x-1.5 py-2'>
+          <img className="h-7 w-7" height="28" width="28"
+           src={`https://static-assets.lenster.xyz/images/tokens/${feeOptional.amount.asset.symbol.toLocaleLowerCase()}.svg`}
+            alt={feeOptional.amount.asset.symbol} title={feeOptional.amount.asset.symbol} />
+          <span className="space-x-1">
+            <span className="text-2xl font-bold">{feeOptional.amount.value}</span>
+            <span className="text-xs">{feeOptional.amount.asset.name}</span>
+            {/* <span className="lt-text-gray-500 px-0.5">·</span>
+            <span className="lt-text-gray-500 text-xs font-bold">$1.00</span> */}
+          </span>
+        </div>) : ''}
+
         <div className='mb-[20px] space-y-1.5'>
           <div className='block items-center space-y-1 sm:flex sm:space-x-5'>
             <div className='flex items-center space-x-2'>
               <HeroIcon className='h-4 w-4' iconName='UsersIcon' />
               <button className='font-bold' type='button'>
-                0 collectors
+                {publication.stats.totalAmountOfCollects} collectors
               </button>
             </div>
           </div>
