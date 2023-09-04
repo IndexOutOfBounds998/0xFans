@@ -208,7 +208,7 @@ export function TweetActions({
                   {...variants}
                   static
                 >
-                  {!isOwner && (
+                  {isOwner && (
                     <Popover.Button
                       className='accent-tab flex w-full gap-3 rounded-md rounded-b-none p-4 text-accent-red
                                  hover:bg-main-sidebar-background'
