@@ -31,7 +31,7 @@ const { chains, publicClient } = configureChains(
 );
 
 const { connectors } = getDefaultWallets({
-  appName: '0xfans',
+  appName: APP_ID,
   projectId: RB_PID,
   chains
 });
@@ -42,7 +42,7 @@ const wagmiConfig = createConfig({
   publicClient
 });
 
-// 'lenster', 'lenstrip', "lenstube", "orb", "buttrfly", "lensplay"
+ 
 const lensConfig: LensConfig = {
   bindings: bindings(),
   environment: MAIN_NETWORK ? production : development,
