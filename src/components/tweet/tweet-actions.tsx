@@ -19,6 +19,7 @@ import type { Variants } from 'framer-motion';
 import type { Tweet } from '@lib/types/tweet';
 import type { User } from '@lib/types/user';
 import { getAuthenticatedClient } from '@lib/getAuthenticatedClient';
+import PubSub from 'pubsub-js';
 
 export const variants: Variants = {
   initial: { opacity: 0, y: -25 },
@@ -94,6 +95,8 @@ export function TweetActions({
       await lensClient.publication.hide({
         publicationId: tweetId
       });
+
+      PubSub.publish('delPost', tweetId);
 
       toast.success(
         `${isInAdminControl ? `@${username}'s` : 'Your'} Post was hide`

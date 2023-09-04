@@ -10,17 +10,20 @@ import { MainContainer } from '@components/home/main-container';
 import { Input } from '@components/input/input';
 import { UpdateUsername } from '@components/home/update-username';
 import { MainHeader } from '@components/home/main-header';
-import { Tweet } from '@components/tweet/tweet';
+import { Tweet, TweetProps } from '@components/tweet/tweet';
 import { Loading } from '@components/ui/loading';
 import type { ReactElement, ReactNode } from 'react';
+import PubSub from 'pubsub-js';
 import {
   PublicationSortCriteria,
   PublicationTypes
 } from '@lens-protocol/react-web';
 import { PublicationMainFocus } from '@lens-protocol/client';
 import { APP_ID } from '@lib/const';
+import { useEffect, useState } from 'react';
 export default function Home(): JSX.Element {
   const { isMobile } = useWindow();
+  const [dataList, setDataList] = useState<TweetProps[]>([]);
 
   const { data, LoadMore, loading } = useInfiniteScroll({
     cursor: JSON.stringify({
@@ -43,6 +46,23 @@ export default function Home(): JSX.Element {
     sources: [APP_ID]
   });
 
+  useEffect(() => {
+    if (data) {
+      setDataList(data);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    const token = PubSub.subscribe('delPost', (msg, tweetId) => {
+      const list = JSON.parse(JSON.stringify(dataList));
+      const todolist = list.filter((item: any) => item.id !== tweetId);
+      setDataList(todolist);
+    });
+    return () => {
+      PubSub.unsubscribe(token);
+    };
+  }, [dataList]);
+
   return (
     <MainContainer>
       <SEO title='Home / 0xFans' />
@@ -59,13 +79,13 @@ export default function Home(): JSX.Element {
           //   loading ? (
           //   <Loading className='mt-5' />
           // ) :
-          !data ? (
+          !dataList ? (
             <Loading className='mt-5' />
           ) : (
             // <Error message='Something went wrong' />
             <>
               <AnimatePresence mode='popLayout'>
-                {data.map((tweet, index) => (
+                {dataList.map((tweet, index) => (
                   <Tweet {...tweet} key={index} />
                 ))}
               </AnimatePresence>
