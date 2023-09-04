@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 
 import { Popover } from '@headlessui/react';
@@ -86,12 +86,12 @@ export function TweetActions({
   const { id: userId, following, pinnedTweet } = user as User;
 
   const isInAdminControl = !isOwner;
+  
   const tweetIsPinned = pinnedTweet === tweetId;
-
-  console.log(pathname);
 
   const handleRemove = async (): Promise<void> => {
     preventBubbling;
+   
     if (tweetId) {
       const lensClient = await getAuthenticatedClient();
       await lensClient.publication.hide({
@@ -107,7 +107,7 @@ export function TweetActions({
       toast.success(
         `${isInAdminControl ? `@${username}'s` : 'Your'} Post was hide`
       );
-
+    
       removeCloseModal();
     }
   };

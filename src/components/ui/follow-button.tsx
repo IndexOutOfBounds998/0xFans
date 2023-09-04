@@ -11,8 +11,11 @@ import {
   useUnfollow
 } from '@lens-protocol/react-web';
 import { useFollowWithSelfFundedFallback } from '@lib/hooks/useFollowWithSelfFundedFallback';
-import { useState } from 'react';
-
+import { useEffect, useState } from 'react';
+import { getAuthenticatedClient } from '@lib/getAuthenticatedClient';
+import { useApprovedModuleAllowance } from '@lib/hooks/useApprovedModuleAllowance';
+import { FollowModules, GenerateModuleCurrencyApprovalFragment } from '@lens-protocol/client';
+import { useSendTransaction, useBalance } from 'wagmi';
 type FollowButtonProps = {
   userTargetId: string | null;
   userTargetUsername: string;
@@ -43,6 +46,19 @@ export function FollowButton({
     follower
   });
 
+
+  const onError = (error: any) => {
+    console.log(error);
+  };
+
+  const {
+    data: txData,
+    isLoading: transactionLoading,
+    sendTransaction
+  } = useSendTransaction({
+    onError
+  });
+
   const { user } = useAuth();
 
   const { open, openModal, closeModal } = useModal();
@@ -51,8 +67,38 @@ export function FollowButton({
 
   if (user?.id === userTargetId) return null;
 
-  const handleFollow = (): Promise<void> => {
-    return follow();
+  const followModule: any = followee?.followModule;
+
+  const { result: allowance } = useApprovedModuleAllowance(followModule);
+
+  const hasApprove = allowance && allowance === "0x00";
+
+  const handleFollow = async (): Promise<void> => {
+    if(hasAmount){
+      return follow();
+    }else{
+      alert('not has Amount');
+    }
+  };
+
+  const handleSuperFollowApprove = async (): Promise<void> => {
+
+    const lensClient = await getAuthenticatedClient();
+    const result = await lensClient.modules.generateCurrencyApprovalData({
+      currency: followModule?.amount?.asset?.address,
+      value: '10',
+      followModule: FollowModules.FeeFollowModule,
+    });
+
+    if (result.isSuccess()) {
+      let data = result.unwrap() as GenerateModuleCurrencyApprovalFragment;
+      sendTransaction?.({
+        account: `0x${data?.from.slice(2)}`,
+        to: data?.to,
+        data: `0x${data?.data.slice(2)}`,
+      });
+    }
+    // return follow();
   };
 
   const handleUnfollow = async (): Promise<void> => {
@@ -60,6 +106,25 @@ export function FollowButton({
     closeModal();
     unfollow();
   };
+
+  const { data: balanceData } = useBalance({
+    address: `0x${follower?.ownedBy.slice(2)}`,
+    token: followModule?.amount?.asset?.address,
+    formatUnits: followModule?.amount?.asset?.decimals,
+    watch: true
+  });
+
+  let hasAmount = false;
+
+  if (
+    balanceData &&
+    parseFloat(balanceData?.formatted) < parseFloat(followModule?.amount?.value)
+  ) {
+    hasAmount = false;
+  } else {
+    hasAmount = true;
+  }
+
 
   return (
     <>
@@ -76,6 +141,7 @@ export function FollowButton({
           closeModal={closeModal}
         />
       </Modal>
+
       {userIsFollowed ? (
         <Button
           loading={isUnfollowPending || unfollowLoading}
@@ -87,16 +153,25 @@ export function FollowButton({
           <span>Following</span>
         </Button>
       ) : (
-        <Button
+        hasApprove ? (<Button
           loading={isFollowPending}
           className='self-start border bg-light-primary px-4 py-1.5 font-bold text-white hover:bg-light-primary/90
-                     focus-visible:bg-light-primary/90 active:bg-light-border/75 dark:bg-light-border
-                     dark:text-light-primary dark:hover:bg-light-border/90 dark:focus-visible:bg-light-border/90
-                     dark:active:bg-light-border/75'
+                   focus-visible:bg-light-primary/90 active:bg-light-border/75 dark:bg-light-border
+                   dark:text-light-primary dark:hover:bg-light-border/90 dark:focus-visible:bg-light-border/90
+                   dark:active:bg-light-border/75'
+          onClick={preventBubbling(handleSuperFollowApprove)}
+        >
+          Approve Follow Module
+        </Button>) : (<Button
+          loading={isFollowPending}
+          className='self-start border bg-light-primary px-4 py-1.5 font-bold text-white hover:bg-light-primary/90
+                   focus-visible:bg-light-primary/90 active:bg-light-border/75 dark:bg-light-border
+                   dark:text-light-primary dark:hover:bg-light-border/90 dark:focus-visible:bg-light-border/90
+                   dark:active:bg-light-border/75'
           onClick={preventBubbling(handleFollow)}
         >
           Follow
-        </Button>
+        </Button>)
       )}
     </>
   );
