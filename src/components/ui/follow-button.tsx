@@ -13,7 +13,7 @@ import {
 import { useFollowWithSelfFundedFallback } from '@lib/hooks/useFollowWithSelfFundedFallback';
 import { useEffect, useState } from 'react';
 import { getAuthenticatedClient } from '@lib/getAuthenticatedClient';
-import { useApprovedModuleAllowance } from '@lib/hooks/useApprovedModuleAllowance';
+import { useApprovedFollowModuleAllowance } from '@lib/hooks/useApprovedFollowModuleAllowance';
 import { FollowModules, GenerateModuleCurrencyApprovalFragment } from '@lens-protocol/client';
 import { useSendTransaction, useBalance } from 'wagmi';
 type FollowButtonProps = {
@@ -69,7 +69,7 @@ export function FollowButton({
 
   const followModule: any = followee?.followModule;
 
-  const { result: allowance } = useApprovedModuleAllowance(followModule);
+  const { result: allowance } = useApprovedFollowModuleAllowance(followModule);
 
   const hasApprove = allowance && allowance === "0x00";
 

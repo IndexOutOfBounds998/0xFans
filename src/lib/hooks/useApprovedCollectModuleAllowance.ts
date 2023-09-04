@@ -1,10 +1,10 @@
 import { getAuthenticatedClient } from '@lib/getAuthenticatedClient';
 import { useEffect, useState } from 'react';
 import { ApprovedAllowanceAmountFragment, CollectModules, FeeFollowModuleParams, FollowModules, ReferenceModules, SimpleCollectModuleParams } from "@lens-protocol/client";
-import { FeeFollowModuleSettings } from '@lens-protocol/react-web';
+ 
 
 
-export function useApprovedModuleAllowance(followModule: FeeFollowModuleSettings) {
+export function useApprovedModuleAllowance(collectModule: SimpleCollectModuleParams) {
 
     let loaded = false;
 
@@ -14,13 +14,14 @@ export function useApprovedModuleAllowance(followModule: FeeFollowModuleSettings
         if (loaded) {
             return;
         }
-        if (!followModule) {
+        if (!collectModule) {
             return;
         }
+        const assetAddress = collectModule?.fee?.amount?.currency;
         const client = await getAuthenticatedClient();
         let res = await client.modules.approvedAllowanceAmount({
-            currencies: [followModule?.amount?.asset?.address],
-            followModules: [FollowModules.FeeFollowModule],
+            currencies: [assetAddress || ''],
+            collectModules: [CollectModules.SimpleCollectModule],
         });
         let r = res.unwrap();
         let allowance;
