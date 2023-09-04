@@ -8,8 +8,8 @@ import { Button } from '@components/ui/button';
 import {
   Profile,
   ProfileOwnedByMe,
-  useUnfollow,
-} from "@lens-protocol/react-web";
+  useUnfollow
+} from '@lens-protocol/react-web';
 import { useFollowWithSelfFundedFallback } from '@lib/hooks/useFollowWithSelfFundedFallback';
 import { useState } from 'react';
 
@@ -28,31 +28,28 @@ export function FollowButton({
   follower,
   followee
 }: FollowButtonProps): JSX.Element | null {
-
-
   const {
     execute: unfollow,
     error: unfollowError,
-    isPending: isUnfollowPending,
+    isPending: isUnfollowPending
   } = useUnfollow({ follower, followee });
 
   const {
     execute: follow,
     error: followError,
-    isPending: isFollowPending,
+    isPending: isFollowPending
   } = useFollowWithSelfFundedFallback({
     followee,
-    follower,
+    follower
   });
-
 
   const { user } = useAuth();
 
   const { open, openModal, closeModal } = useModal();
 
-  if (user?.id === userTargetId) return null;
-
   const [unfollowLoading, setUnfollowLoading] = useState<boolean>(false);
+
+  if (user?.id === userTargetId) return null;
 
   const handleFollow = (): Promise<void> => {
     return follow();
@@ -62,9 +59,7 @@ export function FollowButton({
     setUnfollowLoading(true);
     closeModal();
     unfollow();
-
   };
-
 
   return (
     <>
@@ -84,7 +79,7 @@ export function FollowButton({
       {userIsFollowed ? (
         <Button
           loading={isUnfollowPending || unfollowLoading}
-          className='dark-bg-tab min-w-[106px] self-start border border-light-line-reply px-4 py-1.5 
+          className='dark-bg-tab min-w-[106px] self-start border border-light-line-reply px-4 py-1.5
                      font-bold hover:border-accent-red hover:bg-accent-red/10 hover:text-accent-red
                      hover:before:content-["Unfollow"] inner:hover:hidden dark:border-light-secondary'
           onClick={preventBubbling(openModal)}
@@ -94,9 +89,9 @@ export function FollowButton({
       ) : (
         <Button
           loading={isFollowPending}
-          className='self-start border bg-light-primary px-4 py-1.5 font-bold text-white hover:bg-light-primary/90 
-                     focus-visible:bg-light-primary/90 active:bg-light-border/75 dark:bg-light-border 
-                     dark:text-light-primary dark:hover:bg-light-border/90 dark:focus-visible:bg-light-border/90 
+          className='self-start border bg-light-primary px-4 py-1.5 font-bold text-white hover:bg-light-primary/90
+                     focus-visible:bg-light-primary/90 active:bg-light-border/75 dark:bg-light-border
+                     dark:text-light-primary dark:hover:bg-light-border/90 dark:focus-visible:bg-light-border/90
                      dark:active:bg-light-border/75'
           onClick={preventBubbling(handleFollow)}
         >
