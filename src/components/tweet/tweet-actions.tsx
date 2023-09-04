@@ -69,7 +69,7 @@ export function TweetActions({
   createdBy
 }: TweetActionsProps): JSX.Element {
   const { user } = useAuth();
-  const { push } = useRouter();
+  const { push, pathname } = useRouter();
 
   const {
     open: removeOpen,
@@ -88,6 +88,8 @@ export function TweetActions({
   const isInAdminControl = !isOwner;
   const tweetIsPinned = pinnedTweet === tweetId;
 
+  console.log(pathname);
+
   const handleRemove = async (): Promise<void> => {
     preventBubbling;
     if (tweetId) {
@@ -96,7 +98,11 @@ export function TweetActions({
         publicationId: tweetId
       });
 
-      PubSub.publish('delPost', tweetId);
+      if (pathname !== '/home') {
+        push('/home');
+      } else {
+        PubSub.publish('delPost', tweetId);
+      }
 
       toast.success(
         `${isInAdminControl ? `@${username}'s` : 'Your'} Post was hide`
@@ -202,7 +208,7 @@ export function TweetActions({
                   {...variants}
                   static
                 >
-                  {isOwner && (
+                  {!isOwner && (
                     <Popover.Button
                       className='accent-tab flex w-full gap-3 rounded-md rounded-b-none p-4 text-accent-red
                                  hover:bg-main-sidebar-background'
