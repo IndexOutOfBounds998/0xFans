@@ -96,10 +96,13 @@ export function TweetStats({
 
   const hasReactionType = publication
     ? hasReaction({
-        reactionType: ReactionType.UPVOTE,
-        publication: publication as Post
-      })
+      reactionType: ReactionType.UPVOTE,
+      publication: publication as Post
+    })
     : false;
+
+
+  const canCollect = (publication as ContentPublication)?.collectModule.__typename === 'RevertCollectModuleSettings';
 
   let [loading, setLoading] = useState(false);
 
@@ -172,11 +175,11 @@ export function TweetStats({
           iconName='ArrowPathRoundedSquareIcon'
           viewTweet={viewTweet}
           disabled={!canMirror}
-          // onClick={manageRetweet(
-          //   tweetIsRetweeted ? 'unretweet' : 'retweet',
-          //   userId,
-          //   tweetId??''
-          // )}
+        // onClick={manageRetweet(
+        //   tweetIsRetweeted ? 'unretweet' : 'retweet',
+        //   userId,
+        //   tweetId??''
+        // )}
         />
         <TweetOption
           className={cn(
@@ -199,6 +202,7 @@ export function TweetStats({
           iconClassName='group-hover:bg-accent-purple/10 group-active:bg-accent-purple/20
                          group-focus-visible:bg-accent-purple/10 group-focus-visible:ring-accent-purple/80'
           tip={'Collect'}
+          disabled={canCollect}
           move={likeMove}
           stats={currentLikes}
           iconName='RectangleStackIcon'

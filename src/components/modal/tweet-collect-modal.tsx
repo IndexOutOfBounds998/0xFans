@@ -21,7 +21,7 @@ export function TweetCollectModal({
 
   const content = publication.metadata.content;
 
- const  feeOptional=(publication.collectModule as SimpleCollectModuleSettings)?.feeOptional;
+  const feeOptional = (publication.collectModule as SimpleCollectModuleSettings)?.feeOptional;
 
   return (
     <>
@@ -39,18 +39,18 @@ export function TweetCollectModal({
             <p>{content}</p>
           </div>
         </div>
-        { feeOptional ? 
-        (<div className='flex items-center space-x-1.5 py-2'>
-          <img className="h-7 w-7" height="28" width="28"
-           src={`https://static-assets.lenster.xyz/images/tokens/${feeOptional.amount.asset.symbol.toLocaleLowerCase()}.svg`}
-            alt={feeOptional.amount.asset.symbol} title={feeOptional.amount.asset.symbol} />
-          <span className="space-x-1">
-            <span className="text-2xl font-bold">{feeOptional.amount.value}</span>
-            <span className="text-xs">{feeOptional.amount.asset.name}</span>
-            {/* <span className="lt-text-gray-500 px-0.5">·</span>
+        {feeOptional ?
+          (<div className='flex items-center space-x-1.5 py-2'>
+            <img className="h-7 w-7" height="28" width="28"
+              src={`https://static-assets.lenster.xyz/images/tokens/${feeOptional.amount.asset.symbol.toLocaleLowerCase()}.svg`}
+              alt={feeOptional.amount.asset.symbol} title={feeOptional.amount.asset.symbol} />
+            <span className="space-x-1">
+              <span className="text-2xl font-bold">{feeOptional.amount.value}</span>
+              <span className="text-xs">{feeOptional.amount.asset.name}</span>
+              {/* <span className="lt-text-gray-500 px-0.5">·</span>
             <span className="lt-text-gray-500 text-xs font-bold">$1.00</span> */}
-          </span>
-        </div>) : ''}
+            </span>
+          </div>) : ''}
 
         <div className='mb-[20px] space-y-1.5'>
           <div className='block items-center space-y-1 sm:flex sm:space-x-5'>
