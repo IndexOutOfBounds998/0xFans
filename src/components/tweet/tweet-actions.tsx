@@ -45,13 +45,13 @@ type PinModalData = Record<'title' | 'description' | 'mainBtnLabel', string>;
 
 const pinModalData: Readonly<PinModalData[]> = [
   {
-    title: 'Pin Tweet to from profile?',
+    title: 'Pin Posts to from profile?',
     description:
-      'This will appear at the top of your profile and replace any previously pinned Tweet.',
+      'This will appear at the top of your profile and replace any previously pinned Posts.',
     mainBtnLabel: 'Pin'
   },
   {
-    title: 'Unpin Tweet from profile?',
+    title: 'Unpin Posts from profile?',
     description:
       'This will no longer appear automatically at the top of your profile.',
     mainBtnLabel: 'Unpin'
