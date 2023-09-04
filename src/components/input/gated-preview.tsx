@@ -78,7 +78,7 @@ export function GatedPreview({
           )}
           {...variants}
         >
-          {isOwer ? '解密' : (<div className='flex h-full w-full flex-col items-center justify-center rounded-2xl bg-main-accent text-white'>
+          {isOwer ? 'decrypt' : (<div className='flex h-full w-full flex-col items-center justify-center rounded-2xl bg-main-accent text-white'>
             <HeroIcon
               className='mb-4 h-10 w-10'
               iconName='LockClosedIcon'
