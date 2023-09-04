@@ -69,7 +69,7 @@ export function TweetActions({
   createdBy
 }: TweetActionsProps): JSX.Element {
   const { user } = useAuth();
-  const { push } = useRouter();
+  const { push, pathname } = useRouter();
 
   const {
     open: removeOpen,
@@ -88,13 +88,19 @@ export function TweetActions({
   const isInAdminControl = !isOwner;
   const tweetIsPinned = pinnedTweet === tweetId;
 
+  console.log(pathname);
+
   const handleRemove = async (): Promise<void> => {
     preventBubbling;
     if (tweetId) {
-      const lensClient = await getAuthenticatedClient();
-      await lensClient.publication.hide({
-        publicationId: tweetId
-      });
+      // const lensClient = await getAuthenticatedClient();
+      // await lensClient.publication.hide({
+      //   publicationId: tweetId
+      // });
+
+      if (pathname !== '/home') {
+        push('/home');
+      }
 
       PubSub.publish('delPost', tweetId);
 
