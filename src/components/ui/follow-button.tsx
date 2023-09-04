@@ -15,7 +15,7 @@ import { useEffect, useState } from 'react';
 import { getAuthenticatedClient } from '@lib/getAuthenticatedClient';
 import { useApprovedFollowModuleAllowance } from '@lib/hooks/useApprovedFollowModuleAllowance';
 import { FollowModules, GenerateModuleCurrencyApprovalFragment } from '@lens-protocol/client';
-import { useSendTransaction, useBalance } from 'wagmi';
+import { useSendTransaction, useBalance, useWaitForTransaction } from 'wagmi';
 type FollowButtonProps = {
   userTargetId: string | null;
   userTargetUsername: string;
@@ -65,6 +65,8 @@ export function FollowButton({
 
   const [unfollowLoading, setUnfollowLoading] = useState<boolean>(false);
 
+  const [approved, setApproved] = useState<boolean>(false);
+
   if (user?.id === userTargetId) return null;
 
   const followModule: any = followee?.followModule;
@@ -73,10 +75,19 @@ export function FollowButton({
 
   const hasApprove = allowance && allowance === "0x00";
 
+  const { isLoading: waitLoading } = useWaitForTransaction({
+    hash: txData?.hash,
+    onSuccess: () => {
+      setApproved(true);
+    },
+    onError
+  });
+
+
   const handleFollow = async (): Promise<void> => {
-    if(hasAmount){
+    if (hasAmount) {
       return follow();
-    }else{
+    } else {
       alert('not has Amount');
     }
   };
@@ -153,8 +164,8 @@ export function FollowButton({
           <span>Following</span>
         </Button>
       ) : (
-        hasApprove ? (<Button
-          loading={isFollowPending}
+        hasApprove && !approved ? (<Button
+          loading={transactionLoading || waitLoading}
           className='self-start border bg-light-primary px-4 py-1.5 font-bold text-white hover:bg-light-primary/90
                    focus-visible:bg-light-primary/90 active:bg-light-border/75 dark:bg-light-border
                    dark:text-light-primary dark:hover:bg-light-border/90 dark:focus-visible:bg-light-border/90
