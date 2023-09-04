@@ -93,16 +93,16 @@ export function TweetActions({
   const handleRemove = async (): Promise<void> => {
     preventBubbling;
     if (tweetId) {
-      // const lensClient = await getAuthenticatedClient();
-      // await lensClient.publication.hide({
-      //   publicationId: tweetId
-      // });
+      const lensClient = await getAuthenticatedClient();
+      await lensClient.publication.hide({
+        publicationId: tweetId
+      });
 
       if (pathname !== '/home') {
         push('/home');
+      } else {
+        PubSub.publish('delPost', tweetId);
       }
-
-      PubSub.publish('delPost', tweetId);
 
       toast.success(
         `${isInAdminControl ? `@${username}'s` : 'Your'} Post was hide`
@@ -208,7 +208,7 @@ export function TweetActions({
                   {...variants}
                   static
                 >
-                  {isOwner && (
+                  {!isOwner && (
                     <Popover.Button
                       className='accent-tab flex w-full gap-3 rounded-md rounded-b-none p-4 text-accent-red
                                  hover:bg-main-sidebar-background'
