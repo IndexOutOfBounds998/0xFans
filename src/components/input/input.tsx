@@ -133,9 +133,9 @@ export function Input({
     toast.success(
       () => (
         <span className='flex gap-2'>
-          Your Tweet was sent
+          Your Posts was sent success
           {/*<Link href={`/tweet/${tweetId}`}>*/}
-          <span className='custom-underline font-bold'>View</span>
+          {/* <span className='custom-underline font-bold'>View</span> */}
           {/*</Link>*/}
         </span>
       ),
