@@ -150,7 +150,7 @@ export function TweetActions({
         closeModal={removeCloseModal}
       >
         <ActionModal
-          title='Delete Tweet?'
+          title='Delete Posts?'
           description={`This can’t be undone and it will be removed from ${
             isInAdminControl ? `@${username}'s` : 'your'
           } profile, the timeline of any accounts that follow ${
