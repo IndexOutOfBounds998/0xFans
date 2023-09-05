@@ -93,10 +93,10 @@ export function TweetActions({
     preventBubbling;
 
     if (tweetId) {
-      // const lensClient = await getAuthenticatedClient();
-      // await lensClient.publication.hide({
-      //   publicationId: tweetId
-      // });
+      const lensClient = await getAuthenticatedClient();
+      await lensClient.publication.hide({
+        publicationId: tweetId
+      });
 
       if (pathname !== '/home') {
         push('/home');
