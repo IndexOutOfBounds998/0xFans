@@ -16,7 +16,7 @@ import { Error } from '@components/ui/error';
 import { variants } from '@components/aside/aside-trends';
 import type { ReactElement, ReactNode } from 'react';
 import { ProfileSortCriteria, profileId } from '@lens-protocol/react-web';
-
+import { t, Trans } from "@lingui/macro";
 export default function People(): JSX.Element {
   const { user } = useAuth();
 
@@ -30,8 +30,8 @@ export default function People(): JSX.Element {
 
   return (
     <MainContainer>
-      <SEO title='People / 0xFans' />
-      <MainHeader useActionButton title='People' action={back} />
+      <SEO title={t`People / 0xFans`} />
+      <MainHeader useActionButton title={t`People`} action={back} />
       <section>
         {loading ? (
           <Loading className='mt-5' />

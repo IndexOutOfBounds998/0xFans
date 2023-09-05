@@ -24,7 +24,8 @@ import { configureChains, createConfig, WagmiConfig } from 'wagmi';
 import { polygonMumbai, polygon } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
-
+import { I18nProvider } from "@lingui/react";
+import { useLinguiInit } from 'translations/utils';
 const { chains, publicClient } = configureChains(
   [MAIN_NETWORK ? polygon : polygonMumbai],
   [alchemyProvider({ apiKey: ALCHEMY_KEY }), publicProvider()]
@@ -42,7 +43,7 @@ const wagmiConfig = createConfig({
   publicClient
 });
 
- 
+
 const lensConfig: LensConfig = {
   bindings: bindings(),
   environment: MAIN_NETWORK ? production : development,
@@ -65,22 +66,24 @@ export default function App({
   pageProps
 }: AppPropsWithLayout): ReactNode {
   const getLayout = Component.getLayout ?? ((page): ReactNode => page);
-
+  const initializedI18n = useLinguiInit(pageProps.i18n);
   return (
     <>
-      <AppHead />
-      <WagmiConfig config={wagmiConfig}>
-        <RainbowKitProvider chains={chains} coolMode={true}>
-          <LensProvider config={lensConfig}>
-            <AuthContextProvider>
-              <ThemeContextProvider>
-                {getLayout(<Component {...pageProps} />)}
-                <Analytics />
-              </ThemeContextProvider>
-            </AuthContextProvider>
-          </LensProvider>
-        </RainbowKitProvider>
-      </WagmiConfig>
+      <I18nProvider i18n={initializedI18n}>
+        <AppHead />
+        <WagmiConfig config={wagmiConfig}>
+          <RainbowKitProvider chains={chains} coolMode={true}>
+            <LensProvider config={lensConfig}>
+              <AuthContextProvider>
+                <ThemeContextProvider>
+                  {getLayout(<Component {...pageProps} />)}
+                  <Analytics />
+                </ThemeContextProvider>
+              </AuthContextProvider>
+            </LensProvider>
+          </RainbowKitProvider>
+        </WagmiConfig>
+      </I18nProvider>
     </>
   );
 }

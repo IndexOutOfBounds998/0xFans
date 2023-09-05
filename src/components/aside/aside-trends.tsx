@@ -10,7 +10,7 @@ import { ToolTip } from '@components/ui/tooltip';
 import { Loading } from '@components/ui/loading';
 import type { MotionProps } from 'framer-motion';
 import { useTrending } from '@lib/hooks/useTrending';
-
+import { t, Trans } from "@lingui/macro";
 export const variants: MotionProps = {
   initial: { opacity: 0 },
   animate: { opacity: 1 },
@@ -45,7 +45,7 @@ export function AsideTrends({ inTrendsPage }: AsideTrendsProps): JSX.Element {
           {...variants}
         >
           {!inTrendsPage && (
-            <h2 className='text-xl font-extrabold'>Trends for you</h2>
+            <h2 className='text-xl font-extrabold'><Trans>Trends for you</Trans></h2>
           )}
           {data.map(({ tag, query, tweet_volume, url }) => (
             // <Link href={url} key={query}>
