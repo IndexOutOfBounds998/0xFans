@@ -86,17 +86,17 @@ export function TweetActions({
   const { id: userId, following, pinnedTweet } = user as User;
 
   const isInAdminControl = !isOwner;
-  
+
   const tweetIsPinned = pinnedTweet === tweetId;
 
   const handleRemove = async (): Promise<void> => {
     preventBubbling;
-   
+
     if (tweetId) {
-      const lensClient = await getAuthenticatedClient();
-      await lensClient.publication.hide({
-        publicationId: tweetId
-      });
+      // const lensClient = await getAuthenticatedClient();
+      // await lensClient.publication.hide({
+      //   publicationId: tweetId
+      // });
 
       if (pathname !== '/home') {
         push('/home');
@@ -107,7 +107,7 @@ export function TweetActions({
       toast.success(
         `${isInAdminControl ? `@${username}'s` : 'Your'} Post was hide`
       );
-    
+
       removeCloseModal();
     }
   };

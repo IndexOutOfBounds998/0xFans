@@ -14,7 +14,10 @@ import { useFollowWithSelfFundedFallback } from '@lib/hooks/useFollowWithSelfFun
 import { useEffect, useState } from 'react';
 import { getAuthenticatedClient } from '@lib/getAuthenticatedClient';
 import { useApprovedFollowModuleAllowance } from '@lib/hooks/useApprovedFollowModuleAllowance';
-import { FollowModules, GenerateModuleCurrencyApprovalFragment } from '@lens-protocol/client';
+import {
+  FollowModules,
+  GenerateModuleCurrencyApprovalFragment
+} from '@lens-protocol/client';
 import { useSendTransaction, useBalance, useWaitForTransaction } from 'wagmi';
 type FollowButtonProps = {
   userTargetId: string | null;
@@ -46,7 +49,6 @@ export function FollowButton({
     follower
   });
 
-
   const onError = (error: any) => {
     console.log(error);
   };
@@ -67,13 +69,11 @@ export function FollowButton({
 
   const [approved, setApproved] = useState<boolean>(false);
 
-  if (user?.id === userTargetId) return null;
-
   const followModule: any = followee?.followModule;
 
   const { result: allowance } = useApprovedFollowModuleAllowance(followModule);
 
-  const hasApprove = allowance && allowance === "0x00";
+  const hasApprove = allowance && allowance === '0x00';
 
   const { isLoading: waitLoading } = useWaitForTransaction({
     hash: txData?.hash,
@@ -82,7 +82,6 @@ export function FollowButton({
     },
     onError
   });
-
 
   const handleFollow = async (): Promise<void> => {
     if (hasAmount) {
@@ -93,12 +92,11 @@ export function FollowButton({
   };
 
   const handleSuperFollowApprove = async (): Promise<void> => {
-
     const lensClient = await getAuthenticatedClient();
     const result = await lensClient.modules.generateCurrencyApprovalData({
       currency: followModule?.amount?.asset?.address,
       value: '10',
-      followModule: FollowModules.FeeFollowModule,
+      followModule: FollowModules.FeeFollowModule
     });
 
     if (result.isSuccess()) {
@@ -106,7 +104,7 @@ export function FollowButton({
       sendTransaction?.({
         account: `0x${data?.from.slice(2)}`,
         to: data?.to,
-        data: `0x${data?.data.slice(2)}`,
+        data: `0x${data?.data.slice(2)}`
       });
     }
     // return follow();
@@ -136,6 +134,7 @@ export function FollowButton({
     hasAmount = true;
   }
 
+  if (user?.id === userTargetId) return null;
 
   return (
     <>
@@ -163,8 +162,8 @@ export function FollowButton({
         >
           <span>Following</span>
         </Button>
-      ) : (
-        hasApprove && !approved ? (<Button
+      ) : hasApprove && !approved ? (
+        <Button
           loading={transactionLoading || waitLoading}
           className='self-start border bg-light-primary px-4 py-1.5 font-bold text-white hover:bg-light-primary/90
                    focus-visible:bg-light-primary/90 active:bg-light-border/75 dark:bg-light-border
@@ -173,7 +172,9 @@ export function FollowButton({
           onClick={preventBubbling(handleSuperFollowApprove)}
         >
           Approve Follow Module
-        </Button>) : (<Button
+        </Button>
+      ) : (
+        <Button
           loading={isFollowPending}
           className='self-start border bg-light-primary px-4 py-1.5 font-bold text-white hover:bg-light-primary/90
                    focus-visible:bg-light-primary/90 active:bg-light-border/75 dark:bg-light-border
@@ -182,7 +183,7 @@ export function FollowButton({
           onClick={preventBubbling(handleFollow)}
         >
           Follow
-        </Button>)
+        </Button>
       )}
     </>
   );
