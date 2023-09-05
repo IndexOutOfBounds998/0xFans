@@ -6,14 +6,17 @@ import { FeeFollowModuleSettings } from '@lens-protocol/react-web';
 
 export function useApprovedFollowModuleAllowance(followModule: FeeFollowModuleSettings) {
 
-    let loaded = false;
+
 
     const [result, setResult] = useState();
 
+
+    useEffect(() => {
+        execute();
+    }, [followModule])
+
     const execute = async () => {
-        if (loaded) {
-            return;
-        }
+
         if (!followModule) {
             return;
         }
@@ -28,13 +31,10 @@ export function useApprovedFollowModuleAllowance(followModule: FeeFollowModuleSe
             allowance = item.allowance;
         }))
         setResult(allowance);
-        loaded = true;
+
 
     }
 
-    useEffect(() => {
-        execute();
-    }, [])
 
 
     return { result };

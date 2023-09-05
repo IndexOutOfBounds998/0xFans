@@ -13,12 +13,24 @@ import { UserName } from '@components/user/user-name';
 import { UserUsername } from '@components/user/user-username';
 import { variants } from './more-settings';
 import type { User } from '@lib/types/user';
+import { MediaSet, useProfilesOwnedByMe } from '@lens-protocol/react-web';
+import { useActiveProfile, useActiveProfileSwitch } from '@lens-protocol/react-web';
 
 export function SidebarProfile(): JSX.Element {
   const { user, signOut } = useAuth();
   const { open, openModal, closeModal } = useModal();
-
+  const { data, error, loading: activeLoading } = useActiveProfile();
   const { id, name, username, verified, photoURL } = user as User;
+  const {
+    data: profiles,
+    loading,
+    hasMore,
+    next,
+  } = useProfilesOwnedByMe({
+    limit: 10,
+  });
+
+  const { execute: switchActiveProfile, isPending } = useActiveProfileSwitch();
 
   return (
     <>
@@ -68,26 +80,32 @@ export function SidebarProfile(): JSX.Element {
                   {...variants}
                   static
                 >
-                  <Menu.Item
-                    className='flex items-center justify-between gap-4 border-b
+                  {profiles && profiles.map((profile, index) => (
+                    <Menu.Item
+                      className='flex items-center justify-between gap-4 border-b
                                border-light-border px-4 py-3 dark:border-dark-border'
-                    as='div'
-                    disabled
-                  >
-                    <div className='flex items-center gap-3 truncate'>
-                      <UserAvatar src={photoURL} alt={username} />
-                      <div className='truncate'>
-                        <UserName id={id} name={name ?? ''} verified={verified} />
-                        <UserUsername id={id} username={username} disableLink />
+                      as='div'
+                      disabled
+                    >
+
+                      <div className='flex items-center gap-3 truncate'
+                        onClick={() => {
+                          switchActiveProfile(profile.id);
+                        }}>
+                        <UserAvatar src={(profile.picture as MediaSet)?.original?.url} alt={(profile.picture as MediaSet)?.original?.altTag || ''} />
+                        <div className='truncate'>
+                          <UserName id={profile.id} name={profile.handle ?? ''} verified={verified} />
+                          <UserUsername id={profile.id} username={profile.name || ''} disableLink />
+                        </div>
                       </div>
-                    </div>
-                    <i>
-                      <HeroIcon
-                        className='h-5 w-5 text-main-accent'
-                        iconName='CheckIcon'
-                      />
-                    </i>
-                  </Menu.Item>
+                      {data && data.id === profile.id ? (<i>
+                        <HeroIcon
+                          className='h-5 w-5 text-main-accent'
+                          iconName='CheckIcon'
+                        />
+                      </i>) : ''}
+                    </Menu.Item>
+                  ))}
                   <Menu.Item>
                     {({ active }): JSX.Element => (
                       <Button
