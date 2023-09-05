@@ -21,6 +21,9 @@ msgstr ""
 msgid "Chinese"
 msgstr ""
 
+msgid "Dutch"
+msgstr ""
+
 msgid "English"
 msgstr ""
 
@@ -33,5 +36,3 @@ msgstr ""
 msgid "Pseudo"
 msgstr ""
 
-msgid "Something went wrong"
-msgstr "Something went wrong"
