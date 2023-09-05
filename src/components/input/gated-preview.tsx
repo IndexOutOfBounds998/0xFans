@@ -6,6 +6,7 @@ import { ContentPublication, usePublication } from '@lens-protocol/react-web';
 import { useAuth } from '@lib/context/auth-context';
 
 type GatedPreviewProps = {
+  publication: any;
   publicationObj: any;
   openCollectModal?: () => void;
   openFollowModal?: () => void;
@@ -23,26 +24,28 @@ const variants: MotionProps = {
 };
 
 export function GatedPreview({
+  publication,
   publicationObj,
   openCollectModal,
   openFollowModal
 }: GatedPreviewProps): JSX.Element {
-  const { data: publication, loading: publication_loading } = usePublication(publicationObj);
+  // const { data: publication, loading: publication_loading } = usePublication(publicationObj);
 
   const { user } = useAuth();
 
   const handle = publication?.profile?.handle;
 
-  //null 没有设置超级关注 
+  //null 没有设置超级关注
   const followModule = publication?.profile?.followModule;
 
   //是否已经被我收藏过
   const collected = (publication as ContentPublication)?.hasCollectedByMe;
 
   //是否是我自己的帖子
-  const isOwer = (publication as ContentPublication)?.profile.id === user?.id
+  const isOwer = (publication as ContentPublication)?.profile.id === user?.id;
 
-  const criteria = (publication as ContentPublication)?.metadata?.encryptionParams?.accessCondition?.or?.criteria;
+  const criteria = (publication as ContentPublication)?.metadata
+    ?.encryptionParams?.accessCondition?.or?.criteria;
 
   let isCollect = false;
 
@@ -78,51 +81,54 @@ export function GatedPreview({
           )}
           {...variants}
         >
-          {isOwer ? 'Decrypt' : (<div className='flex h-full w-full flex-col items-center justify-center rounded-2xl bg-main-accent text-white'>
-            <HeroIcon
-              className='mb-4 h-10 w-10'
-              iconName='LockClosedIcon'
-              solid
-            />
-            <div className='mb-2'>
-              <span className='font-bold'>To view this...</span>
+          {isOwer ? (
+            'Decrypt'
+          ) : (
+            <div className='flex h-full w-full flex-col items-center justify-center rounded-2xl bg-main-accent text-white'>
+              <HeroIcon
+                className='mb-4 h-10 w-10'
+                iconName='LockClosedIcon'
+                solid
+              />
+              <div className='mb-2'>
+                <span className='font-bold'>To view this...</span>
+              </div>
+              {isCollect && (
+                <div className='mb-2 flex items-center'>
+                  <HeroIcon
+                    className='mr-[5px] h-5 w-5'
+                    iconName='RectangleStackIcon'
+                  />
+                  <span>
+                    Pay the&nbsp;
+                    <span
+                      className='font-bold underline'
+                      onClick={preventBubbling(openCollectModal)}
+                    >
+                      post
+                    </span>
+                  </span>
+                </div>
+              )}
+              {isFollow && (
+                <div className='mb-2 flex items-center'>
+                  <HeroIcon
+                    className='mr-[5px] h-5 w-5'
+                    iconName='UserGroupIcon'
+                  />
+                  <span>
+                    Follow&nbsp;
+                    <span
+                      className='font-bold underline'
+                      onClick={preventBubbling(openFollowModal)}
+                    >
+                      {handle}
+                    </span>
+                  </span>
+                </div>
+              )}
             </div>
-            {isCollect && (
-              <div className='mb-2 flex items-center'>
-                <HeroIcon
-                  className='mr-[5px] h-5 w-5'
-                  iconName='RectangleStackIcon'
-                />
-                <span>
-                  Pay the&nbsp;
-                  <span
-                    className='font-bold underline'
-                    onClick={preventBubbling(openCollectModal)}
-                  >
-                    post
-                  </span>
-                </span>
-              </div>
-            )}
-            {isFollow && (
-              <div className='mb-2 flex items-center'>
-                <HeroIcon
-                  className='mr-[5px] h-5 w-5'
-                  iconName='UserGroupIcon'
-                />
-                <span>
-                  Follow&nbsp;
-                  <span
-                    className='font-bold underline'
-                    onClick={preventBubbling(openFollowModal)}
-                  >
-                    {handle}
-                  </span>
-                </span>
-              </div>
-            )}
-          </div>)}
-
+          )}
         </motion.button>
       </AnimatePresence>
     </div>

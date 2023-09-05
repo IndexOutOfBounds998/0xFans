@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-const linguiConfig = require("./lingui.config")
+const linguiConfig = require('./lingui.config');
 const nextConfig = {
   eslint: {
     ignoreBuildErrors: true,
@@ -9,16 +9,9 @@ const nextConfig = {
     }
   },
   reactStrictMode: true,
-  experimental: {
-    swcPlugins: [
-      [
-        "@lingui/swc-plugin", {}
-      ],
-    ],
-  },
   i18n: {
     locales: linguiConfig.locales,
-    defaultLocale: linguiConfig.sourceLocale,
+    defaultLocale: linguiConfig.sourceLocale
   },
   swcMinify: true,
   images: {
@@ -36,7 +29,8 @@ const nextConfig = {
     ]
   },
   experimental: {
-    newNextLinkBehavior: false
+    newNextLinkBehavior: false,
+    swcPlugins: [['@lingui/swc-plugin', {}]]
   },
   webpack5: true,
   webpack: (config) => {

@@ -88,6 +88,16 @@ export function Tweet(tweet: TweetProps): JSX.Element {
   const tweetLink = `/tweet/${tweetId}`;
 
   const { user: profileByMe } = useAuth();
+
+  let publicationData: ContentPublication;
+  if (isGated) {
+    const { data, loading: publication_loading } = usePublication({
+      publicationId: tweetId,
+      observerId: profile?.id
+    });
+    publicationData = data;
+  }
+
   const userId = profileByMe?.id as string;
 
   const isOwner = userId === ownerId;
@@ -125,7 +135,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
         closeModal={closeCollectModal}
       >
         <TweetCollectModal
-          publication={tweet.publication as ContentPublication}
+          publication={publicationData as ContentPublication}
           closeModal={closeCollectModal}
         />
       </Modal>
@@ -242,10 +252,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
               <div className='mt-1 flex flex-col gap-2'>
                 {isGated ? (
                   <GatedPreview
-                    publicationObj={{
-                      publicationId: tweetId,
-                      observerId: profile?.id
-                    }}
+                    publication={publicationData}
                     openCollectModal={openCollectModal}
                     openFollowModal={openFollowModal}
                   />

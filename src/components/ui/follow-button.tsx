@@ -25,6 +25,7 @@ type FollowButtonProps = {
   userIsFollowed?: boolean;
   follower: ProfileOwnedByMe;
   followee: Profile;
+  btnClass: string | null;
 };
 
 export function FollowButton({
@@ -32,7 +33,8 @@ export function FollowButton({
   userTargetUsername,
   userIsFollowed,
   follower,
-  followee
+  followee,
+  btnClass
 }: FollowButtonProps): JSX.Element | null {
   const {
     execute: unfollow,
@@ -155,9 +157,9 @@ export function FollowButton({
       {userIsFollowed ? (
         <Button
           loading={isUnfollowPending || unfollowLoading}
-          className='dark-bg-tab min-w-[106px] self-start border border-light-line-reply px-4 py-1.5
+          className={`dark-bg-tab min-w-[106px] self-start border border-light-line-reply px-4 py-1.5
                      font-bold hover:border-accent-red hover:bg-accent-red/10 hover:text-accent-red
-                     hover:before:content-["Unfollow"] inner:hover:hidden dark:border-light-secondary'
+                     hover:before:content-["Unfollow"] inner:hover:hidden dark:border-light-secondary ${btnClass}`}
           onClick={preventBubbling(openModal)}
         >
           <span>Following</span>
@@ -165,10 +167,10 @@ export function FollowButton({
       ) : hasApprove && !approved ? (
         <Button
           loading={transactionLoading || waitLoading}
-          className='self-start border bg-light-primary px-4 py-1.5 font-bold text-white hover:bg-light-primary/90
+          className={`self-start border bg-light-primary px-4 py-1.5 font-bold text-white hover:bg-light-primary/90
                    focus-visible:bg-light-primary/90 active:bg-light-border/75 dark:bg-light-border
                    dark:text-light-primary dark:hover:bg-light-border/90 dark:focus-visible:bg-light-border/90
-                   dark:active:bg-light-border/75'
+                   dark:active:bg-light-border/75 ${btnClass}`}
           onClick={preventBubbling(handleSuperFollowApprove)}
         >
           Approve Follow Module
@@ -176,10 +178,10 @@ export function FollowButton({
       ) : (
         <Button
           loading={isFollowPending}
-          className='self-start border bg-light-primary px-4 py-1.5 font-bold text-white hover:bg-light-primary/90
+          className={`self-start border bg-light-primary px-4 py-1.5 font-bold text-white hover:bg-light-primary/90
                    focus-visible:bg-light-primary/90 active:bg-light-border/75 dark:bg-light-border
                    dark:text-light-primary dark:hover:bg-light-border/90 dark:focus-visible:bg-light-border/90
-                   dark:active:bg-light-border/75'
+                   dark:active:bg-light-border/75 ${btnClass}`}
           onClick={preventBubbling(handleFollow)}
         >
           Follow
