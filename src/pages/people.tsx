@@ -36,7 +36,7 @@ export default function People(): JSX.Element {
         {loading ? (
           <Loading className='mt-5' />
         ) : !data ? (
-          <Error message='Something went wrong' />
+          <Error message={t`Something went wrong`}/>
         ) : (
           <>
             <motion.div className='mt-0.5' {...variants}>
