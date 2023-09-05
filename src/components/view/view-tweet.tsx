@@ -22,8 +22,11 @@ import { VideoPreview } from '@components/input/video-preview';
 import { GatedPreview } from '@components/input/gated-preview';
 import { TweetCollectModal } from '@components/modal/tweet-collect-modal';
 import { TweetFollowModal } from '@components/modal/tweet-follow-modal';
-import { ContentPublication } from '@lens-protocol/react-web';
-
+import {
+  ContentPublication,
+  PublicationId,
+  usePublication
+} from '@lens-protocol/react-web';
 type ViewTweetProps = Tweet & {
   user: User;
   viewTweetRef?: RefObject<HTMLElement>;
@@ -70,6 +73,15 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
     closeModal: closeFollowModal
   } = useModal();
 
+  let publicationData;
+  if (isGated) {
+    const { data, loading: publication_loading } = usePublication({
+      publicationId: tweetId as PublicationId,
+      observerId: profile?.id
+    });
+    publicationData = data ?? null;
+  }
+
   const tweetLink = `/tweet/${tweetId}`;
 
   const userId = user?.id as string;
@@ -103,7 +115,10 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
         open={openCollect}
         closeModal={closeCollectModal}
       >
-        <TweetCollectModal publication={tweet.publication as ContentPublication} closeModal={closeCollectModal} />
+        <TweetCollectModal
+          publication={tweet.publication as ContentPublication}
+          closeModal={closeCollectModal}
+        />
       </Modal>
       <Modal
         modalClassName='flex flex-col gap-6 max-w-md bg-main-background w-full rounded-2xl'
@@ -168,10 +183,7 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
         )}
         {isGated ? (
           <GatedPreview
-            publicationObj={{
-              publicationId: tweetId,
-              observerId: profile?.id
-            }}
+            publication={publicationData as ContentPublication}
             openCollectModal={openCollectModal}
             openFollowModal={openFollowModal}
           />

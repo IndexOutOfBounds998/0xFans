@@ -10,7 +10,7 @@ import { preventBubbling } from '@lib/utils';
 import { Button } from '@components/ui/button';
 
 type CollectButtonProps = {
-  collector: ProfileOwnedByMe;
+  collector?: ProfileOwnedByMe;
   publication: Post | Comment;
   btnClass: string;
 };
@@ -20,11 +20,17 @@ export default function CollectButton({
   publication,
   btnClass
 }: CollectButtonProps) {
-  const {
-    execute: collect,
-    error,
-    isPending
-  } = useCollectWithSelfFundedFallback({ collector, publication });
+  let collect;
+  let loading;
+  if (collector) {
+    const {
+      execute: fun,
+      error,
+      isPending
+    } = useCollectWithSelfFundedFallback({ collector, publication });
+    collect = fun;
+    loading = isPending;
+  }
 
   const CollectBtn = ({ title }: { title: string }) => (
     <Button
@@ -49,7 +55,7 @@ export default function CollectButton({
     case CollectState.CAN_BE_COLLECTED:
       return (
         <Button
-          loading={isPending}
+          loading={loading}
           className={`self-start border bg-light-primary px-4 py-1.5 font-bold text-white hover:bg-light-primary/90
                    focus-visible:bg-light-primary/90 active:bg-light-border/75 dark:bg-light-border
                    dark:text-light-primary dark:hover:bg-light-border/90 dark:focus-visible:bg-light-border/90

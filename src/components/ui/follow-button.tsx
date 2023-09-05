@@ -25,7 +25,7 @@ type FollowButtonProps = {
   userIsFollowed?: boolean;
   follower: ProfileOwnedByMe;
   followee: Profile;
-  btnClass: string | null;
+  btnClass?: string | null;
 };
 
 export function FollowButton({
