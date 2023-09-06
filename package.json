@@ -11,7 +11,8 @@
     "test": "jest --watch",
     "test:ci": "jest --ci",
     "prepare": "husky install",
-    "translations:extract": "lingui extract --clean"
+    "translations:extract": "lingui extract --clean",
+    "translations:compile": "lingui compile"
   },
   "dependencies": {
     "@apollo/client": "^3.8.1",
