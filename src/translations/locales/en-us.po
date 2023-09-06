@@ -30,3 +30,12 @@ msgstr "Pseudo"
 
 msgid "Something went wrong"
 msgstr "Something went wrong"
+
+msgid "This account doesn’t exist"
+msgstr "This account doesn’t exist"
+
+msgid "Trends for you"
+msgstr "Trends for you"
+
+msgid "Try searching for another."
+msgstr "Try searching for another."

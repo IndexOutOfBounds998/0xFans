@@ -30,3 +30,12 @@ msgstr ""
 
 msgid "Something went wrong"
 msgstr ""
+
+msgid "This account doesn’t exist"
+msgstr ""
+
+msgid "Trends for you"
+msgstr ""
+
+msgid "Try searching for another."
+msgstr ""

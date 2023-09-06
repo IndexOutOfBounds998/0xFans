@@ -17,7 +17,7 @@ import { UserEditProfile } from '@components/user/user-edit-profile';
 import { UserShare } from '@components/user/user-share';
 import type { LayoutProps } from './common-layout';
 import { ImageData } from '@lib/types/file';
-
+import { Trans } from '@lingui/macro';
 export function UserHomeLayout({ children }: LayoutProps): JSX.Element {
   const { user, profileByMe } = useAuth();
   const { user: userData, loading } = useUser();
@@ -55,9 +55,9 @@ export function UserHomeLayout({ children }: LayoutProps): JSX.Element {
                 <p className='text-xl font-bold'>@{id}</p>
               </div>
               <div className='p-8 text-center'>
-                <p className='text-3xl font-bold'>This account doesn’t exist</p>
+                <p className='text-3xl font-bold'><Trans>This account doesn’t exist</Trans></p>
                 <p className='text-light-secondary dark:text-dark-secondary'>
-                  Try searching for another.
+                 <Trans>Try searching for another.</Trans> 
                 </p>
               </div>
             </div>
