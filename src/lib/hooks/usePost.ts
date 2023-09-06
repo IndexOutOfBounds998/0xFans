@@ -130,6 +130,7 @@ export function usePost({ callbackOnError }: PostData) {
   };
 
   async function uploadToIPFS(metadata: any, isCollect: boolean) {
+    
     /* create an instance of the Lens SDK gated content with the environment */
     const sdk = await LensGatedSDK.create({
       provider: new Web3Provider(window.ethereum),
