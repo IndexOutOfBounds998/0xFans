@@ -18,12 +18,6 @@ const languages: Languages[] = [
         rtl: false,
     },
     {
-        locale: "nl-nl",
-        msg: msg`Dutch`,
-        territory: "NL",
-        rtl: false,
-    },
-    {
         locale: "zh-CN",
         msg: msg`Chinese`,
         territory: "ZH",
