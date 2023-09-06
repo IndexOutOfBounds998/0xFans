@@ -15,8 +15,7 @@ module.exports = {
         {
             path: "src/translations/locales/{locale}",
             include: [
-                "src/pages",
-                "src/components",
+                "src",
                 "src/translations/languages.ts",
             ],
         },
