@@ -16,7 +16,7 @@
      <a href="https://0xfans.betteruptime.com">
         <img src="https://betteruptime.com/status-badges/v1/monitor/dfaw.svg" alt="Better Uptime">
     </a>
-   <a title="Crowdin" target="_blank" href="https://crowdin.com/project/lensbook"><img src="https://badges.crowdin.net/lensbook/localized.svg"></a>
+  <a title="Crowdin" target="_blank" href="https://crowdin.com/project/0xfans"><img src="https://badges.crowdin.net/0xfans/localized.svg"></a>
 </div>
 <br>
 
