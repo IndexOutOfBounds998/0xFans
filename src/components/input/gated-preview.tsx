@@ -6,8 +6,7 @@ import { ContentPublication, usePublication } from '@lens-protocol/react-web';
 import { useAuth } from '@lib/context/auth-context';
 
 type GatedPreviewProps = {
-  publication: any;
-  publicationObj: any;
+  publication: ContentPublication;
   openCollectModal?: () => void;
   openFollowModal?: () => void;
 };
@@ -25,7 +24,6 @@ const variants: MotionProps = {
 
 export function GatedPreview({
   publication,
-  publicationObj,
   openCollectModal,
   openFollowModal
 }: GatedPreviewProps): JSX.Element {

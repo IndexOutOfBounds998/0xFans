@@ -24,6 +24,7 @@ import { GatedPreview } from '@components/input/gated-preview';
 import {
   ContentPublication,
   Profile,
+  PublicationId,
   usePublication
 } from '@lens-protocol/react-web';
 import { useEffect } from 'react';
@@ -89,13 +90,13 @@ export function Tweet(tweet: TweetProps): JSX.Element {
 
   const { user: profileByMe } = useAuth();
 
-  let publicationData: ContentPublication;
+  let publicationData;
   if (isGated) {
     const { data, loading: publication_loading } = usePublication({
-      publicationId: tweetId,
+      publicationId: tweetId as PublicationId,
       observerId: profile?.id
     });
-    publicationData = data;
+    publicationData = data ?? null;
   }
 
   const userId = profileByMe?.id as string;
@@ -252,7 +253,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
               <div className='mt-1 flex flex-col gap-2'>
                 {isGated ? (
                   <GatedPreview
-                    publication={publicationData}
+                    publication={publicationData as ContentPublication}
                     openCollectModal={openCollectModal}
                     openFollowModal={openFollowModal}
                   />

@@ -6,6 +6,7 @@ import { useAuth } from '@lib/context/auth-context';
 import cn from 'clsx';
 import { FollowButton } from '@components/ui/follow-button';
 import { useUser } from '@lib/context/user-context';
+import { Profile } from '@lens-protocol/react-web';
 
 type TweetFollowModalProps = {
   tweet: TweetProps;
@@ -85,14 +86,16 @@ export function TweetFollowModal({
           </ul>
         </div>
         <div className='flex flex-col gap-3 inner:py-2 inner:font-bold'>
-          <FollowButton
-            btnClass='w-full'
-            userTargetId={userData.id.toString()}
-            userTargetUsername={userData.username}
-            userIsFollowed={userData.isFollowedByMe}
-            followee={userData}
-            follower={profileByMe}
-          />
+          {profileByMe && (
+            <FollowButton
+              btnClass='w-full'
+              userTargetId={userData.id.toString()}
+              userTargetUsername={userData.name || ''}
+              userIsFollowed={userData.isFollowedByMe}
+              followee={userData}
+              follower={profileByMe}
+            />
+          )}
           <Button
             className={cn(
               'w-full border border-light-line-reply hover:bg-light-primary/10 focus-visible:bg-light-primary/10 active:bg-light-primary/20 dark:border-light-secondary dark:text-light-border dark:hover:bg-light-border/10 dark:focus-visible:bg-light-border/10 dark:active:bg-light-border/20'
