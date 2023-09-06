@@ -8,7 +8,7 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: 0xfans\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-09-06 04:57\n"
+"PO-Revision-Date: 2023-09-06 05:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -19,20 +19,20 @@ msgstr ""
 "X-Crowdin-File-ID: 29\n"
 
 msgid "Chinese"
-msgstr ""
+msgstr "中文"
 
 msgid "Dutch"
-msgstr ""
+msgstr "荷兰语"
 
 msgid "English"
-msgstr ""
+msgstr "Distr."
 
 msgid "People"
-msgstr ""
+msgstr "人"
 
 msgid "People / 0xFans"
-msgstr ""
+msgstr "人 / 0xFans"
 
 msgid "Pseudo"
-msgstr ""
+msgstr "伪装"
 
