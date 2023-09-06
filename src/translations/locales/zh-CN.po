@@ -47,4 +47,3 @@ msgstr "尝试搜索另一个。"
 
 msgid "Who to follow"
 msgstr "关注哪些人"
-
