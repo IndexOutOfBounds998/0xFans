@@ -30,3 +30,9 @@ msgstr "People / 0xFans"
 
 msgid "Pseudo"
 msgstr "Pseudo"
+
+msgid "Something went wrong"
+msgstr "Something went wrong"
+
+msgid "Trends for you"
+msgstr "Trends for you"

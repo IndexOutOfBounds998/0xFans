@@ -30,3 +30,9 @@ msgstr ""
 
 msgid "Pseudo"
 msgstr ""
+
+msgid "Something went wrong"
+msgstr ""
+
+msgid "Trends for you"
+msgstr ""
