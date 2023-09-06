@@ -1,22 +1,22 @@
 const footerLinks = [
   ['About', 'https://about.0xfans.com'],
-  ['Help Center', 'https://help.0xfans.com'],
-  ['Privacy Policy', 'https://0xfans.com/tos'],
-  ['Cookie Policy', 'https://support.0xfans.com/articles/20170514'],
-  ['Accessibility', 'https://help.0xfans.com/resources/accessibility'],
-  [
-    'Ads Info',
-    'https://business.0xfans.com/en/help/troubleshooting/how-0xfans-ads-work.html'
-  ],
-  ['Blog', 'https://blog.0xfans.com'],
-  ['Status', 'https://status.0xfans.us'],
-  ['Careers', 'https://careers.0xfans.com'],
-  ['Brand Resources', 'https://about.0xfans.com/press/brand-assets'],
-  ['Advertising', 'https://ads.0xfans.com/?ref=gl-tw-tw-0xfans-advertise'],
-  ['Marketing', 'https://marketing.0xfans.com'],
-  ['Twitter for Business', 'https://business.0xfans.com'],
-  ['Developers', 'https://developer.0xfans.com'],
-  ['Directory', 'https://0xfans.com/i/directory/profiles'],
+  // ['Help Center', 'https://help.0xfans.com'],
+  // ['Privacy Policy', 'https://0xfans.com/tos'],
+  // ['Cookie Policy', 'https://support.0xfans.com/articles/20170514'],
+  // ['Accessibility', 'https://help.0xfans.com/resources/accessibility'],
+  // [
+  //   'Ads Info',
+  //   'https://business.0xfans.com/en/help/troubleshooting/how-0xfans-ads-work.html'
+  // ],
+  // ['Blog', 'https://blog.0xfans.com'],
+  // ['Status', 'https://status.0xfans.us'],
+  // ['Careers', 'https://careers.0xfans.com'],
+  // ['Brand Resources', 'https://about.0xfans.com/press/brand-assets'],
+  // ['Advertising', 'https://ads.0xfans.com/?ref=gl-tw-tw-0xfans-advertise'],
+  // ['Marketing', 'https://marketing.0xfans.com'],
+  // ['Twitter for Business', 'https://business.0xfans.com'],
+  // ['Developers', 'https://developer.0xfans.com'],
+  // ['Directory', 'https://0xfans.com/i/directory/profiles'],
   ['Settings', 'https://0xfans.com/settings']
 ] as const;
 

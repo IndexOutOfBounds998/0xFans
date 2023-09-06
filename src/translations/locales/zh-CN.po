@@ -45,3 +45,5 @@ msgstr "您的趋势"
 msgid "Try searching for another."
 msgstr "尝试搜索另一个。"
 
+msgid "Who to follow"
+msgstr "关注谁"

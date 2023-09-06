@@ -39,3 +39,6 @@ msgstr "Trends for you"
 
 msgid "Try searching for another."
 msgstr "Try searching for another."
+
+msgid "Who to follow"
+msgstr "Who to follow"

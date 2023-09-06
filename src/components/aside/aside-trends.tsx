@@ -11,6 +11,11 @@ import { Loading } from '@components/ui/loading';
 import type { MotionProps } from 'framer-motion';
 import { useTrending } from '@lib/hooks/useTrending';
 import { t, Trans } from "@lingui/macro";
+import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import { loadCatalog } from 'translations/utils';
+import { useLingui } from '@lingui/react'
+
+
 export const variants: MotionProps = {
   initial: { opacity: 0 },
   animate: { opacity: 1 },
@@ -21,20 +26,17 @@ type AsideTrendsProps = {
   inTrendsPage?: boolean;
 };
 
+
+
 export function AsideTrends({ inTrendsPage }: AsideTrendsProps): JSX.Element {
-  // const { data, loading } = useTrends(1, inTrendsPage ? 100 : 10, {
-  //   refreshInterval: 30000
-  // });
+  useLingui()
   const { data, loading } = useTrending({ limit: 10 });
-  console.log(data);
-
-  // const { trends, location } = data ?? {};
-
+  
   return (
     <section
       className={cn(
         !inTrendsPage &&
-          'hover-animation rounded-2xl bg-main-sidebar-background'
+        'hover-animation rounded-2xl bg-main-sidebar-background'
       )}
     >
       {loading ? (
@@ -52,7 +54,7 @@ export function AsideTrends({ inTrendsPage }: AsideTrendsProps): JSX.Element {
             <a
               className='hover-animation accent-tab hover-card relative
                            flex cursor-not-allowed flex-col gap-0.5'
-              // onClick={preventBubbling()}
+            // onClick={preventBubbling()}
             >
               <div className='absolute right-2 top-2'>
                 <Button
@@ -84,13 +86,13 @@ export function AsideTrends({ inTrendsPage }: AsideTrendsProps): JSX.Element {
           ))}
           {!inTrendsPage && (
             <Link href='/trends'>
-            <span
-              className='custom-button accent-tab hover-card block w-full rounded-2xl
+              <span
+                className='custom-button accent-tab hover-card block w-full rounded-2xl
                            rounded-t-none text-center text-main-accent'
-            >
-              Show more
-            </span>
-         </Link>
+              >
+                Show more
+              </span>
+            </Link>
           )}
         </motion.div>
       ) : (
@@ -98,4 +100,15 @@ export function AsideTrends({ inTrendsPage }: AsideTrendsProps): JSX.Element {
       )}
     </section>
   );
+}
+
+export async function getServerSideProps(
+  ctx: GetServerSidePropsContext
+): Promise<GetServerSidePropsResult<any>> {
+  // some server side logic
+  return {
+    props: {
+      i18n: await loadCatalog(ctx.locale as string),
+    },
+  };
 }

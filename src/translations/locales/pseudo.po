@@ -39,3 +39,6 @@ msgstr ""
 
 msgid "Try searching for another."
 msgstr ""
+
+msgid "Who to follow"
+msgstr ""

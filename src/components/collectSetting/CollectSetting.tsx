@@ -114,7 +114,7 @@ export default function CollectSetting({
                   iconName='CurrencyDollarIcon'
                   className='h-6 w-6 text-main-accent'
                 />
-                <span className='ml-[5px] text-sm'>收取费用</span>
+                <span className='ml-[5px] text-sm'>Fee</span>
               </p>
               <div className='mb-[20px] flex'>
                 <ReactSwitch
@@ -123,7 +123,7 @@ export default function CollectSetting({
                   onChange={(val) => setIsCost(val as boolean)}
                 >
                   <span className='ml-[10px] font-bold text-[#71717a]'>
-                    每当有人收藏您的帖子时即可获得报酬
+                  Get paid every time someone views your post
                   </span>
                 </ReactSwitch>
               </div>
@@ -131,7 +131,7 @@ export default function CollectSetting({
                 <>
                   <div className='mb-[20px] flex w-full justify-between'>
                     <div className='w-[60%]'>
-                      <p className='mb-[5px]'>价格</p>
+                      <p className='mb-[5px]'>price</p>
                       <ReactInput
                         className='w-full rounded-[10px]'
                         type='number'
@@ -141,7 +141,7 @@ export default function CollectSetting({
                       />
                     </div>
                     <div className='w-[38%]'>
-                      <p className='mb-[5px]'>选择货币</p>
+                      <p className='mb-[5px]'>select currency</p>
                       <ReactSelect
                         value={selectAddress}
                         className='w-full'
@@ -156,7 +156,7 @@ export default function CollectSetting({
                         iconName='ArrowsRightLeftIcon'
                         className='h-6 w-6 text-main-accent'
                       />
-                      <span className='ml-[5px] text-sm'>镜像推荐奖励</span>
+                      <span className='ml-[5px] text-sm'>Referral Rewards</span>
                     </p>
                     <div className='mb-[20px] flex'>
                       <ReactSwitch
@@ -165,13 +165,13 @@ export default function CollectSetting({
                         onChange={(val) => setIsReward(val as boolean)}
                       >
                         <span className='ml-[10px] font-bold text-[#71717a]'>
-                          与扩大您的内容的人分享您的费用
+                        Share your costs with those who amplify your content
                         </span>
                       </ReactSwitch>
                     </div>
                     {isReward ? (
                       <div className='mb-[20px]'>
-                        <p className='mb-[5px]'>推荐费</p>
+                        <p className='mb-[5px]'>referral fee</p>
                         <ReactInput
                           className='w-full rounded-[10px]'
                           type='number'
@@ -195,7 +195,7 @@ export default function CollectSetting({
                   iconName='StarIcon'
                   className='h-6 w-6 text-main-accent'
                 />
-                <span className='ml-[5px] text-sm'>限量版</span>
+                <span className='ml-[5px] text-sm'>limited edition</span>
               </p>
               <div className='mb-[20px] flex'>
                 <ReactSwitch
@@ -204,13 +204,13 @@ export default function CollectSetting({
                   onChange={(val) => setIsLimit(val as boolean)}
                 >
                   <span className='ml-[10px] font-bold text-[#71717a]'>
-                    让帖子变的独一无二
+                  Make your posts unique
                   </span>
                 </ReactSwitch>
               </div>
               {isLimit ? (
                 <div>
-                  <p className='mb-[5px]'>收取限额</p>
+                  <p className='mb-[5px]'>charge limit</p>
                   <ReactInput
                     className='w-full rounded-[10px]'
                     type='number'
@@ -229,7 +229,7 @@ export default function CollectSetting({
                   iconName='ClockIcon'
                   className='h-6 w-6 text-main-accent'
                 />
-                <span className='ml-[5px] text-sm'>时间限制</span>
+                <span className='ml-[5px] text-sm'>time limit</span>
               </p>
               <div className='mb-[20px] flex'>
                 <ReactSwitch
@@ -238,7 +238,7 @@ export default function CollectSetting({
                   onChange={(val) => setIsTimeLimit(val as boolean)}
                 >
                   <span className='ml-[10px] font-bold text-[#71717a]'>
-                    收藏仅限前24小时
+                  Paid to view only for the first 24 hours
                   </span>
                 </ReactSwitch>
               </div>
