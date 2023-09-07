@@ -135,7 +135,7 @@ export default function TweetId(): JSX.Element {
     <MainContainer className='!pb-[1280px]'>
       <MainHeader
         useActionButton
-        title={initParentId(tweetObj as Comment) ? 'Thread' : 'Tweet'}
+        title={initParentId(tweetObj as Comment) ? 'Thread' : 'Post'}
         action={back}
       />
       <section>
@@ -143,8 +143,8 @@ export default function TweetId(): JSX.Element {
           <Loading className='mt-5' />
         ) : !tweetObj ? (
           <>
-            <SEO title='Tweet not found / 0xFans' />
-            <Error message='Tweet not found' />
+            <SEO title='Post not found / 0xFans' />
+            <Error message='Post not found' />
           </>
         ) : (
           <>

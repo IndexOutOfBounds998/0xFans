@@ -28,12 +28,12 @@ const allNoStatsData: Readonly<NoStatsData> = {
     title: 'Amplify Posts you like',
     imageData: { src: '/assets/no-retweets.png', alt: 'No retweets' },
     description:
-      'Share someone else’s Tweet on your timeline by Retweeting it. When you do, it’ll show up here.'
+      'Share someone else’s Post on your timeline by Retweeting it. When you do, it’ll show up here.'
   },
   likes: {
     title: 'No Posts Likes yet',
     imageData: { src: '/assets/no-likes.png', alt: 'No likes' },
-    description: 'When you like a Tweet, it’ll show up here.'
+    description: 'When you like a Post, it’ll show up here.'
   },
   following: {
     title: 'Be in the know',
