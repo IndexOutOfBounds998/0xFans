@@ -90,7 +90,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
 
   const { user: profileByMe } = useAuth();
 
-  let publicationData;
+  let publicationData = tweet;
   if (isGated) {
     const { data, loading: publication_loading } = usePublication({
       publicationId: tweetId as PublicationId,

@@ -7,7 +7,9 @@ import { Button } from '@components/ui/button';
 import cn from 'clsx';
 import {
   ContentPublication,
-  SimpleCollectModuleSettings
+  SimpleCollectModuleSettings,
+  PublicationId,
+  usePublication
 } from '@lens-protocol/react-web';
 import { useAuth } from '@lib/context/auth-context';
 import CollectButton from '@components/ui/collect-button';
@@ -22,15 +24,23 @@ export function TweetCollectModal({
   closeModal
 }: TweetCollectModalProps): JSX.Element {
   const { profileByMe } = useAuth();
-  const creater = publication.profile.handle;
+  const creater = publication?.profile?.handle;
 
-  const content = publication.metadata.content;
+  const content = publication?.metadata?.content;
+  if (publication && !publication.collectModule) {
+    const { data, loading: publication_loading } = usePublication({
+      publicationId: publication.id as PublicationId,
+      observerId: publication?.profile?.id
+    });
+    publication = data;
+  }
 
-  const feeOptional = (publication.collectModule as SimpleCollectModuleSettings)
-    ?.feeOptional;
+  const feeOptional = (
+    publication?.collectModule as SimpleCollectModuleSettings
+  )?.feeOptional;
 
   const followerOnly = (
-    publication.collectModule as SimpleCollectModuleSettings
+    publication?.collectModule as SimpleCollectModuleSettings
   )?.followerOnly;
   return (
     <>
@@ -80,7 +90,7 @@ export function TweetCollectModal({
             <div className='flex items-center space-x-2'>
               <HeroIcon className='h-4 w-4' iconName='UsersIcon' />
               <button className='font-bold' type='button'>
-                {publication.stats.totalAmountOfCollects} collectors
+                {publication?.stats?.totalAmountOfCollects} collectors
               </button>
             </div>
           </div>

@@ -42,8 +42,8 @@ export default function Home(): JSX.Element {
       tags: {
         oneOf: []
       }
-    },
-    sources: [APP_ID]
+    }
+    // sources: [APP_ID]
   });
 
   useEffect(() => {
