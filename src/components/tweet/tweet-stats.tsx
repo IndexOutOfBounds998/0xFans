@@ -41,7 +41,7 @@ export function TweetStats({
   openModal,
   canComment,
   canMirror,
-  publication: pub,
+  publication,
   openCollectModal
 }: TweetStatsProps): JSX.Element {
   const totalLikes = userLikes ? userLikes : 0;
@@ -83,12 +83,7 @@ export function TweetStats({
 
   const { user: profileUser } = useAuth();
 
-  const isOwner = pub.profile.id === profileUser?.id;
-
-  const { data: publication, loading: publicatioLoading } = usePublication({
-    publicationId: publicationId(tweetId as string),
-    observerId: profileId(profileUser?.id as string)
-  });
+  const isOwner = publication.profile.id === profileUser?.id;
 
   const { addReaction, removeReaction, hasReaction, isPending } = useReaction({
     profileId: profileId(profileUser?.id as string)
