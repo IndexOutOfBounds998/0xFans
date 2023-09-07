@@ -25,26 +25,7 @@ export default function Home(): JSX.Element {
   const { isMobile } = useWindow();
   const [dataList, setDataList] = useState<TweetProps[]>([]);
 
-  const { data, LoadMore, loading } = useInfiniteScroll({
-    cursor: JSON.stringify({
-      timestamp: 1,
-      offset: 0
-    }),
-    sortCriteria: PublicationSortCriteria.Latest,
-    limit: 20,
-    publicationTypes: [PublicationTypes.Post],
-    metadata: {
-      mainContentFocus: [
-        PublicationMainFocus.Image,
-        PublicationMainFocus.Video,
-        PublicationMainFocus.TextOnly
-      ],
-      tags: {
-        oneOf: []
-      }
-    },
-    sources: [APP_ID]
-  });
+  const { data, LoadMore, loading } = useInfiniteScroll();
 
   useEffect(() => {
     if (data) {
