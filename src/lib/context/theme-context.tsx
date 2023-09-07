@@ -5,7 +5,11 @@ import { useState, useEffect, createContext, useContext } from 'react';
 import { useAuth } from './auth-context';
 import type { ReactNode, ChangeEvent } from 'react';
 import type { Theme, Accent } from '@lib/types/theme';
-
+import {
+  ProfileOwnedByMe,
+  useUpdateProfileDetails,
+} from '@lens-protocol/react-web';
+import { upload } from '@lib/upload';
 type ThemeContext = {
   theme: Theme;
   accent: Accent;
@@ -18,6 +22,7 @@ export const ThemeContext = createContext<ThemeContext | null>(null);
 type ThemeContextProviderProps = {
   children: ReactNode;
 };
+
 
 function setInitialTheme(): Theme {
   if (typeof window === 'undefined') return 'dark';
@@ -42,9 +47,16 @@ export function ThemeContextProvider({
   const [theme, setTheme] = useState<Theme>(setInitialTheme);
   const [accent, setAccent] = useState<Accent>(setInitialAccent);
 
-  const { user } = useAuth();
+  const { user, profileByMe } = useAuth();
   const { id: userId, theme: userTheme } = user ?? {};
   const userAccent = null;
+
+  const profile = profileByMe as unknown as ProfileOwnedByMe;
+
+  const { execute: update, error, isPending } = useUpdateProfileDetails({
+    profile,
+    upload
+  });
 
   useEffect(() => {
     if (user && userTheme) setTheme(userTheme);
@@ -104,13 +116,27 @@ export function ThemeContextProvider({
     return () => clearTimeout(timeoutId);
   }, [userId, accent]);
 
-  const changeTheme = ({
+  const changeTheme = async ({
     target: { value }
-  }: ChangeEvent<HTMLInputElement>): void => setTheme(value as Theme);
+  }: ChangeEvent<HTMLInputElement>): Promise<void> => {
+    setTheme(value as Theme);
+    const attributes = {
+      theme: value as Theme,
+      accent: localStorage.getItem('accent'),
+    };
+    await update({ name: profile.name || '', attributes });
+  };
 
-  const changeAccent = ({
+  const changeAccent = async ({
     target: { value }
-  }: ChangeEvent<HTMLInputElement>): void => setAccent(value as Accent);
+  }: ChangeEvent<HTMLInputElement>): Promise<void> => {
+    setAccent(value as Accent);
+    const attributes = {
+      theme: localStorage.getItem('theme'),
+      accent: value as Accent,
+    };
+    await update({ name: profile.name || '', attributes });
+  };
 
   const value: ThemeContext = {
     theme,

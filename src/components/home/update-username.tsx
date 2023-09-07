@@ -28,9 +28,9 @@ export function UpdateUsername(): JSX.Element {
   const [inputValue, setInputValue] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const { user, profileByMe } = useAuth();
   const { open, openModal, closeModal } = useModal();
 
+  const { user, profileByMe } = useAuth();
 
   const profile = profileByMe as unknown as ProfileOwnedByMe;
 

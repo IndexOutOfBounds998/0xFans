@@ -3,8 +3,8 @@ import { MediaSet, Profile, Attribute } from '@lens-protocol/react-web';
 
 import { IPFS_GATEWAY } from './const';
 import { User } from './types/user';
-import { Theme } from '@lens-protocol/widgets-react';
 import { Maybe } from '@lens-protocol/client';
+import { Accent, Theme } from './types/theme';
 
 export function formatContent(item: any) {
   if (!item.contentResponse) {
@@ -151,8 +151,8 @@ export function formatUser(userProfile: Profile) {
     createdAt: '',
     followers: userProfile.stats.totalFollowers,
     following: userProfile.stats.totalFollowing,
-    theme: Theme.dark,
-    accent: null,
+    theme: getProfileAttribute(userProfile?.__attributes, 'theme') as Theme,
+    accent: getProfileAttribute(userProfile?.__attributes, 'accent') as Accent,
     website: getProfileAttribute(userProfile?.__attributes, 'website'),
     location: getProfileAttribute(userProfile?.__attributes, 'location'),
     verified: true,
@@ -168,7 +168,7 @@ export function formatUser(userProfile: Profile) {
 
   return userFormate;
 }
-type Key = 'hasPrideLogo' | 'app' | 'twitter' | 'location' | 'website' | 'statusEmoji' | 'statusMessage';
+type Key = 'hasPrideLogo' | 'app' | 'twitter' | 'location' | 'website' | 'statusEmoji' | 'statusMessage' | 'theme' | 'accent';
 
 export const getProfileAttribute = (attributes: Maybe<Attribute[]> | undefined, key: Key): string => {
   return attributes?.find((el) => el.key === key)?.value ?? '';
