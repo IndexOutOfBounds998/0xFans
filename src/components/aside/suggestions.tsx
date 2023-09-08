@@ -15,7 +15,7 @@ export function Suggestions(): JSX.Element {
     loading: suggestionsLoading
   } = useCollection<UserCardProps>({
     observerId: profileId(profileUser?.id?.toString() ?? ''),
-    limit: 5,
+    limit: 3,
     sortCriteria: ProfileSortCriteria.MostFollowers
   });
 

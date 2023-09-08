@@ -2,9 +2,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Loading } from '@components/ui/loading';
-import { useFetchPublications } from './useFetchPublications';
-import { ExplorePublicationRequest } from '@lens-protocol/client';
-import { ContentPublication, Post, PublicationMainFocus, PublicationSortCriteria, PublicationTypes } from '@lens-protocol/react-web';
+import { Post, PublicationMainFocus, PublicationSortCriteria, PublicationTypes } from '@lens-protocol/react-web';
 import { formatImgList, formatUser, formatVideoList } from '@lib/FormatContent';
 import { TweetProps } from '@components/tweet/tweet';
 import { useExplorePublications } from '@lens-protocol/react-web';
@@ -39,9 +37,14 @@ export function useInfiniteScroll<T>(): InfiniteScroll<T> | InfiniteScrollWithUs
   useEffect(() => {
     if (data && data.length > 0) {
       let list: TweetProps[] = data
-        .filter((it) => it != null && it.__typename==='Post')
+        .filter((it) => it != null && it.__typename === 'Post')
+        .sort(function (i, j) {
+          let time1 = new Date(j.createdAt).getTime();
+          let time2 = new Date(i.createdAt).getTime();
+          return time1 - time2;
+        })
         .map((item) => {
-          item= item as Post
+          item = item as Post
           const isVideo = item?.metadata?.mainContentFocus === 'VIDEO';
           const imagesList = isVideo
             ? null

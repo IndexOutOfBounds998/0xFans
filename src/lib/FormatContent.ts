@@ -155,7 +155,7 @@ export function formatUser(userProfile: Profile) {
     accent: getProfileAttribute(userProfile?.__attributes, 'accent') as Accent,
     website: getProfileAttribute(userProfile?.__attributes, 'website'),
     location: getProfileAttribute(userProfile?.__attributes, 'location'),
-    verified: true,
+    verified: false,
     totalTweets: userProfile.stats.totalPosts,
     totalPhotos: 0,
     updatedAt: '',
