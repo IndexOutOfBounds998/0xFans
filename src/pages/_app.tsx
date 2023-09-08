@@ -49,7 +49,8 @@ const lensConfig: LensConfig = {
   bindings: bindings(),
   environment: MAIN_NETWORK ? production : development,
   sources: [
-    appId(APP_ID)
+    appId(APP_ID),
+    appId("lenster")
   ],
   appId: appId(APP_ID),
 };

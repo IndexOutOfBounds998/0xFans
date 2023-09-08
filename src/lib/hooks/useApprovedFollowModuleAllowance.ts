@@ -23,6 +23,9 @@ export function useApprovedFollowModuleAllowance(
         if (!followModule) {
             return;
         }
+        if (followModule?.amount?.asset?.address === undefined) {
+            return;
+        }
         const client = await getAuthenticatedClient();
         let res = await client.modules.approvedAllowanceAmount({
             currencies: [followModule?.amount?.asset?.address],
