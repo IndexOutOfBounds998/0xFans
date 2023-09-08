@@ -1,5 +1,4 @@
 import { Input } from '@components/input/input';
-import { Tweet } from '@components/tweet/tweet';
 import type { TweetProps } from '@components/tweet/tweet';
 import React from 'react';
 import { HeroIcon } from '@components/ui/hero-icon';
@@ -13,9 +12,10 @@ import {
 } from '@lens-protocol/react-web';
 import { useAuth } from '@lib/context/auth-context';
 import CollectButton from '@components/ui/collect-button';
+import type { Tweet } from '@lib/types/tweet';
 
 type TweetCollectModalProps = {
-  publication: ContentPublication;
+  publication: any;
   closeModal: () => void;
 };
 
@@ -27,13 +27,6 @@ export function TweetCollectModal({
   const creater = publication?.profile?.handle;
 
   const content = publication?.metadata?.content;
-  if (publication && !publication.collectModule) {
-    const { data, loading: publication_loading } = usePublication({
-      publicationId: publication.id as PublicationId,
-      observerId: publication?.profile?.id
-    });
-    publication = data;
-  }
 
   const feeOptional = (
     publication?.collectModule as SimpleCollectModuleSettings
@@ -96,11 +89,13 @@ export function TweetCollectModal({
           </div>
         </div>
         <div className='flex flex-col gap-3 inner:py-2 inner:font-bold'>
-          <CollectButton
-            btnClass='w-full'
-            collector={profileByMe}
-            publication={publication as ContentPublication}
-          />
+          {profileByMe && (
+            <CollectButton
+              btnClass='w-full'
+              collector={profileByMe}
+              publication={publication as ContentPublication}
+            />
+          )}
           <Button
             className={cn(
               'w-full border border-light-line-reply hover:bg-light-primary/10 focus-visible:bg-light-primary/10 active:bg-light-primary/20 dark:border-light-secondary dark:text-light-border dark:hover:bg-light-border/10 dark:focus-visible:bg-light-border/10 dark:active:bg-light-border/20'

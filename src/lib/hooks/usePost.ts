@@ -130,7 +130,6 @@ export function usePost({ callbackOnError }: PostData) {
   };
 
   async function uploadToIPFS(metadata: any, isCollect: boolean) {
-    
     /* create an instance of the Lens SDK gated content with the environment */
     const sdk = await LensGatedSDK.create({
       provider: new Web3Provider(window.ethereum),
@@ -214,7 +213,7 @@ export function usePost({ callbackOnError }: PostData) {
     let referenceModule: ReferenceModuleParams = {
       followerOnlyReferenceModule: isOnlyfans ? true : false
     };
-    debugger
+    debugger;
     //mainContentFocus, 需要判断是否是视频类型的
     let obj: PublicationMetadataV2Input = {
       version: '2.0.0',
@@ -225,7 +224,10 @@ export function usePost({ callbackOnError }: PostData) {
       content: content,
       attributes: attributes,
       locale: 'en-US',
-      mainContentFocus: imagesList && imagesList.length > 0 ? PublicationMainFocus.Image : PublicationMainFocus.TextOnly,
+      mainContentFocus:
+        imagesList && imagesList.length > 0
+          ? PublicationMainFocus.Image
+          : PublicationMainFocus.TextOnly,
       media: imagesList,
       tags: [APP_ID],
       name: `Post by ${profile?.handle}`

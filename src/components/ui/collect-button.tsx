@@ -1,6 +1,7 @@
 import {
   CollectState,
   Comment,
+  SimpleCollectModuleSettings,
   Post,
   ProfileOwnedByMe
 } from '@lens-protocol/react-web';
@@ -11,7 +12,7 @@ import { Button } from '@components/ui/button';
 import { useBalance } from 'wagmi';
 
 type CollectButtonProps = {
-  collector?: ProfileOwnedByMe;
+  collector: ProfileOwnedByMe;
   publication: Post | Comment;
   btnClass: string;
 };
@@ -21,20 +22,16 @@ export default function CollectButton({
   publication,
   btnClass
 }: CollectButtonProps) {
-  let collect;
-  let loading;
-  if (collector) {
-    const {
-      execute: fun,
-      error,
-      isPending
-    } = useCollectWithSelfFundedFallback({ collector, publication });
-    collect = fun;
-    loading = isPending;
-  }
+  const {
+    execute: collect,
+    error,
+    isPending: loading
+  } = useCollectWithSelfFundedFallback({ collector, publication });
   console.log('publication', publication);
   const isFollowedByMe = publication?.profile?.isFollowedByMe;
-  const collectModule: any = publication?.collectModule?.feeOptional;
+  const collectModule: any = (
+    publication?.collectModule as SimpleCollectModuleSettings
+  )?.feeOptional;
 
   const { data: balanceData } = useBalance({
     address: `0x${publication?.profile?.ownedBy.slice(2)}`,
