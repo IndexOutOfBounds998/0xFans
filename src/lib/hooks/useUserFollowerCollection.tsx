@@ -10,6 +10,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useProfileFollowers } from '@lens-protocol/react-web';
 import { motion } from 'framer-motion';
 import { Loading } from '@components/ui/loading';
+
 type useUserFollowerCollectionArgs =
   {
     data: UserCardProps[];
@@ -72,14 +73,16 @@ export function useUserFollowerCollection<T>(
 
   useEffect(() => {
     if (data) {
-      let list: UserCardProps[] = data
-        .filter((it) => it !== undefined)
-        .map((item) => {
-          item = item as Follower;
-          let wallet = item.wallet
+      let list: Follower[] = data
+        .filter((it: Follower) => it !== undefined && it.wallet !== undefined && it.wallet.defaultProfile !== undefined);
+
+      const res = list.map((item) => {
+        let wallet = item.wallet;
+        if (wallet && wallet.defaultProfile) {
           return formatUser(wallet.defaultProfile) as UserCardProps;
-        });
-      setFormateList(list);
+        }
+      }).filter((item): item is UserCardProps => item !== undefined);
+      setFormateList(res);
     }
   }, [data]);
 

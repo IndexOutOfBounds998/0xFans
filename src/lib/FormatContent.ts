@@ -134,11 +134,8 @@ type UserCardProps = User & {
   profile: Profile;
 };
 
-export function formatUser(userProfile?: Profile | undefined | null) {
+export function formatUser(userProfile: Profile) {
 
-  if (userProfile === undefined || userProfile === null) {
-    return null;
-  }
   let userFormate: UserCardProps = {
 
     id: userProfile.id.toString(),
