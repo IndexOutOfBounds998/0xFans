@@ -47,7 +47,7 @@ export function UserCard(user: UserCardProps): JSX.Element {
                 <UserTooltip {...user} modal={modal}>
                   <UserUsername id={id} username={username} />
                 </UserTooltip>
-                {follow && <UserFollowing isFollowingbserver={isFollowingbserver} />}
+                {profileByMe?.isFollowingObserver && <UserFollowing isFollowingbserver={isFollowingbserver} />}
               </div>
             </div>
             {profileByMe && <FollowButton userTargetId={id.toString()} userTargetUsername={username} userIsFollowed={follow} followee={profile} follower={profileByMe} />}

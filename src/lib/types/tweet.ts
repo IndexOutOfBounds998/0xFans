@@ -5,7 +5,7 @@ import { AnyPublication, Profile } from '@lens-protocol/react-web';
 
 export type Tweet = {
   id: string | null;
-  user: User;
+  user: User|undefined|null;
   text: string | null;
   isVideo: boolean;
   images: ImagesPreview | null;

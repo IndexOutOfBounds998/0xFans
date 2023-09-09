@@ -2,11 +2,15 @@ import { UserLayout, ProtectedLayout } from '@components/layout/common-layout';
 import { MainLayout } from '@components/layout/main-layout';
 import { UserDataLayout } from '@components/layout/user-data-layout';
 import { UserFollowLayout } from '@components/layout/user-follow-layout';
-import { UserFollow } from '@components/user/user-follow';
+import { UserFollowings } from '@components/user/user-followings';
+import { useRouter } from 'next/router';
 import type { ReactElement, ReactNode } from 'react';
 
 export default function UserFollowing(): JSX.Element {
-  return <UserFollow type='following' />;
+  const {
+    query: { id }
+  } = useRouter();
+  return <UserFollowings type='following' id={id} />;
 }
 
 UserFollowing.getLayout = (page: ReactElement): ReactNode => (

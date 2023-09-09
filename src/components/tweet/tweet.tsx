@@ -30,7 +30,7 @@ import {
 import { useEffect } from 'react';
 import { useAuth } from '@lib/context/auth-context';
 export type TweetProps = Tweet & {
-  user: User;
+  user?: User|undefined|null;
   modal?: boolean;
   pinned?: boolean;
   profile: Profile;
