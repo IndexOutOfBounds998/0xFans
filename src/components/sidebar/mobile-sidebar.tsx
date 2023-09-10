@@ -36,7 +36,7 @@ export function MobileSidebar(): JSX.Element {
         <MobileSidebarModal {...(user as User)} closeModal={closeModal} />
       </Modal>
       <Button className='accent-tab p-0 xs:hidden' onClick={openModal}>
-        <UserAvatar src={photoURL} alt={name??''} size={30} />
+        <UserAvatar src={photoURL} alt={name ?? ''} size={30} />
       </Button>
     </>
   );

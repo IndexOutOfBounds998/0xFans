@@ -17,10 +17,20 @@ type UserCardProps = User & {
 };
 
 export function UserCard(user: UserCardProps): JSX.Element {
-
   const { profileByMe } = useAuth();
 
-  const { id, bio, name, modal, follow, isFollowingbserver, username, verified, photoURL, profile } = user;
+  const {
+    id,
+    bio,
+    name,
+    modal,
+    follow,
+    isFollowingbserver,
+    username,
+    verified,
+    photoURL,
+    profile
+  } = user;
 
   return (
     <Link href={`/user/${id}`}>
@@ -47,10 +57,20 @@ export function UserCard(user: UserCardProps): JSX.Element {
                 <UserTooltip {...user} modal={modal}>
                   <UserUsername id={id} username={username} />
                 </UserTooltip>
-                {profileByMe?.isFollowingObserver && <UserFollowing isFollowingbserver={isFollowingbserver} />}
+                {profile.isFollowedByMe && (
+                  <UserFollowing isFollowingbserver={isFollowingbserver} />
+                )}
               </div>
             </div>
-            {profileByMe && <FollowButton userTargetId={id.toString()} userTargetUsername={username} userIsFollowed={follow} followee={profile} follower={profileByMe} />}
+            {profileByMe && (
+              <FollowButton
+                userTargetId={id.toString()}
+                userTargetUsername={username}
+                userIsFollowed={profile.isFollowedByMe}
+                followee={profile}
+                follower={profileByMe}
+              />
+            )}
           </div>
           {follow && bio && <p className='whitespace-normal'>{bio}</p>}
         </div>

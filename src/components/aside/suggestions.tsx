@@ -10,14 +10,12 @@ import { ProfileSortCriteria, profileId } from '@lens-protocol/react-web';
 import { Trans } from '@lingui/macro';
 export function Suggestions(): JSX.Element {
   const { user: profileUser } = useAuth();
-  const {
-    data: suggestionsData,
-    loading: suggestionsLoading
-  } = useCollection<UserCardProps>({
-    observerId: profileId(profileUser?.id?.toString() ?? ''),
-    limit: 3,
-    sortCriteria: ProfileSortCriteria.MostFollowers
-  });
+  const { data: suggestionsData, loading: suggestionsLoading } =
+    useCollection<UserCardProps>({
+      observerId: profileId(profileUser?.id?.toString() ?? ''),
+      limit: 3,
+      sortCriteria: ProfileSortCriteria.MostFollowers
+    });
 
   return (
     <section className='hover-animation rounded-2xl bg-main-sidebar-background'>
@@ -25,10 +23,17 @@ export function Suggestions(): JSX.Element {
         <Loading className='flex h-52 items-center justify-center p-4' />
       ) : suggestionsData ? (
         <motion.div className='inner:px-4 inner:py-3' {...variants}>
-          <h2 className='text-xl font-bold'><Trans>Who to follow</Trans></h2>
+          <h2 className='text-xl font-bold'>
+            <Trans>Who to follow</Trans>
+          </h2>
 
           {suggestionsData?.map((userData: UserCardProps) => (
-            <UserCard {...userData} key={userData.id.toString()} follow={userData.follow} profile={userData.profile} />
+            <UserCard
+              {...userData}
+              key={userData.id.toString()}
+              follow={userData.follow}
+              profile={userData.profile}
+            />
           ))}
           <Link href='/people'>
             <span

@@ -14,7 +14,7 @@ import { Tweet, TweetProps } from '@components/tweet/tweet';
 import { Loading } from '@components/ui/loading';
 import type { ReactElement, ReactNode } from 'react';
 import PubSub from 'pubsub-js';
- 
+
 import { useEffect, useState } from 'react';
 import { Error } from '@components/ui/error';
 export default function Home(): JSX.Element {
@@ -52,7 +52,7 @@ export default function Home(): JSX.Element {
       </MainHeader>
       {!isMobile && <Input />}
       <section className='mt-0.5 xs:mt-0'>
-      {loading ? (
+        {loading ? (
           <Loading className='mt-5' />
         ) : !data ? (
           <Error message='Something went wrong' />

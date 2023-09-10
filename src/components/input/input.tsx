@@ -108,15 +108,13 @@ export function Input({
       if (isReplying) await Promise.all([send(content, profileUser)]);
       else {
         await Promise.all([
-          post(
-            {
-              images: selectedImages,
-              title: '',
-              content: content,
-              collectData: collectData,
-              isOnlyfans: audience.label === 'Onlyfans'
-            }
-          )
+          post({
+            images: selectedImages,
+            title: '',
+            content: content,
+            collectData: collectData,
+            isOnlyfans: audience.label === 'Onlyfans'
+          })
         ]);
       }
     }
@@ -249,8 +247,8 @@ export function Input({
           reply
             ? 'pt-3 pb-1'
             : replyModal
-              ? 'pt-0'
-              : 'border-b-2 border-light-border dark:border-dark-border',
+            ? 'pt-0'
+            : 'border-b-2 border-light-border dark:border-dark-border',
           (disabled || loading) && 'pointer-events-none opacity-50'
         )}
         htmlFor={formId}

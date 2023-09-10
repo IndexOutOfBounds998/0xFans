@@ -19,7 +19,7 @@ export function formatDate(
     return '';
   }
   const date = new Date(targetDate.toString());
-  
+
   if (mode === 'full') return getFullTime(date);
   if (mode === 'tweet') return getPostTime(date);
   if (mode === 'joined') return getJoinedTime(date);
@@ -49,8 +49,8 @@ function getFullTime(date: Date): string {
     splittedDate.length === 2
       ? [...splittedDate].reverse().join(' · ')
       : [splittedDate.slice(0, 2).join(', '), splittedDate.slice(-1)]
-        .reverse()
-        .join(' · ');
+          .reverse()
+          .join(' · ');
 
   return formattedDate;
 }
@@ -81,13 +81,13 @@ function getShortTime(date: Date): string {
   const isNear = isToday(date)
     ? 'today'
     : isYesterday(date)
-      ? 'yesterday'
-      : null;
+    ? 'yesterday'
+    : null;
 
   return isNear
     ? `${isNear === 'today' ? 'Today' : 'Yesterday'} at ${date
-      .toLocaleTimeString('en-gb')
-      .slice(0, -3)}`
+        .toLocaleTimeString('en-gb')
+        .slice(0, -3)}`
     : getFullTime(date);
 }
 

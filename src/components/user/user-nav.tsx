@@ -11,7 +11,7 @@ const allNavs = [
   [
     { name: 'Posts', path: '' },
     // { name: 'Tweets & replies', path: 'with_replies' },
-    { name: 'Media', path: 'media' },
+    { name: 'Media', path: 'media' }
     // { name: 'Likes', path: 'likes' }
   ],
   [

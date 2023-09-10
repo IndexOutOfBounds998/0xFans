@@ -12,27 +12,37 @@ type UserFollowProps = {
   id: string;
 };
 
-
 export function UserFollowings({ type, id }: UserFollowProps): JSX.Element {
   const { user } = useUser();
 
   const { name, username, id: userId } = user as UserCardProps;
 
-  const { data: profile, loading: useProfileLoading } = useProfile({ profileId: profileId(id) });
-
-  const { data, loading } = useUserFollowingCollection<UserCardProps>({
-    limit: 10,
-    observerId: profileId(userId as string),
-    walletAddress: profile?.ownedBy || ''
+  const { data: profile, loading: useProfileLoading } = useProfile({
+    profileId: profileId(id)
   });
+
+  const { data, loading, LoadMore } = useUserFollowingCollection<UserCardProps>(
+    {
+      limit: 20,
+      observerId: profileId(userId as string),
+      walletAddress: profile?.ownedBy || ''
+    }
+  );
 
   return (
     <>
       <SEO
-        title={`People ${type === 'following' ? 'followed by' : 'following'
-          } ${name} (@${username}) / 0xFans`}
+        title={`People ${
+          type === 'following' ? 'followed by' : 'following'
+        } ${name} (@${username}) / 0xFans`}
       />
-      <UserCards follow data={data} type={type} loading={loading} />
+      <UserCards
+        follow
+        data={data}
+        type={type}
+        loading={loading}
+        LoadMore={LoadMore}
+      />
     </>
   );
 }

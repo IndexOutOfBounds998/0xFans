@@ -4,7 +4,7 @@ import { UserDataLayout } from '@components/layout/user-data-layout';
 import { UserFollowLayout } from '@components/layout/user-follow-layout';
 import { UserFollower } from '@components/user/user-follower';
 import { useRouter } from 'next/router';
- 
+
 import type { ReactElement, ReactNode } from 'react';
 
 export default function UserFollowers(): JSX.Element {

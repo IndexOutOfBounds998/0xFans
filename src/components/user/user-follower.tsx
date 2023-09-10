@@ -5,33 +5,36 @@ import { UserCardProps } from '@lib/hooks/useCollection';
 import { useUserFollowerCollection } from '@lib/hooks/useUserFollowerCollection';
 import { profileId } from '@lens-protocol/react-web';
 
-
 type UserFollowProps = {
   type: 'following' | 'followers';
   id: string;
 };
-
 
 export function UserFollower({ type, id }: UserFollowProps): JSX.Element {
   const { user } = useUser();
 
   const { name, username } = user as UserCardProps;
 
-  const { data, loading } = useUserFollowerCollection<UserCardProps>(
-    {
-      limit: 10,
-      profileId: profileId(id),
-      observerId: profileId(user?.id as string)
-    }
-  );
+  const { data, loading, LoadMore } = useUserFollowerCollection<UserCardProps>({
+    limit: 20,
+    profileId: profileId(id),
+    observerId: profileId(user?.id as string)
+  });
 
   return (
     <>
       <SEO
-        title={`People ${type === 'following' ? 'followed by' : 'following'
-          } ${name} (@${username}) / 0xFans`}
+        title={`People ${
+          type === 'following' ? 'followed by' : 'following'
+        } ${name} (@${username}) / 0xFans`}
       />
-      <UserCards follow data={data} type={type} loading={loading} />
+      <UserCards
+        follow
+        data={data}
+        type={type}
+        loading={loading}
+        LoadMore={LoadMore}
+      />
     </>
   );
 }

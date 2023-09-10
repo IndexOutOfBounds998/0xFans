@@ -10,13 +10,15 @@ import {
   ProfileOwnedByMe
 } from '@lens-protocol/react-web';
 import { getWalletClient } from '@wagmi/core';
-import { formatAvater, formatNickName, getProfileAttribute } from '@lib/FormatContent';
+import {
+  formatAvater,
+  formatNickName,
+  getProfileAttribute
+} from '@lib/FormatContent';
 
-
-import { useAccount, useNetwork, useSwitchNetwork } from "wagmi";
+import { useAccount, useNetwork, useSwitchNetwork } from 'wagmi';
 import { MAIN_NETWORK } from '@lib/const';
-import { polygon, polygonMumbai } from "wagmi/chains";
-
+import { polygon, polygonMumbai } from 'wagmi/chains';
 
 import type { User } from '@lib/types/user';
 type UserProps = Pick<
@@ -90,7 +92,6 @@ export function AuthContextProvider({
     }
   }, [profile]);
 
-
   const { chain } = useNetwork();
 
   const { address } = useAccount();
@@ -100,30 +101,31 @@ export function AuthContextProvider({
   let isLoginAction = false;
   if (typeof window !== 'undefined') {
     loginAddress = localStorage.getItem('loginAddress') || '';
-    isLoginAction = Boolean(JSON.parse(localStorage.getItem('isLoginAction') || 'false'));
+    isLoginAction = Boolean(
+      JSON.parse(localStorage.getItem('isLoginAction') || 'false')
+    );
 
     useEffect(() => {
       // Perform localStorage action
       loginAddress = localStorage.getItem('loginAddress') || '';
-      isLoginAction = Boolean(JSON.parse(localStorage.getItem('isLoginAction') || 'false'));
-
-    }, [localStorage.getItem('loginAddress'), localStorage.getItem('isLoginAction')])
-
+      isLoginAction = Boolean(
+        JSON.parse(localStorage.getItem('isLoginAction') || 'false')
+      );
+    }, [
+      localStorage.getItem('loginAddress'),
+      localStorage.getItem('isLoginAction')
+    ]);
   }
 
-
   useEffect(() => {
-
     if (isLoginAction) {
-      if ((address && (loginAddress))) {
+      if (address && loginAddress) {
         if (address.toLocaleLowerCase() !== loginAddress.toLocaleLowerCase()) {
           signOut();
         }
       }
     }
-
   }, [address, loginAddress]);
-
 
   useEffect(() => {
     if (chain && switchNetwork) {
@@ -134,12 +136,9 @@ export function AuthContextProvider({
     }
   }, [chain, switchNetwork]);
 
-
   useEffect(() => {
-
     const manageUser = async (): Promise<void> => {
       if (profile) {
-
         let userObj: UserCardProps = {
           id: profile.id,
           bio: profile.bio,
@@ -171,7 +170,6 @@ export function AuthContextProvider({
     manageUser();
   }, [profile, profileLoading, profileError]);
 
-
   const signInWithLens = async (): Promise<void> => {
     try {
       setLoading(true);
@@ -183,21 +181,17 @@ export function AuthContextProvider({
         });
         localStorage.setItem('loginAddress', address);
         localStorage.setItem('isLoginAction', 'true');
-
       }
     } catch (error) {
-       
       setError(error as Error);
     }
     if (loginError) {
-     
       setError(loginError);
     }
   };
 
   const signOut = async (): Promise<void> => {
     try {
-
       if (user && isLoginAction) {
         logout();
         setUser(null);
@@ -207,8 +201,6 @@ export function AuthContextProvider({
       setError(error as Error);
     }
   };
-
-
 
   const value: AuthContext = {
     user,

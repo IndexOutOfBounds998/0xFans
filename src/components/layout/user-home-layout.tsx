@@ -27,11 +27,11 @@ export function UserHomeLayout({ children }: LayoutProps): JSX.Element {
   } = useRouter();
 
   const coverData = userData?.coverPhotoURL
-    ? { src: userData.coverPhotoURL, alt: userData.name } as ImageData
+    ? ({ src: userData.coverPhotoURL, alt: userData.name } as ImageData)
     : null;
 
   const profileData = userData
-    ? { src: userData.photoURL, alt: userData.name } as ImageData
+    ? ({ src: userData.photoURL, alt: userData.name } as ImageData)
     : null;
 
   const { id: userId } = user ?? {};
@@ -55,9 +55,11 @@ export function UserHomeLayout({ children }: LayoutProps): JSX.Element {
                 <p className='text-xl font-bold'>@{id}</p>
               </div>
               <div className='p-8 text-center'>
-                <p className='text-3xl font-bold'><Trans>This account doesn’t exist</Trans></p>
+                <p className='text-3xl font-bold'>
+                  <Trans>This account doesn’t exist</Trans>
+                </p>
                 <p className='text-light-secondary dark:text-dark-secondary'>
-                 <Trans>Try searching for another.</Trans> 
+                  <Trans>Try searching for another.</Trans>
                 </p>
               </div>
             </div>

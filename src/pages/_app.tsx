@@ -24,7 +24,7 @@ import { configureChains, createConfig, WagmiConfig } from 'wagmi';
 import { polygonMumbai, polygon } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
-import { I18nProvider } from "@lingui/react";
+import { I18nProvider } from '@lingui/react';
 import { useLinguiInit } from 'translations/utils';
 
 const { chains, publicClient } = configureChains(
@@ -44,15 +44,11 @@ const wagmiConfig = createConfig({
   publicClient
 });
 
-
 const lensConfig: LensConfig = {
   bindings: bindings(),
   environment: MAIN_NETWORK ? production : development,
-  sources: [
-    appId(APP_ID),
-    appId("lenster")
-  ],
-  appId: appId(APP_ID),
+  sources: [appId(APP_ID), appId('lenster')],
+  appId: appId(APP_ID)
 };
 
 type NextPageWithLayout = NextPage & {

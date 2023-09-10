@@ -16,7 +16,7 @@ import { InputField } from '@components/input/input-field';
 import type { FormEvent, ChangeEvent } from 'react';
 import {
   ProfileOwnedByMe,
-  useUpdateProfileDetails,
+  useUpdateProfileDetails
 } from '@lens-protocol/react-web';
 import { upload } from '@lib/upload';
 
@@ -34,7 +34,11 @@ export function UpdateUsername(): JSX.Element {
 
   const profile = profileByMe as unknown as ProfileOwnedByMe;
 
-  const { execute: update, error, isPending } = useUpdateProfileDetails({
+  const {
+    execute: update,
+    error,
+    isPending
+  } = useUpdateProfileDetails({
     profile,
     upload
   });
@@ -42,7 +46,7 @@ export function UpdateUsername(): JSX.Element {
   useEffect(() => {
     const checkAvailability = async (value: string): Promise<void> => {
       // const empty = await checkUsernameAvailability(value);
-      
+
       if (true) setAvailable(true);
       else {
         setAvailable(false);

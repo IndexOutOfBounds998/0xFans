@@ -91,13 +91,14 @@ export function TweetStats({
 
   const hasReactionType = publication
     ? hasReaction({
-      reactionType: ReactionType.UPVOTE,
-      publication: publication as Post
-    })
+        reactionType: ReactionType.UPVOTE,
+        publication: publication as Post
+      })
     : false;
 
-
-  const canCollect = (publication as ContentPublication)?.collectModule.__typename === 'RevertCollectModuleSettings';
+  const canCollect =
+    (publication as ContentPublication)?.collectModule.__typename ===
+    'RevertCollectModuleSettings';
 
   let [loading, setLoading] = useState(false);
 
@@ -170,11 +171,11 @@ export function TweetStats({
           iconName='ArrowPathRoundedSquareIcon'
           viewTweet={viewTweet}
           disabled={!canMirror}
-        // onClick={manageRetweet(
-        //   tweetIsRetweeted ? 'unretweet' : 'retweet',
-        //   userId,
-        //   tweetId??''
-        // )}
+          // onClick={manageRetweet(
+          //   tweetIsRetweeted ? 'unretweet' : 'retweet',
+          //   userId,
+          //   tweetId??''
+          // )}
         />
         <TweetOption
           className={cn(

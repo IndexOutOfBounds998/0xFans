@@ -27,5 +27,3 @@ export type EditableData = Extract<
 >;
 
 export type EditableUserData = Pick<User, EditableData>;
-
- 

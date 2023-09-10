@@ -2,7 +2,12 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Loading } from '@components/ui/loading';
-import { Post, PublicationMainFocus, PublicationSortCriteria, PublicationTypes } from '@lens-protocol/react-web';
+import {
+  Post,
+  PublicationMainFocus,
+  PublicationSortCriteria,
+  PublicationTypes
+} from '@lens-protocol/react-web';
 import { formatImgList, formatUser, formatVideoList } from '@lib/FormatContent';
 import { TweetProps } from '@components/tweet/tweet';
 import { useExplorePublications } from '@lens-protocol/react-web';
@@ -20,7 +25,9 @@ type InfiniteScrollWithUser<T> = {
 
 export function useInfiniteScroll<T>(): InfiniteScrollWithUser<T>;
 
-export function useInfiniteScroll<T>(): InfiniteScroll<T> | InfiniteScrollWithUser<T> {
+export function useInfiniteScroll<T>():
+  | InfiniteScroll<T>
+  | InfiniteScrollWithUser<T> {
   const [loadMoreInView, setLoadMoreInView] = useState(false);
 
   const { data, loading, hasMore, next } = useExplorePublications({
@@ -28,9 +35,13 @@ export function useInfiniteScroll<T>(): InfiniteScroll<T> | InfiniteScrollWithUs
     sortCriteria: PublicationSortCriteria.Latest,
     publicationTypes: [PublicationTypes.Post],
     metadataFilter: {
-      restrictPublicationMainFocusTo: [PublicationMainFocus.Image, PublicationMainFocus.TextOnly, PublicationMainFocus.Video]
+      restrictPublicationMainFocusTo: [
+        PublicationMainFocus.Image,
+        PublicationMainFocus.TextOnly,
+        PublicationMainFocus.Video
+      ]
     }
-  })
+  });
 
   const [formateList, setFormateList] = useState<TweetProps[]>([]);
 
@@ -44,7 +55,7 @@ export function useInfiniteScroll<T>(): InfiniteScroll<T> | InfiniteScrollWithUs
           return time1 - time2;
         })
         .map((item) => {
-          item = item as Post
+          item = item as Post;
           const isVideo = item?.metadata?.mainContentFocus === 'VIDEO';
           const imagesList = isVideo
             ? null

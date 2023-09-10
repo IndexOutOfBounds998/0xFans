@@ -16,7 +16,7 @@ import { Error } from '@components/ui/error';
 import { variants } from '@components/aside/aside-trends';
 import type { ReactElement, ReactNode } from 'react';
 import { ProfileSortCriteria, profileId } from '@lens-protocol/react-web';
-import { t, Trans } from "@lingui/macro";
+import { t, Trans } from '@lingui/macro';
 export default function People(): JSX.Element {
   const { user } = useAuth();
 
@@ -36,12 +36,17 @@ export default function People(): JSX.Element {
         {loading ? (
           <Loading className='mt-5' />
         ) : !data ? (
-          <Error message={t`Something went wrong`}/>
+          <Error message={t`Something went wrong`} />
         ) : (
           <>
             <motion.div className='mt-0.5' {...variants}>
               {data?.map((userData) => (
-                <UserCard {...userData} key={userData.id.toString()} follow={userData.follow} profile={userData.profile} />
+                <UserCard
+                  {...userData}
+                  key={userData.id.toString()}
+                  follow={userData.follow}
+                  profile={userData.profile}
+                />
               ))}
             </motion.div>
             <LoadMore />

@@ -12,7 +12,8 @@
     "test:ci": "jest --ci",
     "prepare": "husky install",
     "translations:extract": "lingui extract --clean",
-    "translations:compile": "lingui compile"
+    "translations:compile": "lingui compile",
+    "pt": "npx prettier --write ."
   },
   "dependencies": {
     "@apollo/client": "^3.8.1",

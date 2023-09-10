@@ -7,7 +7,7 @@ import type { ReactNode, ChangeEvent } from 'react';
 import type { Theme, Accent } from '@lib/types/theme';
 import {
   ProfileOwnedByMe,
-  useUpdateProfileDetails,
+  useUpdateProfileDetails
 } from '@lens-protocol/react-web';
 import { upload } from '@lib/upload';
 type ThemeContext = {
@@ -22,7 +22,6 @@ export const ThemeContext = createContext<ThemeContext | null>(null);
 type ThemeContextProviderProps = {
   children: ReactNode;
 };
-
 
 function setInitialTheme(): Theme {
   if (typeof window === 'undefined') return 'dark';
@@ -53,7 +52,11 @@ export function ThemeContextProvider({
 
   const profile = profileByMe as unknown as ProfileOwnedByMe;
 
-  const { execute: update, error, isPending } = useUpdateProfileDetails({
+  const {
+    execute: update,
+    error,
+    isPending
+  } = useUpdateProfileDetails({
     profile,
     upload
   });
@@ -122,7 +125,7 @@ export function ThemeContextProvider({
     setTheme(value as Theme);
     const attributes = {
       theme: value as Theme,
-      accent: localStorage.getItem('accent'),
+      accent: localStorage.getItem('accent')
     };
     await update({ name: profile.name || '', attributes });
   };
@@ -133,7 +136,7 @@ export function ThemeContextProvider({
     setAccent(value as Accent);
     const attributes = {
       theme: localStorage.getItem('theme'),
-      accent: value as Accent,
+      accent: value as Accent
     };
     await update({ name: profile.name || '', attributes });
   };

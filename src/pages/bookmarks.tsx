@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast';
 
 import { useAuth } from '@lib/context/auth-context';
 import { useModal } from '@lib/hooks/useModal';
- 
+
 import { HomeLayout, ProtectedLayout } from '@components/layout/common-layout';
 import { MainLayout } from '@components/layout/main-layout';
 import { SEO } from '@components/common/seo';
@@ -22,7 +22,6 @@ import type { ReactElement, ReactNode } from 'react';
 
 import { profileId } from '@lens-protocol/react-web';
 import { useBookmarksQuery } from '@lib/hooks/useBookmarksQuery';
-
 
 export default function Bookmarks(): JSX.Element {
   const { user } = useAuth();

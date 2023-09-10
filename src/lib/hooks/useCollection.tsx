@@ -2,18 +2,19 @@ import {
   Profile,
   ProfileId,
   ProfileSortCriteria,
-  useExploreProfiles,
+  useExploreProfiles
 } from '@lens-protocol/react-web';
 import { formatUser } from '@lib/FormatContent';
 import { User } from '@lib/types/user';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { Loading } from '@components/ui/loading';
 
-type UseCollection<T> =
-  {
-    data: UserCardProps[] | null;
-    loading: boolean;
-    user: UserCardProps[] | null;
-  };
+type UseCollection<T> = {
+  data: UserCardProps[] | null;
+  loading: boolean;
+  LoadMore: () => JSX.Element;
+};
 
 export type UserCardProps = Pick<
   User,
@@ -55,9 +56,11 @@ export function useCollection<T>(
 ): UseCollection<T> | DataWithUser<T> {
   const [formateList, setFormateList] = useState<UserCardProps[]>([]);
 
+  const [loadMoreInView, setLoadMoreInView] = useState(false);
+
   const { limit, observerId, sortCriteria } = options ?? {};
 
-  const { data, loading } = useExploreProfiles({
+  const { data, loading, hasMore, next } = useExploreProfiles({
     observerId,
     limit,
     sortCriteria
@@ -74,5 +77,31 @@ export function useCollection<T>(
     }
   }, [data]);
 
-  return { data: formateList, loading, user: formateList };
+  useEffect(() => {
+    if (loadMoreInView) {
+      if (!hasMore) return;
+      next();
+    }
+  }, [loadMoreInView]);
+
+  const makeItInView = (): void => setLoadMoreInView(true);
+  const makeItNotInView = (): void => setLoadMoreInView(false);
+
+  const isLoadMoreHidden = !hasMore;
+
+  const LoadMore = useCallback(
+    (): JSX.Element => (
+      <motion.div
+        className={isLoadMoreHidden ? 'hidden' : 'block'}
+        viewport={{ margin: `0px 0px 1000px` }}
+        onViewportEnter={makeItInView}
+        onViewportLeave={makeItNotInView}
+      >
+        <Loading className='mt-5' />
+      </motion.div>
+    ),
+    [isLoadMoreHidden]
+  );
+
+  return { data: formateList, loading, LoadMore };
 }

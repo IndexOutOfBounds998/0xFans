@@ -1,21 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {
-  Following,
-  Profile,
-  ProfileId
-} from '@lens-protocol/react-web';
+import { Following, Profile, ProfileId } from '@lens-protocol/react-web';
 import { formatUser } from '@lib/FormatContent';
 import { User } from '@lib/types/user';
 import { useCallback, useEffect, useState } from 'react';
 import { useProfileFollowing } from '@lens-protocol/react-web';
 import { motion } from 'framer-motion';
 import { Loading } from '@components/ui/loading';
-type useUserFollowerCollectionArgs =
-  {
-    data: UserCardProps[];
-    loading: boolean;
-    LoadMore: () => JSX.Element;
-  };
+type useUserFollowerCollectionArgs = {
+  data: UserCardProps[];
+  loading: boolean;
+  LoadMore: () => JSX.Element;
+};
 
 export type UserCardProps = Pick<
   User,
@@ -52,22 +47,16 @@ export type useUserFollowerCollectionOptions = {
 export function useUserFollowingCollection<T>(
   options: useUserFollowerCollectionOptions
 ): useUserFollowerCollectionArgs {
-
   const [formateList, setFormateList] = useState<UserCardProps[]>([]);
 
   const [loadMoreInView, setLoadMoreInView] = useState(false);
 
   const { limit, observerId, walletAddress } = options;
 
-  const {
-    data,
-    loading,
-    hasMore,
-    next,
-  } = useProfileFollowing({
+  const { data, loading, hasMore, next } = useProfileFollowing({
     walletAddress: walletAddress,
     observerId: observerId,
-    limit: limit,
+    limit: limit
   });
 
   useEffect(() => {
@@ -81,7 +70,6 @@ export function useUserFollowingCollection<T>(
       setFormateList(list);
     }
   }, [data]);
-
 
   useEffect(() => {
     if (loadMoreInView) {
@@ -108,8 +96,6 @@ export function useUserFollowingCollection<T>(
     ),
     [isLoadMoreHidden]
   );
-
-
 
   return { data: formateList, loading, LoadMore };
 }

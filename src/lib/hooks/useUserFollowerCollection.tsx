@@ -1,9 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {
-  Follower,
-  Profile,
-  ProfileId
-} from '@lens-protocol/react-web';
+import { Follower, Profile, ProfileId } from '@lens-protocol/react-web';
 import { formatUser } from '@lib/FormatContent';
 import { User } from '@lib/types/user';
 import { useCallback, useEffect, useState } from 'react';
@@ -11,12 +7,11 @@ import { useProfileFollowers } from '@lens-protocol/react-web';
 import { motion } from 'framer-motion';
 import { Loading } from '@components/ui/loading';
 
-type useUserFollowerCollectionArgs =
-  {
-    data: UserCardProps[];
-    loading: boolean;
-    LoadMore: () => JSX.Element;
-  };
+type useUserFollowerCollectionArgs = {
+  data: UserCardProps[];
+  loading: boolean;
+  LoadMore: () => JSX.Element;
+};
 
 export type UserCardProps = Pick<
   User,
@@ -53,19 +48,13 @@ export type useUserFollowerCollectionOptions = {
 export function useUserFollowerCollection<T>(
   options: useUserFollowerCollectionOptions
 ): useUserFollowerCollectionArgs {
-
   const [formateList, setFormateList] = useState<UserCardProps[]>([]);
 
   const [loadMoreInView, setLoadMoreInView] = useState(false);
 
   const { limit, observerId, profileId } = options;
 
-  const {
-    data,
-    loading,
-    hasMore,
-    next,
-  } = useProfileFollowers({
+  const { data, loading, hasMore, next } = useProfileFollowers({
     profileId: profileId,
     observerId: observerId,
     limit: limit
@@ -73,19 +62,24 @@ export function useUserFollowerCollection<T>(
 
   useEffect(() => {
     if (data) {
-      let list: Follower[] = data
-        .filter((it: Follower) => it !== undefined && it.wallet !== undefined && it.wallet.defaultProfile !== undefined);
+      let list: Follower[] = data.filter(
+        (it: Follower) =>
+          it !== undefined &&
+          it.wallet !== undefined &&
+          it.wallet.defaultProfile !== undefined
+      );
 
-      const res = list.map((item) => {
-        let wallet = item.wallet;
-        if (wallet && wallet.defaultProfile) {
-          return formatUser(wallet.defaultProfile) as UserCardProps;
-        }
-      }).filter((item): item is UserCardProps => item !== undefined);
+      const res = list
+        .map((item) => {
+          let wallet = item.wallet;
+          if (wallet && wallet.defaultProfile) {
+            return formatUser(wallet.defaultProfile) as UserCardProps;
+          }
+        })
+        .filter((item): item is UserCardProps => item !== undefined);
       setFormateList(res);
     }
   }, [data]);
-
 
   useEffect(() => {
     if (loadMoreInView) {
@@ -112,8 +106,6 @@ export function useUserFollowerCollection<T>(
     ),
     [isLoadMoreHidden]
   );
-
-
 
   return { data: formateList, loading, LoadMore };
 }

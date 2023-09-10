@@ -5,20 +5,20 @@ import {
   SelfFundedOperation,
   supportsSelfFundedFallback,
   useFollow,
-  useSelfFundedFallback,
-} from "@lens-protocol/react-web";
-import { useState } from "react";
+  useSelfFundedFallback
+} from '@lens-protocol/react-web';
+import { useState } from 'react';
 
 type UseFollowWithSelfFundedFallbackArgs = {
   followee: Profile;
   follower: ProfileOwnedByMe;
 };
 
-type PossibleError = FollowOperation["error"] | SelfFundedOperation["error"];
+type PossibleError = FollowOperation['error'] | SelfFundedOperation['error'];
 
 export function useFollowWithSelfFundedFallback({
   followee,
-  follower,
+  follower
 }: UseFollowWithSelfFundedFallbackArgs) {
   const [error, setError] = useState<PossibleError>(undefined);
 
@@ -29,7 +29,6 @@ export function useFollowWithSelfFundedFallback({
   const selfFunded = useSelfFundedFallback();
 
   const execute = async () => {
-   
     setLoading(true);
     // it won't ask to sign if can be performed via proxy-action
     const gaslessResult = await gasless.execute();
@@ -39,14 +38,14 @@ export function useFollowWithSelfFundedFallback({
       if (supportsSelfFundedFallback(gaslessResult.error)) {
         // ask your confirmation before using their funds
         const shouldPayFor = window.confirm(
-          "It was not possible to cover the gas costs at this time.\n\n" +
-          "Do you wish to continue with your MATIC?",
+          'It was not possible to cover the gas costs at this time.\n\n' +
+            'Do you wish to continue with your MATIC?'
         );
 
         if (shouldPayFor) {
           // initiate self-funded, will require signature
           const selfFundedResult = await selfFunded.execute(
-            gaslessResult.error.fallback,
+            gaslessResult.error.fallback
           );
 
           if (selfFundedResult.isFailure()) {
@@ -56,7 +55,6 @@ export function useFollowWithSelfFundedFallback({
           if (selfFundedResult.isSuccess()) {
             setLoading(false);
           }
-
         }
         return;
       }
@@ -69,6 +67,6 @@ export function useFollowWithSelfFundedFallback({
   return {
     execute,
     error,
-    isPending: gasless.isPending || selfFunded.isPending || loading,
+    isPending: gasless.isPending || selfFunded.isPending || loading
   };
 }
