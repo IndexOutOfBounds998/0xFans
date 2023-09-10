@@ -45,7 +45,7 @@ const bottomNavLinks: Readonly<MobileNavLink[]> = [
   {
     href: '/settings',
     linkName: 'Settings and privacy',
-    iconName: 'Cog8ToothIcon',
+    iconName: 'Cog8ToothIcon'
     // disabled: true
   },
   {

@@ -3,7 +3,13 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Loading } from '@components/ui/loading';
 import { formatImgList, formatUser, formatVideoList } from '@lib/FormatContent';
-import { usePublications, ProfileId, Post, AnyPublication, PublicationMetadataFilters } from '@lens-protocol/react-web';
+import {
+  usePublications,
+  ProfileId,
+  Post,
+  AnyPublication,
+  PublicationMetadataFilters
+} from '@lens-protocol/react-web';
 import { TweetProps } from '@components/tweet/tweet';
 
 type InfiniteScroll<T> = {
@@ -31,22 +37,20 @@ export function useInfinitePublicationsScroll<T>(
 
   const { limit, profileId, metadataFilter } = options;
 
-  const {
-    data,
-    loading,
-    hasMore,
-    next,
-  } = usePublications({
-    profileId: profileId, limit: limit, metadataFilter
+  const { data, loading, hasMore, next } = usePublications({
+    profileId: profileId,
+    limit: limit,
+    metadataFilter
   });
 
   const [formateList, setFormateList] = useState<TweetProps[]>([]);
 
   useEffect(() => {
     if (data && data.length > 0) {
-      let list: TweetProps[] = data.filter((it) => it != null && it.__typename === 'Post')
+      let list: TweetProps[] = data
+        .filter((it) => it != null && it.__typename === 'Post')
         .map((item) => {
-          item = item as Post
+          item = item as Post;
           const isVideo = item?.metadata?.mainContentFocus === 'VIDEO';
           const imagesList = isVideo
             ? null
@@ -74,16 +78,12 @@ export function useInfinitePublicationsScroll<T>(
         });
       setFormateList(list);
     }
-
-
   }, [data]);
 
   useEffect(() => {
-
     if (loadMoreInView) {
       if (!hasMore) return;
       next();
-
     }
   }, [loadMoreInView]);
 

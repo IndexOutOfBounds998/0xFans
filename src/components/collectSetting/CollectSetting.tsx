@@ -103,7 +103,9 @@ export default function CollectSetting({
               setIsCollect(!!val);
             }}
           >
-            <span className='ml-[8px] font-bold text-[#71717a]'>Pay To Show</span>
+            <span className='ml-[8px] font-bold text-[#71717a]'>
+              Pay To Show
+            </span>
           </ReactSwitch>
         </div>
         {isCollect ? (
@@ -123,7 +125,7 @@ export default function CollectSetting({
                   onChange={(val) => setIsCost(val as boolean)}
                 >
                   <span className='ml-[10px] font-bold text-[#71717a]'>
-                  Get paid every time someone views your post
+                    Get paid every time someone views your post
                   </span>
                 </ReactSwitch>
               </div>
@@ -165,7 +167,7 @@ export default function CollectSetting({
                         onChange={(val) => setIsReward(val as boolean)}
                       >
                         <span className='ml-[10px] font-bold text-[#71717a]'>
-                        Share your costs with those who amplify your content
+                          Share your costs with those who amplify your content
                         </span>
                       </ReactSwitch>
                     </div>
@@ -204,7 +206,7 @@ export default function CollectSetting({
                   onChange={(val) => setIsLimit(val as boolean)}
                 >
                   <span className='ml-[10px] font-bold text-[#71717a]'>
-                  Make your posts unique
+                    Make your posts unique
                   </span>
                 </ReactSwitch>
               </div>
@@ -238,12 +240,11 @@ export default function CollectSetting({
                   onChange={(val) => setIsTimeLimit(val as boolean)}
                 >
                   <span className='ml-[10px] font-bold text-[#71717a]'>
-                  Paid to view only for the first 24 hours
+                    Paid to view only for the first 24 hours
                   </span>
                 </ReactSwitch>
               </div>
             </div>
-
           </div>
         ) : (
           ''

@@ -17,23 +17,23 @@ export default function UserMedia(): JSX.Element {
 
   const { id, name, username } = user ?? {};
 
-  const {
-    data,
-    loading,
-    LoadMore
-  } = useInfinitePublicationsScroll({
-    profileId: profileId(id as string ?? ''),
+  const { data, loading, LoadMore } = useInfinitePublicationsScroll({
+    profileId: profileId((id as string) ?? ''),
     limit: 10,
     metadataFilter: {
-      restrictPublicationMainFocusTo: [PublicationMainFocus.Image, PublicationMainFocus.Video]
+      restrictPublicationMainFocusTo: [
+        PublicationMainFocus.Image,
+        PublicationMainFocus.Video
+      ]
     }
   });
 
   return (
     <section>
       <SEO
-        title={`Media 0xFans by ${name as string} (@${username as string
-          }) / 0xFans`}
+        title={`Media 0xFans by ${name as string} (@${
+          username as string
+        }) / 0xFans`}
       />
       {loading ? (
         <Loading className='mt-5' />

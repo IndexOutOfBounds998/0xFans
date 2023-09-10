@@ -28,6 +28,9 @@ export function useApprovedModuleAllowance(
       return;
     }
     const assetAddress = collectModule?.fee?.amount?.currency;
+    if (assetAddress === undefined) {
+      return;
+    }
     const client = await getAuthenticatedClient();
     let res = await client.modules.approvedAllowanceAmount({
       currencies: [assetAddress || ''],

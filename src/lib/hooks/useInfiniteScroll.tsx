@@ -2,12 +2,15 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Loading } from '@components/ui/loading';
-import { useFetchPublications } from './useFetchPublications';
-import { ExplorePublicationRequest } from '@lens-protocol/client';
-import { Post } from '@lens-protocol/react-web';
+import {
+  Post,
+  PublicationMainFocus,
+  PublicationSortCriteria,
+  PublicationTypes
+} from '@lens-protocol/react-web';
 import { formatImgList, formatUser, formatVideoList } from '@lib/FormatContent';
 import { TweetProps } from '@components/tweet/tweet';
-
+import { useExplorePublications } from '@lens-protocol/react-web';
 type InfiniteScroll<T> = {
   data: TweetProps[] | null;
   loading: Boolean;
@@ -20,17 +23,24 @@ type InfiniteScrollWithUser<T> = {
   LoadMore: () => JSX.Element;
 };
 
-export function useInfiniteScroll<T>(
-  request: ExplorePublicationRequest
-): InfiniteScrollWithUser<T>;
+export function useInfiniteScroll<T>(): InfiniteScrollWithUser<T>;
 
-export function useInfiniteScroll<T>(
-  request: ExplorePublicationRequest
-): InfiniteScroll<T> | InfiniteScrollWithUser<T> {
+export function useInfiniteScroll<T>():
+  | InfiniteScroll<T>
+  | InfiniteScrollWithUser<T> {
   const [loadMoreInView, setLoadMoreInView] = useState(false);
 
-  const { data, loading, next, hasMore } = useFetchPublications({
-    explorePublicationRequest: request
+  const { data, loading, hasMore, next } = useExplorePublications({
+    limit: 20,
+    sortCriteria: PublicationSortCriteria.Latest,
+    publicationTypes: [PublicationTypes.Post],
+    metadataFilter: {
+      restrictPublicationMainFocusTo: [
+        PublicationMainFocus.Image,
+        PublicationMainFocus.TextOnly,
+        PublicationMainFocus.Video
+      ]
+    }
   });
 
   const [formateList, setFormateList] = useState<TweetProps[]>([]);
@@ -38,8 +48,14 @@ export function useInfiniteScroll<T>(
   useEffect(() => {
     if (data && data.length > 0) {
       let list: TweetProps[] = data
-        .filter((it) => it != null)
-        .map((item: Post) => {
+        .filter((it) => it != null && it.__typename === 'Post')
+        .sort(function (i, j) {
+          let time1 = new Date(j.createdAt).getTime();
+          let time2 = new Date(i.createdAt).getTime();
+          return time1 - time2;
+        })
+        .map((item) => {
+          item = item as Post;
           const isVideo = item?.metadata?.mainContentFocus === 'VIDEO';
           const imagesList = isVideo
             ? null

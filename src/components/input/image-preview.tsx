@@ -16,7 +16,7 @@ type ImagePreviewProps = {
   tweet?: boolean;
   viewTweet?: boolean;
   previewCount: number;
-  imagesPreview: ImagesPreview;
+  imagesPreview: ImagesPreview | null;
   removeImage?: (targetId: string) => () => void;
 };
 
@@ -56,7 +56,7 @@ export function ImagePreview({
   const previewCountLimit = previewCount > 4 ? 4 : previewCount;
 
   useEffect(() => {
-    const imageData = imagesPreview[selectedIndex];
+    const imageData = imagesPreview ? imagesPreview[selectedIndex] : null;
     setSelectedImage(imageData);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedIndex]);
@@ -109,7 +109,7 @@ export function ImagePreview({
         />
       </Modal>
       <AnimatePresence mode='popLayout'>
-        {imagesPreview.map(({ id, src, alt }, index) => (
+        {imagesPreview?.map(({ id, src, alt }, index) => (
           <motion.button
             key={index}
             type='button'

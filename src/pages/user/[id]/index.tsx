@@ -18,15 +18,15 @@ export default function UserTweets(): JSX.Element {
 
   const { id, username } = user ?? {};
 
-  const {
-    data,
-    loading,
-    LoadMore
-  } = useInfinitePublicationsScroll({
-    profileId: profileId(id as string ?? ''),
+  const { data, loading, LoadMore } = useInfinitePublicationsScroll({
+    profileId: profileId((id as string) ?? ''),
     limit: 20,
     metadataFilter: {
-      restrictPublicationMainFocusTo: [PublicationMainFocus.TextOnly, PublicationMainFocus.Image, PublicationMainFocus.Video]
+      restrictPublicationMainFocusTo: [
+        PublicationMainFocus.TextOnly,
+        PublicationMainFocus.Image,
+        PublicationMainFocus.Video
+      ]
     }
   });
 

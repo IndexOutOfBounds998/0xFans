@@ -101,7 +101,7 @@ export function EditProfileModal({
               imgClassName='object-cover transition group-hover:brightness-75 duration-200
                             group-focus-within:brightness-75'
               src={coverPhotoURL}
-              alt={name??''}
+              alt={name ?? ''}
               layout='fill'
             />
           ) : (
@@ -153,7 +153,7 @@ export function EditProfileModal({
                 imgClassName='rounded-full transition group-hover:brightness-75 duration-200
                               group-focus-within:brightness-75'
                 src={photoURL}
-                alt={name??''}
+                alt={name ?? ''}
                 layout='fill'
               />
               <Button

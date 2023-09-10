@@ -1,4 +1,3 @@
-
 import type { Theme, Accent } from './theme';
 
 export type User = {

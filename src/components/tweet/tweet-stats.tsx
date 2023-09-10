@@ -41,7 +41,7 @@ export function TweetStats({
   openModal,
   canComment,
   canMirror,
-  publication: pub,
+  publication,
   openCollectModal
 }: TweetStatsProps): JSX.Element {
   const totalLikes = userLikes ? userLikes : 0;
@@ -83,12 +83,7 @@ export function TweetStats({
 
   const { user: profileUser } = useAuth();
 
-  const isOwner = pub.profile.id === profileUser?.id;
-
-  const { data: publication, loading: publicatioLoading } = usePublication({
-    publicationId: publicationId(tweetId as string),
-    observerId: profileId(profileUser?.id as string)
-  });
+  const isOwner = publication.profile.id === profileUser?.id;
 
   const { addReaction, removeReaction, hasReaction, isPending } = useReaction({
     profileId: profileId(profileUser?.id as string)
@@ -96,13 +91,14 @@ export function TweetStats({
 
   const hasReactionType = publication
     ? hasReaction({
-      reactionType: ReactionType.UPVOTE,
-      publication: publication as Post
-    })
+        reactionType: ReactionType.UPVOTE,
+        publication: publication as Post
+      })
     : false;
 
-
-  const canCollect = (publication as ContentPublication)?.collectModule.__typename === 'RevertCollectModuleSettings';
+  const canCollect =
+    (publication as ContentPublication)?.collectModule.__typename ===
+    'RevertCollectModuleSettings';
 
   let [loading, setLoading] = useState(false);
 
@@ -175,11 +171,11 @@ export function TweetStats({
           iconName='ArrowPathRoundedSquareIcon'
           viewTweet={viewTweet}
           disabled={!canMirror}
-        // onClick={manageRetweet(
-        //   tweetIsRetweeted ? 'unretweet' : 'retweet',
-        //   userId,
-        //   tweetId??''
-        // )}
+          // onClick={manageRetweet(
+          //   tweetIsRetweeted ? 'unretweet' : 'retweet',
+          //   userId,
+          //   tweetId??''
+          // )}
         />
         <TweetOption
           className={cn(

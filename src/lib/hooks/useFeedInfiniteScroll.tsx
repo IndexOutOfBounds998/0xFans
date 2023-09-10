@@ -28,14 +28,9 @@ export function useFeedInfiniteScroll<T>(
 ): InfiniteScroll<T> | InfiniteScrollWithUser<T> {
   const [loadMoreInView, setLoadMoreInView] = useState(false);
 
-  const {
-    data,
-    loading,
-    hasMore,
-    next,
-  } = useFeed({
+  const { data, loading, hasMore, next } = useFeed({
     profileId: profileId,
-    limit: 20,
+    limit: 20
   });
   const [formateList, setFormateList] = useState<TweetProps[]>([]);
 
@@ -44,7 +39,6 @@ export function useFeedInfiniteScroll<T>(
       let list: TweetProps[] = data
         .filter((it) => it != null)
         .map((item: FeedItem) => {
-
           const isVideo = item.root?.metadata?.mainContentFocus === 'VIDEO';
           const imagesList = isVideo
             ? null

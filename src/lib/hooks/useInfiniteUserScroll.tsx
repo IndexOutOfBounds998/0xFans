@@ -12,8 +12,6 @@ import { User } from '@lib/types/user';
 import { formatUser } from '@lib/FormatContent';
 import { UserCardProps } from './useCollection';
 
-
-
 type InfiniteScroll<T> = {
   data: UserCardProps[] | null;
   loading: Boolean;

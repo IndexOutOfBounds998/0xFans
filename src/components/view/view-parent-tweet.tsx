@@ -33,7 +33,7 @@ export function ViewParentTweet({
           className='rounded-2xl bg-main-sidebar-background py-3 px-1 pl-4 
                      text-light-secondary dark:text-dark-secondary'
         >
-          This Tweet was deleted by the Tweet author.{' '}
+          This Post was deleted by the Post author.{' '}
           <a
             className='custom-underline text-main-accent'
             href='https://help.twitter.com/rules-and-policies/notices-on-twitter'

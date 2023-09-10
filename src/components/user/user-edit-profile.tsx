@@ -34,7 +34,6 @@ type UserEditProfileProps = {
   hide?: boolean;
 };
 
-
 type UserDetailsProps = Pick<
   User,
   | 'id'
@@ -140,29 +139,29 @@ export function UserEditProfile({ hide }: UserEditProfileProps): JSX.Element {
 
   const editImage =
     (type: 'cover' | 'profile') =>
-      ({ target: { files } }: ChangeEvent<HTMLInputElement>): void => {
-        const imagesData = getImagesData(files);
+    ({ target: { files } }: ChangeEvent<HTMLInputElement>): void => {
+      const imagesData = getImagesData(files);
 
-        if (!imagesData) {
-          toast.error('Please choose a valid GIF or Photo');
-          return;
-        }
+      if (!imagesData) {
+        toast.error('Please choose a valid GIF or Photo');
+        return;
+      }
 
-        const { imagesPreviewData, selectedImagesData } = imagesData;
+      const { imagesPreviewData, selectedImagesData } = imagesData;
 
-        const targetKey = type === 'cover' ? 'coverPhotoURL' : 'photoURL';
-        const newImage = imagesPreviewData[0].src;
+      const targetKey = type === 'cover' ? 'coverPhotoURL' : 'photoURL';
+      const newImage = imagesPreviewData[0].src;
 
-        setEditUserData({
-          ...editUserData,
-          [targetKey]: newImage
-        });
+      setEditUserData({
+        ...editUserData,
+        [targetKey]: newImage
+      });
 
-        setUserImages({
-          ...userImages,
-          [targetKey]: selectedImagesData
-        });
-      };
+      setUserImages({
+        ...userImages,
+        [targetKey]: selectedImagesData
+      });
+    };
 
   const removeCoverImage = (): void => {
     setEditUserData({
@@ -206,10 +205,10 @@ export function UserEditProfile({ hide }: UserEditProfileProps): JSX.Element {
 
   const handleChange =
     (key: EditableData) =>
-      ({
-        target: { value }
-      }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-        setEditUserData({ ...editUserData, [key]: value });
+    ({
+      target: { value }
+    }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+      setEditUserData({ ...editUserData, [key]: value });
 
   const handleKeyboardShortcut = ({
     key,
