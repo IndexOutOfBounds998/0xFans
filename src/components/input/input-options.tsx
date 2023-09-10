@@ -8,7 +8,7 @@ import { ProgressBar } from './progress-bar';
 import type { ChangeEvent, ClipboardEvent } from 'react';
 import type { IconName } from '@components/ui/hero-icon';
 import { Modal } from '@components/modal/modal';
-import CollectSetting from '@components/collectSetting/CollectSetting';
+import CollectSetting from '@components/collect/collect-setting';
 import { useModal } from '@lib/hooks/useModal';
 
 type Options = {

@@ -10,7 +10,7 @@ import { useLingui } from '@lingui/react';
 export async function getServerSideProps(
   ctx: GetServerSidePropsContext
 ): Promise<GetServerSidePropsResult<any>> {
-  // some server side logic
+  console.log(222222)
   return {
     props: {
       i18n: await loadCatalog(ctx.locale as string)

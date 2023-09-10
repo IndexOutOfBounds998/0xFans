@@ -15,6 +15,20 @@ import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import { loadCatalog } from 'translations/utils';
 import { useLingui } from '@lingui/react';
 
+
+export async function getServerSideProps(
+  ctx: GetServerSidePropsContext
+): Promise<GetServerSidePropsResult<any>> {
+  // some server side logic
+   console.log(1111)
+  return {
+    props: {
+      i18n: await loadCatalog(ctx.locale as string)
+    }
+  };
+}
+
+
 export const variants: MotionProps = {
   initial: { opacity: 0 },
   animate: { opacity: 1 },
@@ -101,13 +115,3 @@ export function AsideTrends({ inTrendsPage }: AsideTrendsProps): JSX.Element {
   );
 }
 
-export async function getServerSideProps(
-  ctx: GetServerSidePropsContext
-): Promise<GetServerSidePropsResult<any>> {
-  // some server side logic
-  return {
-    props: {
-      i18n: await loadCatalog(ctx.locale as string)
-    }
-  };
-}
