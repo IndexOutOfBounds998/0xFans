@@ -8,7 +8,7 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: 0xfans\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-09-06 09:35\n"
+"PO-Revision-Date: 2023-09-11 07:08\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -50,3 +50,4 @@ msgstr "尝试搜索另一个。"
 
 msgid "Who to follow"
 msgstr "关注哪些人"
+
