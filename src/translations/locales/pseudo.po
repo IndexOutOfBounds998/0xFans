@@ -34,6 +34,9 @@ msgstr ""
 msgid "Cookie Policy"
 msgstr ""
 
+msgid "Display"
+msgstr ""
+
 msgid "English"
 msgstr ""
 
@@ -46,6 +49,9 @@ msgstr ""
 msgid "Get paid every time someone views your post"
 msgstr ""
 
+msgid "Help center"
+msgstr ""
+
 msgid "Home"
 msgstr ""
 
@@ -56,6 +62,9 @@ msgid "Make your posts unique"
 msgstr ""
 
 msgid "Messages"
+msgstr ""
+
+msgid "More"
 msgstr ""
 
 msgid "Notifications"
@@ -85,6 +94,9 @@ msgstr ""
 msgid "Privacy Policy"
 msgstr ""
 
+msgid "Profile"
+msgstr ""
+
 msgid "Pseudo"
 msgstr ""
 
@@ -101,6 +113,9 @@ msgid "Search Creators"
 msgstr ""
 
 msgid "Select Currency"
+msgstr ""
+
+msgid "Settings and privacy"
 msgstr ""
 
 msgid "Share your costs with those who amplify your content"

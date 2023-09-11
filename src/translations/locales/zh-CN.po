@@ -39,17 +39,23 @@ msgstr "中文"
 msgid "Cookie Policy"
 msgstr "Cookie 策略"
 
+msgid "Display"
+msgstr "显示"
+
 msgid "English"
-msgstr "Distr."
+msgstr "英文"
 
 msgid "Fee"
 msgstr "费用"
 
 msgid "Feed"
-msgstr "订阅源"
+msgstr "订阅"
 
 msgid "Get paid every time someone views your post"
 msgstr "每次有人查看您的帖子时获得支付收益"
+
+msgid "Help center"
+msgstr "帮助中心"
 
 msgid "Home"
 msgstr "首页"
@@ -62,6 +68,9 @@ msgstr "使您的帖子变成唯一的"
 
 msgid "Messages"
 msgstr "留言"
+
+msgid "More"
+msgstr "更多"
 
 msgid "Notifications"
 msgstr "通知"
@@ -90,6 +99,9 @@ msgstr "价格"
 msgid "Privacy Policy"
 msgstr "隐私政策"
 
+msgid "Profile"
+msgstr "个人资料"
+
 msgid "Pseudo"
 msgstr "伪装"
 
@@ -107,6 +119,9 @@ msgstr "搜索创作者"
 
 msgid "Select Currency"
 msgstr "选择货币"
+
+msgid "Settings and privacy"
+msgstr "设置和隐私"
 
 msgid "Share your costs with those who amplify your content"
 msgstr "与那些扩大您内容的人分享您的收益"
@@ -137,4 +152,3 @@ msgstr "尝试搜索另一个。"
 
 msgid "Who to follow"
 msgstr "尝试关注哪些人"
-

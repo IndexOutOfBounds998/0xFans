@@ -16,7 +16,7 @@ import {
 } from '@lens-protocol/react-web';
 import { bindings } from '@lens-protocol/wagmi';
 
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { ALCHEMY_KEY, RB_PID, MAIN_NETWORK, APP_ID } from '@lib/const';
 import '@rainbow-me/rainbowkit/styles.css';
 import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
@@ -24,9 +24,9 @@ import { configureChains, createConfig, WagmiConfig } from 'wagmi';
 import { polygonMumbai, polygon } from 'wagmi/chains';
 import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
-import { I18nProvider } from '@lingui/react';
+import { I18nProvider, useLingui } from '@lingui/react';
 import { useLinguiInit } from 'translations/utils';
-
+import { i18n } from '@lingui/core'
 const { chains, publicClient } = configureChains(
   [MAIN_NETWORK ? polygon : polygonMumbai],
   [alchemyProvider({ apiKey: ALCHEMY_KEY }), publicProvider()]
@@ -59,28 +59,41 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
+const WatchLocale = ({ children }: { children: ReactNode }) => {
+  const { i18n: lingui } = useLingui();
+  // Skip render when locale isn't loaded                                                                                           
+  if (!lingui.locale) {
+    return null;
+  }
+  // Force re-render when locale changes.                                                                                           
+  // Otherwise string translations (ie: t`Macro`) won't be updated.                                                                 
+  return <Fragment key={lingui.locale}>{children}</Fragment>;
+};
+
 export default function App({
   Component,
   pageProps
 }: AppPropsWithLayout): ReactNode {
   const getLayout = Component.getLayout ?? ((page): ReactNode => page);
-  const initializedI18n = useLinguiInit(pageProps.translation);
+  useLinguiInit(pageProps.translation);
   return (
     <>
-      <I18nProvider i18n={initializedI18n}>
-        <AppHead />
-        <WagmiConfig config={wagmiConfig}>
-          <RainbowKitProvider chains={chains} coolMode={true}>
-            <LensProvider config={lensConfig}>
-              <AuthContextProvider>
-                <ThemeContextProvider>
-                  {getLayout(<Component {...pageProps} />)}
-                  <Analytics />
-                </ThemeContextProvider>
-              </AuthContextProvider>
-            </LensProvider>
-          </RainbowKitProvider>
-        </WagmiConfig>
+      <I18nProvider i18n={i18n}>
+        <WatchLocale>
+          <AppHead />
+          <WagmiConfig config={wagmiConfig}>
+            <RainbowKitProvider chains={chains} coolMode={true}>
+              <LensProvider config={lensConfig}>
+                <AuthContextProvider>
+                  <ThemeContextProvider>
+                    {getLayout(<Component {...pageProps} />)}
+                    <Analytics />
+                  </ThemeContextProvider>
+                </AuthContextProvider>
+              </LensProvider>
+            </RainbowKitProvider>
+          </WagmiConfig>
+        </WatchLocale>
       </I18nProvider>
     </>
   );

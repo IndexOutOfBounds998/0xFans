@@ -34,6 +34,9 @@ msgstr "Chinese"
 msgid "Cookie Policy"
 msgstr "Cookie Policy"
 
+msgid "Display"
+msgstr "Display"
+
 msgid "English"
 msgstr "English"
 
@@ -46,6 +49,9 @@ msgstr "Feed"
 msgid "Get paid every time someone views your post"
 msgstr "Get paid every time someone views your post"
 
+msgid "Help center"
+msgstr "Help center"
+
 msgid "Home"
 msgstr "Home"
 
@@ -57,6 +63,9 @@ msgstr "Make your posts unique"
 
 msgid "Messages"
 msgstr "Messages"
+
+msgid "More"
+msgstr "More"
 
 msgid "Notifications"
 msgstr "Notifications"
@@ -85,6 +94,9 @@ msgstr "Price"
 msgid "Privacy Policy"
 msgstr "Privacy Policy"
 
+msgid "Profile"
+msgstr "Profile"
+
 msgid "Pseudo"
 msgstr "Pseudo"
 
@@ -102,6 +114,9 @@ msgstr "Search Creators"
 
 msgid "Select Currency"
 msgstr "Select Currency"
+
+msgid "Settings and privacy"
+msgstr "Settings and privacy"
 
 msgid "Share your costs with those who amplify your content"
 msgstr "Share your costs with those who amplify your content"

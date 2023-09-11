@@ -11,6 +11,8 @@ import { MoreSettings } from './more-settings';
 import { SidebarProfile } from './sidebar-profile';
 import type { IconName } from '@components/ui/hero-icon';
 import { Trans, t } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
+import { useState } from 'react';
 export type NavLink = {
   href: string;
   linkName: string;
@@ -19,45 +21,42 @@ export type NavLink = {
   canBeHidden?: boolean;
 };
 
-const navLinks: Readonly<NavLink[]> = [
-  {
-    href: '/home',
-    linkName: t`Home`,
-    iconName: 'HomeIcon'
-  },
-  {
-    href: '/feed',
-    linkName: t`Feed`,
-    iconName: 'HashtagIcon'
-  },
-  {
-    href: '/notifications',
-    linkName: t`Notifications`,
-    iconName: 'BellIcon',
-    disabled: true
-  },
-  {
-    href: '/messages',
-    linkName: t`Messages`,
-    iconName: 'EnvelopeIcon',
-    disabled: true
-  },
-  {
-    href: '/bookmarks',
-    linkName: t`Bookmarks`,
-    iconName: 'BookmarkIcon',
-    canBeHidden: true
-  }
-  // {
-  //   href: '/lists',
-  //   linkName: 'Lists',
-  //   iconName: 'Bars3BottomLeftIcon',
-  //   disabled: true,
-  //   canBeHidden: true
-  // }
-];
-
 export function Sidebar(): JSX.Element {
+
+  const [navLinks] = useState<NavLink[]>(
+    [{
+      href: '/home',
+      linkName: t`Home`,
+      iconName: 'HomeIcon'
+    },
+    {
+      href: '/feed',
+      linkName: t`Feed`,
+      iconName: 'HashtagIcon'
+    },
+    {
+      href: '/notifications',
+      linkName: t`Notifications`,
+      iconName: 'BellIcon',
+      disabled: true
+    },
+    {
+      href: '/messages',
+      linkName: t`Messages`,
+      iconName: 'EnvelopeIcon',
+      disabled: true
+    },
+    {
+      href: '/bookmarks',
+      linkName: t`Bookmarks`,
+      iconName: 'BookmarkIcon',
+      canBeHidden: true
+    }
+    ]
+  )
+
+  useLingui();
+
   const { user } = useAuth();
   const { isMobile } = useWindow();
 
@@ -104,7 +103,7 @@ export function Sidebar(): JSX.Element {
             <SidebarLink
               href={`/user/${userId}`}
               username={username}
-              linkName='Profile'
+              linkName={t`Profile`}
               iconName='UserIcon'
             />
             {!isMobile && <MoreSettings />}

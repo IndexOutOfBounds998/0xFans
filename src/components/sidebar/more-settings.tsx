@@ -9,6 +9,7 @@ import { HeroIcon } from '@components/ui/hero-icon';
 import { Button } from '@components/ui/button';
 import { MenuLink } from './menu-link';
 import type { Variants } from 'framer-motion';
+import { Trans } from '@lingui/macro';
 
 export const variants: Variants = {
   initial: { opacity: 0, y: 50 },
@@ -48,7 +49,7 @@ export function MoreSettings(): JSX.Element {
                   className='h-7 w-7'
                   iconName='EllipsisHorizontalCircleIcon'
                 />{' '}
-                <p className='hidden xl:block'>More</p>
+                <p className='hidden xl:block'><Trans>More</Trans></p>
               </div>
             </Menu.Button>
             <AnimatePresence>
@@ -70,7 +71,7 @@ export function MoreSettings(): JSX.Element {
                         onClick={preventBubbling()}
                       >
                         <HeroIcon iconName='Cog8ToothIcon' />
-                        Settings and privacy
+                        <Trans>Settings and privacy</Trans>
                       </MenuLink>
                     )}
                   </Menu.Item>
@@ -85,7 +86,7 @@ export function MoreSettings(): JSX.Element {
                         onClick={preventBubbling()}
                       >
                         <HeroIcon iconName='QuestionMarkCircleIcon' />
-                        Help center
+                        <Trans> Help center</Trans>
                       </MenuLink>
                     )}
                   </Menu.Item>
@@ -99,7 +100,7 @@ export function MoreSettings(): JSX.Element {
                         onClick={openModal}
                       >
                         <HeroIcon iconName='PaintBrushIcon' />
-                        Display
+                        <Trans>Display</Trans>
                       </Button>
                     )}
                   </Menu.Item>
