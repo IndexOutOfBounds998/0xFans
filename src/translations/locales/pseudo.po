@@ -13,10 +13,61 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+msgid "Accessibility"
+msgstr ""
+
+msgid "Ads Info"
+msgstr ""
+
+msgid "Bookmarks"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Charge Limit"
+msgstr ""
+
 msgid "Chinese"
 msgstr ""
 
+msgid "Cookie Policy"
+msgstr ""
+
 msgid "English"
+msgstr ""
+
+msgid "Fee"
+msgstr ""
+
+msgid "Feed"
+msgstr ""
+
+msgid "Get paid every time someone views your post"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "Limited Edition"
+msgstr ""
+
+msgid "Make your posts unique"
+msgstr ""
+
+msgid "Messages"
+msgstr ""
+
+msgid "Notifications"
+msgstr ""
+
+msgid "Paid to view only for the first 24 hours"
+msgstr ""
+
+msgid "Pay settings"
+msgstr ""
+
+msgid "Pay To Show"
 msgstr ""
 
 msgid "People"
@@ -25,13 +76,49 @@ msgstr ""
 msgid "People / 0xFans"
 msgstr ""
 
+msgid "Post"
+msgstr ""
+
+msgid "Price"
+msgstr ""
+
+msgid "Privacy Policy"
+msgstr ""
+
 msgid "Pseudo"
+msgstr ""
+
+msgid "Referral Fee"
+msgstr ""
+
+msgid "Referral Rewards"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Search Creators"
+msgstr ""
+
+msgid "Select Currency"
+msgstr ""
+
+msgid "Share your costs with those who amplify your content"
+msgstr ""
+
+msgid "Show more"
 msgstr ""
 
 msgid "Something went wrong"
 msgstr ""
 
+msgid "Terms of Service"
+msgstr ""
+
 msgid "This account doesn’t exist"
+msgstr ""
+
+msgid "Time Limit"
 msgstr ""
 
 msgid "Trends"

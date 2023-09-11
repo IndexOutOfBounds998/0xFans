@@ -13,11 +13,62 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+msgid "Accessibility"
+msgstr "Accessibility"
+
+msgid "Ads Info"
+msgstr "Ads Info"
+
+msgid "Bookmarks"
+msgstr "Bookmarks"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Charge Limit"
+msgstr "Charge Limit"
+
 msgid "Chinese"
 msgstr "Chinese"
 
+msgid "Cookie Policy"
+msgstr "Cookie Policy"
+
 msgid "English"
 msgstr "English"
+
+msgid "Fee"
+msgstr "Fee"
+
+msgid "Feed"
+msgstr "Feed"
+
+msgid "Get paid every time someone views your post"
+msgstr "Get paid every time someone views your post"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "Limited Edition"
+msgstr "Limited Edition"
+
+msgid "Make your posts unique"
+msgstr "Make your posts unique"
+
+msgid "Messages"
+msgstr "Messages"
+
+msgid "Notifications"
+msgstr "Notifications"
+
+msgid "Paid to view only for the first 24 hours"
+msgstr "Paid to view only for the first 24 hours"
+
+msgid "Pay settings"
+msgstr "Pay settings"
+
+msgid "Pay To Show"
+msgstr "Pay To Show"
 
 msgid "People"
 msgstr "People"
@@ -25,14 +76,50 @@ msgstr "People"
 msgid "People / 0xFans"
 msgstr "People / 0xFans"
 
+msgid "Post"
+msgstr "Post"
+
+msgid "Price"
+msgstr "Price"
+
+msgid "Privacy Policy"
+msgstr "Privacy Policy"
+
 msgid "Pseudo"
 msgstr "Pseudo"
+
+msgid "Referral Fee"
+msgstr "Referral Fee"
+
+msgid "Referral Rewards"
+msgstr "Referral Rewards"
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Search Creators"
+msgstr "Search Creators"
+
+msgid "Select Currency"
+msgstr "Select Currency"
+
+msgid "Share your costs with those who amplify your content"
+msgstr "Share your costs with those who amplify your content"
+
+msgid "Show more"
+msgstr "Show more"
 
 msgid "Something went wrong"
 msgstr "Something went wrong"
 
+msgid "Terms of Service"
+msgstr "Terms of Service"
+
 msgid "This account doesn’t exist"
 msgstr "This account doesn’t exist"
+
+msgid "Time Limit"
+msgstr "Time Limit"
 
 msgid "Trends"
 msgstr "Trends"

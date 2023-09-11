@@ -18,11 +18,62 @@ msgstr ""
 "X-Crowdin-File: /dev/src/translations/locales/en-us.po\n"
 "X-Crowdin-File-ID: 29\n"
 
+msgid "Accessibility"
+msgstr ""
+
+msgid "Ads Info"
+msgstr ""
+
+msgid "Bookmarks"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Charge Limit"
+msgstr ""
+
 msgid "Chinese"
 msgstr "中文"
 
+msgid "Cookie Policy"
+msgstr ""
+
 msgid "English"
 msgstr "Distr."
+
+msgid "Fee"
+msgstr ""
+
+msgid "Feed"
+msgstr ""
+
+msgid "Get paid every time someone views your post"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "Limited Edition"
+msgstr ""
+
+msgid "Make your posts unique"
+msgstr ""
+
+msgid "Messages"
+msgstr ""
+
+msgid "Notifications"
+msgstr ""
+
+msgid "Paid to view only for the first 24 hours"
+msgstr ""
+
+msgid "Pay settings"
+msgstr ""
+
+msgid "Pay To Show"
+msgstr ""
 
 msgid "People"
 msgstr "人"
@@ -30,14 +81,50 @@ msgstr "人"
 msgid "People / 0xFans"
 msgstr "人 / 0xFans"
 
+msgid "Post"
+msgstr ""
+
+msgid "Price"
+msgstr ""
+
+msgid "Privacy Policy"
+msgstr ""
+
 msgid "Pseudo"
 msgstr "伪装"
+
+msgid "Referral Fee"
+msgstr ""
+
+msgid "Referral Rewards"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Search Creators"
+msgstr ""
+
+msgid "Select Currency"
+msgstr ""
+
+msgid "Share your costs with those who amplify your content"
+msgstr ""
+
+msgid "Show more"
+msgstr ""
 
 msgid "Something went wrong"
 msgstr "出了错。"
 
+msgid "Terms of Service"
+msgstr ""
+
 msgid "This account doesn’t exist"
 msgstr "此帐户不存在"
+
+msgid "Time Limit"
+msgstr ""
 
 msgid "Trends"
 msgstr "趋势"
@@ -50,4 +137,3 @@ msgstr "尝试搜索另一个。"
 
 msgid "Who to follow"
 msgstr "关注哪些人"
-

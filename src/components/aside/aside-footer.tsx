@@ -1,12 +1,11 @@
+import { Trans, t } from '@lingui/macro';
+
 const footerLinks = [
-  ['Terms of Service', 'https://0xFans.com/tos'],
-  ['Privacy Policy', 'https://0xFans.com/privacy'],
-  ['Cookie Policy', 'https://support.0xFans.com/articles/20170514'],
-  ['Accessibility', 'https://help.0xFans.com/resources/accessibility'],
-  [
-    'Ads Info',
-    'https://business.0xFans.com/en/help/troubleshooting/how-0xFans-ads-work.html'
-  ]
+  [t`Terms of Service`, 'https://0xFans.com/tos'],
+  [t`Privacy Policy`, 'https://0xFans.com/privacy'],
+  [t`Cookie Policy`, 'https://support.0xFans.com/articles/20170514'],
+  [t`Accessibility`, 'https://help.0xFans.com/resources/accessibility'],
+  [t`Ads Info`,'https://business.0xFans.com/en/help/troubleshooting/how-0xFans-ads-work.html']
 ] as const;
 
 export function AsideFooter(): JSX.Element {

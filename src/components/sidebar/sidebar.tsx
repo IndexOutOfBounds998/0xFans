@@ -10,7 +10,7 @@ import { SidebarLink } from './sidebar-link';
 import { MoreSettings } from './more-settings';
 import { SidebarProfile } from './sidebar-profile';
 import type { IconName } from '@components/ui/hero-icon';
-
+import { Trans, t } from '@lingui/macro';
 export type NavLink = {
   href: string;
   linkName: string;
@@ -22,29 +22,29 @@ export type NavLink = {
 const navLinks: Readonly<NavLink[]> = [
   {
     href: '/home',
-    linkName: 'Home',
+    linkName: t`Home`,
     iconName: 'HomeIcon'
   },
   {
     href: '/feed',
-    linkName: 'Feed',
+    linkName: t`Feed`,
     iconName: 'HashtagIcon'
   },
   {
     href: '/notifications',
-    linkName: 'Notifications',
+    linkName: t`Notifications`,
     iconName: 'BellIcon',
     disabled: true
   },
   {
     href: '/messages',
-    linkName: 'Messages',
+    linkName: t`Messages`,
     iconName: 'EnvelopeIcon',
     disabled: true
   },
   {
     href: '/bookmarks',
-    linkName: 'Bookmarks',
+    linkName: t`Bookmarks`,
     iconName: 'BookmarkIcon',
     canBeHidden: true
   }
@@ -119,7 +119,7 @@ export function Sidebar(): JSX.Element {
               className='block h-6 w-6 xl:hidden'
               iconName='FeatherIcon'
             />
-            <p className='hidden xl:block'>Post</p>
+            <p className='hidden xl:block'><Trans>Post</Trans></p>
           </Button>
         </section>
         {!isMobile && <SidebarProfile />}
