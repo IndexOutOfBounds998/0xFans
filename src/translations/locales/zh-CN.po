@@ -99,6 +99,9 @@ msgstr "人"
 msgid "People / 0xFans"
 msgstr "人 / 0xFans"
 
+msgid "Popular tags"
+msgstr "热门标签"
+
 msgid "Post"
 msgstr "发帖"
 
@@ -149,9 +152,6 @@ msgstr "此帐户不存在"
 
 msgid "Time Limit"
 msgstr "时间限制"
-
-msgid "Trends"
-msgstr "趋势"
 
 msgid "Trends for you"
 msgstr "您的趋势"

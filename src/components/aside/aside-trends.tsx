@@ -44,7 +44,7 @@ export function AsideTrends({ inTrendsPage }: AsideTrendsProps): JSX.Element {
         >
           {!inTrendsPage && (
             <h2 className='text-xl font-extrabold'>
-              <Trans>Trends for you</Trans>
+              <Trans>Popular tags</Trans>
             </h2>
           )}
           {data.map(({ tag, query, tweet_volume, url }) => (

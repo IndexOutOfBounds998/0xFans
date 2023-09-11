@@ -94,6 +94,9 @@ msgstr ""
 msgid "People / 0xFans"
 msgstr ""
 
+msgid "Popular tags"
+msgstr ""
+
 msgid "Post"
 msgstr ""
 
@@ -143,9 +146,6 @@ msgid "This account doesn’t exist"
 msgstr ""
 
 msgid "Time Limit"
-msgstr ""
-
-msgid "Trends"
 msgstr ""
 
 msgid "Trends for you"
