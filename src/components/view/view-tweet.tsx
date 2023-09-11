@@ -169,8 +169,8 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
         </p>
       )}
       <div>
-        {text && (
-          <p className='whitespace-pre-line break-words text-2xl'>{text}</p>
+        {!isGated && text && (
+          <p className='whitespace-pre-line break-words'>{text}</p>
         )}
         {isGated ? (
           <GatedPreview
@@ -212,6 +212,7 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
             userRetweets={userRetweets}
             userReplies={userReplies}
             openModal={openModal}
+            openCollectModal={openCollectModal}
           />
         </div>
         <Input reply parent={{ id: tweetId ?? '', username: username }} />
