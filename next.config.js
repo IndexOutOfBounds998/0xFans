@@ -13,6 +13,11 @@ const nextConfig = {
     locales: linguiConfig.locales,
     defaultLocale: linguiConfig.sourceLocale
   },
+  experimental: {
+    newNextLinkBehavior: false,
+    forceSwcTransforms: true,
+    swcPlugins: [['@lingui/swc-plugin', {}]]
+  },
   swcMinify: true,
   images: {
     minimumCacheTTL: 30,
@@ -28,16 +33,13 @@ const nextConfig = {
       }
     ]
   },
-  experimental: {
-    newNextLinkBehavior: false,
-    swcPlugins: [['@lingui/swc-plugin', {}]]
-  },
+
   webpack5: true,
   webpack: (config) => {
     config.resolve.fallback = { fs: false, net: false, tls: false };
     return config;
   },
-  transpilePackages: ['@lens-protocol']
+  transpilePackages: ['@lens-protocol','src']
 };
 
 module.exports = nextConfig;

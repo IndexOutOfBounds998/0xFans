@@ -14,37 +14,27 @@ import { Tweet, TweetProps } from '@components/tweet/tweet';
 import { Loading } from '@components/ui/loading';
 import type { ReactElement, ReactNode } from 'react';
 import PubSub from 'pubsub-js';
-import {
-  PublicationSortCriteria,
-  PublicationTypes
-} from '@lens-protocol/react-web';
-import { PublicationMainFocus } from '@lens-protocol/client';
-import { APP_ID } from '@lib/const';
+
 import { useEffect, useState } from 'react';
+import { Error } from '@components/ui/error';
+import { GetStaticProps } from 'next';
+import { loadCatalog } from 'translations/utils';
+import { useLingui } from '@lingui/react';
+
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  const translation = await loadCatalog(ctx.locale!)
+  return {
+    props: {
+      translation
+    }
+  }
+}
 export default function Home(): JSX.Element {
+  useLingui();
   const { isMobile } = useWindow();
   const [dataList, setDataList] = useState<TweetProps[]>([]);
 
-  const { data, LoadMore, loading } = useInfiniteScroll({
-    cursor: JSON.stringify({
-      timestamp: 1,
-      offset: 0
-    }),
-    sortCriteria: PublicationSortCriteria.Latest,
-    limit: 20,
-    publicationTypes: [PublicationTypes.Post],
-    metadata: {
-      mainContentFocus: [
-        PublicationMainFocus.Image,
-        PublicationMainFocus.Video,
-        PublicationMainFocus.TextOnly
-      ],
-      tags: {
-        oneOf: []
-      }
-    },
-    sources: [APP_ID]
-  });
+  const { data, LoadMore, loading } = useInfiniteScroll();
 
   useEffect(() => {
     if (data) {
@@ -75,24 +65,20 @@ export default function Home(): JSX.Element {
       </MainHeader>
       {!isMobile && <Input />}
       <section className='mt-0.5 xs:mt-0'>
-        {
-          //   loading ? (
-          //   <Loading className='mt-5' />
-          // ) :
-          !dataList ? (
-            <Loading className='mt-5' />
-          ) : (
-            // <Error message='Something went wrong' />
-            <>
-              <AnimatePresence mode='popLayout'>
-                {dataList.map((tweet, index) => (
-                  <Tweet {...tweet} key={index} />
-                ))}
-              </AnimatePresence>
-              <LoadMore />
-            </>
-          )
-        }
+        {loading ? (
+          <Loading className='mt-5' />
+        ) : !data ? (
+          <Error message='Something went wrong' />
+        ) : (
+          <>
+            <AnimatePresence mode='popLayout'>
+              {data.map((tweet) => (
+                <Tweet {...tweet} key={tweet.id} />
+              ))}
+            </AnimatePresence>
+            <LoadMore />
+          </>
+        )}
       </section>
     </MainContainer>
   );

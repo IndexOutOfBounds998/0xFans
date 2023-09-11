@@ -19,6 +19,7 @@ import {
   GenerateModuleCurrencyApprovalFragment
 } from '@lens-protocol/client';
 import { useSendTransaction, useBalance, useWaitForTransaction } from 'wagmi';
+import { toast } from 'react-hot-toast';
 type FollowButtonProps = {
   userTargetId: string | null;
   userTargetUsername: string;
@@ -89,7 +90,7 @@ export function FollowButton({
     if (hasAmount) {
       return follow();
     } else {
-      alert('not has Amount');
+      toast.error('not has Amount');
     }
   };
 

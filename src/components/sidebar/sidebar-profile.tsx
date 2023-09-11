@@ -14,7 +14,10 @@ import { UserUsername } from '@components/user/user-username';
 import { variants } from './more-settings';
 import type { User } from '@lib/types/user';
 import { MediaSet, useProfilesOwnedByMe } from '@lens-protocol/react-web';
-import { useActiveProfile, useActiveProfileSwitch } from '@lens-protocol/react-web';
+import {
+  useActiveProfile,
+  useActiveProfileSwitch
+} from '@lens-protocol/react-web';
 
 export function SidebarProfile(): JSX.Element {
   const { user, signOut } = useAuth();
@@ -25,9 +28,9 @@ export function SidebarProfile(): JSX.Element {
     data: profiles,
     loading,
     hasMore,
-    next,
+    next
   } = useProfilesOwnedByMe({
-    limit: 10,
+    limit: 10
   });
 
   const { execute: switchActiveProfile, isPending } = useActiveProfileSwitch();
@@ -63,7 +66,12 @@ export function SidebarProfile(): JSX.Element {
               <div className='flex gap-3 truncate'>
                 <UserAvatar src={photoURL} alt={username} size={40} />
                 <div className='hidden truncate text-start leading-5 xl:block'>
-                  <UserName id={id} name={name ?? ''} className='start' verified={verified} />
+                  <UserName
+                    id={id}
+                    name={name ?? ''}
+                    className='start'
+                    verified={verified}
+                  />
                   <UserUsername id={id} username={username} disableLink />
                 </div>
               </div>
@@ -80,32 +88,52 @@ export function SidebarProfile(): JSX.Element {
                   {...variants}
                   static
                 >
-                  {profiles && profiles.map((profile, index) => (
-                    <Menu.Item
-                      className='flex items-center justify-between gap-4 border-b
+                  {profiles &&
+                    profiles.map((profile, index) => (
+                      <Menu.Item
+                        className='flex items-center justify-between gap-4 border-b
                                border-light-border px-4 py-3 dark:border-dark-border'
-                      as='div'
-                      disabled
-                    >
-
-                      <div className='flex items-center gap-3 truncate'
-                        onClick={() => {
-                          switchActiveProfile(profile.id);
-                        }}>
-                        <UserAvatar src={(profile.picture as MediaSet)?.original?.url} alt={(profile.picture as MediaSet)?.original?.altTag || ''} />
-                        <div className='truncate'>
-                          <UserName id={profile.id} name={profile.handle ?? ''} verified={verified} />
-                          <UserUsername id={profile.id} username={profile.name || ''} disableLink />
+                        as='div'
+                        disabled
+                      >
+                        <div
+                          className='flex items-center gap-3 truncate'
+                          onClick={() => {
+                            switchActiveProfile(profile.id);
+                          }}
+                        >
+                          <UserAvatar
+                            src={(profile.picture as MediaSet)?.original?.url}
+                            alt={
+                              (profile.picture as MediaSet)?.original?.altTag ||
+                              ''
+                            }
+                          />
+                          <div className='truncate'>
+                            <UserName
+                              id={profile.id}
+                              name={profile.handle ?? ''}
+                              verified={verified}
+                            />
+                            <UserUsername
+                              id={profile.id}
+                              username={profile.name || ''}
+                              disableLink
+                            />
+                          </div>
                         </div>
-                      </div>
-                      {data && data.id === profile.id ? (<i>
-                        <HeroIcon
-                          className='h-5 w-5 text-main-accent'
-                          iconName='CheckIcon'
-                        />
-                      </i>) : ''}
-                    </Menu.Item>
-                  ))}
+                        {data && data.id === profile.id ? (
+                          <i>
+                            <HeroIcon
+                              className='h-5 w-5 text-main-accent'
+                              iconName='CheckIcon'
+                            />
+                          </i>
+                        ) : (
+                          ''
+                        )}
+                      </Menu.Item>
+                    ))}
                   <Menu.Item>
                     {({ active }): JSX.Element => (
                       <Button

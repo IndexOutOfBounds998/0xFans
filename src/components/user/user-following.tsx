@@ -1,4 +1,3 @@
-
 type UserFollowingProps = {
   isFollowingbserver?: boolean;
 };
@@ -6,7 +5,6 @@ type UserFollowingProps = {
 export function UserFollowing({
   isFollowingbserver
 }: UserFollowingProps): JSX.Element | null {
-   
   if (!isFollowingbserver) return null;
 
   return (

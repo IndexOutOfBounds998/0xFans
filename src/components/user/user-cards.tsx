@@ -19,6 +19,7 @@ type UserCardsProps = {
   type: CombinedTypes;
   follow?: boolean;
   loading: boolean;
+  LoadMore?: () => JSX.Element;
 };
 
 type NoStatsData = Record<CombinedTypes, StatsEmptyProps>;
@@ -28,12 +29,12 @@ const allNoStatsData: Readonly<NoStatsData> = {
     title: 'Amplify Posts you like',
     imageData: { src: '/assets/no-retweets.png', alt: 'No retweets' },
     description:
-      'Share someone else’s Tweet on your timeline by Retweeting it. When you do, it’ll show up here.'
+      'Share someone else’s Post on your timeline by Retweeting it. When you do, it’ll show up here.'
   },
   likes: {
     title: 'No Posts Likes yet',
     imageData: { src: '/assets/no-likes.png', alt: 'No likes' },
-    description: 'When you like a Tweet, it’ll show up here.'
+    description: 'When you like a Post, it’ll show up here.'
   },
   following: {
     title: 'Be in the know',
@@ -52,7 +53,8 @@ export function UserCards({
   data,
   type,
   follow,
-  loading
+  loading,
+  LoadMore
 }: UserCardsProps): JSX.Element {
   const noStatsData = allNoStatsData[type];
   const modal = ['retweets', 'likes'].includes(type);
@@ -67,17 +69,29 @@ export function UserCards({
       {loading ? (
         <Loading className={modal ? 'mt-[52px]' : 'mt-5'} />
       ) : (
-        <AnimatePresence mode='popLayout'>
-          {data?.length ? (
-            data.map((userData) => (
-              <motion.div layout='position' key={userData.id.toString()} {...variants}>
-                <UserCard {...userData} follow={follow} modal={modal} profile={userData.profile} />
-              </motion.div>
-            ))
-          ) : (
-            <StatsEmpty {...noStatsData} modal={modal} />
-          )}
-        </AnimatePresence>
+        <>
+          <AnimatePresence mode='popLayout'>
+            {data?.length ? (
+              data.map((userData) => (
+                <motion.div
+                  layout='position'
+                  key={userData.id.toString()}
+                  {...variants}
+                >
+                  <UserCard
+                    {...userData}
+                    follow={userData.isFollowingbserver}
+                    modal={modal}
+                    profile={userData.profile}
+                  />
+                </motion.div>
+              ))
+            ) : (
+              <StatsEmpty {...noStatsData} modal={modal} />
+            )}
+          </AnimatePresence>
+          {LoadMore && <LoadMore />}
+        </>
       )}
     </section>
   );

@@ -73,15 +73,6 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
     closeModal: closeFollowModal
   } = useModal();
 
-  let publicationData;
-  if (isGated) {
-    const { data, loading: publication_loading } = usePublication({
-      publicationId: tweetId as PublicationId,
-      observerId: profile?.id
-    });
-    publicationData = data ?? null;
-  }
-
   const tweetLink = `/tweet/${tweetId}`;
 
   const userId = user?.id as string;
@@ -178,12 +169,12 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
         </p>
       )}
       <div>
-        {text && (
-          <p className='whitespace-pre-line break-words text-2xl'>{text}</p>
+        {!isGated && text && (
+          <p className='whitespace-pre-line break-words'>{text}</p>
         )}
         {isGated ? (
           <GatedPreview
-            publication={publicationData as ContentPublication}
+            publication={tweet}
             openCollectModal={openCollectModal}
             openFollowModal={openFollowModal}
           />
@@ -221,6 +212,7 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
             userRetweets={userRetweets}
             userReplies={userReplies}
             openModal={openModal}
+            openCollectModal={openCollectModal}
           />
         </div>
         <Input reply parent={{ id: tweetId ?? '', username: username }} />

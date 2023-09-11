@@ -1,5 +1,4 @@
 import { Input } from '@components/input/input';
-import { Tweet } from '@components/tweet/tweet';
 import type { TweetProps } from '@components/tweet/tweet';
 import React from 'react';
 import { HeroIcon } from '@components/ui/hero-icon';
@@ -7,13 +6,16 @@ import { Button } from '@components/ui/button';
 import cn from 'clsx';
 import {
   ContentPublication,
-  SimpleCollectModuleSettings
+  SimpleCollectModuleSettings,
+  PublicationId,
+  usePublication
 } from '@lens-protocol/react-web';
 import { useAuth } from '@lib/context/auth-context';
 import CollectButton from '@components/ui/collect-button';
+import type { Tweet } from '@lib/types/tweet';
 
 type TweetCollectModalProps = {
-  publication: ContentPublication;
+  publication: any;
   closeModal: () => void;
 };
 
@@ -22,15 +24,16 @@ export function TweetCollectModal({
   closeModal
 }: TweetCollectModalProps): JSX.Element {
   const { profileByMe } = useAuth();
-  const creater = publication.profile.handle;
+  const creater = publication?.profile?.handle;
 
-  const content = publication.metadata.content;
+  const content = publication?.metadata?.content;
 
-  const feeOptional = (publication.collectModule as SimpleCollectModuleSettings)
-    ?.feeOptional;
+  const feeOptional = (
+    publication?.collectModule as SimpleCollectModuleSettings
+  )?.feeOptional;
 
   const followerOnly = (
-    publication.collectModule as SimpleCollectModuleSettings
+    publication?.collectModule as SimpleCollectModuleSettings
   )?.followerOnly;
   return (
     <>
@@ -80,17 +83,19 @@ export function TweetCollectModal({
             <div className='flex items-center space-x-2'>
               <HeroIcon className='h-4 w-4' iconName='UsersIcon' />
               <button className='font-bold' type='button'>
-                {publication.stats.totalAmountOfCollects} collectors
+                {publication?.stats?.totalAmountOfCollects} collectors
               </button>
             </div>
           </div>
         </div>
         <div className='flex flex-col gap-3 inner:py-2 inner:font-bold'>
-          <CollectButton
-            btnClass='w-full'
-            collector={profileByMe}
-            publication={publication as ContentPublication}
-          />
+          {profileByMe && (
+            <CollectButton
+              btnClass='w-full'
+              collector={profileByMe}
+              publication={publication as ContentPublication}
+            />
+          )}
           <Button
             className={cn(
               'w-full border border-light-line-reply hover:bg-light-primary/10 focus-visible:bg-light-primary/10 active:bg-light-primary/20 dark:border-light-secondary dark:text-light-border dark:hover:bg-light-border/10 dark:focus-visible:bg-light-border/10 dark:active:bg-light-border/20'

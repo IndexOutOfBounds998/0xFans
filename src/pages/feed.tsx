@@ -9,18 +9,32 @@ import { Input } from '@components/input/input';
 import { Tweet } from '@components/tweet/tweet';
 import { Loading } from '@components/ui/loading';
 import type { ReactElement, ReactNode } from 'react';
-import {
-  ProfileId
-} from '@lens-protocol/react-web';
+import { ProfileId } from '@lens-protocol/react-web';
 import { useFeedInfiniteScroll } from '@lib/hooks/useFeedInfiniteScroll';
 import { useAuth } from '@lib/context/auth-context';
 import { Error } from '@components/ui/error';
 import { MainHeader } from '@components/home/main-header';
+
+import { GetStaticProps } from 'next';
+import { loadCatalog } from 'translations/utils';
+import { useLingui } from '@lingui/react';
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  const translation = await loadCatalog(ctx.locale!)
+
+  return {
+    props: {
+      translation
+    }
+  }
+}
 export default function Home(): JSX.Element {
+  useLingui();
   const { user } = useAuth();
   const { isMobile } = useWindow();
 
-  const { data, LoadMore, loading } = useFeedInfiniteScroll(user?.id as ProfileId);
+  const { data, LoadMore, loading } = useFeedInfiniteScroll(
+    user?.id as ProfileId
+  );
 
   return (
     <MainContainer>
@@ -29,8 +43,7 @@ export default function Home(): JSX.Element {
         useMobileSidebar
         title='Feed'
         className='flex items-center justify-between'
-      >
-      </MainHeader>
+      ></MainHeader>
       {!isMobile && <Input />}
       <section className='mt-0.5 xs:mt-0'>
         {loading ? (

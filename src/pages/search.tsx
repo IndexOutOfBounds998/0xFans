@@ -17,7 +17,21 @@ import type { ReactElement, ReactNode } from 'react';
 import { profileId } from '@lens-protocol/react-web';
 import { useInfiniteSearchUserScroll } from '@lib/hooks/useInfiniteSearchUserScroll';
 
+import { GetStaticProps } from 'next';
+import { loadCatalog } from 'translations/utils';
+import { useLingui } from '@lingui/react';
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  const translation = await loadCatalog(ctx.locale!)
+
+  return {
+    props: {
+      translation
+    }
+  }
+}
 export default function People(): JSX.Element {
+  useLingui();
+
   const { user } = useAuth();
 
   const {

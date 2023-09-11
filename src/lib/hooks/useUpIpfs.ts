@@ -4,9 +4,9 @@ import { useState } from 'react';
 type useUpData = {
   type: string; //upJsonContent or upLoadImg
 };
-type IpfsApiResponse ={
+type IpfsApiResponse = {
   IpfsHash?: string;
-}
+};
 export function useUpIpfs({ type }: useUpData) {
   const [loading, setLoad] = useState(false);
   const [url, setUrl] = useState('');
@@ -18,7 +18,10 @@ export function useUpIpfs({ type }: useUpData) {
 
   const execute = async (data: any) => {
     setLoad(true);
-    const res = await ipfsApi[type as keyof typeof ipfsApi](data, config) as IpfsApiResponse;
+    const res = (await ipfsApi[type as keyof typeof ipfsApi](
+      data,
+      config
+    )) as IpfsApiResponse;
     if (res?.IpfsHash) {
       setUrl('ipfs://' + res.IpfsHash);
       setLoad(false);

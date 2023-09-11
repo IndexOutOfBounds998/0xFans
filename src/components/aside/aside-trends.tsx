@@ -10,10 +10,8 @@ import { ToolTip } from '@components/ui/tooltip';
 import { Loading } from '@components/ui/loading';
 import type { MotionProps } from 'framer-motion';
 import { useTrending } from '@lib/hooks/useTrending';
-import { t, Trans } from "@lingui/macro";
-import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
-import { loadCatalog } from 'translations/utils';
-import { useLingui } from '@lingui/react'
+import { t, Trans } from '@lingui/macro';
+ 
 
 
 export const variants: MotionProps = {
@@ -26,17 +24,15 @@ type AsideTrendsProps = {
   inTrendsPage?: boolean;
 };
 
-
-
 export function AsideTrends({ inTrendsPage }: AsideTrendsProps): JSX.Element {
-  useLingui()
+ 
   const { data, loading } = useTrending({ limit: 10 });
-  
+
   return (
     <section
       className={cn(
         !inTrendsPage &&
-        'hover-animation rounded-2xl bg-main-sidebar-background'
+          'hover-animation rounded-2xl bg-main-sidebar-background'
       )}
     >
       {loading ? (
@@ -47,14 +43,16 @@ export function AsideTrends({ inTrendsPage }: AsideTrendsProps): JSX.Element {
           {...variants}
         >
           {!inTrendsPage && (
-            <h2 className='text-xl font-extrabold'><Trans>Trends for you</Trans></h2>
+            <h2 className='text-xl font-extrabold'>
+              <Trans>Trends for you</Trans>
+            </h2>
           )}
           {data.map(({ tag, query, tweet_volume, url }) => (
             // <Link href={url} key={query}>
             <a
               className='hover-animation accent-tab hover-card relative
                            flex cursor-not-allowed flex-col gap-0.5'
-            // onClick={preventBubbling()}
+              // onClick={preventBubbling()}
             >
               <div className='absolute right-2 top-2'>
                 <Button
@@ -102,13 +100,3 @@ export function AsideTrends({ inTrendsPage }: AsideTrendsProps): JSX.Element {
   );
 }
 
-export async function getServerSideProps(
-  ctx: GetServerSidePropsContext
-): Promise<GetServerSidePropsResult<any>> {
-  // some server side logic
-  return {
-    props: {
-      i18n: await loadCatalog(ctx.locale as string),
-    },
-  };
-}

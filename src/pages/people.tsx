@@ -16,8 +16,22 @@ import { Error } from '@components/ui/error';
 import { variants } from '@components/aside/aside-trends';
 import type { ReactElement, ReactNode } from 'react';
 import { ProfileSortCriteria, profileId } from '@lens-protocol/react-web';
-import { t, Trans } from "@lingui/macro";
+
+import { GetStaticProps } from 'next';
+import { loadCatalog } from 'translations/utils';
+import { useLingui } from '@lingui/react';
+import { Trans, t } from '@lingui/macro';
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  const translation = await loadCatalog(ctx.locale!)
+  return {
+    props: {
+      translation
+    }
+  }
+}
 export default function People(): JSX.Element {
+  useLingui();
+
   const { user } = useAuth();
 
   const { data, loading, LoadMore } = useInfiniteUserScroll({
@@ -36,12 +50,17 @@ export default function People(): JSX.Element {
         {loading ? (
           <Loading className='mt-5' />
         ) : !data ? (
-          <Error message={t`Something went wrong`}/>
+          <Error message={t`Something went wrong`} />
         ) : (
           <>
             <motion.div className='mt-0.5' {...variants}>
               {data?.map((userData) => (
-                <UserCard {...userData} key={userData.id.toString()} follow={userData.follow} profile={userData.profile} />
+                <UserCard
+                  {...userData}
+                  key={userData.id.toString()}
+                  follow={userData.follow}
+                  profile={userData.profile}
+                />
               ))}
             </motion.div>
             <LoadMore />

@@ -49,4 +49,4 @@ export const LENS_API_BASE_URL = !MAIN_NETWORK
   ? 'https://api-mumbai.lens.dev'
   : 'https://api.lens.dev';
 
-  export const APP_ID = '0xfans';
+export const APP_ID = '0xfans';

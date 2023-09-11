@@ -12,7 +12,6 @@ export function AuthLayout({ children }: LayoutProps): JSX.Element {
 
   const { replace } = useRouter();
 
-
   useEffect(() => {
     const checkLogin = async (): Promise<void> => {
       setPending(true);
@@ -28,15 +27,10 @@ export function AuthLayout({ children }: LayoutProps): JSX.Element {
         await sleep(500);
         void replace('/');
       }
-
     };
 
     void checkLogin();
   }, [user, loading, isLoginAction]);
-
-
-
-
 
   if (loading || pending) return <Placeholder />;
 

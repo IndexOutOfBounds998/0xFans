@@ -23,11 +23,15 @@ export function useCollectWithSelfFundedFallback({
   publication
 }: UseCollectWithSelfFundedFallbackArgs) {
   const [error, setError] = useState<PossibleError>(undefined);
+  console.log('collector', collector);
+  console.log('publication', publication);
+
   const gasless = useCollect({ collector, publication });
 
   const selfFunded = useSelfFundedFallback();
 
   const execute = async () => {
+    debugger;
     const gaslessResult = await gasless.execute();
 
     if (gaslessResult.isFailure()) {

@@ -3,23 +3,22 @@ import { SEO } from '@components/common/seo';
 import { LoginMain } from '@components/login/login-main';
 import { LoginFooter } from '@components/login/login-footer';
 import type { ReactElement, ReactNode } from 'react';
-import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import { GetStaticProps } from 'next';
 import { loadCatalog } from 'translations/utils';
-import { useLingui } from '@lingui/react'
+import { useLingui } from '@lingui/react';
 
-export async function getServerSideProps(
-  ctx: GetServerSidePropsContext
-): Promise<GetServerSidePropsResult<any>> {
-  // some server side logic
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  const translation = await loadCatalog(ctx.locale!)
+  console.log('GetStaticProps')
   return {
     props: {
-      i18n: await loadCatalog(ctx.locale as string),
-    },
-  };
+      translation
+    }
+  }
 }
 
 export default function Login(): JSX.Element {
-  useLingui()
+  useLingui();
   return (
     <div className='grid min-h-screen grid-rows-[1fr,auto]'>
       <SEO

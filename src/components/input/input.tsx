@@ -75,7 +75,8 @@ export function Input({
   });
 
   const callbackOnError = (error: any) => {
-    alert('发布失败' + error);
+    // alert('发布失败' + error);
+    toast.error('发布失败' + error);
   };
   const profileUser = profileByMe as unknown as Profile;
   //发布帖子
@@ -108,15 +109,13 @@ export function Input({
       if (isReplying) await Promise.all([send(content, profileUser)]);
       else {
         await Promise.all([
-          post(
-            {
-              images: selectedImages,
-              title: '',
-              content: content,
-              collectData: collectData,
-              isOnlyfans: audience.label === 'Onlyfans'
-            }
-          )
+          post({
+            images: selectedImages,
+            title: '',
+            content: content,
+            collectData: collectData,
+            isOnlyfans: audience.label === 'Onlyfans'
+          })
         ]);
       }
     }
@@ -249,8 +248,8 @@ export function Input({
           reply
             ? 'pt-3 pb-1'
             : replyModal
-              ? 'pt-0'
-              : 'border-b-2 border-light-border dark:border-dark-border',
+            ? 'pt-0'
+            : 'border-b-2 border-light-border dark:border-dark-border',
           (disabled || loading) && 'pointer-events-none opacity-50'
         )}
         htmlFor={formId}

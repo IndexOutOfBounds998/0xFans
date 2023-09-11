@@ -18,7 +18,7 @@ export type Tweet = {
   userReplies: number | null;
   userRetweets: number | null;
   profile: Profile;
-  publication: AnyPublication
+  publication: AnyPublication;
 };
 
 export type TweetWithUser = Tweet & { user: UserCardProps };

@@ -51,25 +51,21 @@ export function LoginMain(): JSX.Element {
                 >
                   <CustomIcon iconName='LensIcon' /> Sign up with lens
                 </Button>
-              ) : ''
+              ) : (
+                ''
+              )
             ) : (
               <ConnectButton />
             )}
 
-            {
-              isLoginAction && !profileByMe ? (<p>regiser</p>) : ''
-            }
+            {isLoginAction && !profileByMe ? <p>regiser</p> : ''}
 
             <p
               className='inner:custom-underline inner:custom-underline text-center text-xs
                          text-light-secondary inner:text-accent-blue dark:text-dark-secondary'
             >
               By signing up, you agree to the{' '}
-              <a
-                href='https://0xfans.com/tos'
-                target='_blank'
-                rel='noreferrer'
-              >
+              <a href='https://0xfans.com/tos' target='_blank' rel='noreferrer'>
                 Terms of Service
               </a>{' '}
               and{' '}

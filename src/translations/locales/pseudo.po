@@ -34,6 +34,9 @@ msgstr ""
 msgid "This account doesn’t exist"
 msgstr ""
 
+msgid "Trends"
+msgstr ""
+
 msgid "Trends for you"
 msgstr ""
 

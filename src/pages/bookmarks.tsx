@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast';
 
 import { useAuth } from '@lib/context/auth-context';
 import { useModal } from '@lib/hooks/useModal';
- 
+
 import { HomeLayout, ProtectedLayout } from '@components/layout/common-layout';
 import { MainLayout } from '@components/layout/main-layout';
 import { SEO } from '@components/common/seo';
@@ -24,7 +24,21 @@ import { profileId } from '@lens-protocol/react-web';
 import { useBookmarksQuery } from '@lib/hooks/useBookmarksQuery';
 
 
+import { GetStaticProps } from 'next';
+import { loadCatalog } from 'translations/utils';
+import { useLingui } from '@lingui/react';
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  const translation = await loadCatalog(ctx.locale!)
+
+  return {
+    props: {
+      translation
+    }
+  }
+}
 export default function Bookmarks(): JSX.Element {
+  useLingui();
+  
   const { user } = useAuth();
 
   const { open, openModal, closeModal } = useModal();

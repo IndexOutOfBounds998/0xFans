@@ -1,11 +1,7 @@
-
 import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Loading } from '@components/ui/loading';
-import {
-  ProfileId,
-  useSearchProfiles
-} from '@lens-protocol/react-web';
+import { ProfileId, useSearchProfiles } from '@lens-protocol/react-web';
 import { formatUser } from '@lib/FormatContent';
 import { UserCardProps } from './useCollection';
 
@@ -28,7 +24,11 @@ export function useInfiniteSearchUserScroll<T>(
 
   const { limit, observerId, query } = options;
 
-  const { data, loading, hasMore, next } = useSearchProfiles({ query: query, observerId: observerId, limit: limit })
+  const { data, loading, hasMore, next } = useSearchProfiles({
+    query: query,
+    observerId: observerId,
+    limit: limit
+  });
 
   const [formateList, setFormateList] = useState<UserCardProps[]>([]);
 
