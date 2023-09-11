@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { preventBubbling } from '@lib/utils';
 import { Button } from '@components/ui/button';
 import { useBalance } from 'wagmi';
+import { toast } from 'react-hot-toast';
 
 type CollectButtonProps = {
   collector: ProfileOwnedByMe;
@@ -56,7 +57,7 @@ export default function CollectButton({
     if (hasAmount) {
       return collect();
     } else {
-      alert('not has Amount');
+      toast.error('not has Amount');
     }
   };
 
@@ -78,12 +79,15 @@ export default function CollectButton({
                    focus-visible:bg-light-primary/90 active:bg-light-border/75 dark:bg-light-border
                    dark:text-light-primary dark:hover:bg-light-border/90 dark:focus-visible:bg-light-border/90
                    dark:active:bg-light-border/75 ${btnClass}`}
-      onClick={preventBubbling(collect)}
+      onClick={preventBubbling(handleCollect)}
     >
       Approve Collect Module
     </Button>
   );
 
+  console.log(publication?.collectPolicy?.state);
+  console.log(CollectState.NOT_A_FOLLOWER);
+  console.log(publication?.profile);
   switch (publication?.collectPolicy?.state) {
     case CollectState.COLLECT_TIME_EXPIRED:
       return <CollectBtn title='Collecting ended' />;

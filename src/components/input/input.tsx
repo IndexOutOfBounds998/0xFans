@@ -75,7 +75,8 @@ export function Input({
   });
 
   const callbackOnError = (error: any) => {
-    alert('发布失败' + error);
+    // alert('发布失败' + error);
+    toast.error('发布失败' + error);
   };
   const profileUser = profileByMe as unknown as Profile;
   //发布帖子
