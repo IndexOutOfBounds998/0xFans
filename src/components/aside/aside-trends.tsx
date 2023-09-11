@@ -11,9 +11,8 @@ import { Loading } from '@components/ui/loading';
 import type { MotionProps } from 'framer-motion';
 import { useTrending } from '@lib/hooks/useTrending';
 import { t, Trans } from '@lingui/macro';
-import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
-import { loadCatalog } from 'translations/utils';
-import { useLingui } from '@lingui/react';
+ 
+
 
 export const variants: MotionProps = {
   initial: { opacity: 0 },
@@ -26,7 +25,7 @@ type AsideTrendsProps = {
 };
 
 export function AsideTrends({ inTrendsPage }: AsideTrendsProps): JSX.Element {
-  useLingui();
+ 
   const { data, loading } = useTrending({ limit: 10 });
 
   return (
@@ -101,13 +100,3 @@ export function AsideTrends({ inTrendsPage }: AsideTrendsProps): JSX.Element {
   );
 }
 
-export async function getServerSideProps(
-  ctx: GetServerSidePropsContext
-): Promise<GetServerSidePropsResult<any>> {
-  // some server side logic
-  return {
-    props: {
-      i18n: await loadCatalog(ctx.locale as string)
-    }
-  };
-}

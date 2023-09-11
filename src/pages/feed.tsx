@@ -14,7 +14,21 @@ import { useFeedInfiniteScroll } from '@lib/hooks/useFeedInfiniteScroll';
 import { useAuth } from '@lib/context/auth-context';
 import { Error } from '@components/ui/error';
 import { MainHeader } from '@components/home/main-header';
+
+import { GetStaticProps } from 'next';
+import { loadCatalog } from 'translations/utils';
+import { useLingui } from '@lingui/react';
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  const translation = await loadCatalog(ctx.locale!)
+
+  return {
+    props: {
+      translation
+    }
+  }
+}
 export default function Home(): JSX.Element {
+  useLingui();
   const { user } = useAuth();
   const { isMobile } = useWindow();
 

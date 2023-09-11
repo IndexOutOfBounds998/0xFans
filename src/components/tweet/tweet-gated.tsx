@@ -13,6 +13,7 @@ import { Web3Provider } from '@ethersproject/providers';
 import { preventBubbling } from '@lib/utils';
 import { ProfileOwnedByMe, useActiveProfile } from '@lens-protocol/react-web';
 import { formatImgList, formatVideoList } from '@lib/FormatContent';
+import { toast } from 'react-hot-toast';
 
 export type TweetProps = {
   tweet: Tweet;
@@ -49,7 +50,7 @@ export function TweetGated({ tweet }: TweetProps): JSX.Element {
         (publication as ContentPublication).metadata
       );
       if (error) {
-        alert(error);
+        toast.error(error.toString());
       } else {
         const isVideo = decrypted?.mainContentFocus === 'VIDEO';
         setText(decrypted?.content);

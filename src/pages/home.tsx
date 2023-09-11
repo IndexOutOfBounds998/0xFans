@@ -17,7 +17,20 @@ import PubSub from 'pubsub-js';
 
 import { useEffect, useState } from 'react';
 import { Error } from '@components/ui/error';
+import { GetStaticProps } from 'next';
+import { loadCatalog } from 'translations/utils';
+import { useLingui } from '@lingui/react';
+
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  const translation = await loadCatalog(ctx.locale!)
+  return {
+    props: {
+      translation
+    }
+  }
+}
 export default function Home(): JSX.Element {
+  useLingui();
   const { isMobile } = useWindow();
   const [dataList, setDataList] = useState<TweetProps[]>([]);
 
