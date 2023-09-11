@@ -24,6 +24,9 @@ msgstr "无障碍环境"
 msgid "Ads Info"
 msgstr "广告信息"
 
+msgid "Approve Follow Module"
+msgstr "授权关注模块"
+
 msgid "Bookmarks"
 msgstr "书签"
 
@@ -50,6 +53,12 @@ msgstr "费用"
 
 msgid "Feed"
 msgstr "订阅"
+
+msgid "Follow"
+msgstr "关注"
+
+msgid "Following"
+msgstr "正在关注"
 
 msgid "Get paid every time someone views your post"
 msgstr "每次有人查看您的帖子时获得支付收益"
@@ -149,6 +158,9 @@ msgstr "您的趋势"
 
 msgid "Try searching for another."
 msgstr "尝试搜索另一个。"
+
+msgid "Unfollow"
+msgstr "取消关注"
 
 msgid "Who to follow"
 msgstr "尝试关注哪些人"

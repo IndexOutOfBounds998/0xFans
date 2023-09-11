@@ -19,6 +19,9 @@ msgstr ""
 msgid "Ads Info"
 msgstr ""
 
+msgid "Approve Follow Module"
+msgstr ""
+
 msgid "Bookmarks"
 msgstr ""
 
@@ -44,6 +47,12 @@ msgid "Fee"
 msgstr ""
 
 msgid "Feed"
+msgstr ""
+
+msgid "Follow"
+msgstr ""
+
+msgid "Following"
 msgstr ""
 
 msgid "Get paid every time someone views your post"
@@ -143,6 +152,9 @@ msgid "Trends for you"
 msgstr ""
 
 msgid "Try searching for another."
+msgstr ""
+
+msgid "Unfollow"
 msgstr ""
 
 msgid "Who to follow"
