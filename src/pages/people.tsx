@@ -25,7 +25,8 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const translation = await loadCatalog(ctx.locale!)
   return {
     props: {
-      translation
+      translation,
+      i18n: translation
     }
   }
 }

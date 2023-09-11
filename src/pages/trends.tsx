@@ -22,7 +22,8 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
   return {
     props: {
-      translation
+      translation,
+      i18n: translation
     }
   }
 }

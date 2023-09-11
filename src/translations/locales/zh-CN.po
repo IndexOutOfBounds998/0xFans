@@ -8,7 +8,7 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: 0xfans\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-09-11 07:08\n"
+"PO-Revision-Date: 2023-09-11 07:36\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -19,61 +19,61 @@ msgstr ""
 "X-Crowdin-File-ID: 29\n"
 
 msgid "Accessibility"
-msgstr ""
+msgstr "无障碍环境"
 
 msgid "Ads Info"
-msgstr ""
+msgstr "广告信息"
 
 msgid "Bookmarks"
-msgstr ""
+msgstr "书签"
 
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 msgid "Charge Limit"
-msgstr ""
+msgstr "个数限制"
 
 msgid "Chinese"
 msgstr "中文"
 
 msgid "Cookie Policy"
-msgstr ""
+msgstr "Cookie 策略"
 
 msgid "English"
 msgstr "Distr."
 
 msgid "Fee"
-msgstr ""
+msgstr "费用"
 
 msgid "Feed"
-msgstr ""
+msgstr "订阅源"
 
 msgid "Get paid every time someone views your post"
-msgstr ""
+msgstr "每次有人查看您的帖子时获得支付收益"
 
 msgid "Home"
-msgstr ""
+msgstr "首页"
 
 msgid "Limited Edition"
-msgstr ""
+msgstr "有限版"
 
 msgid "Make your posts unique"
-msgstr ""
+msgstr "使您的帖子变成唯一的"
 
 msgid "Messages"
-msgstr ""
+msgstr "留言"
 
 msgid "Notifications"
-msgstr ""
+msgstr "通知"
 
 msgid "Paid to view only for the first 24 hours"
-msgstr ""
+msgstr "付费仅在头24小时内查看"
 
 msgid "Pay settings"
-msgstr ""
+msgstr "支付设置"
 
 msgid "Pay To Show"
-msgstr ""
+msgstr "付款以显示"
 
 msgid "People"
 msgstr "人"
@@ -82,49 +82,49 @@ msgid "People / 0xFans"
 msgstr "人 / 0xFans"
 
 msgid "Post"
-msgstr ""
+msgstr "发帖"
 
 msgid "Price"
-msgstr ""
+msgstr "价格"
 
 msgid "Privacy Policy"
-msgstr ""
+msgstr "隐私政策"
 
 msgid "Pseudo"
 msgstr "伪装"
 
 msgid "Referral Fee"
-msgstr ""
+msgstr "转发费"
 
 msgid "Referral Rewards"
-msgstr ""
+msgstr "推荐奖励"
 
 msgid "Save"
-msgstr ""
+msgstr "保存"
 
 msgid "Search Creators"
-msgstr ""
+msgstr "搜索创作者"
 
 msgid "Select Currency"
-msgstr ""
+msgstr "选择货币"
 
 msgid "Share your costs with those who amplify your content"
-msgstr ""
+msgstr "与那些扩大您内容的人分享您的收益"
 
 msgid "Show more"
-msgstr ""
+msgstr "显示更多"
 
 msgid "Something went wrong"
-msgstr "出了错。"
+msgstr "出错了"
 
 msgid "Terms of Service"
-msgstr ""
+msgstr "服务条款"
 
 msgid "This account doesn’t exist"
 msgstr "此帐户不存在"
 
 msgid "Time Limit"
-msgstr ""
+msgstr "时间限制"
 
 msgid "Trends"
 msgstr "趋势"
@@ -136,4 +136,5 @@ msgid "Try searching for another."
 msgstr "尝试搜索另一个。"
 
 msgid "Who to follow"
-msgstr "关注哪些人"
+msgstr "尝试关注哪些人"
+

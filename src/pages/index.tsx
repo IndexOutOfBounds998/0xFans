@@ -9,10 +9,10 @@ import { useLingui } from '@lingui/react';
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const translation = await loadCatalog(ctx.locale!)
-  console.log('GetStaticProps')
   return {
     props: {
-      translation
+      translation,
+      i18n: translation
     }
   }
 }
