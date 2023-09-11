@@ -13,13 +13,28 @@ import { ToolTip } from '@components/ui/tooltip';
 import { HeroIcon } from '@components/ui/hero-icon';
 import type { ReactElement, ReactNode } from 'react';
 
-export default function Bookmarks(): JSX.Element {
+import { GetStaticProps } from 'next';
+import { loadCatalog } from 'translations/utils';
+import { useLingui } from '@lingui/react';
+import { Trans, t } from '@lingui/macro';
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  const translation = await loadCatalog(ctx.locale!)
+
+  return {
+    props: {
+      translation
+    }
+  }
+}
+
+export default function Trends(): JSX.Element {
+  useLingui();
   const { back } = useRouter();
 
   return (
     <MainContainer>
       <SEO title='Trends / 0xFans' />
-      <MainHeader useActionButton title='Trends' action={back}>
+      <MainHeader useActionButton title={t`Trends`} action={back}>
         <Button
           className='dark-bg-tab group relative ml-auto cursor-not-allowed p-2 hover:bg-light-primary/10
                      active:bg-light-primary/20 dark:hover:bg-dark-primary/10 dark:active:bg-dark-primary/20'
@@ -33,7 +48,7 @@ export default function Bookmarks(): JSX.Element {
   );
 }
 
-Bookmarks.getLayout = (page: ReactElement): ReactNode => (
+Trends.getLayout = (page: ReactElement): ReactNode => (
   <ProtectedLayout>
     <MainLayout>
       <TrendsLayout>{page}</TrendsLayout>
