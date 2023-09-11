@@ -8,7 +8,7 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: 0xfans\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-09-11 09:29\n"
+"PO-Revision-Date: 2023-09-11 11:26\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -23,6 +23,9 @@ msgstr "无障碍环境"
 
 msgid "Ads Info"
 msgstr "广告信息"
+
+msgid "Approve Follow Module"
+msgstr ""
 
 msgid "Bookmarks"
 msgstr "书签"
@@ -50,6 +53,12 @@ msgstr "费用"
 
 msgid "Feed"
 msgstr "订阅源"
+
+msgid "Follow"
+msgstr ""
+
+msgid "Following"
+msgstr ""
 
 msgid "Get paid every time someone views your post"
 msgstr "每次有人查看您的帖子时获得支付"
@@ -89,6 +98,9 @@ msgstr "人"
 
 msgid "People / 0xFans"
 msgstr "人 / 0xFans"
+
+msgid "Popular tags"
+msgstr ""
 
 msgid "Post"
 msgstr "帖子"
@@ -141,14 +153,14 @@ msgstr "此帐户不存在"
 msgid "Time Limit"
 msgstr "时间限制"
 
-msgid "Trends"
-msgstr "A. 趋势"
-
 msgid "Trends for you"
 msgstr "您的趋势"
 
 msgid "Try searching for another."
 msgstr "尝试搜索另一个。"
+
+msgid "Unfollow"
+msgstr ""
 
 msgid "Who to follow"
 msgstr "关注哪些人"
