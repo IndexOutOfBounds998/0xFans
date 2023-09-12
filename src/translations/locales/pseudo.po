@@ -67,6 +67,9 @@ msgstr ""
 msgid "Cookie Policy"
 msgstr ""
 
+msgid "Copy link to Profile"
+msgstr ""
+
 msgid "Customize your view"
 msgstr ""
 
@@ -112,6 +115,12 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
+msgid "Learn more"
+msgstr ""
+
+msgid "Like"
+msgstr ""
+
 msgid "Limited Edition"
 msgstr ""
 
@@ -122,6 +131,9 @@ msgid "Log out of 0xFans?"
 msgstr ""
 
 msgid "Make your posts unique"
+msgstr ""
+
+msgid "Media"
 msgstr ""
 
 msgid "Messages"
@@ -172,6 +184,9 @@ msgstr ""
 msgid "Post by"
 msgstr ""
 
+msgid "Posts"
+msgstr ""
+
 msgid "Price"
 msgstr ""
 
@@ -205,7 +220,13 @@ msgstr ""
 msgid "Reply"
 msgstr ""
 
+msgid "Replying to"
+msgstr ""
+
 msgid "Reset"
+msgstr ""
+
+msgid "Retweet"
 msgstr ""
 
 msgid "Save"
@@ -242,6 +263,9 @@ msgid "These settings affect all the 0xFans accounts on this browser."
 msgstr ""
 
 msgid "This account doesn’t exist"
+msgstr ""
+
+msgid "This Post was deleted by the Post author."
 msgstr ""
 
 msgid "Time Limit"
