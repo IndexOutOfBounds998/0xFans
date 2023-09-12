@@ -8,7 +8,7 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: 0xfans\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-09-12 07:15\n"
+"PO-Revision-Date: 2023-09-12 07:26\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -72,6 +72,9 @@ msgstr ""
 msgid "Cookie Policy"
 msgstr "Cookie 策略"
 
+msgid "Copy link to Profile"
+msgstr ""
+
 msgid "Customize your view"
 msgstr ""
 
@@ -117,6 +120,12 @@ msgstr "帮助中心"
 msgid "Home"
 msgstr "首页"
 
+msgid "Learn more"
+msgstr ""
+
+msgid "Like"
+msgstr ""
+
 msgid "Limited Edition"
 msgstr "有限版"
 
@@ -128,6 +137,9 @@ msgstr ""
 
 msgid "Make your posts unique"
 msgstr "使您的帖子变成唯一的"
+
+msgid "Media"
+msgstr ""
 
 msgid "Messages"
 msgstr "留言"
@@ -177,6 +189,9 @@ msgstr "帖子"
 msgid "Post by"
 msgstr ""
 
+msgid "Posts"
+msgstr ""
+
 msgid "Price"
 msgstr "价格"
 
@@ -210,7 +225,13 @@ msgstr ""
 msgid "Reply"
 msgstr "答复"
 
+msgid "Replying to"
+msgstr ""
+
 msgid "Reset"
+msgstr ""
+
+msgid "Retweet"
 msgstr ""
 
 msgid "Save"
@@ -247,7 +268,10 @@ msgid "These settings affect all the 0xFans accounts on this browser."
 msgstr ""
 
 msgid "This account doesn’t exist"
-msgstr "此帐户不存在"
+msgstr "该账户不存在。"
+
+msgid "This Post was deleted by the Post author."
+msgstr ""
 
 msgid "Time Limit"
 msgstr "时间限制"
