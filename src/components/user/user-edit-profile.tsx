@@ -139,29 +139,29 @@ export function UserEditProfile({ hide }: UserEditProfileProps): JSX.Element {
 
   const editImage =
     (type: 'cover' | 'profile') =>
-    ({ target: { files } }: ChangeEvent<HTMLInputElement>): void => {
-      const imagesData = getImagesData(files);
+      ({ target: { files } }: ChangeEvent<HTMLInputElement>): void => {
+        const imagesData = getImagesData(files);
 
-      if (!imagesData) {
-        toast.error('Please choose a valid GIF or Photo');
-        return;
-      }
+        if (!imagesData) {
+          toast.error('Please choose a valid GIF or Photo');
+          return;
+        }
 
-      const { imagesPreviewData, selectedImagesData } = imagesData;
+        const { imagesPreviewData, selectedImagesData } = imagesData;
 
-      const targetKey = type === 'cover' ? 'coverPhotoURL' : 'photoURL';
-      const newImage = imagesPreviewData[0].src;
+        const targetKey = type === 'cover' ? 'coverPhotoURL' : 'photoURL';
+        const newImage = imagesPreviewData[0].src;
 
-      setEditUserData({
-        ...editUserData,
-        [targetKey]: newImage
-      });
+        setEditUserData({
+          ...editUserData,
+          [targetKey]: newImage
+        });
 
-      setUserImages({
-        ...userImages,
-        [targetKey]: selectedImagesData
-      });
-    };
+        setUserImages({
+          ...userImages,
+          [targetKey]: selectedImagesData
+        });
+      };
 
   const removeCoverImage = (): void => {
     setEditUserData({
@@ -205,10 +205,21 @@ export function UserEditProfile({ hide }: UserEditProfileProps): JSX.Element {
 
   const handleChange =
     (key: EditableData) =>
-    ({
-      target: { value }
-    }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-      setEditUserData({ ...editUserData, [key]: value });
+      ({
+        target: { value }
+      }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        let res = inputFields.find((it) => it.inputId === key) as RequiredInputFieldProps;
+        res.inputValue = value;
+        const updatedInputFields = inputFields.map((input) => {
+          if (input.inputId === key) {
+            return { ...input, inputValue: value };
+          }
+          return input;
+        });
+        setInputFields(updatedInputFields);
+        setEditUserData({ ...editUserData, [key]: value });
+      }
+
 
   const handleKeyboardShortcut = ({
     key,
@@ -221,7 +232,7 @@ export function UserEditProfile({ hide }: UserEditProfileProps): JSX.Element {
     }
   };
 
-  const inputFields: Readonly<RequiredInputFieldProps[]> = [
+  const [inputFields, setInputFields] = useState<RequiredInputFieldProps[]>([
     {
       label: 'Name',
       inputId: 'name',
@@ -248,7 +259,7 @@ export function UserEditProfile({ hide }: UserEditProfileProps): JSX.Element {
       inputValue: editUserData.website,
       inputLimit: 100
     }
-  ];
+  ]);
 
   return (
     <form className={cn(hide && 'hidden md:block')}>
