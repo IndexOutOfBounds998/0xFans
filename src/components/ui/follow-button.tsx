@@ -42,7 +42,6 @@ export function FollowButton({
 }: FollowButtonProps): JSX.Element | null {
   const { i18n } = useLingui();
   const unfollowstr = i18n._(t`Unfollow`);
-  const followClass = `hover:before:content-["${unfollowstr}"]`;
 
   const {
     execute: unfollow,
@@ -165,13 +164,9 @@ export function FollowButton({
       {userIsFollowed ? (
         <Button
           loading={isUnfollowPending || unfollowLoading}
-          className={
-            `dark-bg-tab hover:before:content-[" group min-w-[106px] self-start border border-light-line-reply px-4
+          className={`dark-bg-tab hover:before:content-[" group group min-w-[106px] self-start border border-light-line-reply px-4
                      py-1.5 font-bold hover:border-accent-red hover:bg-accent-red/10
-                     hover:text-accent-red` +
-            unfollowstr +
-            `"] inner:hover:hidden dark:border-light-secondary ${btnClass}`
-          }
+                     hover:text-accent-red dark:border-light-secondary ${btnClass}`}
           onClick={preventBubbling(openModal)}
         >
           <span className={'block group-hover:hidden'}>

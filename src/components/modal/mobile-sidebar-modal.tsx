@@ -14,47 +14,10 @@ import { ActionModal } from './action-modal';
 import { DisplayModal } from './display-modal';
 import type { NavLink } from '@components/sidebar/sidebar';
 import type { User } from '@lib/types/user';
-
+import { useLingui } from '@lingui/react';
+import { useState } from 'react';
+import { Trans, t } from '@lingui/macro';
 export type MobileNavLink = Omit<NavLink, 'canBeHidden'>;
-
-const topNavLinks: Readonly<MobileNavLink[]> = [
-  {
-    href: '/trends',
-    linkName: 'Topics',
-    iconName: 'ChatBubbleBottomCenterTextIcon'
-  },
-  {
-    href: '/bookmarks',
-    linkName: 'Bookmarks',
-    iconName: 'BookmarkIcon'
-  },
-  {
-    href: '/lists',
-    linkName: 'Lists',
-    iconName: 'Bars3BottomLeftIcon',
-    disabled: true
-  },
-  {
-    href: '/people',
-    linkName: '0xFans Circle',
-    iconName: 'UserGroupIcon'
-  }
-];
-
-const bottomNavLinks: Readonly<MobileNavLink[]> = [
-  {
-    href: '/settings',
-    linkName: 'Settings and privacy',
-    iconName: 'Cog8ToothIcon'
-    // disabled: true
-  },
-  {
-    href: '/help-center',
-    linkName: 'Help center',
-    iconName: 'QuestionMarkCircleIcon',
-    disabled: true
-  }
-];
 
 type Stats = [string, string, number];
 
@@ -83,6 +46,41 @@ export function MobileSidebarModal({
   coverPhotoURL,
   closeModal
 }: MobileSidebarModalProps): JSX.Element {
+  useLingui();
+
+  const [topNavLinks] = useState<MobileNavLink[]>([
+    {
+      href: '/trends',
+      linkName: t`Topics`,
+      iconName: 'ChatBubbleBottomCenterTextIcon'
+    },
+    {
+      href: '/bookmarks',
+      linkName: t`Bookmarks`,
+      iconName: 'BookmarkIcon'
+    },
+    {
+      href: '/people',
+      linkName: t`0xFans Circle`,
+      iconName: 'UserGroupIcon'
+    }
+  ]);
+
+  const [bottomNavLinks] = useState<MobileNavLink[]>([
+    {
+      href: '/settings',
+      linkName: t`Settings and privacy`,
+      iconName: 'Cog8ToothIcon',
+      disabled: false
+    },
+    {
+      href: '/help-center',
+      linkName: t`Help center`,
+      iconName: 'QuestionMarkCircleIcon',
+      disabled: true
+    }
+  ]);
+
   const { signOut } = useAuth();
 
   const {
@@ -97,10 +95,10 @@ export function MobileSidebarModal({
     closeModal: logOutCloseModal
   } = useModal();
 
-  const allStats: Readonly<Stats[]> = [
-    ['following', 'Following', following],
-    ['followers', 'Followers', followers]
-  ];
+  const [allStats] = useState<Stats[]>([
+    ['following', t`Following`, following],
+    ['followers', t`Followers`, followers]
+  ]);
 
   const userLink = `/user/${id}`;
 
@@ -122,9 +120,9 @@ export function MobileSidebarModal({
         <ActionModal
           useIcon
           focusOnMainBtn
-          title='Log out of 0xFans?'
-          description='You can always log back in at any time. If you just want to switch accounts, you can do that by adding an existing account.'
-          mainBtnLabel='Log out'
+          title={t`Log out of 0xFans?`}
+          description={t`You can always log back in at any time. If you just want to switch accounts, you can do that by adding an existing account.`}
+          mainBtnLabel={t`Log out`}
           action={signOut}
           closeModal={logOutCloseModal}
         />
@@ -133,8 +131,8 @@ export function MobileSidebarModal({
         useActionButton
         className='flex flex-row-reverse items-center justify-between'
         iconName='XMarkIcon'
-        title='Account info'
-        tip='Close'
+        title={t`Account info`}
+        tip={t`Close`}
         action={closeModal}
       />
       <section className='mt-0.5 flex flex-col gap-2 px-4'>
@@ -196,7 +194,7 @@ export function MobileSidebarModal({
             <MobileSidebarLink
               href={`/user/${id}`}
               iconName='UserIcon'
-              linkName='Profile'
+              linkName={t`Profile`}
             />
             {topNavLinks.map((linkData) => (
               <MobileSidebarLink {...linkData} key={linkData.href} />
@@ -214,7 +212,7 @@ export function MobileSidebarModal({
               onClick={displayOpenModal}
             >
               <HeroIcon className='h-5 w-5' iconName='PaintBrushIcon' />
-              Display
+              <Trans>Display</Trans>
             </Button>
             <Button
               className='accent-tab accent-bg-tab flex items-center gap-2 rounded-md p-1.5 font-bold transition
@@ -226,7 +224,7 @@ export function MobileSidebarModal({
                 className='h-5 w-5'
                 iconName='ArrowRightOnRectangleIcon'
               />
-              Log out
+              <Trans>Log out</Trans>
             </Button>
           </nav>
         </div>

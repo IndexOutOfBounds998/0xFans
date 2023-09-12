@@ -13,7 +13,16 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+msgid "0xFans Circle"
+msgstr ""
+
 msgid "Accessibility"
+msgstr ""
+
+msgid "Account info"
+msgstr ""
+
+msgid "Add photo"
 msgstr ""
 
 msgid "Ads Info"
@@ -22,7 +31,13 @@ msgstr ""
 msgid "Approve Follow Module"
 msgstr ""
 
+msgid "Background"
+msgstr ""
+
 msgid "Bookmarks"
+msgstr ""
+
+msgid "can collect"
 msgstr ""
 
 msgid "can reply"
@@ -43,10 +58,28 @@ msgstr ""
 msgid "Choose audience"
 msgstr ""
 
+msgid "Close"
+msgstr ""
+
+msgid "collectors"
+msgstr ""
+
 msgid "Cookie Policy"
 msgstr ""
 
+msgid "Copy link to Profile"
+msgstr ""
+
+msgid "Customize your view"
+msgstr ""
+
 msgid "Display"
+msgstr ""
+
+msgid "Done"
+msgstr ""
+
+msgid "Edit profile"
 msgstr ""
 
 msgid "English"
@@ -64,6 +97,12 @@ msgstr ""
 msgid "Follow"
 msgstr ""
 
+msgid "Follow and get some awesome perks!"
+msgstr ""
+
+msgid "Followers"
+msgstr ""
+
 msgid "Following"
 msgstr ""
 
@@ -76,10 +115,25 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
+msgid "Learn more"
+msgstr ""
+
+msgid "Like"
+msgstr ""
+
 msgid "Limited Edition"
 msgstr ""
 
+msgid "Log out"
+msgstr ""
+
+msgid "Log out of 0xFans?"
+msgstr ""
+
 msgid "Make your posts unique"
+msgstr ""
+
+msgid "Media"
 msgstr ""
 
 msgid "Messages"
@@ -88,10 +142,19 @@ msgstr ""
 msgid "More"
 msgstr ""
 
+msgid "More coming soon™"
+msgstr ""
+
 msgid "Notifications"
 msgstr ""
 
+msgid "Only"
+msgstr ""
+
 msgid "Onlyfans"
+msgstr ""
+
+msgid "Open original"
 msgstr ""
 
 msgid "Paid to view only for the first 24 hours"
@@ -109,10 +172,19 @@ msgstr ""
 msgid "People / 0xFans"
 msgstr ""
 
+msgid "Perks you get"
+msgstr ""
+
 msgid "Popular tags"
 msgstr ""
 
 msgid "Post"
+msgstr ""
+
+msgid "Post by"
+msgstr ""
+
+msgid "Posts"
 msgstr ""
 
 msgid "Price"
@@ -121,10 +193,19 @@ msgstr ""
 msgid "Privacy Policy"
 msgstr ""
 
+msgid "profile"
+msgstr ""
+
 msgid "Profile"
 msgstr ""
 
 msgid "Pseudo"
+msgstr ""
+
+msgid "publications"
+msgstr ""
+
+msgid "Recipient"
 msgstr ""
 
 msgid "Referral Fee"
@@ -133,7 +214,19 @@ msgstr ""
 msgid "Referral Rewards"
 msgstr ""
 
+msgid "Remove photo"
+msgstr ""
+
 msgid "Reply"
+msgstr ""
+
+msgid "Replying to"
+msgstr ""
+
+msgid "Reset"
+msgstr ""
+
+msgid "Retweet"
 msgstr ""
 
 msgid "Save"
@@ -160,16 +253,28 @@ msgstr ""
 msgid "Something went wrong"
 msgstr ""
 
+msgid "super followers"
+msgstr ""
+
 msgid "Terms of Service"
 msgstr ""
 
+msgid "These settings affect all the 0xFans accounts on this browser."
+msgstr ""
+
 msgid "This account doesn’t exist"
+msgstr ""
+
+msgid "This Post was deleted by the Post author."
 msgstr ""
 
 msgid "Time Limit"
 msgstr ""
 
 msgid "Top Posts"
+msgstr ""
+
+msgid "Topics"
 msgstr ""
 
 msgid "Try searching for another."
@@ -194,4 +299,19 @@ msgid "You can always change it here again."
 msgstr ""
 
 msgid "You can always change it later."
+msgstr ""
+
+msgid "You can always log back in at any time. If you just want to switch accounts, you can do that by adding an existing account."
+msgstr ""
+
+msgid "You can collect"
+msgstr ""
+
+msgid "You can comment on"
+msgstr ""
+
+msgid "You will get Super follow badge in"
+msgstr ""
+
+msgid "You will have high voting power if you followed multiple times"
 msgstr ""

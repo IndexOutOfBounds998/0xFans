@@ -63,7 +63,7 @@ export function SearchBar(): JSX.Element {
           className={cn(
             'accent-tab scale-50 bg-main-accent p-1 opacity-0 transition hover:brightness-90 disabled:opacity-0',
             inputValue &&
-            'focus:scale-100 focus:opacity-100 peer-focus:scale-100 peer-focus:opacity-100'
+              'focus:scale-100 focus:opacity-100 peer-focus:scale-100 peer-focus:opacity-100'
           )}
           onClick={clearInputValue(true)}
           disabled={!inputValue}

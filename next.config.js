@@ -39,7 +39,7 @@ const nextConfig = {
     config.resolve.fallback = { fs: false, net: false, tls: false };
     return config;
   },
-  transpilePackages: ['@lens-protocol','src']
+  transpilePackages: ['@lens-protocol', 'src']
 };
 
 module.exports = nextConfig;

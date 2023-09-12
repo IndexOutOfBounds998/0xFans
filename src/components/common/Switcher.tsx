@@ -25,11 +25,11 @@ export function Switcher() {
   const [locale, setLocale] = useState<LOCALES>(router.locale as LOCALES);
 
   const selectList = Object.keys(languages).map((item) => ({
-    id: item,
+    id: item as LOCALES,
     name: i18n._(languages[item])
   }));
 
-  function handleChange(event: React.ChangeEvent<HTMLSelectElement>) {
+  function handleChange(event: any) {
     const locale = event.id as LOCALES;
 
     setLocale(locale);

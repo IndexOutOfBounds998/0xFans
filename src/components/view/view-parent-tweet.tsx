@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 
 import { Publication, TweetProps } from '@components/publication/publication';
 import type { RefObject } from 'react';
+import { Trans, t } from '@lingui/macro';
 
 type ViewParentTweetProps = {
   parentId: string;
@@ -33,14 +34,14 @@ export function ViewParentTweet({
           className='rounded-2xl bg-main-sidebar-background py-3 px-1 pl-4 
                      text-light-secondary dark:text-dark-secondary'
         >
-          This Post was deleted by the Post author.{' '}
+          <Trans>This Post was deleted by the Post author.</Trans>{' '}
           <a
             className='custom-underline text-main-accent'
             href='https://help.twitter.com/rules-and-policies/notices-on-twitter'
             target='_blank'
             rel='noreferrer'
           >
-            Learn more
+            <Trans>Learn more</Trans>
           </a>
         </p>
       </div>

@@ -83,11 +83,10 @@ export function InputForm({
 }: InputFormProps): JSX.Element {
   const { open, openModal, closeModal } = useModal();
 
-
   const [peopler] = useState<AudienceType[]>([
     { icon: 'GlobeAsiaAustraliaIcon', label: t`Everyone`, color: '#1d9bf0' },
     { icon: 'UserGroupIcon', label: t`Onlyfans`, color: '#00ba7c' }
-  ])
+  ]);
 
   useEffect(() => {
     handleShowHideNav(true);
@@ -251,7 +250,9 @@ export function InputForm({
                        px-3 text-main-accent hover:bg-main-accent/10 active:bg-main-accent/20'
           >
             <HeroIcon className='h-4 w-4' iconName={audience.icon} />
-            <p className='font-bold'>{audience.label} <Trans>can reply</Trans></p>
+            <p className='font-bold'>
+              {audience.label} <Trans>can reply</Trans>
+            </p>
           </button>
         </motion.div>
       )}

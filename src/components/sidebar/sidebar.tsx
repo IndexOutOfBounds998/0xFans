@@ -22,9 +22,8 @@ export type NavLink = {
 };
 
 export function Sidebar(): JSX.Element {
-
-  const [navLinks] = useState<NavLink[]>(
-    [{
+  const [navLinks] = useState<NavLink[]>([
+    {
       href: '/home',
       linkName: t`Home`,
       iconName: 'HomeIcon'
@@ -52,8 +51,7 @@ export function Sidebar(): JSX.Element {
       iconName: 'BookmarkIcon',
       canBeHidden: true
     }
-    ]
-  )
+  ]);
 
   useLingui();
 
@@ -118,7 +116,9 @@ export function Sidebar(): JSX.Element {
               className='block h-6 w-6 xl:hidden'
               iconName='FeatherIcon'
             />
-            <p className='hidden xl:block'><Trans>Post</Trans></p>
+            <p className='hidden xl:block'>
+              <Trans>Post</Trans>
+            </p>
           </Button>
         </section>
         {!isMobile && <SidebarProfile />}
