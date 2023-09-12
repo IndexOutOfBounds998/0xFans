@@ -17,6 +17,7 @@ import type { Variants } from 'framer-motion';
 import { Menu, Popover } from '@headlessui/react';
 import type { IconName } from '@components/ui/hero-icon';
 import { Trans, t } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 type AudienceType = {
   icon: IconName;
   label: string;
@@ -81,6 +82,7 @@ export function InputForm({
   audience,
   setAudience
 }: InputFormProps): JSX.Element {
+  useLingui();
   const { open, openModal, closeModal } = useModal();
 
   const [peopler] = useState<AudienceType[]>([
@@ -138,10 +140,10 @@ export function InputForm({
         closeModal={closeModal}
       >
         <ActionModal
-          title='Discard Posts?'
-          description='This can’t be undone and you’ll lose your draft.'
+          title={t`Discard Posts?`}
+          description={t`This can’t be undone and you’ll lose your draft.`}
           mainBtnClassName='bg-accent-red hover:bg-accent-red/90 active:bg-accent-red/75'
-          mainBtnLabel='Discard'
+          mainBtnLabel={t`Discard`}
           action={handleClose}
           closeModal={closeModal}
         />
@@ -217,7 +219,7 @@ export function InputForm({
                        placeholder:text-light-secondary dark:placeholder:text-dark-secondary'
             value={inputValue}
             placeholder={
-              reply || replyModal ? 'Post your reply' : "What's happening?"
+              reply || replyModal ? t`Post your reply` : t`What's happening?`
             }
             onBlur={handleShowHideNav(true)}
             minRows={loading ? 1 : modal && !isUploadingImages ? 3 : 1}

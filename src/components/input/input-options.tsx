@@ -10,7 +10,8 @@ import type { IconName } from '@components/ui/hero-icon';
 import { Modal } from '@components/modal/modal';
 import CollectSetting from '@components/collect/collect-setting';
 import { useModal } from '@lib/hooks/useModal';
-
+import { useLingui } from '@lingui/react';
+import { Trans, t } from '@lingui/macro';
 type Options = {
   name: string;
   iconName: IconName;
@@ -52,41 +53,37 @@ export function InputOptions({
   setCollectData,
   audience
 }: InputOptionsProps): JSX.Element {
+  useLingui();
   const { open, openModal, closeModal } = useModal();
 
   const mediaClick = (): void => inputFileRef.current?.click();
 
   const options: Readonly<Options> = [
     {
-      name: 'Media',
+      name: t`Media`,
       iconName: 'PhotoIcon',
       disabled: false,
       onClick: mediaClick
     },
     {
-      name: 'GIF',
+      name: t`GIF`,
       iconName: 'GifIcon',
       disabled: true
     },
     {
-      name: 'Poll',
-      iconName: 'ChartBarIcon',
-      disabled: true
-    },
-    {
-      name: 'Emoji',
+      name: t`Emoji`,
       iconName: 'FaceSmileIcon',
       disabled: true
     },
     {
-      name: 'Schedule',
+      name: t`Collect`,
       iconName: 'RectangleStackIcon',
       disabled: audience.label === 'Everyone',
-      tip: 'onlyfans can use',
+      tip: t`onlyfans can use`,
       onClick: openModal
     },
     {
-      name: 'Location',
+      name: t`Location`,
       iconName: 'MapPinIcon',
       disabled: true
     }
@@ -112,7 +109,7 @@ export function InputOptions({
         <CollectSetting
           closeModal={closeModal}
           collectData={collectData}
-          setCollectData={setCollectData || (() => {})}
+          setCollectData={setCollectData || (() => { })}
         />
       </Modal>
       <div
@@ -164,7 +161,7 @@ export function InputOptions({
                 disabled
               >
                 <HeroIcon className='h-5 w-5' iconName='PlusIcon' />
-                <ToolTip tip='Add' modal={modal} />
+                <ToolTip tip={t`Add`} modal={modal} />
               </Button>
             </>
           )}
@@ -176,7 +173,7 @@ export function InputOptions({
                      enabled:active:bg-main-accent/75'
           disabled={!isValidTweet}
         >
-          {reply ? 'Reply' : 'Post'}
+          {reply ? t`Reply` : t`Post`}
         </Button>
       </div>
     </motion.div>

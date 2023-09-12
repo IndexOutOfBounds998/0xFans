@@ -22,6 +22,9 @@ msgstr "Accessibility"
 msgid "Account info"
 msgstr "Account info"
 
+msgid "Add"
+msgstr "Add"
+
 msgid "Add photo"
 msgstr "Add photo"
 
@@ -61,17 +64,29 @@ msgstr "Choose audience"
 msgid "Close"
 msgstr "Close"
 
+msgid "Collect"
+msgstr "Collect"
+
 msgid "collectors"
 msgstr "collectors"
 
 msgid "Cookie Policy"
 msgstr "Cookie Policy"
 
+msgid "Copy link"
+msgstr "Copy link"
+
 msgid "Copy link to Profile"
 msgstr "Copy link to Profile"
 
 msgid "Customize your view"
 msgstr "Customize your view"
+
+msgid "Discard"
+msgstr "Discard"
+
+msgid "Discard Posts?"
+msgstr "Discard Posts?"
 
 msgid "Display"
 msgstr "Display"
@@ -81,6 +96,9 @@ msgstr "Done"
 
 msgid "Edit profile"
 msgstr "Edit profile"
+
+msgid "Emoji"
+msgstr "Emoji"
 
 msgid "English"
 msgstr "English"
@@ -100,20 +118,32 @@ msgstr "Follow"
 msgid "Follow and get some awesome perks!"
 msgstr "Follow and get some awesome perks!"
 
+msgid "Follower"
+msgstr "Follower"
+
 msgid "Followers"
 msgstr "Followers"
 
 msgid "Following"
 msgstr "Following"
 
+msgid "Follows you"
+msgstr "Follows you"
+
 msgid "Get paid every time someone views your post"
 msgstr "Get paid every time someone views your post"
+
+msgid "GIF"
+msgstr "GIF"
 
 msgid "Help center"
 msgstr "Help center"
 
 msgid "Home"
 msgstr "Home"
+
+msgid "Language"
+msgstr "Language"
 
 msgid "Learn more"
 msgstr "Learn more"
@@ -123,6 +153,9 @@ msgstr "Like"
 
 msgid "Limited Edition"
 msgstr "Limited Edition"
+
+msgid "Location"
+msgstr "Location"
 
 msgid "Log out"
 msgstr "Log out"
@@ -145,6 +178,15 @@ msgstr "More"
 msgid "More coming soon™"
 msgstr "More coming soon™"
 
+msgid "No Like"
+msgstr "No Like"
+
+msgid "No Photo & GIF"
+msgstr "No Photo & GIF"
+
+msgid "No Post"
+msgstr "No Post"
+
 msgid "Notifications"
 msgstr "Notifications"
 
@@ -153,6 +195,9 @@ msgstr "Only"
 
 msgid "Onlyfans"
 msgstr "Onlyfans"
+
+msgid "onlyfans can use"
+msgstr "onlyfans can use"
 
 msgid "Open original"
 msgstr "Open original"
@@ -183,6 +228,9 @@ msgstr "Post"
 
 msgid "Post by"
 msgstr "Post by"
+
+msgid "Post your reply"
+msgstr "Post your reply"
 
 msgid "Posts"
 msgstr "Posts"
@@ -265,6 +313,9 @@ msgstr "These settings affect all the 0xFans accounts on this browser."
 msgid "This account doesn’t exist"
 msgstr "This account doesn’t exist"
 
+msgid "This can’t be undone and you’ll lose your draft."
+msgstr "This can’t be undone and you’ll lose your draft."
+
 msgid "This Post was deleted by the Post author."
 msgstr "This Post was deleted by the Post author."
 
@@ -291,6 +342,9 @@ msgstr "Username updated successfully"
 
 msgid "What should we call you?"
 msgstr "What should we call you?"
+
+msgid "What's happening?"
+msgstr "What's happening?"
 
 msgid "Who to follow"
 msgstr "Who to follow"
