@@ -145,6 +145,9 @@ msgstr "Search Creators"
 msgid "Select Currency"
 msgstr "Select Currency"
 
+msgid "Set username"
+msgstr "Set username"
+
 msgid "Settings and privacy"
 msgstr "Settings and privacy"
 
@@ -166,11 +169,20 @@ msgstr "This account doesn’t exist"
 msgid "Time Limit"
 msgstr "Time Limit"
 
+msgid "Top Posts"
+msgstr "Top Posts"
+
 msgid "Try searching for another."
 msgstr "Try searching for another."
 
 msgid "Unfollow"
 msgstr "Unfollow"
+
+msgid "Username"
+msgstr "Username"
+
+msgid "Username updated successfully"
+msgstr "Username updated successfully"
 
 msgid "What should we call you?"
 msgstr "What should we call you?"

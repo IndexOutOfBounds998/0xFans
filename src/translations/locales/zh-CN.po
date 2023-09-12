@@ -150,6 +150,9 @@ msgstr "搜索创作者"
 msgid "Select Currency"
 msgstr "选择货币"
 
+msgid "Set username"
+msgstr ""
+
 msgid "Settings and privacy"
 msgstr "设置和隐私"
 
@@ -171,11 +174,20 @@ msgstr "此帐户不存在"
 msgid "Time Limit"
 msgstr "时间限制"
 
+msgid "Top Posts"
+msgstr ""
+
 msgid "Try searching for another."
 msgstr "尝试搜索另一个。"
 
 msgid "Unfollow"
 msgstr "取消关注"
+
+msgid "Username"
+msgstr ""
+
+msgid "Username updated successfully"
+msgstr ""
 
 msgid "What should we call you?"
 msgstr "我们应该怎么称呼你"

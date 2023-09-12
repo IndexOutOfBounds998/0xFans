@@ -145,6 +145,9 @@ msgstr ""
 msgid "Select Currency"
 msgstr ""
 
+msgid "Set username"
+msgstr ""
+
 msgid "Settings and privacy"
 msgstr ""
 
@@ -166,10 +169,19 @@ msgstr ""
 msgid "Time Limit"
 msgstr ""
 
+msgid "Top Posts"
+msgstr ""
+
 msgid "Try searching for another."
 msgstr ""
 
 msgid "Unfollow"
+msgstr ""
+
+msgid "Username"
+msgstr ""
+
+msgid "Username updated successfully"
 msgstr ""
 
 msgid "What should we call you?"
