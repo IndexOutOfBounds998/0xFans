@@ -11,6 +11,7 @@ import { backdrop, modal } from './modal';
 import type { VariantLabels } from 'framer-motion';
 import type { ImageData } from '@lib/types/file';
 import type { IconName } from '@components/ui/hero-icon';
+import { Trans } from '@lingui/macro';
 
 type ImageModalProps = {
   tweet?: boolean;
@@ -135,7 +136,7 @@ export function ImageModal({
               rel='noreferrer'
               onClick={preventBubbling(null, true)}
             >
-              Open original
+              <Trans>Open original</Trans>
             </a>
           </motion.div>
         )}

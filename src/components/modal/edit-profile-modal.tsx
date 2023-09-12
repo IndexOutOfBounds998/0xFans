@@ -7,7 +7,7 @@ import { NextImage } from '@components/ui/next-image';
 import { ToolTip } from '@components/ui/tooltip';
 import type { ReactNode, ChangeEvent } from 'react';
 import type { User } from '@lib/types/user';
-
+import { t } from '@lingui/macro';
 type EditProfileModalProps = Pick<
   User,
   'name' | 'photoURL' | 'coverPhotoURL'
@@ -53,7 +53,7 @@ export function EditProfileModal({
         iconName='XMarkIcon'
         tip='Close'
         className='absolute flex w-full items-center gap-6 rounded-tl-2xl'
-        title='Edit profile'
+        title={t`Edit profile`}
         action={closeModal}
       >
         <div className='ml-auto flex items-center gap-3'>
@@ -65,7 +65,7 @@ export function EditProfileModal({
             disabled={loading}
           >
             <HeroIcon className='h-5 w-5' iconName={'ArrowPathIcon'} />
-            <ToolTip tip='Reset' />
+            <ToolTip tip={t`Reset`} />
           </Button>
           <Button
             className='bg-light-primary py-1 px-4 font-bold text-white focus-visible:bg-light-primary/90 
@@ -117,7 +117,7 @@ export function EditProfileModal({
                 className='hover-animation h-6 w-6 text-dark-primary group-hover:text-white'
                 iconName='CameraIcon'
               />
-              <ToolTip groupInner tip='Add photo' />
+              <ToolTip groupInner tip={t`Add photo`} />
             </Button>
             {coverPhotoURL && (
               <Button
@@ -129,7 +129,7 @@ export function EditProfileModal({
                   className='hover-animation h-6 w-6 text-dark-primary group-hover:text-white'
                   iconName='XMarkIcon'
                 />
-                <ToolTip groupInner tip='Remove photo' />
+                <ToolTip groupInner tip={t`Remove photo`} />
               </Button>
             )}
           </div>
@@ -166,7 +166,7 @@ export function EditProfileModal({
                   className='hover-animation h-6 w-6 text-dark-primary group-hover:text-white'
                   iconName='CameraIcon'
                 />
-                <ToolTip groupInner tip='Add photo' />
+                <ToolTip groupInner tip={t`Add photo`} />
               </Button>
             </div>
           </div>

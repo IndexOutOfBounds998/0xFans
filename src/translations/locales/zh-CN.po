@@ -18,8 +18,17 @@ msgstr ""
 "X-Crowdin-File: /dev/src/translations/locales/en-us.po\n"
 "X-Crowdin-File-ID: 29\n"
 
+msgid "0xFans Circle"
+msgstr ""
+
 msgid "Accessibility"
 msgstr "无障碍环境"
+
+msgid "Account info"
+msgstr ""
+
+msgid "Add photo"
+msgstr ""
 
 msgid "Ads Info"
 msgstr "广告信息"
@@ -27,8 +36,14 @@ msgstr "广告信息"
 msgid "Approve Follow Module"
 msgstr "批准跟随模块"
 
+msgid "Background"
+msgstr ""
+
 msgid "Bookmarks"
 msgstr "书签"
+
+msgid "can collect"
+msgstr ""
 
 msgid "can reply"
 msgstr "可以回复"
@@ -48,11 +63,26 @@ msgstr "中文"
 msgid "Choose audience"
 msgstr "选择观看者"
 
+msgid "Close"
+msgstr ""
+
+msgid "collectors"
+msgstr ""
+
 msgid "Cookie Policy"
 msgstr "Cookie 策略"
 
+msgid "Customize your view"
+msgstr ""
+
 msgid "Display"
 msgstr "显示"
+
+msgid "Done"
+msgstr ""
+
+msgid "Edit profile"
+msgstr ""
 
 msgid "English"
 msgstr "英文"
@@ -69,6 +99,12 @@ msgstr "订阅源"
 msgid "Follow"
 msgstr "关注"
 
+msgid "Follow and get some awesome perks!"
+msgstr ""
+
+msgid "Followers"
+msgstr ""
+
 msgid "Following"
 msgstr "关注"
 
@@ -84,6 +120,12 @@ msgstr "首页"
 msgid "Limited Edition"
 msgstr "有限版"
 
+msgid "Log out"
+msgstr ""
+
+msgid "Log out of 0xFans?"
+msgstr ""
+
 msgid "Make your posts unique"
 msgstr "使您的帖子变成唯一的"
 
@@ -93,11 +135,20 @@ msgstr "留言"
 msgid "More"
 msgstr "更多"
 
+msgid "More coming soon™"
+msgstr ""
+
 msgid "Notifications"
 msgstr "通知"
 
+msgid "Only"
+msgstr ""
+
 msgid "Onlyfans"
 msgstr "Onlyfans"
+
+msgid "Open original"
+msgstr ""
 
 msgid "Paid to view only for the first 24 hours"
 msgstr "付费仅在头24小时内查看"
@@ -114,11 +165,17 @@ msgstr "用户"
 msgid "People / 0xFans"
 msgstr "用户 / 0xFans"
 
+msgid "Perks you get"
+msgstr ""
+
 msgid "Popular tags"
 msgstr "热门标签"
 
 msgid "Post"
 msgstr "帖子"
+
+msgid "Post by"
+msgstr ""
 
 msgid "Price"
 msgstr "价格"
@@ -126,11 +183,20 @@ msgstr "价格"
 msgid "Privacy Policy"
 msgstr "隐私政策"
 
+msgid "profile"
+msgstr ""
+
 msgid "Profile"
 msgstr "个人信息"
 
 msgid "Pseudo"
 msgstr "伪装"
+
+msgid "publications"
+msgstr ""
+
+msgid "Recipient"
+msgstr ""
 
 msgid "Referral Fee"
 msgstr "转诊费"
@@ -138,8 +204,14 @@ msgstr "转诊费"
 msgid "Referral Rewards"
 msgstr "推荐奖励"
 
+msgid "Remove photo"
+msgstr ""
+
 msgid "Reply"
 msgstr "答复"
+
+msgid "Reset"
+msgstr ""
 
 msgid "Save"
 msgstr "保存"
@@ -165,8 +237,14 @@ msgstr "显示更多"
 msgid "Something went wrong"
 msgstr "出了错。"
 
+msgid "super followers"
+msgstr ""
+
 msgid "Terms of Service"
 msgstr "服务条款"
+
+msgid "These settings affect all the 0xFans accounts on this browser."
+msgstr ""
 
 msgid "This account doesn’t exist"
 msgstr "此帐户不存在"
@@ -176,6 +254,9 @@ msgstr "时间限制"
 
 msgid "Top Posts"
 msgstr "顶部帖子"
+
+msgid "Topics"
+msgstr ""
 
 msgid "Try searching for another."
 msgstr "尝试搜索另一个。"
@@ -201,3 +282,17 @@ msgstr "您总是可以在这里再次更改它。"
 msgid "You can always change it later."
 msgstr "您可以随时更改它。"
 
+msgid "You can always log back in at any time. If you just want to switch accounts, you can do that by adding an existing account."
+msgstr ""
+
+msgid "You can collect"
+msgstr ""
+
+msgid "You can comment on"
+msgstr ""
+
+msgid "You will get Super follow badge in"
+msgstr ""
+
+msgid "You will have high voting power if you followed multiple times"
+msgstr ""

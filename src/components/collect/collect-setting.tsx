@@ -93,7 +93,9 @@ export default function CollectSetting({
           iconName='RectangleStackIcon'
           className='h-6 w-6 text-main-accent'
         />
-        <span className='ml-[5px]'><Trans>Pay settings</Trans></span>
+        <span className='ml-[5px]'>
+          <Trans>Pay settings</Trans>
+        </span>
       </div>
       <div className='overflow-auto border-t-[1px] border-[#00000014] p-[20px] text-sm'>
         <div className='mb-[20px] flex'>
@@ -116,7 +118,9 @@ export default function CollectSetting({
                   iconName='CurrencyDollarIcon'
                   className='h-6 w-6 text-main-accent'
                 />
-                <span className='ml-[5px] text-sm'><Trans>Fee</Trans></span>
+                <span className='ml-[5px] text-sm'>
+                  <Trans>Fee</Trans>
+                </span>
               </p>
               <div className='mb-[20px] flex'>
                 <ReactSwitch
@@ -133,7 +137,9 @@ export default function CollectSetting({
                 <>
                   <div className='mb-[20px] flex w-full justify-between'>
                     <div className='w-[60%]'>
-                      <p className='mb-[5px]'><Trans>Price</Trans></p>
+                      <p className='mb-[5px]'>
+                        <Trans>Price</Trans>
+                      </p>
                       <ReactInput
                         className='w-full rounded-[10px]'
                         type='number'
@@ -143,7 +149,9 @@ export default function CollectSetting({
                       />
                     </div>
                     <div className='w-[38%]'>
-                      <p className='mb-[5px]'><Trans>Select Currency</Trans></p>
+                      <p className='mb-[5px]'>
+                        <Trans>Select Currency</Trans>
+                      </p>
                       <ReactSelect
                         value={selectAddress}
                         className='w-full'
@@ -158,7 +166,9 @@ export default function CollectSetting({
                         iconName='ArrowsRightLeftIcon'
                         className='h-6 w-6 text-main-accent'
                       />
-                      <span className='ml-[5px] text-sm'><Trans>Referral Rewards</Trans></span>
+                      <span className='ml-[5px] text-sm'>
+                        <Trans>Referral Rewards</Trans>
+                      </span>
                     </p>
                     <div className='mb-[20px] flex'>
                       <ReactSwitch
@@ -167,13 +177,17 @@ export default function CollectSetting({
                         onChange={(val) => setIsReward(val as boolean)}
                       >
                         <span className='ml-[10px] font-bold text-[#71717a]'>
-                          <Trans>Share your costs with those who amplify your content</Trans>
+                          <Trans>
+                            Share your costs with those who amplify your content
+                          </Trans>
                         </span>
                       </ReactSwitch>
                     </div>
                     {isReward ? (
                       <div className='mb-[20px]'>
-                        <p className='mb-[5px]'><Trans>Referral Fee</Trans></p>
+                        <p className='mb-[5px]'>
+                          <Trans>Referral Fee</Trans>
+                        </p>
                         <ReactInput
                           className='w-full rounded-[10px]'
                           type='number'
@@ -197,7 +211,9 @@ export default function CollectSetting({
                   iconName='StarIcon'
                   className='h-6 w-6 text-main-accent'
                 />
-                <span className='ml-[5px] text-sm'><Trans>Limited Edition</Trans></span>
+                <span className='ml-[5px] text-sm'>
+                  <Trans>Limited Edition</Trans>
+                </span>
               </p>
               <div className='mb-[20px] flex'>
                 <ReactSwitch
@@ -212,7 +228,9 @@ export default function CollectSetting({
               </div>
               {isLimit ? (
                 <div>
-                  <p className='mb-[5px]'><Trans>Charge Limit</Trans></p>
+                  <p className='mb-[5px]'>
+                    <Trans>Charge Limit</Trans>
+                  </p>
                   <ReactInput
                     className='w-full rounded-[10px]'
                     type='number'
@@ -231,7 +249,9 @@ export default function CollectSetting({
                   iconName='ClockIcon'
                   className='h-6 w-6 text-main-accent'
                 />
-                <span className='ml-[5px] text-sm'><Trans>Time Limit</Trans></span>
+                <span className='ml-[5px] text-sm'>
+                  <Trans>Time Limit</Trans>
+                </span>
               </p>
               <div className='mb-[20px] flex'>
                 <ReactSwitch

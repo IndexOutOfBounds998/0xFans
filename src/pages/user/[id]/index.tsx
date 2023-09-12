@@ -45,7 +45,11 @@ export default function UserTweets(): JSX.Element {
             <Tweet pinned {...pinnedData} key={`pinned-${pinnedData.id}`} />
           )} */}
           {data.map((publication) => (
-            <Publication {...publication} profile={publication.profile} key={publication.id} />
+            <Publication
+              {...publication}
+              profile={publication.profile}
+              key={publication.id}
+            />
           ))}
           <LoadMore />
         </AnimatePresence>

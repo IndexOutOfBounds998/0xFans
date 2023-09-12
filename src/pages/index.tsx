@@ -8,14 +8,14 @@ import { loadCatalog } from 'translations/utils';
 import { useLingui } from '@lingui/react';
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
-  const translation = await loadCatalog(ctx.locale!)
+  const translation = await loadCatalog(ctx.locale!);
   return {
     props: {
       translation,
       i18n: translation
     }
-  }
-}
+  };
+};
 
 export default function Login(): JSX.Element {
   useLingui();

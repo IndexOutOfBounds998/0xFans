@@ -3,7 +3,8 @@ import cn from 'clsx';
 import { Dialog } from '@headlessui/react';
 import { Button } from '@components/ui/button';
 import { CustomIcon } from '@components/ui/custom-icon';
-
+import { t } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 type ActionModalProps = {
   title: string;
   useIcon?: boolean;
@@ -29,6 +30,7 @@ export function ActionModal({
   action,
   closeModal
 }: ActionModalProps): JSX.Element {
+  useLingui();
   const mainBtn = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -79,7 +81,7 @@ export function ActionModal({
           )}
           onClick={closeModal}
         >
-          {secondaryBtnLabel ?? 'Cancel'}
+          {secondaryBtnLabel ?? t`Cancel`}
         </Button>
       </div>
     </div>

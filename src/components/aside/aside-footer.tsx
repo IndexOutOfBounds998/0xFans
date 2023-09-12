@@ -11,8 +11,11 @@ export function AsideFooter(): JSX.Element {
     [t`Privacy Policy`, 'https://0xFans.com/privacy'],
     [t`Cookie Policy`, 'https://support.0xFans.com/articles/20170514'],
     [t`Accessibility`, 'https://help.0xFans.com/resources/accessibility'],
-    [t`Ads Info`, 'https://business.0xFans.com/en/help/troubleshooting/how-0xFans-ads-work.html']
-  ])
+    [
+      t`Ads Info`,
+      'https://business.0xFans.com/en/help/troubleshooting/how-0xFans-ads-work.html'
+    ]
+  ]);
 
   return (
     <footer
