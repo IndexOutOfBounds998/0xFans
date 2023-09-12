@@ -4,18 +4,18 @@ import cn from 'clsx';
 import { useModal } from '@lib/hooks/useModal';
 import { delayScroll } from '@lib/utils';
 import { Modal } from '@components/modal/modal';
-import { TweetReplyModal } from '@components/modal/tweet-reply-modal';
-import { TweetCollectModal } from '@components/modal/tweet-collect-modal';
-import { TweetFollowModal } from '@components/modal/tweet-follow-modal';
+import { PublicationReplyModal } from '@components/modal/publication-reply-modal';
+import { PublicationCollectModal } from '@components/modal/publication-collect-modal';
+import { PublicationFollowModal } from '@components/modal/publication-follow-modal';
 import { ImagePreview } from '@components/input/image-preview';
 import { UserAvatar } from '@components/user/user-avatar';
 import { UserTooltip } from '@components/user/user-tooltip';
 import { UserName } from '@components/user/user-name';
 import { UserUsername } from '@components/user/user-username';
-import { TweetActions } from './tweet-actions';
-import { TweetStatus } from './tweet-status';
-import { TweetStats } from './tweet-stats';
-import { TweetDate } from './tweet-date';
+import { PublicationActions } from './publication-actions';
+import { PublicationStatus } from './publication-status';
+import { PublicationStats } from './publication-stats';
+import { PublicationDate } from './publication-date';
 import type { Variants } from 'framer-motion';
 import type { Tweet } from '@lib/types/tweet';
 import { User } from '@lib/types/user';
@@ -46,7 +46,7 @@ export const variants: Variants = {
   exit: { opacity: 0, transition: { duration: 0.2 } }
 };
 
-export function Tweet(tweet: TweetProps): JSX.Element {
+export function Publication(tweet: TweetProps): JSX.Element {
   const {
     id: tweetId,
     text,
@@ -119,14 +119,14 @@ export function Tweet(tweet: TweetProps): JSX.Element {
         open={open}
         closeModal={closeModal}
       >
-        <TweetReplyModal tweet={tweet} closeModal={closeModal} />
+        <PublicationReplyModal tweet={tweet} closeModal={closeModal} />
       </Modal>
       <Modal
         modalClassName='flex flex-col gap-6 max-w-sm bg-main-background w-full rounded-2xl'
         open={openCollect}
         closeModal={closeCollectModal}
       >
-        <TweetCollectModal
+        <PublicationCollectModal
           publication={tweet.publication}
           closeModal={closeCollectModal}
         />
@@ -136,7 +136,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
         open={openFollow}
         closeModal={closeFollowModal}
       >
-        <TweetFollowModal tweet={tweet} closeModal={closeFollowModal} />
+        <PublicationFollowModal tweet={tweet} closeModal={closeFollowModal} />
       </Modal>
       <Link href={tweetLink} scroll={!canComment}>
         <span
@@ -153,18 +153,18 @@ export function Tweet(tweet: TweetProps): JSX.Element {
           <div className='grid grid-cols-[auto,1fr] gap-x-3 gap-y-1'>
             <AnimatePresence initial={false}>
               {modal ? null : pinned ? (
-                <TweetStatus type='pin'>
+                <PublicationStatus type='pin'>
                   <p className='text-sm font-bold'>Pinned Post</p>
-                </TweetStatus>
+                </PublicationStatus>
               ) : (
                 tweetIsRetweeted && (
-                  <TweetStatus type='tweet'>
+                  <PublicationStatus type='tweet'>
                     {/*<Link href={profileUsername as string}>*/}
                     <span className='custom-underline truncate text-sm font-bold'>
                       {userId === profileId ? 'You' : profileName} Retweeted
                     </span>
                     {/*</Link>*/}
-                  </TweetStatus>
+                  </PublicationStatus>
                 )
               )}
             </AnimatePresence>
@@ -207,11 +207,11 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                   <UserTooltip modal={modal} {...user} profile={profile}>
                     <UserUsername id={ownerId} username={username ?? ''} />
                   </UserTooltip>
-                  <TweetDate tweetLink={tweetLink} createdAt={createdAt} />
+                  <PublicationDate tweetLink={tweetLink} createdAt={createdAt} />
                 </div>
                 <div className='px-4'>
                   {!modal && (
-                    <TweetActions
+                    <PublicationActions
                       isOwner={isOwner}
                       ownerId={ownerId?.toString() ?? ''}
                       tweetId={tweetId}
@@ -260,7 +260,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                   )
                 )}
                 {!modal && (
-                  <TweetStats
+                  <PublicationStats
                     publication={publication}
                     canComment={canComment}
                     canMirror={canMirror}

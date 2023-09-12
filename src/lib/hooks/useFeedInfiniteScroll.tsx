@@ -5,7 +5,7 @@ import { Loading } from '@components/ui/loading';
 
 import { FeedItem, Post, ProfileId } from '@lens-protocol/react-web';
 import { formatImgList, formatUser, formatVideoList } from '@lib/FormatContent';
-import { TweetProps } from '@components/tweet/tweet';
+import { TweetProps } from '@components/publication/publication';
 import { useFeed } from '@lens-protocol/react-web';
 type InfiniteScroll<T> = {
   data: TweetProps[] | null;

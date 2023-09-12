@@ -4,7 +4,7 @@ import { AnimatePresence, motion, MotionProps } from 'framer-motion';
 import { HeroIcon } from '@components/ui/hero-icon';
 import { ContentPublication, usePublication } from '@lens-protocol/react-web';
 import { useAuth } from '@lib/context/auth-context';
-import { TweetGated } from '@components/tweet/tweet-gated';
+import { PublicationGated } from '@components/publication/publication-gated';
 import type { Tweet } from '@lib/types/tweet';
 
 type GatedPreviewProps = {
@@ -73,7 +73,7 @@ export function GatedPreview({
   return (
     <>
       {isOwer || (!isCollect && !isFollow) ? (
-        <TweetGated tweet={publication}></TweetGated>
+        <PublicationGated tweet={publication}></PublicationGated>
       ) : (
         <div
           className={cn(

@@ -58,7 +58,7 @@ const pinModalData: Readonly<PinModalData[]> = [
   }
 ];
 
-export function TweetActions({
+export function PublicationActions({
   isOwner,
   ownerId,
   tweetId,

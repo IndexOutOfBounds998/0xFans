@@ -8,10 +8,10 @@ import { MainLayout } from '@components/layout/main-layout';
 import { SEO } from '@components/common/seo';
 import { UserDataLayout } from '@components/layout/user-data-layout';
 import { UserHomeLayout } from '@components/layout/user-home-layout';
-import { Tweet } from '@components/tweet/tweet';
+import { Publication } from '@components/publication/publication';
 import { Loading } from '@components/ui/loading';
-import { StatsEmpty } from '@components/tweet/stats-empty';
-import { TweetWithParent } from '@components/tweet/tweet-with-parent';
+import { StatsEmpty } from '@components/publication/stats-empty';
+import { PublicationWithParent } from '@components/publication/publication-with-parent';
 import type { ReactElement, ReactNode } from 'react';
 
 export default function UserWithReplies(): JSX.Element {

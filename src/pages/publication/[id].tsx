@@ -5,8 +5,8 @@ import { HomeLayout, ProtectedLayout } from '@components/layout/common-layout';
 import { MainLayout } from '@components/layout/main-layout';
 import { MainContainer } from '@components/home/main-container';
 import { MainHeader } from '@components/home/main-header';
-import { Tweet } from '@components/tweet/tweet';
-import { ViewTweet } from '@components/view/view-tweet';
+import { Publication } from '@components/publication/publication';
+import { ViewPublication } from '@components/view/view-publication';
 import { SEO } from '@components/common/seo';
 import { Loading } from '@components/ui/loading';
 import { Error } from '@components/ui/error';
@@ -25,7 +25,7 @@ import {
   formatUser,
   formatVideoList
 } from '@lib/FormatContent';
-import { TweetProps } from '@components/tweet/tweet';
+import { TweetProps } from '@components/publication/publication';
 
 type TwDetailsProps = Pick<
   TweetProps,
@@ -155,7 +155,7 @@ export default function TweetId(): JSX.Element {
                 viewTweetRef={viewTweetRef}
               />
             )}
-            <ViewTweet
+            <ViewPublication
               viewTweetRef={viewTweetRef}
               profile={tweetObj.profile}
               {...initData(tweetObj as Comment)}
@@ -165,10 +165,10 @@ export default function TweetId(): JSX.Element {
                 <Loading className='mt-5' />
               ) : (
                 <AnimatePresence mode='popLayout'>
-                  {commentList?.map((tweet) => (
-                    <Tweet
-                      {...tweet}
-                      key={tweet.id}
+                  {commentList?.map((publication) => (
+                    <Publication
+                      {...publication}
+                      key={publication.id}
                       profile={tweetObj.profile}
                     />
                   ))}

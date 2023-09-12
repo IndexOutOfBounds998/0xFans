@@ -1,12 +1,12 @@
 import cn from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
-import { StatsEmpty } from '@components/tweet/stats-empty';
+import { StatsEmpty } from '@components/publication/stats-empty';
 import { Loading } from '@components/ui/loading';
 import { variants } from '@components/user/user-header';
 import { UserCard } from './user-card';
 import type { User } from '@lib/types/user';
-import type { StatsType } from '@components/view/view-tweet-stats';
-import type { StatsEmptyProps } from '@components/tweet/stats-empty';
+import type { StatsType } from '@components/view/view-publication-stats';
+import type { StatsEmptyProps } from '@components/publication/stats-empty';
 import { Profile } from '@lens-protocol/react-web';
 import { UserCardProps } from '@lib/hooks/useCollection';
 

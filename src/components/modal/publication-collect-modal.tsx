@@ -1,5 +1,5 @@
 import { Input } from '@components/input/input';
-import type { TweetProps } from '@components/tweet/tweet';
+import type { TweetProps } from '@components/publication/publication';
 import React from 'react';
 import { HeroIcon } from '@components/ui/hero-icon';
 import { Button } from '@components/ui/button';
@@ -19,7 +19,7 @@ type TweetCollectModalProps = {
   closeModal: () => void;
 };
 
-export function TweetCollectModal({
+export function PublicationCollectModal({
   publication,
   closeModal
 }: TweetCollectModalProps): JSX.Element {

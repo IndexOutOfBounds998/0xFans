@@ -19,7 +19,7 @@ export type TweetProps = {
   tweet: Tweet;
 };
 
-export function TweetGated({ tweet }: TweetProps): JSX.Element {
+export function PublicationGated({ tweet }: TweetProps): JSX.Element {
   const { id: tweetId, publication } = tweet;
 
   let loading = false;

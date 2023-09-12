@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { Tweet, TweetProps } from '@components/tweet/tweet';
+import { Publication, TweetProps } from '@components/publication/publication';
 import type { RefObject } from 'react';
 
 type ViewParentTweetProps = {

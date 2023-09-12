@@ -5,9 +5,9 @@ import { UserLayout, ProtectedLayout } from '@components/layout/common-layout';
 import { MainLayout } from '@components/layout/main-layout';
 import { UserDataLayout } from '@components/layout/user-data-layout';
 import { UserHomeLayout } from '@components/layout/user-home-layout';
-import { StatsEmpty } from '@components/tweet/stats-empty';
+import { StatsEmpty } from '@components/publication/stats-empty';
 import { Loading } from '@components/ui/loading';
-import { Tweet } from '@components/tweet/tweet';
+import { Publication } from '@components/publication/publication';
 import type { ReactElement, ReactNode } from 'react';
 
 import { PublicationMainFocus, profileId } from '@lens-protocol/react-web';
@@ -44,8 +44,8 @@ export default function UserTweets(): JSX.Element {
           {/* {pinnedData && (
             <Tweet pinned {...pinnedData} key={`pinned-${pinnedData.id}`} />
           )} */}
-          {data.map((tweet) => (
-            <Tweet {...tweet} profile={tweet.profile} key={tweet.id} />
+          {data.map((publication) => (
+            <Publication {...publication} profile={publication.profile} key={publication.id} />
           ))}
           <LoadMore />
         </AnimatePresence>

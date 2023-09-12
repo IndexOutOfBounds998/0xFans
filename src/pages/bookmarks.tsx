@@ -12,8 +12,8 @@ import { MainHeader } from '@components/home/main-header';
 import { MainContainer } from '@components/home/main-container';
 import { Modal } from '@components/modal/modal';
 import { ActionModal } from '@components/modal/action-modal';
-import { Tweet, TweetProps } from '@components/tweet/tweet';
-import { StatsEmpty } from '@components/tweet/stats-empty';
+import { Publication, TweetProps } from '@components/publication/publication';
+import { StatsEmpty } from '@components/publication/stats-empty';
 import { Button } from '@components/ui/button';
 import { ToolTip } from '@components/ui/tooltip';
 import { HeroIcon } from '@components/ui/hero-icon';
@@ -104,8 +104,8 @@ export default function Bookmarks(): JSX.Element {
           />
         ) : (
           <AnimatePresence mode='popLayout'>
-            {data?.map((tweet) => (
-              <Tweet {...tweet} key={tweet.id} />
+            {data?.map((publication) => (
+              <Publication {...publication} key={publication.id} />
             ))}
           </AnimatePresence>
         )}

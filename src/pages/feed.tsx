@@ -6,7 +6,7 @@ import { MainLayout } from '@components/layout/main-layout';
 import { SEO } from '@components/common/seo';
 import { MainContainer } from '@components/home/main-container';
 import { Input } from '@components/input/input';
-import { Tweet } from '@components/tweet/tweet';
+import { Publication } from '@components/publication/publication';
 import { Loading } from '@components/ui/loading';
 import type { ReactElement, ReactNode } from 'react';
 import { ProfileId } from '@lens-protocol/react-web';
@@ -54,8 +54,8 @@ export default function Home(): JSX.Element {
         ) : (
           <>
             <AnimatePresence mode='popLayout'>
-              {data.map((tweet, index) => (
-                <Tweet {...tweet} key={index} />
+              {data.map((publication, index) => (
+                <Publication {...publication} key={index} />
               ))}
             </AnimatePresence>
             <LoadMore />

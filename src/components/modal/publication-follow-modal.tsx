@@ -1,4 +1,4 @@
-import type { TweetProps } from '@components/tweet/tweet';
+import type { TweetProps } from '@components/publication/publication';
 import React from 'react';
 import { HeroIcon } from '@components/ui/hero-icon';
 import { Button } from '@components/ui/button';
@@ -13,7 +13,7 @@ type TweetFollowModalProps = {
   closeModal: () => void;
 };
 
-export function TweetFollowModal({
+export function PublicationFollowModal({
   tweet,
   closeModal
 }: TweetFollowModalProps): JSX.Element {

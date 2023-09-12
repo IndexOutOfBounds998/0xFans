@@ -1,6 +1,6 @@
 import { MainHeader } from '@components/home/main-header';
 import type { ReactNode } from 'react';
-import type { StatsType } from '@components/view/view-tweet-stats';
+import type { StatsType } from '@components/view/view-publication-stats';
 
 type TweetStatsModalProps = {
   children: ReactNode;
@@ -8,7 +8,7 @@ type TweetStatsModalProps = {
   handleClose: () => void;
 };
 
-export function TweetStatsModal({
+export function PublicationStatsModal({
   children,
   statsType,
   handleClose

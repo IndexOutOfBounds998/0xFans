@@ -17,7 +17,7 @@ type TweetOption = {
   onClick?: (...args: unknown[]) => unknown;
 };
 
-export function TweetOption({
+export function PublicationOption({
   tip,
   move,
   stats,

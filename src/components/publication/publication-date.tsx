@@ -9,7 +9,7 @@ type TweetDateProps = Pick<Tweet, 'createdAt'> & {
   viewTweet?: boolean;
 };
 
-export function TweetDate({
+export function PublicationDate({
   createdAt,
   tweetLink,
   viewTweet
