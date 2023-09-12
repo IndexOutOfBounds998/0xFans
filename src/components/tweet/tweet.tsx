@@ -223,7 +223,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                   )}
                 </div>
               </div>
-              {(canComment || modal) && (
+              {/* {(canComment || modal) && (
                 <p
                   className={cn(
                     'text-light-secondary dark:text-dark-secondary',
@@ -237,7 +237,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
                     </span>
                   </Link>
                 </p>
-              )}
+              )} */}
               <div className='mt-1 flex flex-col gap-2'>
                 {!isGated && text && (
                   <p className='whitespace-pre-line break-words'>{text}</p>
