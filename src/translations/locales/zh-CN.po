@@ -8,7 +8,7 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: 0xfans\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-09-12 09:36\n"
+"PO-Revision-Date: 2023-09-12 12:12\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -26,6 +26,9 @@ msgstr "无障碍环境"
 
 msgid "Account info"
 msgstr "帐户信息"
+
+msgid "Add"
+msgstr ""
 
 msgid "Add photo"
 msgstr "添加照片"
@@ -66,17 +69,29 @@ msgstr "选择观看者"
 msgid "Close"
 msgstr "关闭"
 
+msgid "Collect"
+msgstr ""
+
 msgid "collectors"
 msgstr "集合器"
 
 msgid "Cookie Policy"
 msgstr "Cookie 策略"
 
+msgid "Copy link"
+msgstr ""
+
 msgid "Copy link to Profile"
 msgstr "复制链接到配置文件"
 
 msgid "Customize your view"
 msgstr "自定义您的视图"
+
+msgid "Discard"
+msgstr ""
+
+msgid "Discard Posts?"
+msgstr ""
 
 msgid "Display"
 msgstr "显示"
@@ -86,6 +101,9 @@ msgstr "完成"
 
 msgid "Edit profile"
 msgstr "编辑配置文件"
+
+msgid "Emoji"
+msgstr ""
 
 msgid "English"
 msgstr "Distr."
@@ -105,20 +123,32 @@ msgstr "关注"
 msgid "Follow and get some awesome perks!"
 msgstr "跟随并获得一些超棒的增益！"
 
+msgid "Follower"
+msgstr ""
+
 msgid "Followers"
 msgstr "关注者"
 
 msgid "Following"
 msgstr "关注"
 
+msgid "Follows you"
+msgstr ""
+
 msgid "Get paid every time someone views your post"
 msgstr "每次有人查看您的帖子时获得支付"
+
+msgid "GIF"
+msgstr ""
 
 msgid "Help center"
 msgstr "帮助中心"
 
 msgid "Home"
 msgstr "首页"
+
+msgid "Language"
+msgstr ""
 
 msgid "Learn more"
 msgstr "了解更多"
@@ -128,6 +158,9 @@ msgstr "赞"
 
 msgid "Limited Edition"
 msgstr "有限版"
+
+msgid "Location"
+msgstr ""
 
 msgid "Log out"
 msgstr "注销"
@@ -150,6 +183,15 @@ msgstr "更多"
 msgid "More coming soon™"
 msgstr "更多即将到来的"
 
+msgid "No Like"
+msgstr ""
+
+msgid "No Photo & GIF"
+msgstr ""
+
+msgid "No Post"
+msgstr ""
+
 msgid "Notifications"
 msgstr "通知"
 
@@ -158,6 +200,9 @@ msgstr "仅限"
 
 msgid "Onlyfans"
 msgstr "Onlyfans"
+
+msgid "onlyfans can use"
+msgstr ""
 
 msgid "Open original"
 msgstr "打开原始文件"
@@ -188,6 +233,9 @@ msgstr "帖子"
 
 msgid "Post by"
 msgstr "发布者"
+
+msgid "Post your reply"
+msgstr ""
 
 msgid "Posts"
 msgstr "员额"
@@ -270,6 +318,9 @@ msgstr "这些设置会影响此浏览器上所有的 0xFans 帐户。"
 msgid "This account doesn’t exist"
 msgstr "该账户不存在。"
 
+msgid "This can’t be undone and you’ll lose your draft."
+msgstr ""
+
 msgid "This Post was deleted by the Post author."
 msgstr "这个帖子已被帖子作者删除。"
 
@@ -296,6 +347,9 @@ msgstr "用户名更新成功"
 
 msgid "What should we call you?"
 msgstr "我们应该怎么称呼你？"
+
+msgid "What's happening?"
+msgstr ""
 
 msgid "Who to follow"
 msgstr "关注哪些人"
