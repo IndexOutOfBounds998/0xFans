@@ -86,7 +86,7 @@ export function Tweet(tweet: TweetProps): JSX.Element {
     closeModal: closeFollowModal
   } = useModal();
 
-  const tweetLink = `/tweet/${tweetId}`;
+  const tweetLink = `/publication/${tweetId}`;
 
   const { user: profileByMe } = useAuth();
 
