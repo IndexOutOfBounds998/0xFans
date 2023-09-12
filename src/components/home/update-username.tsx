@@ -20,7 +20,9 @@ import {
 } from '@lens-protocol/react-web';
 import { upload } from '@lib/upload';
 import { t } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 export function UpdateUsername(): JSX.Element {
+  useLingui();
   const [alreadySet, setAlreadySet] = useState(false);
   const [available, setAvailable] = useState(false);
   const [loading, setLoading] = useState(false);
