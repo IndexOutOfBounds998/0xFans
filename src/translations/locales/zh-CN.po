@@ -151,7 +151,7 @@ msgid "Select Currency"
 msgstr "选择货币"
 
 msgid "Set username"
-msgstr ""
+msgstr "设置用户名"
 
 msgid "Settings and privacy"
 msgstr "设置和隐私"
@@ -175,7 +175,7 @@ msgid "Time Limit"
 msgstr "时间限制"
 
 msgid "Top Posts"
-msgstr ""
+msgstr "顶部帖子"
 
 msgid "Try searching for another."
 msgstr "尝试搜索另一个。"
@@ -184,10 +184,10 @@ msgid "Unfollow"
 msgstr "取消关注"
 
 msgid "Username"
-msgstr ""
+msgstr "用户名"
 
 msgid "Username updated successfully"
-msgstr ""
+msgstr "用户名更新成功"
 
 msgid "What should we call you?"
 msgstr "我们应该怎么称呼你？"
