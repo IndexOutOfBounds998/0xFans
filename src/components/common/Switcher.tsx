@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { t, msg } from '@lingui/macro';
 import type { MessageDescriptor } from '@lingui/core';
 import { useLingui } from '@lingui/react';
+import { ReactSelect } from '@components/ui/react-select';
 
 type LOCALES = 'en-us' | 'zh-CN';
 
@@ -23,8 +24,13 @@ export function Switcher() {
 
   const [locale, setLocale] = useState<LOCALES>(router.locale as LOCALES);
 
-  function handleChange(event: React.ChangeEvent<HTMLSelectElement>) {
-    const locale = event.target.value as LOCALES;
+  const selectList = Object.keys(languages).map((item) => ({
+    id: item as LOCALES,
+    name: i18n._(languages[item])
+  }));
+
+  function handleChange(event: any) {
+    const locale = event.id as LOCALES;
 
     setLocale(locale);
 
@@ -37,14 +43,22 @@ export function Switcher() {
   }
 
   return (
-    <select value={locale} onChange={handleChange}>
-      {Object.keys(languages).map((locale) => {
-        return (
-          <option value={locale} key={locale}>
-            {i18n._(languages[locale as unknown as LOCALES])}
-          </option>
-        );
-      })}
-    </select>
+    <ReactSelect
+      value={
+        selectList.filter((item) => item.id === locale)[0] || selectList[0]
+      }
+      className='w-full'
+      list={selectList}
+      onChange={handleChange}
+    />
+    // <select value={locale} onChange={handleChange}>
+    //     {Object.keys(languages).map((locale) => {
+    //         return (
+    //             <option value={locale} key={locale}>
+    //                 {i18n._(languages[locale as unknown as LOCALES])}
+    //             </option>
+    //         )
+    //     })}
+    // </select>
   );
 }
