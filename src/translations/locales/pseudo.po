@@ -25,13 +25,22 @@ msgstr ""
 msgid "Bookmarks"
 msgstr ""
 
+msgid "can reply"
+msgstr ""
+
 msgid "Cancel"
+msgstr ""
+
+msgid "Change your username?"
 msgstr ""
 
 msgid "Charge Limit"
 msgstr ""
 
 msgid "Chinese"
+msgstr ""
+
+msgid "Choose audience"
 msgstr ""
 
 msgid "Cookie Policy"
@@ -41,6 +50,9 @@ msgid "Display"
 msgstr ""
 
 msgid "English"
+msgstr ""
+
+msgid "Everyone"
 msgstr ""
 
 msgid "Fee"
@@ -77,6 +89,9 @@ msgid "More"
 msgstr ""
 
 msgid "Notifications"
+msgstr ""
+
+msgid "Onlyfans"
 msgstr ""
 
 msgid "Paid to view only for the first 24 hours"
@@ -118,6 +133,9 @@ msgstr ""
 msgid "Referral Rewards"
 msgstr ""
 
+msgid "Reply"
+msgstr ""
+
 msgid "Save"
 msgstr ""
 
@@ -148,14 +166,20 @@ msgstr ""
 msgid "Time Limit"
 msgstr ""
 
-msgid "Trends for you"
-msgstr ""
-
 msgid "Try searching for another."
 msgstr ""
 
 msgid "Unfollow"
 msgstr ""
 
+msgid "What should we call you?"
+msgstr ""
+
 msgid "Who to follow"
+msgstr ""
+
+msgid "You can always change it here again."
+msgstr ""
+
+msgid "You can always change it later."
 msgstr ""

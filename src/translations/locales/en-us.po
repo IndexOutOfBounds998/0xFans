@@ -25,14 +25,23 @@ msgstr "Approve Follow Module"
 msgid "Bookmarks"
 msgstr "Bookmarks"
 
+msgid "can reply"
+msgstr "can reply"
+
 msgid "Cancel"
 msgstr "Cancel"
+
+msgid "Change your username?"
+msgstr "Change your username?"
 
 msgid "Charge Limit"
 msgstr "Charge Limit"
 
 msgid "Chinese"
 msgstr "Chinese"
+
+msgid "Choose audience"
+msgstr "Choose audience"
 
 msgid "Cookie Policy"
 msgstr "Cookie Policy"
@@ -42,6 +51,9 @@ msgstr "Display"
 
 msgid "English"
 msgstr "English"
+
+msgid "Everyone"
+msgstr "Everyone"
 
 msgid "Fee"
 msgstr "Fee"
@@ -78,6 +90,9 @@ msgstr "More"
 
 msgid "Notifications"
 msgstr "Notifications"
+
+msgid "Onlyfans"
+msgstr "Onlyfans"
 
 msgid "Paid to view only for the first 24 hours"
 msgstr "Paid to view only for the first 24 hours"
@@ -118,6 +133,9 @@ msgstr "Referral Fee"
 msgid "Referral Rewards"
 msgstr "Referral Rewards"
 
+msgid "Reply"
+msgstr "Reply"
+
 msgid "Save"
 msgstr "Save"
 
@@ -148,14 +166,20 @@ msgstr "This account doesn’t exist"
 msgid "Time Limit"
 msgstr "Time Limit"
 
-msgid "Trends for you"
-msgstr "Trends for you"
-
 msgid "Try searching for another."
 msgstr "Try searching for another."
 
 msgid "Unfollow"
 msgstr "Unfollow"
 
+msgid "What should we call you?"
+msgstr "What should we call you?"
+
 msgid "Who to follow"
 msgstr "Who to follow"
+
+msgid "You can always change it here again."
+msgstr "You can always change it here again."
+
+msgid "You can always change it later."
+msgstr "You can always change it later."

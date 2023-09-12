@@ -1,8 +1,9 @@
 import { Dialog } from '@headlessui/react';
 import { CustomIcon } from '@components/ui/custom-icon';
 import { Button } from '@components/ui/button';
-import type { ReactNode, FormEvent } from 'react';
-
+import { type ReactNode, type FormEvent, useState } from 'react';
+import { Trans, t } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 type UsernameModalProps = {
   loading: boolean;
   children: ReactNode;
@@ -12,20 +13,6 @@ type UsernameModalProps = {
   cancelUpdateUsername: () => void;
 };
 
-const usernameModalData = [
-  {
-    title: 'What should we call you?',
-    description: 'Your @username is unique. You can always change it later.',
-    cancelLabel: 'Skip'
-  },
-  {
-    title: 'Change your username?',
-    description:
-      'Your @username is unique. You can always change it here again.',
-    cancelLabel: 'Cancel'
-  }
-] as const;
-
 export function UsernameModal({
   loading,
   children,
@@ -34,6 +21,21 @@ export function UsernameModal({
   changeUsername,
   cancelUpdateUsername
 }: UsernameModalProps): JSX.Element {
+  useLingui();
+
+  const [usernameModalData] = useState<any[]>([
+    {
+      title: t`What should we call you?`,
+      description: t`You can always change it later.`,
+      cancelLabel: 'Skip'
+    },
+    {
+      title: t`Change your username?`,
+      description: t`You can always change it here again.`,
+      cancelLabel: 'Cancel'
+    }
+  ]);
+
   const { title, description, cancelLabel } = usernameModalData[+alreadySet];
 
   return (
@@ -67,7 +69,7 @@ export function UsernameModal({
           loading={loading}
           disabled={!available}
         >
-          Set username
+          <Trans>Set username</Trans>
         </Button>
         <Button
           className='border border-light-line-reply hover:bg-light-primary/10 focus-visible:bg-light-primary/10

@@ -30,14 +30,23 @@ msgstr "授权关注模块"
 msgid "Bookmarks"
 msgstr "书签"
 
+msgid "can reply"
+msgstr "可以回复"
+
 msgid "Cancel"
 msgstr "取消"
+
+msgid "Change your username?"
+msgstr "更改您的用户名？"
 
 msgid "Charge Limit"
 msgstr "个数限制"
 
 msgid "Chinese"
 msgstr "中文"
+
+msgid "Choose audience"
+msgstr "选择受众"
 
 msgid "Cookie Policy"
 msgstr "Cookie 策略"
@@ -47,6 +56,9 @@ msgstr "显示"
 
 msgid "English"
 msgstr "英文"
+
+msgid "Everyone"
+msgstr "所有人"
 
 msgid "Fee"
 msgstr "费用"
@@ -83,6 +95,9 @@ msgstr "更多"
 
 msgid "Notifications"
 msgstr "通知"
+
+msgid "Onlyfans"
+msgstr "仅粉丝"
 
 msgid "Paid to view only for the first 24 hours"
 msgstr "付费仅在头24小时内查看"
@@ -123,6 +138,9 @@ msgstr "转发费"
 msgid "Referral Rewards"
 msgstr "推荐奖励"
 
+msgid "Reply"
+msgstr "回复"
+
 msgid "Save"
 msgstr "保存"
 
@@ -153,14 +171,20 @@ msgstr "此帐户不存在"
 msgid "Time Limit"
 msgstr "时间限制"
 
-msgid "Trends for you"
-msgstr "您的趋势"
-
 msgid "Try searching for another."
 msgstr "尝试搜索另一个。"
 
 msgid "Unfollow"
 msgstr "取消关注"
 
+msgid "What should we call you?"
+msgstr "我们应该怎么称呼你"
+
 msgid "Who to follow"
 msgstr "尝试关注哪些人"
+
+msgid "You can always change it here again."
+msgstr "您随时可以在这里再次更改它。"
+
+msgid "You can always change it later."
+msgstr "您以后可以随时更改它。"
