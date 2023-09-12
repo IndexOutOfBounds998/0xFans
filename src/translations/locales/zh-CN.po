@@ -8,7 +8,7 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: 0xfans\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-09-12 04:04\n"
+"PO-Revision-Date: 2023-09-12 04:34\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -25,19 +25,19 @@ msgid "Ads Info"
 msgstr "广告信息"
 
 msgid "Approve Follow Module"
-msgstr ""
+msgstr "批准跟随模块"
 
 msgid "Bookmarks"
 msgstr "书签"
 
 msgid "can reply"
-msgstr ""
+msgstr "可以回复"
 
 msgid "Cancel"
 msgstr "取消"
 
 msgid "Change your username?"
-msgstr ""
+msgstr "更改您的用户名？"
 
 msgid "Charge Limit"
 msgstr "充电限制"
@@ -46,19 +46,19 @@ msgid "Chinese"
 msgstr "中文"
 
 msgid "Choose audience"
-msgstr ""
+msgstr "选择观看者"
 
 msgid "Cookie Policy"
 msgstr "Cookie 策略"
 
 msgid "Display"
-msgstr ""
+msgstr "显示"
 
 msgid "English"
 msgstr "Distr."
 
 msgid "Everyone"
-msgstr ""
+msgstr "每个人"
 
 msgid "Fee"
 msgstr "费用"
@@ -67,16 +67,16 @@ msgid "Feed"
 msgstr "订阅源"
 
 msgid "Follow"
-msgstr ""
+msgstr "关注"
 
 msgid "Following"
-msgstr ""
+msgstr "关注"
 
 msgid "Get paid every time someone views your post"
 msgstr "每次有人查看您的帖子时获得支付"
 
 msgid "Help center"
-msgstr ""
+msgstr "帮助中心"
 
 msgid "Home"
 msgstr "首页"
@@ -91,13 +91,13 @@ msgid "Messages"
 msgstr "留言"
 
 msgid "More"
-msgstr ""
+msgstr "更多"
 
 msgid "Notifications"
 msgstr "通知"
 
 msgid "Onlyfans"
-msgstr ""
+msgstr "Onlyfans"
 
 msgid "Paid to view only for the first 24 hours"
 msgstr "付费仅在头24小时内查看"
@@ -115,7 +115,7 @@ msgid "People / 0xFans"
 msgstr "人 / 0xFans"
 
 msgid "Popular tags"
-msgstr ""
+msgstr "热门标签"
 
 msgid "Post"
 msgstr "帖子"
@@ -127,7 +127,7 @@ msgid "Privacy Policy"
 msgstr "隐私政策"
 
 msgid "Profile"
-msgstr ""
+msgstr "个人信息"
 
 msgid "Pseudo"
 msgstr "伪装"
@@ -139,7 +139,7 @@ msgid "Referral Rewards"
 msgstr "推荐奖励"
 
 msgid "Reply"
-msgstr ""
+msgstr "答复"
 
 msgid "Save"
 msgstr "保存"
@@ -150,8 +150,11 @@ msgstr "搜索创建者"
 msgid "Select Currency"
 msgstr "选择货币"
 
-msgid "Settings and privacy"
+msgid "Set username"
 msgstr ""
+
+msgid "Settings and privacy"
+msgstr "设置和隐私"
 
 msgid "Share your costs with those who amplify your content"
 msgstr "与那些扩大您内容的人分担您的费用"
@@ -171,21 +174,30 @@ msgstr "此帐户不存在"
 msgid "Time Limit"
 msgstr "时间限制"
 
+msgid "Top Posts"
+msgstr ""
+
 msgid "Try searching for another."
 msgstr "尝试搜索另一个。"
 
 msgid "Unfollow"
+msgstr "取消关注"
+
+msgid "Username"
+msgstr ""
+
+msgid "Username updated successfully"
 msgstr ""
 
 msgid "What should we call you?"
-msgstr ""
+msgstr "我们应该怎么称呼你？"
 
 msgid "Who to follow"
 msgstr "关注哪些人"
 
 msgid "You can always change it here again."
-msgstr ""
+msgstr "您总是可以在这里再次更改它。"
 
 msgid "You can always change it later."
-msgstr ""
+msgstr "您可以随时更改它。"
 
