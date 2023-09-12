@@ -6,6 +6,8 @@ import { isPlural } from '@lib/utils';
 
 import { UserName } from './user-name';
 import type { Variants } from 'framer-motion';
+import { Trans, t } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 export const variants: Variants = {
   initial: { opacity: 0 },
@@ -14,6 +16,7 @@ export const variants: Variants = {
 };
 
 export function UserHeader(): JSX.Element {
+  useLingui();
   const {
     pathname,
     query: { id }
@@ -80,16 +83,16 @@ export function UserHeader(): JSX.Element {
               : isInTweetPage
               ? totalTweets
                 ? `${totalTweets} ${`Posts${isPlural(totalTweets)}`}`
-                : 'No Post'
+                : t`No Post`
               : currentPage === 'media'
               ? totalPhotos
                 ? `${totalPhotos} Photo${isPlural(totalPhotos)} & GIF${isPlural(
                     totalPhotos
                   )}`
-                : 'No Photo & GIF'
+                : t`No Photo & GIF`
               : totalLikes
               ? `${totalLikes} Like${isPlural(totalLikes)}`
-              : 'No Like'}
+              : t`No Like`}
           </p>
         </motion.div>
       )}
