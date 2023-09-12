@@ -8,7 +8,7 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: 0xfans\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-09-12 07:28\n"
+"PO-Revision-Date: 2023-09-12 12:33\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -25,10 +25,10 @@ msgid "Accessibility"
 msgstr "无障碍环境"
 
 msgid "Account info"
-msgstr "帐户信息"
+msgstr "账户信息"
 
 msgid "Add"
-msgstr ""
+msgstr "添加"
 
 msgid "Add photo"
 msgstr "添加照片"
@@ -37,7 +37,7 @@ msgid "Ads Info"
 msgstr "广告信息"
 
 msgid "Approve Follow Module"
-msgstr "批准跟随模块"
+msgstr "批准关注模块"
 
 msgid "Background"
 msgstr "背景"
@@ -64,34 +64,34 @@ msgid "Chinese"
 msgstr "中文"
 
 msgid "Choose audience"
-msgstr "选择受众"
+msgstr "选择观看者"
 
 msgid "Close"
 msgstr "关闭"
 
 msgid "Collect"
-msgstr ""
+msgstr "收集"
 
 msgid "collectors"
-msgstr "收藏者"
+msgstr "集合器"
 
 msgid "Cookie Policy"
 msgstr "Cookie 策略"
 
 msgid "Copy link"
-msgstr ""
+msgstr "复制链接"
 
 msgid "Copy link to Profile"
-msgstr "复制链接到个人资料"
+msgstr "复制链接到配置文件"
 
 msgid "Customize your view"
 msgstr "自定义您的视图"
 
 msgid "Discard"
-msgstr ""
+msgstr "放弃..."
 
 msgid "Discard Posts?"
-msgstr ""
+msgstr "丢弃帖子？"
 
 msgid "Display"
 msgstr "显示"
@@ -100,10 +100,10 @@ msgid "Done"
 msgstr "完成"
 
 msgid "Edit profile"
-msgstr "编辑个人资料"
+msgstr "编辑配置文件"
 
 msgid "Emoji"
-msgstr ""
+msgstr "Emoji"
 
 msgid "English"
 msgstr "英文"
@@ -124,7 +124,7 @@ msgid "Follow and get some awesome perks!"
 msgstr "跟随并获得一些超棒的增益！"
 
 msgid "Follower"
-msgstr ""
+msgstr "跟随者"
 
 msgid "Followers"
 msgstr "关注者"
@@ -133,13 +133,13 @@ msgid "Following"
 msgstr "关注"
 
 msgid "Follows you"
-msgstr ""
+msgstr "关注你"
 
 msgid "Get paid every time someone views your post"
 msgstr "每次有人查看您的帖子时获得支付"
 
 msgid "GIF"
-msgstr ""
+msgstr "GIF图片"
 
 msgid "Help center"
 msgstr "帮助中心"
@@ -148,19 +148,19 @@ msgid "Home"
 msgstr "首页"
 
 msgid "Language"
-msgstr ""
+msgstr "语言"
 
 msgid "Learn more"
 msgstr "了解更多"
 
 msgid "Like"
-msgstr "点赞"
+msgstr "赞"
 
 msgid "Limited Edition"
 msgstr "有限版"
 
 msgid "Location"
-msgstr ""
+msgstr "地点"
 
 msgid "Log out"
 msgstr "注销"
@@ -184,13 +184,13 @@ msgid "More coming soon™"
 msgstr "更多即将到来的"
 
 msgid "No Like"
-msgstr ""
+msgstr "没有赞"
 
 msgid "No Photo & GIF"
-msgstr ""
+msgstr "无照片 & GIF"
 
 msgid "No Post"
-msgstr ""
+msgstr "没有帖子"
 
 msgid "Notifications"
 msgstr "通知"
@@ -202,7 +202,7 @@ msgid "Onlyfans"
 msgstr "仅粉丝"
 
 msgid "onlyfans can use"
-msgstr ""
+msgstr "只有粉丝可以使用"
 
 msgid "Open original"
 msgstr "打开原始文件"
@@ -217,13 +217,13 @@ msgid "Pay To Show"
 msgstr "付款以显示"
 
 msgid "People"
-msgstr "人"
+msgstr "用户"
 
 msgid "People / 0xFans"
-msgstr "人 / 0xFans"
+msgstr "用户 / 0xFans"
 
 msgid "Perks you get"
-msgstr "你获得的增益效果"
+msgstr "你获得的收益"
 
 msgid "Popular tags"
 msgstr "热门标签"
@@ -235,7 +235,7 @@ msgid "Post by"
 msgstr "发布者"
 
 msgid "Post your reply"
-msgstr ""
+msgstr "发布您的回复"
 
 msgid "Posts"
 msgstr "帖子"
@@ -277,7 +277,7 @@ msgid "Replying to"
 msgstr "回复到"
 
 msgid "Reset"
-msgstr "Reset"
+msgstr "重 置"
 
 msgid "Retweet"
 msgstr "转发器"
@@ -286,7 +286,7 @@ msgid "Save"
 msgstr "保存"
 
 msgid "Search Creators"
-msgstr "搜索创建者"
+msgstr "搜索创作者"
 
 msgid "Select Currency"
 msgstr "选择货币"
@@ -298,13 +298,13 @@ msgid "Settings and privacy"
 msgstr "设置和隐私"
 
 msgid "Share your costs with those who amplify your content"
-msgstr "与那些扩大您内容的人分担您的费用"
+msgstr "与那些转发您内容的人分享您的收益"
 
 msgid "Show more"
 msgstr "显示更多"
 
 msgid "Something went wrong"
-msgstr "出了错。"
+msgstr "出现了一些错误"
 
 msgid "super followers"
 msgstr "超级关注者"
@@ -313,13 +313,13 @@ msgid "Terms of Service"
 msgstr "服务条款"
 
 msgid "These settings affect all the 0xFans accounts on this browser."
-msgstr "这些设置会影响此浏览器上所有的 0xFans 帐户。"
+msgstr "这些设置会影响此浏览器上所有的 0xFans 账户。"
 
 msgid "This account doesn’t exist"
 msgstr "该账户不存在。"
 
 msgid "This can’t be undone and you’ll lose your draft."
-msgstr ""
+msgstr "此操作无法撤消，您将丢失您的草稿。"
 
 msgid "This Post was deleted by the Post author."
 msgstr "这个帖子已被帖子作者删除。"
@@ -349,7 +349,7 @@ msgid "What should we call you?"
 msgstr "我们应该怎么称呼你？"
 
 msgid "What's happening?"
-msgstr ""
+msgstr "发生了什么？"
 
 msgid "Who to follow"
 msgstr "关注哪些人"
@@ -361,10 +361,10 @@ msgid "You can always change it later."
 msgstr "您可以随时更改它。"
 
 msgid "You can always log back in at any time. If you just want to switch accounts, you can do that by adding an existing account."
-msgstr "您可以随时重新登录。如果您只想切换帐户，您可以添加一个现有帐户。"
+msgstr "您可以随时重新登录。如果您只想切换账户，您可以通过添加一个现有账户来这样做。"
 
 msgid "You can collect"
-msgstr "您可以收集"
+msgstr "您可以收藏"
 
 msgid "You can comment on"
 msgstr "您可以发表评论"
@@ -373,4 +373,5 @@ msgid "You will get Super follow badge in"
 msgstr "您将获得超级跟随徽章"
 
 msgid "You will have high voting power if you followed multiple times"
-msgstr "如果您多次关注您，您将拥有很高的投票权"
+msgstr "如果您多次关注，您将拥有更高的投票权"
+
