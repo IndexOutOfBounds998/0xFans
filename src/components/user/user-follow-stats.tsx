@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { NumberStats } from '@components/publication/number-stats';
 import type { User } from '@lib/types/user';
+import { Trans, t } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 type UserFollowStatsProps = Pick<User, 'following' | 'followers'>;
 type Stats = [string, string, number, number];
@@ -13,6 +15,7 @@ export function UserFollowStats({
   following,
   followers
 }: UserFollowStatsProps): JSX.Element {
+  useLingui();
   const totalFollowing = following;
   const totalFollowers = followers;
 
@@ -44,10 +47,10 @@ export function UserFollowStats({
 
   const userPath = `/user/${id as string}`;
 
-  const allStats: Readonly<Stats[]> = [
-    ['Following', `${userPath}/following`, followingMove, currentFollowing],
-    ['Follower', `${userPath}/followers`, followersMove, currentFollowers]
-  ];
+  const [allStats] = useState<Stats[]>([
+    [t`Following`, `${userPath}/following`, followingMove, currentFollowing],
+    [t`Follower`, `${userPath}/followers`, followersMove, currentFollowers]
+  ]);
 
   return (
     <div
