@@ -22,7 +22,7 @@ import { useSendTransaction, useBalance, useWaitForTransaction } from 'wagmi';
 import { toast } from 'react-hot-toast';
 import { Trans, t } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
-import { i18n } from '@lingui/core';
+import cn from 'clsx';
 type FollowButtonProps = {
   userTargetId: string | null;
   userTargetUsername: string;
@@ -42,7 +42,7 @@ export function FollowButton({
 }: FollowButtonProps): JSX.Element | null {
   const { i18n } = useLingui();
   const unfollowstr = i18n._(t`Unfollow`);
-    
+
   const {
     execute: unfollow,
     error: unfollowError,
@@ -164,12 +164,17 @@ export function FollowButton({
       {userIsFollowed ? (
         <Button
           loading={isUnfollowPending || unfollowLoading}
-          className={`dark-bg-tab min-w-[106px] self-start border border-light-line-reply px-4 py-1.5
-                     font-bold hover:border-accent-red hover:bg-accent-red/10 hover:text-accent-red
-                     hover:before:content-["`+ unfollowstr + `"] inner:hover:hidden dark:border-light-secondary ${btnClass}`}
+          className={`dark-bg-tab hover:before:content-[" group group min-w-[106px] self-start border border-light-line-reply px-4
+                     py-1.5 font-bold hover:border-accent-red hover:bg-accent-red/10
+                     hover:text-accent-red dark:border-light-secondary ${btnClass}`}
           onClick={preventBubbling(openModal)}
         >
-          <span><Trans>Following</Trans></span>
+          <span className={'block group-hover:hidden'}>
+            <Trans>Following</Trans>
+          </span>
+          <span className={'hidden group-hover:block'}>
+            <Trans>Unfollow</Trans>
+          </span>
         </Button>
       ) : hasApprove && !approved ? (
         <Button

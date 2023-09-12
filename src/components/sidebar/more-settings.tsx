@@ -49,7 +49,9 @@ export function MoreSettings(): JSX.Element {
                   className='h-7 w-7'
                   iconName='EllipsisHorizontalCircleIcon'
                 />{' '}
-                <p className='hidden xl:block'><Trans>More</Trans></p>
+                <p className='hidden xl:block'>
+                  <Trans>More</Trans>
+                </p>
               </div>
             </Menu.Button>
             <AnimatePresence>
@@ -101,6 +103,20 @@ export function MoreSettings(): JSX.Element {
                       >
                         <HeroIcon iconName='PaintBrushIcon' />
                         <Trans>Display</Trans>
+                      </Button>
+                    )}
+                  </Menu.Item>
+                  <Menu.Item>
+                    {({ active }): JSX.Element => (
+                      <Button
+                        className={cn(
+                          'flex w-full gap-3 rounded-none rounded-b-md p-4 duration-200',
+                          active && 'bg-main-sidebar-background'
+                        )}
+                        onClick={openModal}
+                      >
+                        <HeroIcon iconName='LanguageIcon' />
+                        <Trans>Language</Trans>
                       </Button>
                     )}
                   </Menu.Item>

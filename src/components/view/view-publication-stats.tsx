@@ -10,6 +10,8 @@ import { UserCards } from '@components/user/user-cards';
 import type { Tweet } from '@lib/types/tweet';
 import { User } from '@lib/types/user';
 import { UserCardProps } from '@lib/hooks/useCollection';
+import { Trans, t } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 type viewTweetStats = Pick<Tweet, 'userRetweets' | 'userLikes'> & {
   likeMove: number;
@@ -36,6 +38,7 @@ export function ViewPublicationStats({
   currentReplies,
   isStatsVisible
 }: viewTweetStats): JSX.Element {
+  useLingui();
   const [statsType, setStatsType] = useState<StatsType | null>(null);
 
   const { open, openModal, closeModal } = useModal();
@@ -58,11 +61,11 @@ export function ViewPublicationStats({
     closeModal();
   };
 
-  const allStats: Readonly<Stats[]> = [
-    ['Reply', null, replyMove, currentReplies ?? 0],
-    ['Retweet', 'retweets', tweetMove, currentTweets],
-    ['Like', 'likes', likeMove, currentLikes]
-  ];
+  const [allStats] = useState<Stats[]>([
+    [t`Reply`, null, replyMove, currentReplies ?? 0],
+    [t`Retweet`, 'retweets', tweetMove, currentTweets],
+    [t`Like`, 'likes', likeMove, currentLikes]
+  ]);
 
   return (
     <>

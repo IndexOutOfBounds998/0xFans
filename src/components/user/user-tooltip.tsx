@@ -11,6 +11,7 @@ import type { ReactNode } from 'react';
 import type { User } from '@lib/types/user';
 import { Profile } from '@lens-protocol/react-web';
 import { useAuth } from '@lib/context/auth-context';
+import { Trans, t } from '@lingui/macro';
 
 type UserTooltipProps = Pick<
   User,
@@ -59,9 +60,9 @@ export function UserTooltip({
 
   const allStats: Stats[] = [];
 
-  if (following) allStats.push(['following', 'Following', following]);
+  if (following) allStats.push(['following', t`Following`, following]);
 
-  if (followers) allStats.push(['followers', 'Followers', followers]);
+  if (followers) allStats.push(['followers', t`Followers`, followers]);
 
   return (
     <div

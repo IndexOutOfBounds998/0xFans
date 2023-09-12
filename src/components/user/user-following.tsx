@@ -1,3 +1,5 @@
+import { Trans, t } from '@lingui/macro';
+
 type UserFollowingProps = {
   isFollowingbserver?: boolean;
 };
@@ -9,7 +11,7 @@ export function UserFollowing({
 
   return (
     <p className='rounded bg-main-search-background px-1 text-xs'>
-      Follows you
+      <Trans>Follows you</Trans>
     </p>
   );
 }

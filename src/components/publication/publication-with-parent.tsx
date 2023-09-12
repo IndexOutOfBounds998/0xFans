@@ -9,7 +9,9 @@ type TweetWithParentProps = {
 
 export type LoadedParents = Record<'parentId' | 'childId', string>[];
 
-export function PublicationWithParent({ data }: TweetWithParentProps): JSX.Element {
+export function PublicationWithParent({
+  data
+}: TweetWithParentProps): JSX.Element {
   const [loadedParents, setLoadedParents] = useState<LoadedParents>([]);
 
   const addParentId = (parentId: string, targetChildId: string): void =>

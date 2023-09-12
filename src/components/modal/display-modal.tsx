@@ -4,6 +4,8 @@ import { InputThemeRadio } from '@components/input/input-theme-radio';
 import { Button } from '@components/ui/button';
 import { InputAccentRadio } from '@components/input/input-accent-radio';
 import type { Theme, Accent } from '@lib/types/theme';
+import { Trans } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 type DisplayModalProps = {
   closeModal: () => void;
@@ -25,12 +27,17 @@ const accentsColor: Readonly<Accent[]> = [
 ];
 
 export function DisplayModal({ closeModal }: DisplayModalProps): JSX.Element {
+  useLingui();
   return (
     <div className='flex flex-col items-center gap-6'>
       <div className='flex flex-col gap-3 text-center'>
-        <h2 className='text-2xl font-bold'>Customize your view</h2>
+        <h2 className='text-2xl font-bold'>
+          <Trans>Customize your view</Trans>
+        </h2>
         <p className='text-light-secondary dark:text-dark-secondary'>
-          These settings affect all the 0xFans accounts on this browser.
+          <Trans>
+            These settings affect all the 0xFans accounts on this browser.
+          </Trans>
         </p>
       </div>
       {/* <article
@@ -74,7 +81,7 @@ export function DisplayModal({ closeModal }: DisplayModalProps): JSX.Element {
       </div>
       <div className='flex w-full flex-col gap-1'>
         <p className='text-sm font-bold text-light-secondary dark:text-dark-secondary'>
-          Background
+          <Trans>Background</Trans>
         </p>
         <div
           className='hover-animation grid grid-rows-3 gap-3 rounded-2xl bg-main-sidebar-background
@@ -90,7 +97,7 @@ export function DisplayModal({ closeModal }: DisplayModalProps): JSX.Element {
                    text-white hover:bg-main-accent/90 active:bg-main-accent/75'
         onClick={closeModal}
       >
-        Done
+        <Trans>Done</Trans>
       </Button>
     </div>
   );

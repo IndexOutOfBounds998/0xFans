@@ -2,6 +2,8 @@ import { motion } from 'framer-motion';
 import cn from 'clsx';
 import { variants } from '@components/user/user-header';
 import { UserNavLink } from './user-nav-link';
+import { Trans, t } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 type UserNavProps = {
   follow?: boolean;
@@ -9,18 +11,19 @@ type UserNavProps = {
 
 const allNavs = [
   [
-    { name: 'Posts', path: '' },
+    { name: t`Posts`, path: '' },
     // { name: 'Tweets & replies', path: 'with_replies' },
-    { name: 'Media', path: 'media' }
+    { name: t`Media`, path: 'media' }
     // { name: 'Likes', path: 'likes' }
   ],
   [
-    { name: 'Following', path: 'following' },
-    { name: 'Followers', path: 'followers' }
+    { name: t`Following`, path: 'following' },
+    { name: t`Followers`, path: 'followers' }
   ]
 ] as const;
 
 export function UserNav({ follow }: UserNavProps): JSX.Element {
+  useLingui();
   const userNav = allNavs[+!!follow];
 
   return (

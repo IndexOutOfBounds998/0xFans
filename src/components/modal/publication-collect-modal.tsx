@@ -13,6 +13,7 @@ import {
 import { useAuth } from '@lib/context/auth-context';
 import CollectButton from '@components/ui/collect-button';
 import type { Tweet } from '@lib/types/tweet';
+import { Trans } from '@lingui/macro';
 
 type TweetCollectModalProps = {
   publication: any;
@@ -39,7 +40,9 @@ export function PublicationCollectModal({
     <>
       <div className='overflow-auto border-t-[1px] border-[#00000014] p-[20px] text-sm'>
         <div className='space-y-1.5 pb-2'>
-          <div className='text-xl font-bold'>Post by @{creater}</div>
+          <div className='text-xl font-bold'>
+            <Trans>Post by</Trans> @{creater}
+          </div>
           <div className='lt-text-gray-500 line-clamp-2'>
             <p>{content}</p>
           </div>
@@ -47,10 +50,16 @@ export function PublicationCollectModal({
         {followerOnly ? (
           <div className='flex items-center space-x-1.5 rounded-none border border-x-0 border-pink-300 bg-white !bg-pink-100 px-[5px] py-[10px] text-sm font-bold text-gray-500 dark:border-gray-700 dark:bg-black sm:rounded-xl sm:border-x'>
             <HeroIcon iconName='StarIcon' className='h-4 w-4 text-pink-500' />
-            <span className='ml-[5px]'>Only</span>
+            <span className='ml-[5px]'>
+              <Trans>Only</Trans>
+            </span>
             <span className='text-purple-500'>{creater}</span>
-            <span className='text-pink-500'>super followers</span>
-            <span>can collect</span>
+            <span className='text-pink-500'>
+              <Trans>super followers</Trans>
+            </span>
+            <span>
+              <Trans>can collect</Trans>
+            </span>
           </div>
         ) : (
           ''
@@ -83,7 +92,8 @@ export function PublicationCollectModal({
             <div className='flex items-center space-x-2'>
               <HeroIcon className='h-4 w-4' iconName='UsersIcon' />
               <button className='font-bold' type='button'>
-                {publication?.stats?.totalAmountOfCollects} collectors
+                {publication?.stats?.totalAmountOfCollects}{' '}
+                <Trans>collectors</Trans>
               </button>
             </div>
           </div>
@@ -102,7 +112,7 @@ export function PublicationCollectModal({
             )}
             onClick={closeModal}
           >
-            Cancel
+            <Trans>Cancel</Trans>
           </Button>
         </div>
       </div>

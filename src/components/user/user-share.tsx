@@ -8,6 +8,7 @@ import { Button } from '@components/ui/button';
 import { HeroIcon } from '@components/ui/hero-icon';
 import { ToolTip } from '@components/ui/tooltip';
 import { variants } from '@components/publication/publication-actions';
+import { Trans, t } from '@lingui/macro';
 
 type UserShareProps = {
   id: string;
@@ -34,7 +35,7 @@ export function UserShare({ id }: UserShareProps): JSX.Element {
             )}
           >
             <HeroIcon className='h-5 w-5' iconName='EllipsisHorizontalIcon' />
-            {!open && <ToolTip tip='More' />}
+            {!open && <ToolTip tip={t`More`} />}
           </Popover.Button>
           <AnimatePresence>
             {open && (
@@ -51,7 +52,7 @@ export function UserShare({ id }: UserShareProps): JSX.Element {
                   onClick={preventBubbling(handleCopy(close))}
                 >
                   <HeroIcon iconName='LinkIcon' />
-                  Copy link to Profile
+                  <Trans>Copy link to Profile</Trans>
                 </Popover.Button>
               </Popover.Panel>
             )}

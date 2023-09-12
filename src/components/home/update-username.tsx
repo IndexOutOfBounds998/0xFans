@@ -19,8 +19,10 @@ import {
   useUpdateProfileDetails
 } from '@lens-protocol/react-web';
 import { upload } from '@lib/upload';
-
+import { t } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 export function UpdateUsername(): JSX.Element {
+  useLingui();
   const [alreadySet, setAlreadySet] = useState(false);
   const [available, setAvailable] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -94,7 +96,7 @@ export function UpdateUsername(): JSX.Element {
     setVisited(false);
     setAvailable(false);
 
-    toast.success('Username updated successfully');
+    toast.success(t`Username updated successfully`);
   };
 
   const cancelUpdateUsername = (): void => {
@@ -122,7 +124,7 @@ export function UpdateUsername(): JSX.Element {
           cancelUpdateUsername={cancelUpdateUsername}
         >
           <InputField
-            label='Username'
+            label={t`Username`}
             inputId='username'
             inputValue={inputValue}
             errorMessage={errorMessage}
@@ -137,7 +139,7 @@ export function UpdateUsername(): JSX.Element {
         onClick={openModal}
       >
         <HeroIcon className='h-5 w-5' iconName='SparklesIcon' />
-        <ToolTip tip='Top tweets' />
+        <ToolTip tip={t`Top Posts`} />
       </Button>
     </>
   );

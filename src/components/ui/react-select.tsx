@@ -9,7 +9,7 @@ import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/outline';
 
 type SelectProps = ComponentPropsWithRef<'select'> & {
-  value?: { name: string };
+  value?: any;
   list: any[];
   onChange: (val: any) => void;
 };

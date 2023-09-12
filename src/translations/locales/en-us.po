@@ -13,8 +13,17 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+msgid "0xFans Circle"
+msgstr "0xFans Circle"
+
 msgid "Accessibility"
 msgstr "Accessibility"
+
+msgid "Account info"
+msgstr "Account info"
+
+msgid "Add photo"
+msgstr "Add photo"
 
 msgid "Ads Info"
 msgstr "Ads Info"
@@ -22,8 +31,14 @@ msgstr "Ads Info"
 msgid "Approve Follow Module"
 msgstr "Approve Follow Module"
 
+msgid "Background"
+msgstr "Background"
+
 msgid "Bookmarks"
 msgstr "Bookmarks"
+
+msgid "can collect"
+msgstr "can collect"
 
 msgid "can reply"
 msgstr "can reply"
@@ -43,11 +58,29 @@ msgstr "Chinese"
 msgid "Choose audience"
 msgstr "Choose audience"
 
+msgid "Close"
+msgstr "Close"
+
+msgid "collectors"
+msgstr "collectors"
+
 msgid "Cookie Policy"
 msgstr "Cookie Policy"
 
+msgid "Copy link to Profile"
+msgstr "Copy link to Profile"
+
+msgid "Customize your view"
+msgstr "Customize your view"
+
 msgid "Display"
 msgstr "Display"
+
+msgid "Done"
+msgstr "Done"
+
+msgid "Edit profile"
+msgstr "Edit profile"
 
 msgid "English"
 msgstr "English"
@@ -64,6 +97,12 @@ msgstr "Feed"
 msgid "Follow"
 msgstr "Follow"
 
+msgid "Follow and get some awesome perks!"
+msgstr "Follow and get some awesome perks!"
+
+msgid "Followers"
+msgstr "Followers"
+
 msgid "Following"
 msgstr "Following"
 
@@ -76,11 +115,26 @@ msgstr "Help center"
 msgid "Home"
 msgstr "Home"
 
+msgid "Learn more"
+msgstr "Learn more"
+
+msgid "Like"
+msgstr "Like"
+
 msgid "Limited Edition"
 msgstr "Limited Edition"
 
+msgid "Log out"
+msgstr "Log out"
+
+msgid "Log out of 0xFans?"
+msgstr "Log out of 0xFans?"
+
 msgid "Make your posts unique"
 msgstr "Make your posts unique"
+
+msgid "Media"
+msgstr "Media"
 
 msgid "Messages"
 msgstr "Messages"
@@ -88,11 +142,20 @@ msgstr "Messages"
 msgid "More"
 msgstr "More"
 
+msgid "More coming soon™"
+msgstr "More coming soon™"
+
 msgid "Notifications"
 msgstr "Notifications"
 
+msgid "Only"
+msgstr "Only"
+
 msgid "Onlyfans"
 msgstr "Onlyfans"
+
+msgid "Open original"
+msgstr "Open original"
 
 msgid "Paid to view only for the first 24 hours"
 msgstr "Paid to view only for the first 24 hours"
@@ -109,11 +172,20 @@ msgstr "People"
 msgid "People / 0xFans"
 msgstr "People / 0xFans"
 
+msgid "Perks you get"
+msgstr "Perks you get"
+
 msgid "Popular tags"
 msgstr "Popular tags"
 
 msgid "Post"
 msgstr "Post"
+
+msgid "Post by"
+msgstr "Post by"
+
+msgid "Posts"
+msgstr "Posts"
 
 msgid "Price"
 msgstr "Price"
@@ -121,11 +193,20 @@ msgstr "Price"
 msgid "Privacy Policy"
 msgstr "Privacy Policy"
 
+msgid "profile"
+msgstr "profile"
+
 msgid "Profile"
 msgstr "Profile"
 
 msgid "Pseudo"
 msgstr "Pseudo"
+
+msgid "publications"
+msgstr "publications"
+
+msgid "Recipient"
+msgstr "Recipient"
 
 msgid "Referral Fee"
 msgstr "Referral Fee"
@@ -133,8 +214,20 @@ msgstr "Referral Fee"
 msgid "Referral Rewards"
 msgstr "Referral Rewards"
 
+msgid "Remove photo"
+msgstr "Remove photo"
+
 msgid "Reply"
 msgstr "Reply"
+
+msgid "Replying to"
+msgstr "Replying to"
+
+msgid "Reset"
+msgstr "Reset"
+
+msgid "Retweet"
+msgstr "Retweet"
 
 msgid "Save"
 msgstr "Save"
@@ -144,6 +237,9 @@ msgstr "Search Creators"
 
 msgid "Select Currency"
 msgstr "Select Currency"
+
+msgid "Set username"
+msgstr "Set username"
 
 msgid "Settings and privacy"
 msgstr "Settings and privacy"
@@ -157,20 +253,41 @@ msgstr "Show more"
 msgid "Something went wrong"
 msgstr "Something went wrong"
 
+msgid "super followers"
+msgstr "super followers"
+
 msgid "Terms of Service"
 msgstr "Terms of Service"
+
+msgid "These settings affect all the 0xFans accounts on this browser."
+msgstr "These settings affect all the 0xFans accounts on this browser."
 
 msgid "This account doesn’t exist"
 msgstr "This account doesn’t exist"
 
+msgid "This Post was deleted by the Post author."
+msgstr "This Post was deleted by the Post author."
+
 msgid "Time Limit"
 msgstr "Time Limit"
+
+msgid "Top Posts"
+msgstr "Top Posts"
+
+msgid "Topics"
+msgstr "Topics"
 
 msgid "Try searching for another."
 msgstr "Try searching for another."
 
 msgid "Unfollow"
 msgstr "Unfollow"
+
+msgid "Username"
+msgstr "Username"
+
+msgid "Username updated successfully"
+msgstr "Username updated successfully"
 
 msgid "What should we call you?"
 msgstr "What should we call you?"
@@ -183,3 +300,18 @@ msgstr "You can always change it here again."
 
 msgid "You can always change it later."
 msgstr "You can always change it later."
+
+msgid "You can always log back in at any time. If you just want to switch accounts, you can do that by adding an existing account."
+msgstr "You can always log back in at any time. If you just want to switch accounts, you can do that by adding an existing account."
+
+msgid "You can collect"
+msgstr "You can collect"
+
+msgid "You can comment on"
+msgstr "You can comment on"
+
+msgid "You will get Super follow badge in"
+msgstr "You will get Super follow badge in"
+
+msgid "You will have high voting power if you followed multiple times"
+msgstr "You will have high voting power if you followed multiple times"

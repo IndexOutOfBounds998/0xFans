@@ -207,7 +207,10 @@ export function Publication(tweet: TweetProps): JSX.Element {
                   <UserTooltip modal={modal} {...user} profile={profile}>
                     <UserUsername id={ownerId} username={username ?? ''} />
                   </UserTooltip>
-                  <PublicationDate tweetLink={tweetLink} createdAt={createdAt} />
+                  <PublicationDate
+                    tweetLink={tweetLink}
+                    createdAt={createdAt}
+                  />
                 </div>
                 <div className='px-4'>
                   {!modal && (
