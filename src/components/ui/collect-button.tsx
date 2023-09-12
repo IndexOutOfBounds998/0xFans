@@ -53,6 +53,36 @@ export default function CollectButton({
     hasAmount = true;
   }
 
+  let isEnd = false;
+
+  console.log(Date.parse(new Date().toString()));
+  console.log(
+    Date.parse(
+      (publication?.collectModule as SimpleCollectModuleSettings)
+        ?.endTimestampOptional ?? ''
+    )
+  );
+  console.log(
+    (publication?.collectModule as SimpleCollectModuleSettings)
+      ?.endTimestampOptional ?? ''
+  );
+  if (
+    (publication?.collectModule as SimpleCollectModuleSettings)
+      ?.endTimestampOptional
+  ) {
+    const now = Date.parse(new Date().toString());
+    const endTime = Date.parse(
+      (publication?.collectModule as SimpleCollectModuleSettings)
+        ?.endTimestampOptional ?? ''
+    );
+    debugger;
+    if (now > endTime) {
+      isEnd = true;
+    } else {
+      isEnd = false;
+    }
+  }
+
   const handleCollect = async (): Promise<void> => {
     if (hasAmount) {
       return collect();
@@ -102,6 +132,10 @@ export default function CollectButton({
     case CollectState.CANNOT_BE_COLLECTED:
       return <CollectBtn title='Cannot be collected' />;
     case CollectState.CAN_BE_COLLECTED:
-      return <CanCollectBtn />;
+      return isEnd ? (
+        <CollectBtn title='Collection time has expired' />
+      ) : (
+        <CanCollectBtn />
+      );
   }
 }
