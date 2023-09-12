@@ -3,9 +3,9 @@
 import { useState, useEffect, useMemo } from 'react';
 import cn from 'clsx';
 
-import { ViewTweetStats } from '@components/view/view-tweet-stats';
-import { TweetOption } from './tweet-option';
-import { TweetShare } from './tweet-share';
+import { ViewPublicationStats } from '@components/view/view-publication-stats';
+import { PublicationOption } from './publication-option';
+import { PublicationShare } from './publication-share';
 import type { Tweet } from '@lib/types/tweet';
 import {
   ContentPublication,
@@ -31,7 +31,7 @@ type TweetStatsProps = Pick<
   openCollectModal?: () => void;
 };
 
-export function TweetStats({
+export function PublicationStats({
   userId,
   tweetId,
   userLikes,
@@ -128,7 +128,7 @@ export function TweetStats({
   return (
     <>
       {viewTweet && (
-        <ViewTweetStats
+        <ViewPublicationStats
           likeMove={likeMove}
           userLikes={userLikes}
           tweetMove={tweetMove}
@@ -146,7 +146,7 @@ export function TweetStats({
           viewTweet ? 'justify-around py-2' : 'max-w-md justify-between'
         )}
       >
-        <TweetOption
+        <PublicationOption
           className='hover:text-accent-blue focus-visible:text-accent-blue'
           iconClassName='group-hover:bg-accent-blue/10 group-active:bg-accent-blue/20
                          group-focus-visible:bg-accent-blue/10 group-focus-visible:ring-accent-blue/80'
@@ -158,7 +158,7 @@ export function TweetStats({
           onClick={openModal}
           disabled={!canComment}
         />
-        <TweetOption
+        <PublicationOption
           className={cn(
             'hover:text-accent-green focus-visible:text-accent-green',
             tweetIsRetweeted && 'text-accent-green [&>i>svg]:[stroke-width:2px]'
@@ -177,7 +177,7 @@ export function TweetStats({
           //   tweetId??''
           // )}
         />
-        <TweetOption
+        <PublicationOption
           className={cn(
             'hover:text-accent-pink focus-visible:text-accent-pink',
             hasReactionType && 'text-accent-pink [&>i>svg]:fill-accent-pink'
@@ -191,7 +191,7 @@ export function TweetStats({
           viewTweet={viewTweet}
           onClick={() => toggleReaction()}
         />
-        <TweetOption
+        <PublicationOption
           className={cn(
             'hover:text-accent-purple focus-visible:text-accent-purple'
           )}
@@ -205,13 +205,13 @@ export function TweetStats({
           viewTweet={viewTweet}
           onClick={openCollectModal}
         />
-        <TweetShare
+        <PublicationShare
           userId={userId}
           tweetId={tweetId ?? ''}
           viewTweet={viewTweet}
         />
         {isOwner && (
-          <TweetOption
+          <PublicationOption
             className='hover:text-accent-blue focus-visible:text-accent-blue'
             iconClassName='group-hover:bg-accent-blue/10 group-active:bg-accent-blue/20
                            group-focus-visible:bg-accent-blue/10 group-focus-visible:ring-accent-blue/80'

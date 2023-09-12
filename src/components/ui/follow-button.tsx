@@ -20,6 +20,9 @@ import {
 } from '@lens-protocol/client';
 import { useSendTransaction, useBalance, useWaitForTransaction } from 'wagmi';
 import { toast } from 'react-hot-toast';
+import { Trans, t } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
+import { i18n } from '@lingui/core';
 type FollowButtonProps = {
   userTargetId: string | null;
   userTargetUsername: string;
@@ -37,6 +40,9 @@ export function FollowButton({
   followee,
   btnClass
 }: FollowButtonProps): JSX.Element | null {
+  const { i18n } = useLingui();
+  const unfollowstr = i18n._(t`Unfollow`);
+    
   const {
     execute: unfollow,
     error: unfollowError,
@@ -147,9 +153,9 @@ export function FollowButton({
         closeModal={closeModal}
       >
         <ActionModal
-          title={`Unfollow @${userTargetUsername}?`}
+          title={t`Unfollow` + `@${userTargetUsername}?`}
           description='Their Posts will no longer show up in your home timeline. You can still view their profile, unless their Posts are protected.'
-          mainBtnLabel='Unfollow'
+          mainBtnLabel={t`Unfollow`}
           action={handleUnfollow}
           closeModal={closeModal}
         />
@@ -160,10 +166,10 @@ export function FollowButton({
           loading={isUnfollowPending || unfollowLoading}
           className={`dark-bg-tab min-w-[106px] self-start border border-light-line-reply px-4 py-1.5
                      font-bold hover:border-accent-red hover:bg-accent-red/10 hover:text-accent-red
-                     hover:before:content-["Unfollow"] inner:hover:hidden dark:border-light-secondary ${btnClass}`}
+                     hover:before:content-["`+ unfollowstr + `"] inner:hover:hidden dark:border-light-secondary ${btnClass}`}
           onClick={preventBubbling(openModal)}
         >
-          <span>Following</span>
+          <span><Trans>Following</Trans></span>
         </Button>
       ) : hasApprove && !approved ? (
         <Button
@@ -174,7 +180,7 @@ export function FollowButton({
                    dark:active:bg-light-border/75 ${btnClass}`}
           onClick={preventBubbling(handleSuperFollowApprove)}
         >
-          Approve Follow Module
+          <Trans>Approve Follow Module</Trans>
         </Button>
       ) : (
         <Button
@@ -185,7 +191,7 @@ export function FollowButton({
                    dark:active:bg-light-border/75 ${btnClass}`}
           onClick={preventBubbling(handleFollow)}
         >
-          Follow
+          <Trans>Follow</Trans>
         </Button>
       )}
     </>

@@ -40,7 +40,7 @@ export function Suggestions(): JSX.Element {
               className='custom-button accent-tab hover-card block w-full rounded-2xl
                          rounded-t-none text-center text-main-accent'
             >
-              Show more
+              <Trans>Show more</Trans>
             </span>
           </Link>
         </motion.div>

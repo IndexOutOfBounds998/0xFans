@@ -1,4 +1,4 @@
-import { TweetProps } from '@components/tweet/tweet';
+import { TweetProps } from '@components/publication/publication';
 import {
   AnyPublication,
   ContentPublication,

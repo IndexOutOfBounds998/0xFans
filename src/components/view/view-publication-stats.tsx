@@ -4,8 +4,8 @@ import cn from 'clsx';
 import { useModal } from '@lib/hooks/useModal';
 
 import { Modal } from '@components/modal/modal';
-import { TweetStatsModal } from '@components/modal/tweet-stats-modal';
-import { NumberStats } from '@components/tweet/number-stats';
+import { PublicationStatsModal } from '@components/modal/publication-stats-modal';
+import { NumberStats } from '@components/publication/number-stats';
 import { UserCards } from '@components/user/user-cards';
 import type { Tweet } from '@lib/types/tweet';
 import { User } from '@lib/types/user';
@@ -25,7 +25,7 @@ export type StatsType = 'retweets' | 'likes';
 
 type Stats = [string, StatsType | null, number, number];
 
-export function ViewTweetStats({
+export function ViewPublicationStats({
   likeMove,
   userLikes,
   tweetMove,
@@ -72,14 +72,14 @@ export function ViewTweetStats({
         open={open}
         closeModal={handleClose}
       >
-        <TweetStatsModal statsType={statsType} handleClose={handleClose}>
+        <PublicationStatsModal statsType={statsType} handleClose={handleClose}>
           <UserCards
             follow
             type={statsType as StatsType}
             data={data}
             loading={loading}
           />
-        </TweetStatsModal>
+        </PublicationStatsModal>
       </Modal>
       {isStatsVisible && (
         <div

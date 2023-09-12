@@ -10,7 +10,7 @@ import { siteURL } from '@lib/env';
 import { Button } from '@components/ui/button';
 import { HeroIcon } from '@components/ui/hero-icon';
 import { ToolTip } from '@components/ui/tooltip';
-import { variants } from './tweet-actions';
+import { variants } from './publication-actions';
 
 type TweetShareProps = {
   userId: string;
@@ -18,7 +18,7 @@ type TweetShareProps = {
   viewTweet?: boolean;
 };
 
-export function TweetShare({
+export function PublicationShare({
   userId,
   tweetId,
   viewTweet
@@ -49,7 +49,7 @@ export function TweetShare({
 
   const handleCopy = (closeMenu: () => void) => async (): Promise<void> => {
     closeMenu();
-    await navigator.clipboard.writeText(`${siteURL}/tweet/${tweetId}`);
+    await navigator.clipboard.writeText(`${siteURL}/publication/${tweetId}`);
     toast.success('Copied to clipboard');
   };
 

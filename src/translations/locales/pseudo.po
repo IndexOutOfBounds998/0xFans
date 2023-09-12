@@ -13,10 +13,94 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+msgid "Accessibility"
+msgstr ""
+
+msgid "Ads Info"
+msgstr ""
+
+msgid "Approve Follow Module"
+msgstr ""
+
+msgid "Bookmarks"
+msgstr ""
+
+msgid "can reply"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Change your username?"
+msgstr ""
+
+msgid "Charge Limit"
+msgstr ""
+
 msgid "Chinese"
 msgstr ""
 
+msgid "Choose audience"
+msgstr ""
+
+msgid "Cookie Policy"
+msgstr ""
+
+msgid "Display"
+msgstr ""
+
 msgid "English"
+msgstr ""
+
+msgid "Everyone"
+msgstr ""
+
+msgid "Fee"
+msgstr ""
+
+msgid "Feed"
+msgstr ""
+
+msgid "Follow"
+msgstr ""
+
+msgid "Following"
+msgstr ""
+
+msgid "Get paid every time someone views your post"
+msgstr ""
+
+msgid "Help center"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "Limited Edition"
+msgstr ""
+
+msgid "Make your posts unique"
+msgstr ""
+
+msgid "Messages"
+msgstr ""
+
+msgid "More"
+msgstr ""
+
+msgid "Notifications"
+msgstr ""
+
+msgid "Onlyfans"
+msgstr ""
+
+msgid "Paid to view only for the first 24 hours"
+msgstr ""
+
+msgid "Pay settings"
+msgstr ""
+
+msgid "Pay To Show"
 msgstr ""
 
 msgid "People"
@@ -25,23 +109,77 @@ msgstr ""
 msgid "People / 0xFans"
 msgstr ""
 
+msgid "Popular tags"
+msgstr ""
+
+msgid "Post"
+msgstr ""
+
+msgid "Price"
+msgstr ""
+
+msgid "Privacy Policy"
+msgstr ""
+
+msgid "Profile"
+msgstr ""
+
 msgid "Pseudo"
+msgstr ""
+
+msgid "Referral Fee"
+msgstr ""
+
+msgid "Referral Rewards"
+msgstr ""
+
+msgid "Reply"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Search Creators"
+msgstr ""
+
+msgid "Select Currency"
+msgstr ""
+
+msgid "Settings and privacy"
+msgstr ""
+
+msgid "Share your costs with those who amplify your content"
+msgstr ""
+
+msgid "Show more"
 msgstr ""
 
 msgid "Something went wrong"
 msgstr ""
 
+msgid "Terms of Service"
+msgstr ""
+
 msgid "This account doesn’t exist"
 msgstr ""
 
-msgid "Trends"
-msgstr ""
-
-msgid "Trends for you"
+msgid "Time Limit"
 msgstr ""
 
 msgid "Try searching for another."
 msgstr ""
 
+msgid "Unfollow"
+msgstr ""
+
+msgid "What should we call you?"
+msgstr ""
+
 msgid "Who to follow"
+msgstr ""
+
+msgid "You can always change it here again."
+msgstr ""
+
+msgid "You can always change it later."
 msgstr ""

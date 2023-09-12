@@ -1,7 +1,7 @@
 import { useMemo, useEffect } from 'react';
 import { getRandomId } from '@lib/random';
-import { Tweet, TweetProps } from './tweet';
-import type { LoadedParents } from './tweet-with-parent';
+import { Publication, TweetProps } from './publication';
+import type { LoadedParents } from './publication-with-parent';
 
 type TweetParentProps = {
   parentId: string;
@@ -9,7 +9,7 @@ type TweetParentProps = {
   addParentId: (parentId: string, componentId: string) => void;
 };
 
-export function TweetParent({
+export function PublicationParent({
   parentId,
   loadedParents,
   addParentId

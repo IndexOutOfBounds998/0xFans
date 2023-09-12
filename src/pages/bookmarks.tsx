@@ -12,8 +12,8 @@ import { MainHeader } from '@components/home/main-header';
 import { MainContainer } from '@components/home/main-container';
 import { Modal } from '@components/modal/modal';
 import { ActionModal } from '@components/modal/action-modal';
-import { Tweet, TweetProps } from '@components/tweet/tweet';
-import { StatsEmpty } from '@components/tweet/stats-empty';
+import { Publication, TweetProps } from '@components/publication/publication';
+import { StatsEmpty } from '@components/publication/stats-empty';
 import { Button } from '@components/ui/button';
 import { ToolTip } from '@components/ui/tooltip';
 import { HeroIcon } from '@components/ui/hero-icon';
@@ -27,18 +27,20 @@ import { useBookmarksQuery } from '@lib/hooks/useBookmarksQuery';
 import { GetStaticProps } from 'next';
 import { loadCatalog } from 'translations/utils';
 import { useLingui } from '@lingui/react';
+import { i18n } from '@lingui/core';
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const translation = await loadCatalog(ctx.locale!)
 
   return {
     props: {
-      translation
+      translation,
+      i18n: translation
     }
   }
 }
 export default function Bookmarks(): JSX.Element {
   useLingui();
-  
+
   const { user } = useAuth();
 
   const { open, openModal, closeModal } = useModal();
@@ -102,8 +104,8 @@ export default function Bookmarks(): JSX.Element {
           />
         ) : (
           <AnimatePresence mode='popLayout'>
-            {data?.map((tweet) => (
-              <Tweet {...tweet} key={tweet.id} />
+            {data?.map((publication) => (
+              <Publication {...publication} key={publication.id} />
             ))}
           </AnimatePresence>
         )}

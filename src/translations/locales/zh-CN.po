@@ -8,7 +8,7 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: 0xfans\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-09-11 07:08\n"
+"PO-Revision-Date: 2023-09-11 07:36\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -18,11 +18,95 @@ msgstr ""
 "X-Crowdin-File: /dev/src/translations/locales/en-us.po\n"
 "X-Crowdin-File-ID: 29\n"
 
+msgid "Accessibility"
+msgstr "无障碍环境"
+
+msgid "Ads Info"
+msgstr "广告信息"
+
+msgid "Approve Follow Module"
+msgstr "授权关注模块"
+
+msgid "Bookmarks"
+msgstr "书签"
+
+msgid "can reply"
+msgstr "可以回复"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Change your username?"
+msgstr "更改您的用户名？"
+
+msgid "Charge Limit"
+msgstr "个数限制"
+
 msgid "Chinese"
 msgstr "中文"
 
+msgid "Choose audience"
+msgstr "选择受众"
+
+msgid "Cookie Policy"
+msgstr "Cookie 策略"
+
+msgid "Display"
+msgstr "显示"
+
 msgid "English"
-msgstr "Distr."
+msgstr "英文"
+
+msgid "Everyone"
+msgstr "所有人"
+
+msgid "Fee"
+msgstr "费用"
+
+msgid "Feed"
+msgstr "订阅"
+
+msgid "Follow"
+msgstr "关注"
+
+msgid "Following"
+msgstr "正在关注"
+
+msgid "Get paid every time someone views your post"
+msgstr "每次有人查看您的帖子时获得支付收益"
+
+msgid "Help center"
+msgstr "帮助中心"
+
+msgid "Home"
+msgstr "首页"
+
+msgid "Limited Edition"
+msgstr "有限版"
+
+msgid "Make your posts unique"
+msgstr "使您的帖子变成唯一的"
+
+msgid "Messages"
+msgstr "留言"
+
+msgid "More"
+msgstr "更多"
+
+msgid "Notifications"
+msgstr "通知"
+
+msgid "Onlyfans"
+msgstr "仅粉丝"
+
+msgid "Paid to view only for the first 24 hours"
+msgstr "付费仅在头24小时内查看"
+
+msgid "Pay settings"
+msgstr "支付设置"
+
+msgid "Pay To Show"
+msgstr "付款以显示"
 
 msgid "People"
 msgstr "人"
@@ -30,24 +114,77 @@ msgstr "人"
 msgid "People / 0xFans"
 msgstr "人 / 0xFans"
 
+msgid "Popular tags"
+msgstr "热门标签"
+
+msgid "Post"
+msgstr "发帖"
+
+msgid "Price"
+msgstr "价格"
+
+msgid "Privacy Policy"
+msgstr "隐私政策"
+
+msgid "Profile"
+msgstr "个人资料"
+
 msgid "Pseudo"
 msgstr "伪装"
 
+msgid "Referral Fee"
+msgstr "转发费"
+
+msgid "Referral Rewards"
+msgstr "推荐奖励"
+
+msgid "Reply"
+msgstr "回复"
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Search Creators"
+msgstr "搜索创作者"
+
+msgid "Select Currency"
+msgstr "选择货币"
+
+msgid "Settings and privacy"
+msgstr "设置和隐私"
+
+msgid "Share your costs with those who amplify your content"
+msgstr "与那些扩大您内容的人分享您的收益"
+
+msgid "Show more"
+msgstr "显示更多"
+
 msgid "Something went wrong"
-msgstr "出了错。"
+msgstr "出错了"
+
+msgid "Terms of Service"
+msgstr "服务条款"
 
 msgid "This account doesn’t exist"
 msgstr "此帐户不存在"
 
-msgid "Trends"
-msgstr "趋势"
-
-msgid "Trends for you"
-msgstr "您的趋势"
+msgid "Time Limit"
+msgstr "时间限制"
 
 msgid "Try searching for another."
 msgstr "尝试搜索另一个。"
 
-msgid "Who to follow"
-msgstr "关注哪些人"
+msgid "Unfollow"
+msgstr "取消关注"
 
+msgid "What should we call you?"
+msgstr "我们应该怎么称呼你"
+
+msgid "Who to follow"
+msgstr "尝试关注哪些人"
+
+msgid "You can always change it here again."
+msgstr "您随时可以在这里再次更改它。"
+
+msgid "You can always change it later."
+msgstr "您以后可以随时更改它。"

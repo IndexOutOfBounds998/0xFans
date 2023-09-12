@@ -1,13 +1,13 @@
 import { Input } from '@components/input/input';
-import { Tweet } from '@components/tweet/tweet';
-import type { TweetProps } from '@components/tweet/tweet';
+import { Publication } from '@components/publication/publication';
+import type { TweetProps } from '@components/publication/publication';
 
 type TweetReplyModalProps = {
   tweet: TweetProps;
   closeModal: () => void;
 };
 
-export function TweetReplyModal({
+export function PublicationReplyModal({
   tweet,
   closeModal
 }: TweetReplyModalProps): JSX.Element {
@@ -18,7 +18,7 @@ export function TweetReplyModal({
       parent={{ id: tweet?.id || '', username: tweet?.user?.username || '' }}
       closeModal={closeModal}
     >
-      <Tweet modal parentTweet {...tweet} />
+      <Publication modal parentTweet {...tweet} />
     </Input>
   );
 }

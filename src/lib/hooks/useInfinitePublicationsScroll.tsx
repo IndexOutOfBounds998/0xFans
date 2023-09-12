@@ -10,7 +10,7 @@ import {
   AnyPublication,
   PublicationMetadataFilters
 } from '@lens-protocol/react-web';
-import { TweetProps } from '@components/tweet/tweet';
+import { TweetProps } from '@components/publication/publication';
 
 type InfiniteScroll<T> = {
   data: TweetProps[] | null;

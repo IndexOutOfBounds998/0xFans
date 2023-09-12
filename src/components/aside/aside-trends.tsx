@@ -11,7 +11,7 @@ import { Loading } from '@components/ui/loading';
 import type { MotionProps } from 'framer-motion';
 import { useTrending } from '@lib/hooks/useTrending';
 import { t, Trans } from '@lingui/macro';
- 
+
 
 
 export const variants: MotionProps = {
@@ -25,14 +25,14 @@ type AsideTrendsProps = {
 };
 
 export function AsideTrends({ inTrendsPage }: AsideTrendsProps): JSX.Element {
- 
+
   const { data, loading } = useTrending({ limit: 10 });
 
   return (
     <section
       className={cn(
         !inTrendsPage &&
-          'hover-animation rounded-2xl bg-main-sidebar-background'
+        'hover-animation rounded-2xl bg-main-sidebar-background'
       )}
     >
       {loading ? (
@@ -44,7 +44,7 @@ export function AsideTrends({ inTrendsPage }: AsideTrendsProps): JSX.Element {
         >
           {!inTrendsPage && (
             <h2 className='text-xl font-extrabold'>
-              <Trans>Trends for you</Trans>
+              <Trans>Popular tags</Trans>
             </h2>
           )}
           {data.map(({ tag, query, tweet_volume, url }) => (
@@ -52,7 +52,7 @@ export function AsideTrends({ inTrendsPage }: AsideTrendsProps): JSX.Element {
             <a
               className='hover-animation accent-tab hover-card relative
                            flex cursor-not-allowed flex-col gap-0.5'
-              // onClick={preventBubbling()}
+            // onClick={preventBubbling()}
             >
               <div className='absolute right-2 top-2'>
                 <Button
@@ -88,7 +88,7 @@ export function AsideTrends({ inTrendsPage }: AsideTrendsProps): JSX.Element {
                 className='custom-button accent-tab hover-card block w-full rounded-2xl
                            rounded-t-none text-center text-main-accent'
               >
-                Show more
+                <Trans>Show more</Trans>
               </span>
             </Link>
           )}

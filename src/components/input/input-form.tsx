@@ -16,7 +16,7 @@ import type {
 import type { Variants } from 'framer-motion';
 import { Menu, Popover } from '@headlessui/react';
 import type { IconName } from '@components/ui/hero-icon';
-
+import { Trans, t } from '@lingui/macro';
 type AudienceType = {
   icon: IconName;
   label: string;
@@ -83,10 +83,11 @@ export function InputForm({
 }: InputFormProps): JSX.Element {
   const { open, openModal, closeModal } = useModal();
 
-  const peopler: Readonly<AudienceType[]> = [
-    { icon: 'GlobeAsiaAustraliaIcon', label: 'Everyone', color: '#1d9bf0' },
-    { icon: 'UserGroupIcon', label: 'Onlyfans', color: '#00ba7c' }
-  ];
+
+  const [peopler] = useState<AudienceType[]>([
+    { icon: 'GlobeAsiaAustraliaIcon', label: t`Everyone`, color: '#1d9bf0' },
+    { icon: 'UserGroupIcon', label: t`Onlyfans`, color: '#00ba7c' }
+  ])
 
   useEffect(() => {
     handleShowHideNav(true);
@@ -162,7 +163,7 @@ export function InputForm({
               <Popover.Panel className='menu-container absolute left-[-70px] top-[35px] z-10'>
                 <div className='h-[190px] w-[260px] rounded-2xl bg-main-background py-[10px] shadow-inner'>
                   <p className='px-[15px] text-[20px] font-bold'>
-                    Choose audience
+                    <Trans>Choose audience</Trans>
                   </p>
                   {peopler.map((item) => (
                     <div
@@ -233,7 +234,7 @@ export function InputForm({
               className='cursor-pointer bg-main-accent px-4 py-1.5 font-bold text-white opacity-50'
               onClick={handleFocus}
             >
-              Reply
+              <Trans>Reply</Trans>
             </Button>
           )}
         </div>
@@ -250,7 +251,7 @@ export function InputForm({
                        px-3 text-main-accent hover:bg-main-accent/10 active:bg-main-accent/20'
           >
             <HeroIcon className='h-4 w-4' iconName={audience.icon} />
-            <p className='font-bold'>{audience.label} can reply</p>
+            <p className='font-bold'>{audience.label} <Trans>can reply</Trans></p>
           </button>
         </motion.div>
       )}

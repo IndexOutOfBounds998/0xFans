@@ -10,7 +10,7 @@ import { MainContainer } from '@components/home/main-container';
 import { Input } from '@components/input/input';
 import { UpdateUsername } from '@components/home/update-username';
 import { MainHeader } from '@components/home/main-header';
-import { Tweet, TweetProps } from '@components/tweet/tweet';
+import { Publication, TweetProps } from '@components/publication/publication';
 import { Loading } from '@components/ui/loading';
 import type { ReactElement, ReactNode } from 'react';
 import PubSub from 'pubsub-js';
@@ -25,7 +25,8 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const translation = await loadCatalog(ctx.locale!)
   return {
     props: {
-      translation
+      translation,
+      i18n: translation
     }
   }
 }
@@ -72,8 +73,8 @@ export default function Home(): JSX.Element {
         ) : (
           <>
             <AnimatePresence mode='popLayout'>
-              {data.map((tweet) => (
-                <Tweet {...tweet} key={tweet.id} />
+              {data.map((publication) => (
+                <Publication {...publication} key={publication.id} />
               ))}
             </AnimatePresence>
             <LoadMore />

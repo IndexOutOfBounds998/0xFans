@@ -4,24 +4,24 @@ import cn from 'clsx';
 import { useAuth } from '@lib/context/auth-context';
 import { useModal } from '@lib/hooks/useModal';
 import { Modal } from '@components/modal/modal';
-import { TweetReplyModal } from '@components/modal/tweet-reply-modal';
+import { PublicationReplyModal } from '@components/modal/publication-reply-modal';
 import { ImagePreview } from '@components/input/image-preview';
 import { UserAvatar } from '@components/user/user-avatar';
 import { UserTooltip } from '@components/user/user-tooltip';
 import { UserName } from '@components/user/user-name';
 import { UserUsername } from '@components/user/user-username';
-import { variants } from '@components/tweet/tweet';
-import { TweetActions } from '@components/tweet/tweet-actions';
-import { TweetStats } from '@components/tweet/tweet-stats';
-import { TweetDate } from '@components/tweet/tweet-date';
+import { variants } from '@components/publication/publication';
+import { PublicationActions } from '@components/publication/publication-actions';
+import {PublicationStats } from '@components/publication/publication-stats';
+import { PublicationDate } from '@components/publication/publication-date';
 import { Input } from '@components/input/input';
 import type { RefObject } from 'react';
 import type { User } from '@lib/types/user';
 import type { Tweet } from '@lib/types/tweet';
 import { VideoPreview } from '@components/input/video-preview';
 import { GatedPreview } from '@components/input/gated-preview';
-import { TweetCollectModal } from '@components/modal/tweet-collect-modal';
-import { TweetFollowModal } from '@components/modal/tweet-follow-modal';
+import {PublicationCollectModal } from '@components/modal/publication-collect-modal';
+import { PublicationFollowModal } from '@components/modal/publication-follow-modal';
 import {
   ContentPublication,
   PublicationId,
@@ -35,7 +35,7 @@ type ViewTweetProps = Tweet & {
   isGated?: boolean;
 };
 
-export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
+export function ViewPublication(tweet: ViewTweetProps): JSX.Element {
   const {
     id: tweetId,
     text,
@@ -73,7 +73,7 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
     closeModal: closeFollowModal
   } = useModal();
 
-  const tweetLink = `/tweet/${tweetId}`;
+  const tweetLink = `/publication/${tweetId}`;
 
   const userId = user?.id as string;
 
@@ -99,14 +99,14 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
         open={open}
         closeModal={closeModal}
       >
-        <TweetReplyModal tweet={tweet} closeModal={closeModal} />
+        <PublicationReplyModal tweet={tweet} closeModal={closeModal} />
       </Modal>
       <Modal
         modalClassName='flex flex-col gap-6 max-w-sm bg-main-background w-full rounded-2xl'
         open={openCollect}
         closeModal={closeCollectModal}
       >
-        <TweetCollectModal
+        <PublicationCollectModal
           publication={tweet.publication as ContentPublication}
           closeModal={closeCollectModal}
         />
@@ -116,7 +116,7 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
         open={openFollow}
         closeModal={closeFollowModal}
       >
-        <TweetFollowModal tweet={tweet} closeModal={closeFollowModal} />
+        <PublicationFollowModal tweet={tweet} closeModal={closeFollowModal} />
       </Modal>
       <div className='flex flex-col gap-2'>
         {canComment && (
@@ -144,7 +144,7 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
               </UserTooltip>
             </div>
             <div className='px-4'>
-              <TweetActions
+              <PublicationActions
                 viewTweet
                 isOwner={isOwner}
                 ownerId={ownerId.toString()}
@@ -200,8 +200,8 @@ export function ViewTweet(tweet: ViewTweetProps): JSX.Element {
           className='inner:hover-animation inner:border-b inner:border-light-border
                      dark:inner:border-dark-border'
         >
-          <TweetDate viewTweet tweetLink={tweetLink} createdAt={createdAt} />
-          <TweetStats
+          <PublicationDate viewTweet tweetLink={tweetLink} createdAt={createdAt} />
+          <PublicationStats
             publication={publication}
             viewTweet
             canComment={canComment}

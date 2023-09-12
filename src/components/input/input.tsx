@@ -133,7 +133,7 @@ export function Input({
       () => (
         <span className='flex gap-2'>
           Your Posts was sent success
-          {/*<Link href={`/tweet/${tweetId}`}>*/}
+          {/*<Link href={`/publication/${tweetId}`}>*/}
           {/* <span className='custom-underline font-bold'>View</span> */}
           {/*</Link>*/}
         </span>
