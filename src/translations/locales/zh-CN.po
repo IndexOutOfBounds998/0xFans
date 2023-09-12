@@ -8,7 +8,7 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: 0xfans\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-09-11 11:26\n"
+"PO-Revision-Date: 2023-09-12 04:04\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -30,14 +30,23 @@ msgstr ""
 msgid "Bookmarks"
 msgstr "书签"
 
+msgid "can reply"
+msgstr ""
+
 msgid "Cancel"
 msgstr "取消"
+
+msgid "Change your username?"
+msgstr ""
 
 msgid "Charge Limit"
 msgstr "充电限制"
 
 msgid "Chinese"
 msgstr "中文"
+
+msgid "Choose audience"
+msgstr ""
 
 msgid "Cookie Policy"
 msgstr "Cookie 策略"
@@ -47,6 +56,9 @@ msgstr ""
 
 msgid "English"
 msgstr "Distr."
+
+msgid "Everyone"
+msgstr ""
 
 msgid "Fee"
 msgstr "费用"
@@ -83,6 +95,9 @@ msgstr ""
 
 msgid "Notifications"
 msgstr "通知"
+
+msgid "Onlyfans"
+msgstr ""
 
 msgid "Paid to view only for the first 24 hours"
 msgstr "付费仅在头24小时内查看"
@@ -123,6 +138,9 @@ msgstr "转诊费"
 msgid "Referral Rewards"
 msgstr "推荐奖励"
 
+msgid "Reply"
+msgstr ""
+
 msgid "Save"
 msgstr "保存"
 
@@ -153,15 +171,21 @@ msgstr "此帐户不存在"
 msgid "Time Limit"
 msgstr "时间限制"
 
-msgid "Trends for you"
-msgstr "您的趋势"
-
 msgid "Try searching for another."
 msgstr "尝试搜索另一个。"
 
 msgid "Unfollow"
 msgstr ""
 
+msgid "What should we call you?"
+msgstr ""
+
 msgid "Who to follow"
 msgstr "关注哪些人"
+
+msgid "You can always change it here again."
+msgstr ""
+
+msgid "You can always change it later."
+msgstr ""
 
