@@ -12,7 +12,7 @@ import { UserName } from '@components/user/user-name';
 import { UserUsername } from '@components/user/user-username';
 import { variants } from '@components/publication/publication';
 import { PublicationActions } from '@components/publication/publication-actions';
-import {PublicationStats } from '@components/publication/publication-stats';
+import { PublicationStats } from '@components/publication/publication-stats';
 import { PublicationDate } from '@components/publication/publication-date';
 import { Input } from '@components/input/input';
 import type { RefObject } from 'react';
@@ -20,7 +20,7 @@ import type { User } from '@lib/types/user';
 import type { Tweet } from '@lib/types/tweet';
 import { VideoPreview } from '@components/input/video-preview';
 import { GatedPreview } from '@components/input/gated-preview';
-import {PublicationCollectModal } from '@components/modal/publication-collect-modal';
+import { PublicationCollectModal } from '@components/modal/publication-collect-modal';
 import { PublicationFollowModal } from '@components/modal/publication-follow-modal';
 import {
   ContentPublication,
@@ -200,7 +200,11 @@ export function ViewPublication(tweet: ViewTweetProps): JSX.Element {
           className='inner:hover-animation inner:border-b inner:border-light-border
                      dark:inner:border-dark-border'
         >
-          <PublicationDate viewTweet tweetLink={tweetLink} createdAt={createdAt} />
+          <PublicationDate
+            viewTweet
+            tweetLink={tweetLink}
+            createdAt={createdAt}
+          />
           <PublicationStats
             publication={publication}
             viewTweet

@@ -210,7 +210,7 @@ export function PublicationStats({
           tweetId={tweetId ?? ''}
           viewTweet={viewTweet}
         />
-        {isOwner && (
+        {/* {isOwner && (
           <PublicationOption
             className='hover:text-accent-blue focus-visible:text-accent-blue'
             iconClassName='group-hover:bg-accent-blue/10 group-active:bg-accent-blue/20
@@ -219,7 +219,7 @@ export function PublicationStats({
             iconName='ChartPieIcon'
             disabled
           />
-        )}
+        )} */}
       </div>
     </>
   );

@@ -18,15 +18,15 @@ import { loadCatalog } from 'translations/utils';
 import { useLingui } from '@lingui/react';
 import { Trans, t } from '@lingui/macro';
 export const getStaticProps: GetStaticProps = async (ctx) => {
-  const translation = await loadCatalog(ctx.locale!)
+  const translation = await loadCatalog(ctx.locale!);
 
   return {
     props: {
       translation,
       i18n: translation
     }
-  }
-}
+  };
+};
 
 export default function Trends(): JSX.Element {
   useLingui();

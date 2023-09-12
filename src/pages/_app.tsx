@@ -26,7 +26,7 @@ import { alchemyProvider } from 'wagmi/providers/alchemy';
 import { publicProvider } from 'wagmi/providers/public';
 import { I18nProvider, useLingui } from '@lingui/react';
 import { useLinguiInit } from 'translations/utils';
-import { i18n } from '@lingui/core'
+import { i18n } from '@lingui/core';
 const { chains, publicClient } = configureChains(
   [MAIN_NETWORK ? polygon : polygonMumbai],
   [alchemyProvider({ apiKey: ALCHEMY_KEY }), publicProvider()]
@@ -61,12 +61,12 @@ type AppPropsWithLayout = AppProps & {
 
 const WatchLocale = ({ children }: { children: ReactNode }) => {
   const { i18n: lingui } = useLingui();
-  // Skip render when locale isn't loaded                                                                                           
+  // Skip render when locale isn't loaded
   if (!lingui.locale) {
     return null;
   }
-  // Force re-render when locale changes.                                                                                           
-  // Otherwise string translations (ie: t`Macro`) won't be updated.                                                                 
+  // Force re-render when locale changes.
+  // Otherwise string translations (ie: t`Macro`) won't be updated.
   return <Fragment key={lingui.locale}>{children}</Fragment>;
 };
 

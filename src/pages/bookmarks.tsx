@@ -23,21 +23,20 @@ import type { ReactElement, ReactNode } from 'react';
 import { profileId } from '@lens-protocol/react-web';
 import { useBookmarksQuery } from '@lib/hooks/useBookmarksQuery';
 
-
 import { GetStaticProps } from 'next';
 import { loadCatalog } from 'translations/utils';
 import { useLingui } from '@lingui/react';
 import { i18n } from '@lingui/core';
 export const getStaticProps: GetStaticProps = async (ctx) => {
-  const translation = await loadCatalog(ctx.locale!)
+  const translation = await loadCatalog(ctx.locale!);
 
   return {
     props: {
       translation,
       i18n: translation
     }
-  }
-}
+  };
+};
 export default function Bookmarks(): JSX.Element {
   useLingui();
 

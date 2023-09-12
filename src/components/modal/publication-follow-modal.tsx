@@ -7,6 +7,7 @@ import cn from 'clsx';
 import { FollowButton } from '@components/ui/follow-button';
 import { useUser } from '@lib/context/user-context';
 import { Profile } from '@lens-protocol/react-web';
+import { Trans } from '@lingui/macro';
 
 type TweetFollowModalProps = {
   tweet: TweetProps;
@@ -40,7 +41,7 @@ export function PublicationFollowModal({
             </span>
           </div>
           <div className='lt-text-gray-500'>
-            Follow and get some awesome perks!
+            <Trans>Follow and get some awesome perks!</Trans>
           </div>
         </div>
         {/* <div className="flex items-center space-x-1.5 py-2">
@@ -51,37 +52,49 @@ export function PublicationFollowModal({
           </div> */}
         <div className='flex items-center'>
           <HeroIcon className='mr-[5px] h-4 w-4' iconName='UserIcon' />
-          <span>Recipient: {userData?.stats?.totalFollowers}</span>
+          <span>
+            <Trans>Recipient</Trans>: {userData?.stats?.totalFollowers}
+          </span>
         </div>
         <div className='mb-[20px] space-y-2 pt-5'>
-          <div className='text-lg font-bold'>Perks you get</div>
+          <div className='text-lg font-bold'>
+            <Trans>Perks you get</Trans>
+          </div>
           <ul className='lt-text-gray-500 space-y-1 text-sm'>
             <li className='flex space-x-2 leading-6 tracking-normal'>
               <div>•</div>
               <div>
-                You can comment on {tweet?.profile?.handle} publications
-              </div>
-            </li>
-            <li className='flex space-x-2 leading-6 tracking-normal'>
-              <div>•</div>
-              <div>You can collect {tweet?.profile?.handle} publications</div>
-            </li>
-            <li className='flex space-x-2 leading-6 tracking-normal'>
-              <div>•</div>
-              <div>
-                You will get Super follow badge in {tweet?.profile?.handle}{' '}
-                profile
+                <Trans>You can comment on</Trans> {tweet?.profile?.handle}{' '}
+                <Trans>publications</Trans>
               </div>
             </li>
             <li className='flex space-x-2 leading-6 tracking-normal'>
               <div>•</div>
               <div>
-                You will have high voting power if you followed multiple times
+                <Trans>You can collect</Trans> {tweet?.profile?.handle}{' '}
+                <Trans>publications</Trans>
               </div>
             </li>
             <li className='flex space-x-2 leading-6 tracking-normal'>
               <div>•</div>
-              <div>More coming soon™</div>
+              <div>
+                <Trans>You will get Super follow badge in</Trans>{' '}
+                {tweet?.profile?.handle} <Trans>profile</Trans>
+              </div>
+            </li>
+            <li className='flex space-x-2 leading-6 tracking-normal'>
+              <div>•</div>
+              <div>
+                <Trans>
+                  You will have high voting power if you followed multiple times
+                </Trans>
+              </div>
+            </li>
+            <li className='flex space-x-2 leading-6 tracking-normal'>
+              <div>•</div>
+              <div>
+                <Trans>More coming soon™</Trans>
+              </div>
             </li>
           </ul>
         </div>
@@ -102,7 +115,7 @@ export function PublicationFollowModal({
             )}
             onClick={closeModal}
           >
-            Cancel
+            <Trans>Cancel</Trans>
           </Button>
         </div>
       </div>

@@ -12,8 +12,6 @@ import type { MotionProps } from 'framer-motion';
 import { useTrending } from '@lib/hooks/useTrending';
 import { t, Trans } from '@lingui/macro';
 
-
-
 export const variants: MotionProps = {
   initial: { opacity: 0 },
   animate: { opacity: 1 },
@@ -25,14 +23,13 @@ type AsideTrendsProps = {
 };
 
 export function AsideTrends({ inTrendsPage }: AsideTrendsProps): JSX.Element {
-
   const { data, loading } = useTrending({ limit: 10 });
 
   return (
     <section
       className={cn(
         !inTrendsPage &&
-        'hover-animation rounded-2xl bg-main-sidebar-background'
+          'hover-animation rounded-2xl bg-main-sidebar-background'
       )}
     >
       {loading ? (
@@ -52,7 +49,7 @@ export function AsideTrends({ inTrendsPage }: AsideTrendsProps): JSX.Element {
             <a
               className='hover-animation accent-tab hover-card relative
                            flex cursor-not-allowed flex-col gap-0.5'
-            // onClick={preventBubbling()}
+              // onClick={preventBubbling()}
             >
               <div className='absolute right-2 top-2'>
                 <Button
@@ -99,4 +96,3 @@ export function AsideTrends({ inTrendsPage }: AsideTrendsProps): JSX.Element {
     </section>
   );
 }
-

@@ -49,7 +49,9 @@ export function MoreSettings(): JSX.Element {
                   className='h-7 w-7'
                   iconName='EllipsisHorizontalCircleIcon'
                 />{' '}
-                <p className='hidden xl:block'><Trans>More</Trans></p>
+                <p className='hidden xl:block'>
+                  <Trans>More</Trans>
+                </p>
               </div>
             </Menu.Button>
             <AnimatePresence>
