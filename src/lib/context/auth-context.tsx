@@ -21,6 +21,7 @@ import { MAIN_NETWORK } from '@lib/const';
 import { polygon, polygonMumbai } from 'wagmi/chains';
 
 import type { User } from '@lib/types/user';
+import { Accent, Theme } from '@lib/types/theme';
 type UserProps = Pick<
   User,
   | 'id'
@@ -155,8 +156,8 @@ export function AuthContextProvider({
           updatedAt: null,
           totalPhotos: 0,
           pinnedTweet: null,
-          theme: null,
-          accent: null,
+          theme: getProfileAttribute(profile?.__attributes, 'theme') as Theme,
+          accent: getProfileAttribute(profile?.__attributes, 'accent') as Accent,
           website: getProfileAttribute(profile?.__attributes, 'website'),
           location: getProfileAttribute(profile?.__attributes, 'location'),
           createdAt: null,

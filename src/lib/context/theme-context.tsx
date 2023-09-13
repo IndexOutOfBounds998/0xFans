@@ -47,8 +47,8 @@ export function ThemeContextProvider({
   const [accent, setAccent] = useState<Accent>(setInitialAccent);
 
   const { user, profileByMe } = useAuth();
-  const { id: userId, theme: userTheme } = user ?? {};
-  const userAccent = null;
+
+  const { id: userId, theme: userTheme, accent: userAccent } = user ?? {};
 
   const profile = profileByMe as unknown as ProfileOwnedByMe;
 
@@ -71,6 +71,7 @@ export function ThemeContextProvider({
 
   useEffect(() => {
     const flipTheme = (theme: Theme): NodeJS.Timeout | undefined => {
+      
       const root = document.documentElement;
       const targetTheme = theme === 'dim' ? 'dark' : theme;
 
