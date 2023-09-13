@@ -1,14 +1,11 @@
 <div align="center">
     <h1>0xFans</h1>
     <p>Decentralized video and image&text -sharing social media platform.</p>
-    <a href="https://mainnet.0xtrip.xyz">0xfans.xyz</a>
+    <a href="https://mainnet.0xfans.xyz">0xfans.xyz</a>
 </div>
 <br>
 <div align="center">
-    <a href="https://lenstube.xyz/sasicodes.lens">
-        <img src="https://lens-badge.vercel.app/api/badge/sasicodes.lens" alt="Lens">
-    </a>
-    <a href="https://twitter.com/0xtripxyz">
+    <a href="https://twitter.com/0xFansProtocol">
         <img src="https://img.shields.io/twitter/follow/0xtripxyz?style=social" alt="Twitter">
     </a>
    <a href="https://app.deepsource.com/gh/IndexOutOfBounds998/oxfans/?ref=repository-badge}" target="_blank"><img alt="DeepSource" title="DeepSource" src="https://app.deepsource.com/gh/IndexOutOfBounds998/oxfans.svg/?label=active+issues&show_trend=true&token=u-H2BAmuJbTMmMn2xJYjcHoE"/>
@@ -49,7 +46,7 @@ Start the application,
 npm dev
 ```
 
-and visit http://localhost:3000
+and visit http://localhost
 
 ## 🤝 Contributors
 
