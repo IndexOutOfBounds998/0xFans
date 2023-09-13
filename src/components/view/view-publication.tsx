@@ -60,7 +60,7 @@ export function ViewPublication(tweet: ViewTweetProps): JSX.Element {
 
   const { id: ownerId, name, username, verified, photoURL } = tweetUserData;
 
-  const { user } = useAuth();
+  const { user, profileByMe } = useAuth();
 
   const { open, openModal, closeModal } = useModal();
   const {
@@ -145,16 +145,20 @@ export function ViewPublication(tweet: ViewTweetProps): JSX.Element {
               </UserTooltip>
             </div>
             <div className='px-4'>
-              <PublicationActions
-                viewTweet
-                isOwner={isOwner}
-                ownerId={ownerId.toString()}
-                tweetId={tweetId}
-                parentId={parentId}
-                username={username}
-                hasImages={!!images}
-                createdBy={createdBy}
-              />
+              {
+                profileByMe ? (<PublicationActions
+                  viewTweet
+                  isOwner={isOwner}
+                  ownerId={ownerId.toString()}
+                  tweetId={tweetId}
+                  parentId={parentId}
+                  username={username}
+                  hasImages={!!images}
+                  createdBy={createdBy}
+                  followee={profile}
+                  follower={profileByMe}
+                />) : ""
+              }
             </div>
           </div>
         </div>

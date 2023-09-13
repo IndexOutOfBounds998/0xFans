@@ -20,6 +20,10 @@ import type { Tweet } from '@lib/types/tweet';
 import type { User } from '@lib/types/user';
 import { getAuthenticatedClient } from '@lib/getAuthenticatedClient';
 import PubSub from 'pubsub-js';
+import { useLingui } from '@lingui/react';
+import { Trans, t } from '@lingui/macro';
+import { useFollowWithSelfFundedFallback } from '@lib/hooks/useFollowWithSelfFundedFallback';
+import { ProfileOwnedByMe, Profile, useUnfollow } from '@lens-protocol/react-web';
 
 export const variants: Variants = {
   initial: { opacity: 0, y: -25 },
@@ -39,6 +43,8 @@ type TweetActionsProps = Pick<Tweet, 'createdBy'> & {
   parentId?: string;
   hasImages: boolean;
   viewTweet?: boolean;
+  follower: ProfileOwnedByMe;
+  followee: Profile;
 };
 
 type PinModalData = Record<'title' | 'description' | 'mainBtnLabel', string>;
@@ -66,8 +72,11 @@ export function PublicationActions({
   username,
   hasImages,
   viewTweet,
-  createdBy
+  createdBy,
+  follower,
+  followee
 }: TweetActionsProps): JSX.Element {
+  useLingui();
   const { user } = useAuth();
   const { push, pathname } = useRouter();
 
@@ -120,21 +129,22 @@ export function PublicationActions({
     pinCloseModal();
   };
 
-  // const handleFollow =
-  //   (closeMenu: () => void, ...args: Parameters<typeof manageFollow>) =>
-  //   async (): Promise<void> => {
-  //     const [type] = args;
+  const {
+    execute: unfollow,
+    error: unfollowError,
+    isPending: isUnfollowPending
+  } = useUnfollow({ follower, followee });
 
-  //     closeMenu();
-  //     // await manageFollow(...args);
+  const {
+    execute: follow,
+    error: followError,
+    isPending: isFollowPending
+  } = useFollowWithSelfFundedFallback({
+    followee,
+    follower
+  });
 
-  //     toast.success(
-  //       `You ${type === 'follow' ? 'followed' : 'unfollowed'} @${username}`
-  //     );
-  //   };
-
-  // const userIsFollowed = following ? following.includes(createdBy) : '';
-  const userIsFollowed = '';
+  const userIsFollowed = followee.isFollowedByMe;
 
   const currentPinModalData = useMemo(
     () => pinModalData[+tweetIsPinned],
@@ -150,15 +160,13 @@ export function PublicationActions({
         closeModal={removeCloseModal}
       >
         <ActionModal
-          title='Delete Posts?'
-          description={`This can’t be undone and it will be removed from ${
-            isInAdminControl ? `@${username}'s` : 'your'
-          } profile, the timeline of any accounts that follow ${
-            isInAdminControl ? `@${username}` : 'you'
-          }, and from Twitter search results.`}
+          title={t`Delete Posts?`}
+          description={t`This can’t be undone and it will be removed from ${isInAdminControl ? `@${username}'s` : 'your'
+            } profile, the timeline of any accounts that follow ${isInAdminControl ? `@${username}` : 'you'
+            }, and from 0xFans search results.`}
           mainBtnClassName='bg-accent-red hover:bg-accent-red/90 active:bg-accent-red/75 accent-tab
                             focus-visible:bg-accent-red/90'
-          mainBtnLabel='Delete'
+          mainBtnLabel={t`Delete`}
           focusOnMainBtn
           action={handleRemove}
           closeModal={removeCloseModal}
@@ -196,7 +204,7 @@ export function PublicationActions({
                              group-focus-visible:text-accent-blue dark:text-dark-secondary/80'
                   iconName='EllipsisHorizontalIcon'
                 />
-                {!open && <ToolTip tip='More' />}
+                {!open && <ToolTip tip={t`More`} />}
               </div>
             </Popover.Button>
             <AnimatePresence>
@@ -216,7 +224,7 @@ export function PublicationActions({
                       onClick={preventBubbling(removeOpenModal)}
                     >
                       <HeroIcon iconName='TrashIcon' />
-                      Delete
+                      <Trans>Delete</Trans>
                     </Popover.Button>
                   )}
                   {isOwner ? (
@@ -242,24 +250,22 @@ export function PublicationActions({
                       className='accent-tab flex w-full gap-3 rounded-md rounded-t-none p-4 hover:bg-main-sidebar-background'
                       as={Button}
                       onClick={
-                        preventBubbling()
-                        // handleFollow(close, 'unfollow', userId, createdBy)
+                        () => unfollow()
                       }
                     >
                       <HeroIcon iconName='UserMinusIcon' />
-                      Unfollow @{username}
+                      <Trans>Unfollow</Trans> @{username}
                     </Popover.Button>
                   ) : (
                     <Popover.Button
                       className='accent-tab flex w-full gap-3 rounded-md rounded-t-none p-4 hover:bg-main-sidebar-background'
                       as={Button}
                       onClick={
-                        preventBubbling()
-                        // handleFollow(close, 'follow', userId, createdBy)
+                        () => follow()
                       }
                     >
                       <HeroIcon iconName='UserPlusIcon' />
-                      Follow @{username}
+                      <Trans>Follow</Trans> @{username}
                     </Popover.Button>
                   )}
                 </Popover.Panel>

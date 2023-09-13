@@ -40,9 +40,8 @@ export function FollowButton({
   followee,
   btnClass
 }: FollowButtonProps): JSX.Element | null {
-  const { i18n } = useLingui();
-  const unfollowstr = i18n._(t`Unfollow`);
-
+  useLingui();
+ 
   const {
     execute: unfollow,
     error: unfollowError,
