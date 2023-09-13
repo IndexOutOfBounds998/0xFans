@@ -8,7 +8,7 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: 0xfans\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-09-12 12:33\n"
+"PO-Revision-Date: 2023-09-13 15:32\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -88,10 +88,10 @@ msgid "Customize your view"
 msgstr "自定义您的视图"
 
 msgid "Delete"
-msgstr ""
+msgstr "删除"
 
 msgid "Delete Posts?"
-msgstr ""
+msgstr "删除帖子？"
 
 msgid "Discard"
 msgstr "放弃..."
@@ -136,7 +136,7 @@ msgid "Followers"
 msgstr "关注者"
 
 msgid "Following"
-msgstr "关注中"
+msgstr "关注"
 
 msgid "Follows you"
 msgstr "关注你"
@@ -226,7 +226,7 @@ msgid "People"
 msgstr "用户"
 
 msgid "People / 0xFansProtocol"
-msgstr ""
+msgstr "人 / 0xFansProtocol"
 
 msgid "Perks you get"
 msgstr "你获得的收益"
@@ -310,7 +310,7 @@ msgid "Show more"
 msgstr "显示更多"
 
 msgid "Skip"
-msgstr ""
+msgstr "跳过"
 
 msgid "Something went wrong"
 msgstr "出现了一些错误"
@@ -328,7 +328,7 @@ msgid "This account doesn’t exist"
 msgstr "该账户不存在。"
 
 msgid "This can’t be undone and it will be removed from {0} profile, the timeline of any accounts that follow {1}, and from 0xFans search results."
-msgstr ""
+msgstr "此操作无法撤消，它将被从 {0} 配置文件中删除， 跟随 {1}和0xFans 搜索结果的时间段。"
 
 msgid "This can’t be undone and you’ll lose your draft."
 msgstr "此操作无法撤消，您将丢失您的草稿。"
@@ -386,3 +386,4 @@ msgstr "您将获得超级跟随徽章"
 
 msgid "You will have high voting power if you followed multiple times"
 msgstr "如果您多次关注，您将拥有更高的投票权"
+
