@@ -10,7 +10,7 @@ export default function NotFound(): JSX.Element {
   return (
     <>
       <SEO
-        title='Page not found / 0xFans'
+        title='Page not found / 0xFansProtocol '
         description='Sorry we couldn’t find the page you were looking for.'
         image='/404.png'
       />

@@ -34,7 +34,7 @@ export default function Trends(): JSX.Element {
 
   return (
     <MainContainer>
-      <SEO title='Popular tags / 0xFans' />
+      <SEO title='Popular tags / 0xFansProtocol ' />
       <MainHeader useActionButton title={t`Popular tags`} action={back}>
         <Button
           className='dark-bg-tab group relative ml-auto cursor-not-allowed p-2 hover:bg-light-primary/10
