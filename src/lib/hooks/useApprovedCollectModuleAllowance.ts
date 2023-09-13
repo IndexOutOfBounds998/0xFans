@@ -1,11 +1,7 @@
 import { getAuthenticatedClient } from '@lib/getAuthenticatedClient';
 import { useEffect, useState } from 'react';
 import {
-  ApprovedAllowanceAmountFragment,
   CollectModules,
-  FeeFollowModuleParams,
-  FollowModules,
-  ReferenceModules,
   SimpleCollectModuleParams
 } from '@lens-protocol/client';
 
