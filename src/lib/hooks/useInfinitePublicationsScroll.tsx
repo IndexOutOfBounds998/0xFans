@@ -73,7 +73,8 @@ export function useInfinitePublicationsScroll<T>(
             userReplies: item.stats.commentsCount,
             userRetweets: 0,
             profile: item.profile,
-            publication: item
+            publication: item,
+            isGated: item.isGated
           };
         });
       setFormateList(list);

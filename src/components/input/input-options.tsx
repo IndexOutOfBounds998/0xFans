@@ -21,6 +21,7 @@ type Options = {
 }[];
 
 type AudienceType = {
+  id: string;
   icon: IconName;
   label: string;
   color: string;
@@ -37,6 +38,9 @@ type InputOptionsProps = {
   handleImageUpload: (
     e: ChangeEvent<HTMLInputElement> | ClipboardEvent<HTMLTextAreaElement>
   ) => void;
+  handleVideoUpload: (
+    e: ChangeEvent<HTMLInputElement> | ClipboardEvent<HTMLTextAreaElement>
+  ) => void;
   collectData: any;
   setCollectData?: (obj: any) => void;
 };
@@ -49,6 +53,7 @@ export function InputOptions({
   isValidTweet,
   isCharLimitExceeded,
   handleImageUpload,
+  handleVideoUpload,
   collectData,
   setCollectData,
   audience
@@ -57,8 +62,15 @@ export function InputOptions({
   const { open, openModal, closeModal } = useModal();
 
   const mediaClick = (): void => inputFileRef.current?.click();
+  const videoClick = (): void => inputVedioRef.current?.click();
 
   const options: Readonly<Options> = [
+    {
+      name: 'Video',
+      iconName: 'PlayCircleIcon',
+      disabled: false,
+      onClick: videoClick
+    },
     {
       name: t`Media`,
       iconName: 'PhotoIcon',
@@ -78,7 +90,7 @@ export function InputOptions({
     {
       name: t`Collect`,
       iconName: 'RectangleStackIcon',
-      disabled: audience.label === 'Everyone',
+      disabled: audience.id === 'Everyone',
       tip: t`onlyfans can use`,
       onClick: openModal
     },
@@ -90,6 +102,7 @@ export function InputOptions({
   ];
 
   const inputFileRef = useRef<HTMLInputElement>(null);
+  const inputVedioRef = useRef<HTMLInputElement>(null);
 
   let filteredOptions = options;
 
@@ -109,13 +122,21 @@ export function InputOptions({
         <CollectSetting
           closeModal={closeModal}
           collectData={collectData}
-          setCollectData={setCollectData || (() => { })}
+          setCollectData={setCollectData || (() => {})}
         />
       </Modal>
       <div
         className='flex text-main-accent xs:[&>button:nth-child(n+6)]:hidden
                    md:[&>button]:!block [&>button:nth-child(n+4)]:hidden'
       >
+        <input
+          className='hidden'
+          type='file'
+          accept='video/*'
+          onChange={handleVideoUpload}
+          ref={inputVedioRef}
+          multiple
+        />
         <input
           className='hidden'
           type='file'

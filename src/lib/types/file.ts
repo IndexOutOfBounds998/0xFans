@@ -8,7 +8,7 @@ export type ImagesPreview = (ImageData & {
 export type ImagePreview = ImageData & { id: string };
 
 export type VideoData = {
-  url: string;
+  url: string | any;
   alt: string;
   cover: string;
 };

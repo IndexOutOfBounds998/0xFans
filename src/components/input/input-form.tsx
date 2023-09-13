@@ -19,6 +19,7 @@ import type { IconName } from '@components/ui/hero-icon';
 import { Trans, t } from '@lingui/macro';
 import { useLingui } from '@lingui/react';
 type AudienceType = {
+  id: string;
   icon: IconName;
   label: string;
   color: string;
@@ -86,8 +87,18 @@ export function InputForm({
   const { open, openModal, closeModal } = useModal();
 
   const [peopler] = useState<AudienceType[]>([
-    { icon: 'GlobeAsiaAustraliaIcon', label: t`Everyone`, color: '#1d9bf0' },
-    { icon: 'UserGroupIcon', label: t`Onlyfans`, color: '#00ba7c' }
+    {
+      id: 'Everyone',
+      icon: 'GlobeAsiaAustraliaIcon',
+      label: t`Everyone`,
+      color: '#1d9bf0'
+    },
+    {
+      id: 'Onlyfans',
+      icon: 'UserGroupIcon',
+      label: t`Onlyfans`,
+      color: '#00ba7c'
+    }
   ]);
 
   useEffect(() => {
@@ -183,7 +194,7 @@ export function InputForm({
                       </div>
                       <div className='flex w-[calc(100%-52px)] items-center justify-between'>
                         <span className='font-bold'>{item.label}</span>
-                        {item.label === audience.label ? (
+                        {item.id === audience.id ? (
                           <div>
                             <HeroIcon
                               className='h-[18px] w-[20px] text-main-accent'

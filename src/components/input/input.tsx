@@ -12,14 +12,22 @@ import { InputOptions } from './input-options';
 import type { ReactNode, FormEvent, ChangeEvent, ClipboardEvent } from 'react';
 import type { Variants } from 'framer-motion';
 import type { User } from '@lib/types/user';
-import type { FilesWithId, ImagesPreview, ImageData } from '@lib/types/file';
+import type {
+  FilesWithId,
+  ImagesPreview,
+  ImageData,
+  VideosPreview
+} from '@lib/types/file';
 import { useSendComment } from '@lib/hooks/useSendComment';
 import { usePost } from '@lib/hooks/usePost';
 import { Profile } from '@lens-protocol/react-web';
 import { formatAvater } from '@lib/FormatContent';
 import type { IconName } from '@components/ui/hero-icon';
+import { getRandomId } from '@lib/random';
+import { VideoPreview } from '@components/input/video-preview';
 
 type AudienceType = {
+  id: string;
   icon: IconName;
   label: string;
   color: string;
@@ -51,11 +59,14 @@ export function Input({
 }: InputProps): JSX.Element {
   const [selectedImages, setSelectedImages] = useState<FilesWithId>([]);
   const [imagesPreview, setImagesPreview] = useState<ImagesPreview>([]);
+  const [videoPreview, setVideoPreview] = useState<VideosPreview>([]);
+  const [selectedVideo, setSelectedVideo] = useState<FilesWithId>([]);
   const [inputValue, setInputValue] = useState('');
   const [loading, setLoading] = useState(false);
   const [visited, setVisited] = useState(false);
   const [collectData, setCollectData] = useState({});
   const [audience, setAudience] = useState<AudienceType>({
+    id: 'Everyone',
     icon: 'GlobeAsiaAustraliaIcon',
     label: 'Everyone',
     color: '#1d9bf0'
@@ -68,6 +79,9 @@ export function Input({
 
   const previewCount = imagesPreview.length;
   const isUploadingImages = !!previewCount;
+
+  const videoPreviewCount = videoPreview.length;
+  const isUploadingVideo = !!videoPreviewCount;
 
   //发布评论
   const { submit: send, loading: sendLoad } = useSendComment({
@@ -87,7 +101,7 @@ export function Input({
   useEffect(
     () => {
       if (modal) inputRef.current?.focus();
-      return cleanImage;
+      return cleanUrl;
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
@@ -111,10 +125,11 @@ export function Input({
         await Promise.all([
           post({
             images: selectedImages,
+            video: selectedVideo,
             title: '',
             content: content,
             collectData: collectData,
-            isOnlyfans: audience.label === 'Onlyfans'
+            isOnlyfans: audience.id === 'Onlyfans'
           })
         ]);
       }
@@ -160,7 +175,8 @@ export function Input({
       toast.error('Please choose a GIF or photo up to 4');
       return;
     }
-
+    setVideoPreview([]);
+    setSelectedVideo([]);
     const { imagesPreviewData, selectedImagesData } = imagesData;
 
     setImagesPreview([...imagesPreview, ...imagesPreviewData]);
@@ -169,20 +185,61 @@ export function Input({
     inputRef.current?.focus();
   };
 
+  const handleVideoUpload = (
+    e: ChangeEvent<HTMLInputElement> | ClipboardEvent<HTMLTextAreaElement>
+  ): void => {
+    const isClipboardEvent = 'clipboardData' in e;
+
+    if (isClipboardEvent) {
+      const isPastingText = e.clipboardData.getData('text');
+      if (isPastingText) return;
+    }
+
+    const files = isClipboardEvent ? e.clipboardData.files : e.target.files;
+
+    if (files?.length === 1) {
+      setSelectedImages([]);
+      setImagesPreview([]);
+      const randomId = getRandomId();
+      const localStream = window.URL.createObjectURL(files[0]);
+      setVideoPreview([{ url: localStream, id: randomId, cover: '', alt: '' }]);
+      setSelectedVideo([Object.assign(files[0], { id: randomId })]);
+    } else {
+      toast.error('Please choose video up to 1');
+      return;
+    }
+
+    inputRef.current?.focus();
+  };
+
   const removeImage = (targetId: string) => (): void => {
     setSelectedImages(selectedImages.filter(({ id }) => id !== targetId));
     setImagesPreview(imagesPreview.filter(({ id }) => id !== targetId));
 
-    const { src } = imagesPreview.find(
-      ({ id }) => id === targetId
-    ) as ImageData;
-
-    URL.revokeObjectURL(src);
+    // const { src } = imagesPreview.find(
+    //   ({ id }) => id === targetId
+    // ) as ImageData;
+    //
+    // URL.revokeObjectURL(src);
   };
 
-  const cleanImage = (): void => {
-    imagesPreview.forEach(({ src }) => URL.revokeObjectURL(src));
+  const removeVideo = (targetId: string) => (): void => {
+    setVideoPreview(videoPreview.filter(({ id }) => id !== targetId));
+    setSelectedVideo(selectedVideo.filter(({ id }) => id !== targetId));
 
+    // const { src } = videoPreview.find(
+    //     ({ id }) => id === targetId
+    // ) as ImageData;
+    //
+    // URL.revokeObjectURL(src);
+  };
+
+  const cleanUrl = (): void => {
+    imagesPreview.forEach(({ src }) => URL.revokeObjectURL(src));
+    videoPreview.forEach(({ url }) => URL.revokeObjectURL(url));
+
+    setVideoPreview([]);
+    setSelectedVideo([]);
     setSelectedImages([]);
     setImagesPreview([]);
   };
@@ -190,7 +247,7 @@ export function Input({
   const discardTweet = (): void => {
     setInputValue('');
     setVisited(false);
-    cleanImage();
+    cleanUrl();
 
     inputRef.current?.blur();
   };
@@ -279,13 +336,30 @@ export function Input({
             handleChange={handleChange}
             handleImageUpload={handleImageUpload}
           >
-            {isUploadingImages && (
-              <ImagePreview
-                imagesPreview={imagesPreview}
-                previewCount={previewCount}
-                removeImage={!loading ? removeImage : undefined}
-              />
-            )}
+            {
+              isUploadingVideo
+                ? videoPreview && (
+                    <VideoPreview
+                      removeImage={!loading ? removeVideo : undefined}
+                      tweet
+                      videoPreview={videoPreview}
+                    />
+                  )
+                : isUploadingImages && (
+                    <ImagePreview
+                      imagesPreview={imagesPreview}
+                      previewCount={previewCount}
+                      removeImage={!loading ? removeImage : undefined}
+                    />
+                  )
+              // isUploadingImages && (
+              // <ImagePreview
+              // imagesPreview={imagesPreview}
+              // previewCount={previewCount}
+              // removeImage={!loading ? removeImage : undefined}
+              // />
+              // )
+            }
           </InputForm>
           <AnimatePresence initial={false}>
             {(reply ? reply && visited && !loading : !loading) && (
@@ -298,6 +372,7 @@ export function Input({
                 isCharLimitExceeded={isCharLimitExceeded}
                 audience={audience}
                 handleImageUpload={handleImageUpload}
+                handleVideoUpload={handleVideoUpload}
                 collectData={collectData}
                 setCollectData={setCollectData}
               />

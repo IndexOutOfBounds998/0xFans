@@ -36,8 +36,8 @@ export function useInfiniteScroll<T>():
     publicationTypes: [PublicationTypes.Post],
     metadataFilter: {
       restrictPublicationMainFocusTo: [
-        PublicationMainFocus.Image,
-        PublicationMainFocus.TextOnly,
+        // PublicationMainFocus.Image,
+        // PublicationMainFocus.TextOnly,
         PublicationMainFocus.Video
       ]
     }
