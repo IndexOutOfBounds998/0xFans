@@ -8,7 +8,8 @@ import {
   PublicationMetadataV2Input,
   PublicationMainFocus,
   PublicationMetadataDisplayTypes,
-  MetadataAttributeInput
+  MetadataAttributeInput,
+  PublicationMetadataMediaInput
 } from '@lens-protocol/client';
 import { Profile } from '@lens-protocol/react-web';
 import {
@@ -33,7 +34,8 @@ type PostData = {
 };
 
 type PostSubmit = {
-  images: File[];
+  images?: File[];
+  video?: File[];
   title: string;
   content: string;
   collectData: CollectData;
@@ -129,6 +131,23 @@ export function usePost({ callbackOnError }: PostData) {
     return imagesList;
   };
 
+  const upIpfsVideo = async (video: File[]) => {
+    let videoList = [];
+    const item = video[0];
+    const formData = new FormData();
+    formData.append('file', item);
+    const url = await upImg(formData);
+    if (url) {
+      videoList.push({
+        item: 'ipfs://' + url,
+        cover: '',
+        type: item.type
+      });
+    }
+    debugger;
+    return videoList;
+  };
+
   async function uploadToIPFS(metadata: any, isCollect: boolean) {
     /* create an instance of the Lens SDK gated content with the environment */
     const sdk = await LensGatedSDK.create({
@@ -186,6 +205,7 @@ export function usePost({ callbackOnError }: PostData) {
   }
 
   const submit = async ({
+    video,
     images,
     title,
     content,
@@ -193,16 +213,24 @@ export function usePost({ callbackOnError }: PostData) {
     isOnlyfans
   }: PostSubmit) => {
     setPostLoading(true);
-    debugger;
-    let imagesList = await upIpfsImg(images);
+    let videoList: PublicationMetadataMediaInput[] = [];
+    let imagesList: PublicationMetadataMediaInput[] = [];
+    if (video?.length) {
+      videoList = await upIpfsVideo(video);
+    } else if (images?.length) {
+      imagesList = await upIpfsImg(images);
+    }
 
-    let attributes: MetadataAttributeInput[] = images.map((item) => {
-      return {
-        displayType: PublicationMetadataDisplayTypes.Number,
-        traitType: 'size',
-        value: item.size.toString()
-      };
-    });
+    const data = video?.length ? video : images;
+    let attributes: MetadataAttributeInput[] = data?.length
+      ? data.map((item) => {
+          return {
+            displayType: PublicationMetadataDisplayTypes.Number,
+            traitType: 'size',
+            value: item.size.toString()
+          };
+        })
+      : [];
     const profileUser = profile as unknown as ProfileOwnedByMe;
 
     let collectModule: CollectModuleParams = CollectModuleInfo(
@@ -213,7 +241,11 @@ export function usePost({ callbackOnError }: PostData) {
     let referenceModule: ReferenceModuleParams = {
       followerOnlyReferenceModule: isOnlyfans ? true : false
     };
-    debugger;
+    const mainContentFocus = videoList.length
+      ? PublicationMainFocus.Video
+      : imagesList && imagesList.length > 0
+      ? PublicationMainFocus.Image
+      : PublicationMainFocus.TextOnly;
     //mainContentFocus, 需要判断是否是视频类型的
     let obj: PublicationMetadataV2Input = {
       version: '2.0.0',
@@ -224,14 +256,12 @@ export function usePost({ callbackOnError }: PostData) {
       content: content,
       attributes: attributes,
       locale: 'en-US',
-      mainContentFocus:
-        imagesList && imagesList.length > 0
-          ? PublicationMainFocus.Image
-          : PublicationMainFocus.TextOnly,
-      media: imagesList,
+      mainContentFocus: mainContentFocus,
+      media: videoList.length ? videoList : imagesList,
       tags: [APP_ID],
       name: `Post by ${profile?.handle}`
     };
+    debugger;
     const url = isOnlyfans
       ? await uploadToIPFS(obj, collectData.isCollect || false)
       : await execute(obj);

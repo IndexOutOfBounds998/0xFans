@@ -88,9 +88,9 @@ export function Publication(tweet: TweetProps): JSX.Element {
 
   const tweetLink = `/publication/${tweetId}`;
 
-  const { user: profileByMe } = useAuth();
+  const { user: profileMe, profileByMe } = useAuth();
 
-  const userId = profileByMe?.id as string;
+  const userId = profileMe?.id as string;
 
   const isOwner = userId === ownerId;
 
@@ -213,7 +213,7 @@ export function Publication(tweet: TweetProps): JSX.Element {
                   />
                 </div>
                 <div className='px-4'>
-                  {!modal && (
+                  {!modal && profileByMe && (
                     <PublicationActions
                       isOwner={isOwner}
                       ownerId={ownerId?.toString() ?? ''}
@@ -222,6 +222,8 @@ export function Publication(tweet: TweetProps): JSX.Element {
                       username={username ?? ''}
                       hasImages={!!images}
                       createdBy={createdBy}
+                      followee={profile}
+                      follower={profileByMe}
                     />
                   )}
                 </div>

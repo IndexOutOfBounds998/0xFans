@@ -84,7 +84,7 @@ export function formatVideoUrl(url: any) {
   if (url) {
     if (url.startsWith('ipfs://')) {
       let result = url.substring(7, url.length);
-      return `https://lens.infura-ipfs.io/ipfs/${result}`;
+      return `https://ipfs.io/ipfs/${result}`;
     } else if (url.startsWith('ar://')) {
       let result = url.substring(4, url.length);
       return `https://arweave.net/${result}`;

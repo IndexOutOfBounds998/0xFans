@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import cn from 'clsx';
 import type { ReactNode } from 'react';
 import ReactPlayer from 'react-player';
+import { formatVideoUrl } from '@lib/FormatContent';
 
 type ReactPlayerProps = {
   url: string;
@@ -25,7 +26,9 @@ export function ReactVideo({
   className,
   width
 }: ReactPlayerProps): JSX.Element {
-  const [loading, setLoading] = useState(!ReactPlayer.canPlay(url));
+  const formatUrl = formatVideoUrl(url);
+  // const loading = !ReactPlayer.canPlay(formatUrl);
+  const loading = false;
 
   return (
     <figure style={{ width, height }} className={className}>
@@ -37,7 +40,7 @@ export function ReactVideo({
             : 'object-cover'
         )}
         controls
-        url={url}
+        url={formatUrl}
         width={width}
         height={height}
         light={light}
