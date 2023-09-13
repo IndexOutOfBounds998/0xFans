@@ -11,6 +11,7 @@ import { Button } from '@components/ui/button';
 import { HeroIcon } from '@components/ui/hero-icon';
 import { ToolTip } from '@components/ui/tooltip';
 import { variants } from './publication-actions';
+import { Trans } from '@lingui/macro';
 
 type TweetShareProps = {
   userId: string;
@@ -23,7 +24,7 @@ export function PublicationShare({
   tweetId,
   viewTweet
 }: TweetShareProps): JSX.Element {
-  const {} = useAuth();
+  const { } = useAuth();
 
   // const handleBookmark =
   //   (closeMenu: () => void, ...args: Parameters<typeof manageBookmark>) =>
@@ -92,7 +93,7 @@ export function PublicationShare({
                   onClick={preventBubbling(handleCopy(close))}
                 >
                   <HeroIcon iconName='LinkIcon' />
-                  Copy link to Tweet
+                  <Trans>Copy link</Trans>
                 </Popover.Button>
                 {/* {!tweetIsBookmarked ? (
                   <Popover.Button

@@ -45,7 +45,7 @@ export default function People(): JSX.Element {
 
   return (
     <MainContainer>
-      <SEO title={t`People / 0xFans`} />
+      <SEO title={t`People / 0xFansProtocol `} />
       <MainHeader useActionButton title={t`People`} action={back} />
       <section>
         {loading ? (
