@@ -82,6 +82,12 @@ msgstr ""
 msgid "Customize your view"
 msgstr ""
 
+msgid "Delete"
+msgstr ""
+
+msgid "Delete Posts?"
+msgstr ""
+
 msgid "Discard"
 msgstr ""
 
@@ -214,7 +220,7 @@ msgstr ""
 msgid "People"
 msgstr ""
 
-msgid "People / 0xFans"
+msgid "People / 0xFansProtocol"
 msgstr ""
 
 msgid "Perks you get"
@@ -298,6 +304,9 @@ msgstr ""
 msgid "Show more"
 msgstr ""
 
+msgid "Skip"
+msgstr ""
+
 msgid "Something went wrong"
 msgstr ""
 
@@ -311,6 +320,9 @@ msgid "These settings affect all the 0xFans accounts on this browser."
 msgstr ""
 
 msgid "This account doesn’t exist"
+msgstr ""
+
+msgid "This can’t be undone and it will be removed from {0} profile, the timeline of any accounts that follow {1}, and from 0xFans search results."
 msgstr ""
 
 msgid "This can’t be undone and you’ll lose your draft."

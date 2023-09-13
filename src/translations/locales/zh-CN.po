@@ -87,6 +87,12 @@ msgstr "复制链接到配置文件"
 msgid "Customize your view"
 msgstr "自定义您的视图"
 
+msgid "Delete"
+msgstr ""
+
+msgid "Delete Posts?"
+msgstr ""
+
 msgid "Discard"
 msgstr "放弃..."
 
@@ -130,7 +136,7 @@ msgid "Followers"
 msgstr "关注者"
 
 msgid "Following"
-msgstr "关注"
+msgstr "关注中"
 
 msgid "Follows you"
 msgstr "关注你"
@@ -219,8 +225,8 @@ msgstr "付款以显示"
 msgid "People"
 msgstr "用户"
 
-msgid "People / 0xFans"
-msgstr "用户 / 0xFans"
+msgid "People / 0xFansProtocol"
+msgstr ""
 
 msgid "Perks you get"
 msgstr "你获得的收益"
@@ -303,6 +309,9 @@ msgstr "与那些转发您内容的人分享您的收益"
 msgid "Show more"
 msgstr "显示更多"
 
+msgid "Skip"
+msgstr ""
+
 msgid "Something went wrong"
 msgstr "出现了一些错误"
 
@@ -317,6 +326,9 @@ msgstr "这些设置会影响此浏览器上所有的 0xFans 账户。"
 
 msgid "This account doesn’t exist"
 msgstr "该账户不存在。"
+
+msgid "This can’t be undone and it will be removed from {0} profile, the timeline of any accounts that follow {1}, and from 0xFans search results."
+msgstr ""
 
 msgid "This can’t be undone and you’ll lose your draft."
 msgstr "此操作无法撤消，您将丢失您的草稿。"
@@ -374,4 +386,3 @@ msgstr "您将获得超级跟随徽章"
 
 msgid "You will have high voting power if you followed multiple times"
 msgstr "如果您多次关注，您将拥有更高的投票权"
-

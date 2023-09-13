@@ -18,8 +18,11 @@ import {
   useActiveProfile,
   useActiveProfileSwitch
 } from '@lens-protocol/react-web';
+import { Trans, t } from '@lingui/macro';
+import { useLingui } from '@lingui/react';
 
 export function SidebarProfile(): JSX.Element {
+  useLingui();
   const { user, signOut } = useAuth();
   const { open, openModal, closeModal } = useModal();
   const { data, error, loading: activeLoading } = useActiveProfile();
@@ -45,9 +48,9 @@ export function SidebarProfile(): JSX.Element {
         <ActionModal
           useIcon
           focusOnMainBtn
-          title='Log out of 0xFans?'
-          description='You can always log back in at any time. If you just want to switch accounts, you can do that by adding an existing account.'
-          mainBtnLabel='Log out'
+          title={t`Log out of 0xFans?`}
+          description={t`You can always log back in at any time. If you just want to switch accounts, you can do that by adding an existing account.`}
+          mainBtnLabel={t`Log out`}
           action={signOut}
           closeModal={closeModal}
         />
@@ -144,7 +147,7 @@ export function SidebarProfile(): JSX.Element {
                         onClick={openModal}
                       >
                         <HeroIcon iconName='ArrowRightOnRectangleIcon' />
-                        Log out @{username}
+                        <Trans>Log out</Trans> @{username}
                       </Button>
                     )}
                   </Menu.Item>

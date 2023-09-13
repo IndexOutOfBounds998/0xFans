@@ -27,12 +27,12 @@ export function UsernameModal({
     {
       title: t`What should we call you?`,
       description: t`You can always change it later.`,
-      cancelLabel: 'Skip'
+      cancelLabel: t`Skip`
     },
     {
       title: t`Change your username?`,
       description: t`You can always change it here again.`,
-      cancelLabel: 'Cancel'
+      cancelLabel: t`Cancel`
     }
   ]);
 

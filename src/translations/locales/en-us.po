@@ -82,6 +82,12 @@ msgstr "Copy link to Profile"
 msgid "Customize your view"
 msgstr "Customize your view"
 
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Delete Posts?"
+msgstr "Delete Posts?"
+
 msgid "Discard"
 msgstr "Discard"
 
@@ -214,8 +220,8 @@ msgstr "Pay To Show"
 msgid "People"
 msgstr "People"
 
-msgid "People / 0xFans"
-msgstr "People / 0xFans"
+msgid "People / 0xFansProtocol"
+msgstr "People / 0xFansProtocol"
 
 msgid "Perks you get"
 msgstr "Perks you get"
@@ -298,6 +304,9 @@ msgstr "Share your costs with those who amplify your content"
 msgid "Show more"
 msgstr "Show more"
 
+msgid "Skip"
+msgstr "Skip"
+
 msgid "Something went wrong"
 msgstr "Something went wrong"
 
@@ -312,6 +321,9 @@ msgstr "These settings affect all the 0xFans accounts on this browser."
 
 msgid "This account doesn’t exist"
 msgstr "This account doesn’t exist"
+
+msgid "This can’t be undone and it will be removed from {0} profile, the timeline of any accounts that follow {1}, and from 0xFans search results."
+msgstr "This can’t be undone and it will be removed from {0} profile, the timeline of any accounts that follow {1}, and from 0xFans search results."
 
 msgid "This can’t be undone and you’ll lose your draft."
 msgstr "This can’t be undone and you’ll lose your draft."
