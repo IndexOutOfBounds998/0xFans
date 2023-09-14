@@ -85,7 +85,7 @@ msgid "Collection time has expired"
 msgstr "领取时间已过"
 
 msgid "collectors"
-msgstr "集合器"
+msgstr "收藏者"
 
 msgid "Cookie Policy"
 msgstr "Cookie 策略"
