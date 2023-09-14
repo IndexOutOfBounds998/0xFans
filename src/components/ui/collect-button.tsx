@@ -11,6 +11,8 @@ import { preventBubbling } from '@lib/utils';
 import { Button } from '@components/ui/button';
 import { useBalance } from 'wagmi';
 import { toast } from 'react-hot-toast';
+import { FollowButton } from './follow-button';
+import { useAuth } from '@lib/context/auth-context';
 
 type CollectButtonProps = {
   collector: ProfileOwnedByMe;
@@ -28,7 +30,7 @@ export default function CollectButton({
     error,
     isPending: loading
   } = useCollectWithSelfFundedFallback({ collector, publication });
-  console.log('publication', publication);
+  const { profileByMe } = useAuth();
   const isFollowedByMe = publication?.profile?.isFollowedByMe;
   const collectModule: any = (
     publication?.collectModule as SimpleCollectModuleSettings
@@ -46,7 +48,7 @@ export default function CollectButton({
   if (
     balanceData &&
     parseFloat(balanceData?.formatted) <
-      parseFloat(collectModule?.amount?.value)
+    parseFloat(collectModule?.amount?.value)
   ) {
     hasAmount = false;
   } else {
@@ -115,9 +117,6 @@ export default function CollectButton({
     </Button>
   );
 
-  console.log(publication?.collectPolicy?.state);
-  console.log(CollectState.NOT_A_FOLLOWER);
-  console.log(publication?.profile);
   switch (publication?.collectPolicy?.state) {
     case CollectState.COLLECT_TIME_EXPIRED:
       return <CollectBtn title='Collecting ended' />;
@@ -127,7 +126,14 @@ export default function CollectButton({
       return isFollowedByMe ? (
         <CanCollectBtn />
       ) : (
-        <CollectBtn title='Only followers can collect' />
+        profileByMe ? <FollowButton
+          btnClass='w-full'
+          userTargetId={publication?.profile.id.toString()}
+          userTargetUsername={publication?.profile.name || ''}
+          userIsFollowed={publication?.profile.isFollowedByMe}
+          followee={publication?.profile}
+          follower={profileByMe}
+        /> : <CollectBtn title='Only followers can collect' />
       );
     case CollectState.CANNOT_BE_COLLECTED:
       return <CollectBtn title='Cannot be collected' />;

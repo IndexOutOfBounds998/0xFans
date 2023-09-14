@@ -16,7 +16,7 @@ import type { Tweet } from '@lib/types/tweet';
 import { Trans } from '@lingui/macro';
 
 type TweetCollectModalProps = {
-  publication: any;
+  publication: ContentPublication;
   closeModal: () => void;
 };
 
@@ -36,6 +36,9 @@ export function PublicationCollectModal({
   const followerOnly = (
     publication?.collectModule as SimpleCollectModuleSettings
   )?.followerOnly;
+
+  const superFollower = publication?.profile.followModule != null && publication?.profile.followModule.__typename === 'FeeFollowModuleSettings';
+  
   return (
     <>
       <div className='overflow-auto border-t-[1px] border-[#00000014] p-[20px] text-sm'>
@@ -54,9 +57,11 @@ export function PublicationCollectModal({
               <Trans>Only</Trans>
             </span>
             <span className='text-purple-500'>{creater}</span>
-            <span className='text-pink-500'>
-              <Trans>super followers</Trans>
-            </span>
+            {
+              superFollower ? (<span className='text-pink-500'>
+                <Trans>super followers</Trans>
+              </span>) : <Trans>followers</Trans>
+            }
             <span>
               <Trans>can collect</Trans>
             </span>
