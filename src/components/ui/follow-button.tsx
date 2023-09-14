@@ -41,7 +41,7 @@ export function FollowButton({
   btnClass
 }: FollowButtonProps): JSX.Element | null {
   useLingui();
- 
+
   const {
     execute: unfollow,
     error: unfollowError,
@@ -95,7 +95,7 @@ export function FollowButton({
     if (hasAmount) {
       return follow();
     } else {
-      toast.error('not has Amount');
+      toast.error(t`Insufficient balance`);
     }
   };
 
@@ -153,7 +153,7 @@ export function FollowButton({
       >
         <ActionModal
           title={t`Unfollow` + `@${userTargetUsername}?`}
-          description='Their Posts will no longer show up in your home timeline. You can still view their profile, unless their Posts are protected.'
+          description={t`Their Posts will no longer show up in your home timeline. You can still view their profile, unless their Posts are protected.`}
           mainBtnLabel={t`Unfollow`}
           action={handleUnfollow}
           closeModal={closeModal}

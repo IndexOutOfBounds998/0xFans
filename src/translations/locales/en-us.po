@@ -31,6 +31,9 @@ msgstr "Add photo"
 msgid "Ads Info"
 msgstr "Ads Info"
 
+msgid "Approve Collect Module"
+msgstr "Approve Collect Module"
+
 msgid "Approve Follow Module"
 msgstr "Approve Follow Module"
 
@@ -66,6 +69,15 @@ msgstr "Close"
 
 msgid "Collect"
 msgstr "Collect"
+
+msgid "Collect limit reached"
+msgstr "Collect limit reached"
+
+msgid "Collecting ended"
+msgstr "Collecting ended"
+
+msgid "Collection time has expired"
+msgstr "Collection time has expired"
 
 msgid "collectors"
 msgstr "collectors"
@@ -127,6 +139,9 @@ msgstr "Follow and get some awesome perks!"
 msgid "Follower"
 msgstr "Follower"
 
+msgid "followers"
+msgstr "followers"
+
 msgid "Followers"
 msgstr "Followers"
 
@@ -147,6 +162,9 @@ msgstr "Help center"
 
 msgid "Home"
 msgstr "Home"
+
+msgid "Insufficient balance"
+msgstr "Insufficient balance"
 
 msgid "Language"
 msgstr "Language"
@@ -198,6 +216,9 @@ msgstr "Notifications"
 
 msgid "Only"
 msgstr "Only"
+
+msgid "Only followers can collect"
+msgstr "Only followers can collect"
 
 msgid "Onlyfans"
 msgstr "Onlyfans"
@@ -315,6 +336,9 @@ msgstr "super followers"
 
 msgid "Terms of Service"
 msgstr "Terms of Service"
+
+msgid "Their Posts will no longer show up in your home timeline. You can still view their profile, unless their Posts are protected."
+msgstr "Their Posts will no longer show up in your home timeline. You can still view their profile, unless their Posts are protected."
 
 msgid "These settings affect all the 0xFans accounts on this browser."
 msgstr "These settings affect all the 0xFans accounts on this browser."

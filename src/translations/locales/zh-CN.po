@@ -36,6 +36,9 @@ msgstr "添加照片"
 msgid "Ads Info"
 msgstr "广告信息"
 
+msgid "Approve Collect Module"
+msgstr "批准收藏模块"
+
 msgid "Approve Follow Module"
 msgstr "批准关注模块"
 
@@ -71,6 +74,15 @@ msgstr "关闭"
 
 msgid "Collect"
 msgstr "收集"
+
+msgid "Collect limit reached"
+msgstr "已达到收集限额"
+
+msgid "Collecting ended"
+msgstr "收藏结束"
+
+msgid "Collection time has expired"
+msgstr "领取时间已过"
 
 msgid "collectors"
 msgstr "集合器"
@@ -130,7 +142,10 @@ msgid "Follow and get some awesome perks!"
 msgstr "跟随并获得一些超棒的增益！"
 
 msgid "Follower"
-msgstr "跟随者"
+msgstr "关注者"
+
+msgid "followers"
+msgstr "关注者"
 
 msgid "Followers"
 msgstr "关注者"
@@ -153,6 +168,9 @@ msgstr "帮助中心"
 msgid "Home"
 msgstr "首页"
 
+msgid "Insufficient balance"
+msgstr "余额不足"
+
 msgid "Language"
 msgstr "语言"
 
@@ -160,7 +178,7 @@ msgid "Learn more"
 msgstr "了解更多"
 
 msgid "Like"
-msgstr "赞"
+msgstr "点赞"
 
 msgid "Limited Edition"
 msgstr "有限版"
@@ -204,6 +222,9 @@ msgstr "通知"
 msgid "Only"
 msgstr "仅限"
 
+msgid "Only followers can collect"
+msgstr "仅仅关注者可以收藏"
+
 msgid "Onlyfans"
 msgstr "仅粉丝"
 
@@ -226,7 +247,7 @@ msgid "People"
 msgstr "用户"
 
 msgid "People / 0xFansProtocol"
-msgstr "人 / 0xFansProtocol"
+msgstr "用户 / 0xFansProtocol"
 
 msgid "Perks you get"
 msgstr "你获得的收益"
@@ -321,6 +342,9 @@ msgstr "超级关注者"
 msgid "Terms of Service"
 msgstr "服务条款"
 
+msgid "Their Posts will no longer show up in your home timeline. You can still view their profile, unless their Posts are protected."
+msgstr "他们的帖子将不再显示在您的订阅中。您仍然可以查看他们的个人资料，除非他们的帖子受到保护"
+
 msgid "These settings affect all the 0xFans accounts on this browser."
 msgstr "这些设置会影响此浏览器上所有的 0xFans 账户。"
 
@@ -386,4 +410,3 @@ msgstr "您将获得超级跟随徽章"
 
 msgid "You will have high voting power if you followed multiple times"
 msgstr "如果您多次关注，您将拥有更高的投票权"
-

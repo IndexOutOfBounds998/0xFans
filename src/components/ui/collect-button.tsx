@@ -6,13 +6,14 @@ import {
   ProfileOwnedByMe
 } from '@lens-protocol/react-web';
 import { useCollectWithSelfFundedFallback } from '@lib/hooks/useCollectWithSelfFundedFallback';
-import { useEffect, useState } from 'react';
 import { preventBubbling } from '@lib/utils';
 import { Button } from '@components/ui/button';
 import { useBalance } from 'wagmi';
 import { toast } from 'react-hot-toast';
 import { FollowButton } from './follow-button';
 import { useAuth } from '@lib/context/auth-context';
+import { useLingui } from '@lingui/react';
+import { Trans, t } from '@lingui/macro';
 
 type CollectButtonProps = {
   collector: ProfileOwnedByMe;
@@ -25,6 +26,7 @@ export default function CollectButton({
   publication,
   btnClass
 }: CollectButtonProps) {
+  useLingui();
   const {
     execute: collect,
     error,
@@ -89,7 +91,7 @@ export default function CollectButton({
     if (hasAmount) {
       return collect();
     } else {
-      toast.error('not has Amount');
+      toast.error(t`Insufficient balance`);
     }
   };
 
@@ -113,15 +115,15 @@ export default function CollectButton({
                    dark:active:bg-light-border/75 ${btnClass}`}
       onClick={preventBubbling(handleCollect)}
     >
-      Approve Collect Module
+      <Trans>Approve Collect Module</Trans>
     </Button>
   );
 
   switch (publication?.collectPolicy?.state) {
     case CollectState.COLLECT_TIME_EXPIRED:
-      return <CollectBtn title='Collecting ended' />;
+      return <CollectBtn title={t`Collecting ended`} />;
     case CollectState.COLLECT_LIMIT_REACHED:
-      return <CollectBtn title='Collect limit reached' />;
+      return <CollectBtn title={t`Collect limit reached`} />;
     case CollectState.NOT_A_FOLLOWER:
       return isFollowedByMe ? (
         <CanCollectBtn />
@@ -133,13 +135,13 @@ export default function CollectButton({
           userIsFollowed={publication?.profile.isFollowedByMe}
           followee={publication?.profile}
           follower={profileByMe}
-        /> : <CollectBtn title='Only followers can collect' />
+        /> : <CollectBtn title={t`Only followers can collect`} />
       );
     case CollectState.CANNOT_BE_COLLECTED:
-      return <CollectBtn title='Cannot be collected' />;
+      return <CollectBtn title={`Cannot be collected`} />;
     case CollectState.CAN_BE_COLLECTED:
       return isEnd ? (
-        <CollectBtn title='Collection time has expired' />
+        <CollectBtn title={t`Collection time has expired`} />
       ) : (
         <CanCollectBtn />
       );
