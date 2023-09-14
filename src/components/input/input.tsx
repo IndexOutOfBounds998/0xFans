@@ -16,7 +16,8 @@ import type {
   FilesWithId,
   ImagesPreview,
   ImageData,
-  VideosPreview
+  VideosPreview,
+  VideoData
 } from '@lib/types/file';
 import { useSendComment } from '@lib/hooks/useSendComment';
 import { usePost } from '@lib/hooks/usePost';
@@ -216,22 +217,20 @@ export function Input({
     setSelectedImages(selectedImages.filter(({ id }) => id !== targetId));
     setImagesPreview(imagesPreview.filter(({ id }) => id !== targetId));
 
-    // const { src } = imagesPreview.find(
-    //   ({ id }) => id === targetId
-    // ) as ImageData;
-    //
-    // URL.revokeObjectURL(src);
+    const { src } = imagesPreview.find(
+      ({ id }) => id === targetId
+    ) as ImageData;
+
+    URL.revokeObjectURL(src);
   };
 
   const removeVideo = (targetId: string) => (): void => {
     setVideoPreview(videoPreview.filter(({ id }) => id !== targetId));
     setSelectedVideo(selectedVideo.filter(({ id }) => id !== targetId));
 
-    // const { src } = videoPreview.find(
-    //     ({ id }) => id === targetId
-    // ) as ImageData;
-    //
-    // URL.revokeObjectURL(src);
+    const { url } = videoPreview.find(({ id }) => id === targetId) as VideoData;
+
+    URL.revokeObjectURL(url);
   };
 
   const cleanUrl = (): void => {

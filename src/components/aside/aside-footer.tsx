@@ -19,7 +19,7 @@ export function AsideFooter(): JSX.Element {
 
   return (
     <footer
-      className='sticky top-16 flex flex-col gap-3 text-center text-sm 
+      className='sticky top-16 flex flex-col gap-3 text-center text-sm
                  text-light-secondary dark:text-dark-secondary'
     >
       <nav className='flex flex-wrap justify-center gap-2'>
@@ -35,8 +35,10 @@ export function AsideFooter(): JSX.Element {
           </a>
         ))}
       </nav>
-      <Switcher></Switcher>
-      <p>© 2023 0xFans, Inc.</p>
+      <div className='flex items-center justify-center'>
+        <Switcher></Switcher>
+        <p className='p-2'>© 2023 0xFans, Inc.</p>
+      </div>
     </footer>
   );
 }

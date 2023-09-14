@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu } from '@headlessui/react';
+import { Menu, Popover, Transition } from '@headlessui/react';
 import cn from 'clsx';
 import { useModal } from '@lib/hooks/useModal';
 import { preventBubbling } from '@lib/utils';
@@ -9,7 +9,10 @@ import { HeroIcon } from '@components/ui/hero-icon';
 import { Button } from '@components/ui/button';
 import { MenuLink } from './menu-link';
 import type { Variants } from 'framer-motion';
-import { Trans } from '@lingui/macro';
+import { msg, Trans } from '@lingui/macro';
+import { MessageDescriptor } from '@lingui/core';
+import { useLingui } from '@lingui/react';
+import { useRouter } from 'next/router';
 
 export const variants: Variants = {
   initial: { opacity: 0, y: 50 },
@@ -21,8 +24,35 @@ export const variants: Variants = {
   exit: { opacity: 0, y: 50, transition: { duration: 0.2 } }
 };
 
+type LOCALES = 'en-us' | 'zh-CN';
+
+const languages: { [key: string]: MessageDescriptor } = {
+  'en-us': msg`English`,
+  'zh-CN': msg`Chinese`
+};
+
 export function MoreSettings(): JSX.Element {
+  const router = useRouter();
+  const {
+    query: { id },
+    back,
+    locale
+  } = useRouter();
+  console.log(locale);
+
   const { open, openModal, closeModal } = useModal();
+
+  const { i18n } = useLingui();
+
+  function handleChange(event: string) {
+    const trans = event as LOCALES;
+    if (id) {
+      let path = router.pathname.replace('[id]', id);
+      router.push(router.pathname, path, { trans });
+    } else {
+      router.push(router.pathname, router.pathname, { trans });
+    }
+  }
 
   return (
     <>
@@ -108,16 +138,38 @@ export function MoreSettings(): JSX.Element {
                   </Menu.Item>
                   <Menu.Item>
                     {({ active }): JSX.Element => (
-                      <Button
-                        className={cn(
-                          'flex w-full gap-3 rounded-none rounded-b-md p-4 duration-200',
-                          active && 'bg-main-sidebar-background'
-                        )}
-                        onClick={openModal}
-                      >
-                        <HeroIcon iconName='LanguageIcon' />
-                        <Trans>Language</Trans>
-                      </Button>
+                      <Popover className='relative'>
+                        <Popover.Button
+                          className={cn(
+                            'flex w-full gap-3 rounded-none rounded-b-md p-4 duration-200',
+                            active && 'bg-main-sidebar-background'
+                          )}
+                        >
+                          <HeroIcon iconName='LanguageIcon' />
+                          <Trans>Language</Trans>
+                        </Popover.Button>
+                        <Transition className='menu-container absolute top-[-10px] left-[240px]'>
+                          <Popover.Panel className='w-28 cursor-pointer'>
+                            {Object.keys(languages).map((item) => (
+                              <p
+                                className='px-2 py-3 text-center hover:bg-main-accent/10 hover:text-main-accent/90'
+                                onClick={() => handleChange(item)}
+                              >
+                                {i18n._(languages[item])}
+                              </p>
+                            ))}
+                          </Popover.Panel>
+                        </Transition>
+                      </Popover>
+                      // <Button
+                      //   className={cn(
+                      //     'flex w-full gap-3 rounded-none rounded-b-md p-4 duration-200',
+                      //     active && 'bg-main-sidebar-background'
+                      //   )}
+                      //   onClick={openModal}
+                      // >
+                      //   <HeroIcon iconName='LanguageIcon' />
+                      // </Button>
                     )}
                   </Menu.Item>
                 </Menu.Items>

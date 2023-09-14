@@ -22,7 +22,7 @@ export type TweetProps = {
 export function PublicationGated({ tweet }: TweetProps): JSX.Element {
   const { id: tweetId, publication } = tweet;
 
-  let loading = false;
+  const [loading, setLoading] = useState(false);
   const [decrypt, setDecrypt] = useState(false);
   const [text, setText] = useState();
   const [isVideo, setIsVideo] = useState(false);
@@ -31,7 +31,7 @@ export function PublicationGated({ tweet }: TweetProps): JSX.Element {
   const { data: profile, error, loading: profileLoading } = useActiveProfile();
 
   async function decryptMetadata() {
-    loading = true;
+    setLoading(true);
     const sdk = await LensGatedSDK.create({
       provider: new Web3Provider(window.ethereum),
       signer: new Web3Provider(window.ethereum).getSigner(),
@@ -63,7 +63,7 @@ export function PublicationGated({ tweet }: TweetProps): JSX.Element {
       console.log('error decrypting post... ', e);
     }
     debugger;
-    loading = false;
+    setLoading(false);
   }
 
   return (
@@ -83,19 +83,19 @@ export function PublicationGated({ tweet }: TweetProps): JSX.Element {
         )
       ) : (
         <div className='flex h-full w-full flex-col items-center justify-center rounded-2xl bg-main-accent py-[25px] text-white'>
-          <HeroIcon
-            className='mb-4 h-10 w-10'
-            iconName='LockClosedIcon'
-            solid
-          />
+          <HeroIcon className='mb-4 h-10 w-10' iconName='LockOpenIcon' solid />
           <Button
             className={cn(
-              'w-full border border-light-line-reply hover:bg-light-primary/10 focus-visible:bg-light-primary/10 active:bg-light-primary/20 dark:border-light-secondary dark:text-light-border dark:hover:bg-light-border/10 dark:focus-visible:bg-light-border/10 dark:active:bg-light-border/20'
+              'border-[2px] border-light-line-reply px-4 hover:bg-light-primary/10 focus-visible:bg-light-primary/10 active:bg-light-primary/20 dark:border-light-secondary dark:text-light-border dark:hover:bg-light-border/10 dark:focus-visible:bg-light-border/10 dark:active:bg-light-border/20',
+              loading ? '!bg-[#fff]' : ''
             )}
             loading={loading}
             onClick={preventBubbling(decryptMetadata)}
           >
-            <span className='font-bold'>To view this...</span>
+            <div className='flex items-center justify-center'>
+              <HeroIcon className='mr-3 h-6 w-6' iconName='KeyIcon' solid />
+              <span className='font-bold'>To view this...</span>
+            </div>
           </Button>
         </div>
       )}

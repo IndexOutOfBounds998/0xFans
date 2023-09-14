@@ -1,9 +1,12 @@
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import { t, msg } from '@lingui/macro';
 import type { MessageDescriptor } from '@lingui/core';
 import { useLingui } from '@lingui/react';
 import { ReactSelect } from '@components/ui/react-select';
+import { Listbox, Transition } from '@headlessui/react';
+import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/24/outline';
+import { HeroIcon } from '@components/ui/hero-icon';
 
 type LOCALES = 'en-us' | 'zh-CN';
 
@@ -28,6 +31,8 @@ export function Switcher() {
     id: item as LOCALES,
     name: i18n._(languages[item])
   }));
+  const value =
+    selectList.filter((item) => item.id === locale)[0] || selectList[0];
 
   function handleChange(event: any) {
     const locale = event.id as LOCALES;
@@ -43,22 +48,48 @@ export function Switcher() {
   }
 
   return (
-    <ReactSelect
-      value={
-        selectList.filter((item) => item.id === locale)[0] || selectList[0]
-      }
-      className='w-full'
-      list={selectList}
-      onChange={handleChange}
-    />
-    // <select value={locale} onChange={handleChange}>
-    //     {Object.keys(languages).map((locale) => {
-    //         return (
-    //             <option value={locale} key={locale}>
-    //                 {i18n._(languages[locale as unknown as LOCALES])}
-    //             </option>
-    //         )
-    //     })}
-    // </select>
+    <Listbox value={value} onChange={handleChange}>
+      <div className='relative'>
+        <Listbox.Button className='relative cursor-pointer cursor-default rounded-lg bg-white p-2 text-left focus:outline-none sm:text-sm'>
+          <div className='flex justify-start'>
+            <HeroIcon className='h-5 w-5' iconName='GlobeAltIcon' />
+            &nbsp;
+            <span className='block truncate'>{value.name}</span>
+          </div>
+        </Listbox.Button>
+        <Transition
+          as={Fragment}
+          leave='transition ease-in duration-100'
+          leaveFrom='opacity-100'
+          leaveTo='opacity-0'
+        >
+          <Listbox.Options className='absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
+            {selectList.map((item, personIdx) => (
+              <Listbox.Option
+                key={personIdx}
+                className={({ active }) =>
+                  `relative cursor-default select-none p-2 ${
+                    active
+                      ? 'bg-main-accent/10 text-main-accent/90'
+                      : 'text-gray-900'
+                  }`
+                }
+                value={item}
+              >
+                {({ selected }) => (
+                  <span
+                    className={`block truncate ${
+                      selected ? 'font-medium' : 'font-normal'
+                    }`}
+                  >
+                    {item.name}
+                  </span>
+                )}
+              </Listbox.Option>
+            ))}
+          </Listbox.Options>
+        </Transition>
+      </div>
+    </Listbox>
   );
 }

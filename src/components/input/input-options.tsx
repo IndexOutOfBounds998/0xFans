@@ -64,6 +64,10 @@ export function InputOptions({
   const mediaClick = (): void => inputFileRef.current?.click();
   const videoClick = (): void => inputVedioRef.current?.click();
 
+  const onClick = (event: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+    (event.target as HTMLInputElement).value = '';
+  };
+
   const options: Readonly<Options> = [
     {
       name: 'Video',
@@ -134,6 +138,7 @@ export function InputOptions({
           type='file'
           accept='video/*'
           onChange={handleVideoUpload}
+          onClick={onClick}
           ref={inputVedioRef}
           multiple
         />
@@ -142,6 +147,7 @@ export function InputOptions({
           type='file'
           accept='image/*'
           onChange={handleImageUpload}
+          onClick={onClick}
           ref={inputFileRef}
           multiple
         />
