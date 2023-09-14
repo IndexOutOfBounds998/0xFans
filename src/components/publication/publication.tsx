@@ -127,7 +127,7 @@ export function Publication(tweet: TweetProps): JSX.Element {
         closeModal={closeCollectModal}
       >
         <PublicationCollectModal
-          publication={tweet.publication}
+          publication={tweet.publication as ContentPublication}
           closeModal={closeCollectModal}
         />
       </Modal>
