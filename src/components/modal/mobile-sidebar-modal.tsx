@@ -16,7 +16,12 @@ import type { NavLink } from '@components/sidebar/sidebar';
 import type { User } from '@lib/types/user';
 import { useLingui } from '@lingui/react';
 import { useState } from 'react';
-import { Trans, t } from '@lingui/macro';
+import { Trans, t, msg } from '@lingui/macro';
+import { MessageDescriptor } from '@lingui/core';
+import { Popover } from '@headlessui/react';
+import cn from 'clsx';
+import { LanguagesModal } from '@components/modal/languages-model';
+
 export type MobileNavLink = Omit<NavLink, 'canBeHidden'>;
 
 type Stats = [string, string, number];
@@ -33,6 +38,11 @@ type MobileSidebarModalProps = Pick<
   | 'coverPhotoURL'
 > & {
   closeModal: () => void;
+};
+
+const languages: { [key: string]: MessageDescriptor } = {
+  'en-us': msg`English`,
+  'zh-CN': msg`Chinese`
 };
 
 export function MobileSidebarModal({
@@ -80,6 +90,7 @@ export function MobileSidebarModal({
       disabled: true
     }
   ]);
+  const { i18n } = useLingui();
 
   const { signOut } = useAuth();
 
@@ -93,6 +104,12 @@ export function MobileSidebarModal({
     open: logOutOpen,
     openModal: logOutOpenModal,
     closeModal: logOutCloseModal
+  } = useModal();
+
+  const {
+    open: langOpen,
+    openModal: langOpenModal,
+    closeModal: langCloseModal
   } = useModal();
 
   const [allStats] = useState<Stats[]>([
@@ -111,6 +128,13 @@ export function MobileSidebarModal({
         closeModal={displayCloseModal}
       >
         <DisplayModal closeModal={displayCloseModal} />
+      </Modal>
+      <Modal
+        modalClassName='max-w-xl bg-main-background w-full p-8 rounded-2xl hover-animation'
+        open={langOpen}
+        closeModal={langCloseModal}
+      >
+        <LanguagesModal closeModal={langCloseModal} />
       </Modal>
       <Modal
         modalClassName='max-w-xs bg-main-background w-full p-8 rounded-2xl'
@@ -213,6 +237,15 @@ export function MobileSidebarModal({
             >
               <HeroIcon className='h-5 w-5' iconName='PaintBrushIcon' />
               <Trans>Display</Trans>
+            </Button>
+            <Button
+              className='accent-tab accent-bg-tab flex items-center gap-2 rounded-md p-1.5 font-bold transition
+                         hover:bg-light-primary/10 focus-visible:ring-2 first:focus-visible:ring-[#878a8c]
+                         dark:hover:bg-dark-primary/10 dark:focus-visible:ring-white'
+              onClick={langOpenModal}
+            >
+              <HeroIcon className='h-5 w-5' iconName='LanguageIcon' />
+              <Trans>Language</Trans>
             </Button>
             <Button
               className='accent-tab accent-bg-tab flex items-center gap-2 rounded-md p-1.5 font-bold transition

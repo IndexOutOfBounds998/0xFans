@@ -5,6 +5,7 @@ import { useModal } from '@lib/hooks/useModal';
 import { preventBubbling } from '@lib/utils';
 import { Modal } from '@components/modal/modal';
 import { DisplayModal } from '@components/modal/display-modal';
+import { LanguagesModal } from '@components/modal/languages-model';
 import { HeroIcon } from '@components/ui/hero-icon';
 import { Button } from '@components/ui/button';
 import { MenuLink } from './menu-link';
@@ -38,19 +39,24 @@ export function MoreSettings(): JSX.Element {
     back,
     locale
   } = useRouter();
-  console.log(locale);
 
   const { open, openModal, closeModal } = useModal();
+  const {
+    open: langOpen,
+    openModal: langOpenModal,
+    closeModal: langCloseModal
+  } = useModal();
 
   const { i18n } = useLingui();
 
   function handleChange(event: string) {
-    const trans = event as LOCALES;
+    const locale = event as LOCALES;
+
     if (id) {
       let path = router.pathname.replace('[id]', id);
-      router.push(router.pathname, path, { trans });
+      router.push(router.pathname, path, { locale });
     } else {
-      router.push(router.pathname, router.pathname, { trans });
+      router.push(router.pathname, router.pathname, { locale });
     }
   }
 
@@ -62,6 +68,13 @@ export function MoreSettings(): JSX.Element {
         closeModal={closeModal}
       >
         <DisplayModal closeModal={closeModal} />
+      </Modal>
+      <Modal
+        modalClassName='max-w-xl bg-main-background w-full p-8 rounded-2xl hover-animation'
+        open={langOpen}
+        closeModal={langCloseModal}
+      >
+        <LanguagesModal closeModal={langCloseModal} />
       </Modal>
       <Menu className='relative' as='div'>
         {({ open }): JSX.Element => (
@@ -138,38 +151,16 @@ export function MoreSettings(): JSX.Element {
                   </Menu.Item>
                   <Menu.Item>
                     {({ active }): JSX.Element => (
-                      <Popover className='relative'>
-                        <Popover.Button
-                          className={cn(
-                            'flex w-full gap-3 rounded-none rounded-b-md p-4 duration-200',
-                            active && 'bg-main-sidebar-background'
-                          )}
-                        >
-                          <HeroIcon iconName='LanguageIcon' />
-                          <Trans>Language</Trans>
-                        </Popover.Button>
-                        <Transition className='menu-container absolute top-[-10px] left-[240px]'>
-                          <Popover.Panel className='w-28 cursor-pointer'>
-                            {Object.keys(languages).map((item) => (
-                              <p
-                                className='px-2 py-3 text-center hover:bg-main-accent/10 hover:text-main-accent/90'
-                                onClick={() => handleChange(item)}
-                              >
-                                {i18n._(languages[item])}
-                              </p>
-                            ))}
-                          </Popover.Panel>
-                        </Transition>
-                      </Popover>
-                      // <Button
-                      //   className={cn(
-                      //     'flex w-full gap-3 rounded-none rounded-b-md p-4 duration-200',
-                      //     active && 'bg-main-sidebar-background'
-                      //   )}
-                      //   onClick={openModal}
-                      // >
-                      //   <HeroIcon iconName='LanguageIcon' />
-                      // </Button>
+                      <Button
+                        className={cn(
+                          'flex w-full gap-3 rounded-none rounded-b-md p-4 duration-200',
+                          active && 'bg-main-sidebar-background'
+                        )}
+                        onClick={langOpenModal}
+                      >
+                        <HeroIcon iconName='LanguageIcon' />
+                        <Trans>Language</Trans>
+                      </Button>
                     )}
                   </Menu.Item>
                 </Menu.Items>
