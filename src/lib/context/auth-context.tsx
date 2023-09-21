@@ -7,7 +7,8 @@ import {
   useWalletLogout,
   MediaSet,
   Profile,
-  ProfileOwnedByMe
+  ProfileOwnedByMe,
+  useCreateProfile
 } from '@lens-protocol/react-web';
 import { getWalletClient } from '@wagmi/core';
 import {
@@ -52,6 +53,7 @@ type AuthContext = {
   loginAddress: string;
   signOut: () => Promise<void>;
   signInWithLens: () => Promise<void>;
+  createProfile: (handle: string) => Promise<void>;
 };
 
 export const AuthContext = createContext<AuthContext | null>(null);
@@ -86,6 +88,9 @@ export function AuthContextProvider({
   } = useWalletLogin();
 
   const { execute: logout, isPending } = useWalletLogout();
+
+  //注册
+  const { execute: create, error: createError } = useCreateProfile();
 
   useEffect(() => {
     if (profile) {
@@ -157,7 +162,10 @@ export function AuthContextProvider({
           totalPhotos: 0,
           pinnedTweet: null,
           theme: getProfileAttribute(profile?.__attributes, 'theme') as Theme,
-          accent: getProfileAttribute(profile?.__attributes, 'accent') as Accent,
+          accent: getProfileAttribute(
+            profile?.__attributes,
+            'accent'
+          ) as Accent,
           website: getProfileAttribute(profile?.__attributes, 'website'),
           location: getProfileAttribute(profile?.__attributes, 'location'),
           createdAt: null,
@@ -175,6 +183,7 @@ export function AuthContextProvider({
     try {
       setLoading(true);
       const walletClient = await getWalletClient();
+      debugger;
       if (walletClient) {
         const address = walletClient.account.address;
         await login({
@@ -182,6 +191,7 @@ export function AuthContextProvider({
         });
         localStorage.setItem('loginAddress', address);
         localStorage.setItem('isLoginAction', 'true');
+        setLoading(false);
       }
     } catch (error) {
       setError(error as Error);
@@ -203,6 +213,18 @@ export function AuthContextProvider({
     }
   };
 
+  const createProfile = async (handle: string): Promise<void> => {
+    try {
+      if (handle) {
+        await create({ handle: handle });
+        setLoading(true);
+        location.reload();
+      }
+    } catch (error) {
+      setError(error as Error);
+    }
+  };
+
   const value: AuthContext = {
     user,
     profileByMe,
@@ -211,7 +233,8 @@ export function AuthContextProvider({
     isLoginAction,
     loginAddress,
     signOut,
-    signInWithLens
+    signInWithLens,
+    createProfile
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

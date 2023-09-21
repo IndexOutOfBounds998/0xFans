@@ -4,10 +4,28 @@ import { CustomIcon } from '@components/ui/custom-icon';
 import { Button } from '@components/ui/button';
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { t } from '@lingui/macro';
+import { InputField } from '@components/input/input-field';
+import { ChangeEvent, useState } from 'react';
 export function LoginMain(): JSX.Element {
-  const { signInWithLens, profileByMe, isLoginAction } = useAuth();
+  const { signInWithLens, profileByMe, isLoginAction, createProfile, error } =
+    useAuth();
+
+  const [inputValue, setInputValue] = useState<string>('');
+  const [createLoading, setCreateLoading] = useState(false);
 
   const { isConnected } = useAccount();
+
+  const handleChange = ({
+    target: { value }
+  }: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void =>
+    setInputValue(value);
+
+  const createSubmit = async () => {
+    setCreateLoading(true);
+    await createProfile(inputValue);
+    setCreateLoading(false);
+  };
   return (
     <main className='grid lg:grid-cols-[1fr,45vw]'>
       <div className='relative hidden items-center justify-center  lg:flex'>
@@ -58,7 +76,28 @@ export function LoginMain(): JSX.Element {
               <ConnectButton />
             )}
 
-            {isLoginAction && !profileByMe ? <p>regiser</p> : ''}
+            {isLoginAction && !profileByMe ? (
+              <>
+                <InputField
+                  label={t`Username`}
+                  inputId='username'
+                  inputValue={inputValue}
+                  errorMessage={error?.message ?? undefined}
+                  handleChange={handleChange}
+                />
+                <Button
+                  loading={createLoading}
+                  className='flex justify-center gap-2 border border-light-line-reply font-bold text-light-primary transition
+                       hover:bg-[#e6e6e6] focus-visible:bg-[#e6e6e6] active:bg-[#cccccc] dark:border-0 dark:bg-white
+                       dark:hover:brightness-90 dark:focus-visible:brightness-90 dark:active:brightness-75'
+                  onClick={createSubmit}
+                >
+                  Register up with lens
+                </Button>
+              </>
+            ) : (
+              ''
+            )}
 
             <p
               className='inner:custom-underline inner:custom-underline text-center text-xs
