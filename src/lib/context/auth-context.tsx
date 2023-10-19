@@ -23,6 +23,7 @@ import { polygon, polygonMumbai } from 'wagmi/chains';
 
 import type { User } from '@lib/types/user';
 import { Accent, Theme } from '@lib/types/theme';
+import { useRouter } from 'next/router';
 type UserProps = Pick<
   User,
   | 'id'
@@ -101,7 +102,7 @@ export function AuthContextProvider({
   const { chain } = useNetwork();
 
   const { address } = useAccount();
-
+  const { push, pathname } = useRouter();
   const { switchNetwork } = useSwitchNetwork();
   let loginAddress = '';
   let isLoginAction = false;
@@ -218,7 +219,12 @@ export function AuthContextProvider({
       if (handle) {
         await create({ handle: handle });
         setLoading(true);
-        location.reload();
+        debugger;
+        setTimeout(() => {
+          location.reload();
+          // setLoading(false);
+          // push('/home');
+        }, 1000);
       }
     } catch (error) {
       setError(error as Error);
