@@ -2,7 +2,7 @@
     <h1>0xFans</h1>
     <h2>诚接区块链应用开发，有团队，联系:13693094831</h2>
     <p>Decentralized video and image&text -sharing social media platform.</p>
-    <a href="https://mainnet.0xfans.xyz">0xfans.xyz</a>
+    <a href="https://testnet.0xfans.xyz">0xfans.xyz</a>
 </div>
 <br>
 <div align="center">
