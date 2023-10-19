@@ -1,7 +1,4 @@
 <div align="center">
-
-    
-    
     <h1>0xFans</h1>
     <h2>承接区块链应用开发，有团队，联系:13693094831</h2>
     <p>Decentralized video and image&text -sharing social media platform.</p>
