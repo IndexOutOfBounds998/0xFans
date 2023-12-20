@@ -19,8 +19,9 @@
 <br>
 
 ## 📽️ About
-
+Web3去中心化的视频和图文共享社交媒体平台。 付费以观看帖子赚取您的收益
 \*_oxfans_ is a decentralized video-and-image&text -sharing social media platform, built using Lens Protocol 🌿
+
 
 ## 💪 Community
 
